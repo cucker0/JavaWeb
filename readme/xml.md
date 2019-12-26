@@ -91,7 +91,8 @@ xml的标签属性和html 的标签属性是非常类似的，属性可以提供
 
 早期JDK为我们提供了两种xml解析技术Dom和Sax,现在主要用dom4j
 ```
-* dom解析
+* dom解析，已经过时
+* sax解析，已经过时
 * dom4j解析
 
 ## dom4j
