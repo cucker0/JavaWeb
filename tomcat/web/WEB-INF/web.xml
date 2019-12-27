@@ -3,4 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!-- 定义一个servlet，servlet名与class的映射 -->
+    <servlet>
+        <servlet-name>demo</servlet-name>
+        <servlet-class>com.java.servlet.Mydemo</servlet-class>
+    </servlet>
+
+    <!-- 定义URL与servlet的映射 -->
+    <servlet-mapping>
+        <servlet-name>demo</servlet-name>
+        <!-- http://127.0.0.1:8080/tomcat/demo -->
+        <url-pattern>/demo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>demo2</servlet-name>
+        <servlet-class>com.java.servlet.Mydemo2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>demo2</servlet-name>
+        <url-pattern>/demo2</url-pattern>
+    </servlet-mapping>
 </web-app>
