@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <!-- 定义一个servlet，servlet名与class的映射 -->
+    <!-- 定义一个servlet，servlet名与处理请求class的映射 -->
     <servlet>
         <servlet-name>demo</servlet-name>
         <servlet-class>com.java.servlet.Mydemo</servlet-class>
@@ -23,5 +23,23 @@
     <servlet-mapping>
         <servlet-name>demo2</servlet-name>
         <url-pattern>/demo2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ConfigServlet</servlet-name>
+        <servlet-class>com.java.servlet.ConfigServlet</servlet-class>
+        <!-- 给servlet添加一个初始化参数 -->
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>root</param-value>
+        </init-param>
+        <init-param>
+            <param-name>driverClass</param-name>
+            <param-value>com.mysql.cj.jdbc.Driver</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
     </servlet-mapping>
 </web-app>

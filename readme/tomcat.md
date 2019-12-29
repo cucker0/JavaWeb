@@ -139,17 +139,154 @@ xx.html   是这个目录下要访问的文件名
 ```
 
 
-## servlet
+## Servlet
 ```text
 Servlet是一个专门用来接收和响应客户端的请求的小web程序。
 
-Servlet接口，sun公司定义一个servlet的规范，定义了servlet应该有哪些方法，以及方法需要的参数
+Servlet接口，sun公司定义一个servlet的规范，定义了servlet应该有哪些方法，以及方法需要的参数，
+依赖tomcat根目录/lib/servlet-api.jar包
+
+Servlet-api在线文档：http://tomcat.apache.org/tomcat-9.0-doc/servletapi/index.html
 ```
 
 
 ### Servlet接口与实现类结构关系
 ![](../images/tomcat/servlet接口与实现类的关系.png)  
 
-### 手动实现Servlet接口
+### 手动实现Servlet接口来实现Servlet程序
+1. 新建一个类，并实现Servlet接口，重写service方法，该方法可对客户端请求的接收和响应
+    ```java
+    package com.java.servlet;
+    
+    import javax.servlet.*;
+    import javax.servlet.http.HttpServletRequest;
+    import java.io.IOException;
+    
+    /**
+     * 手动实现Servlet接口
+     */
+    public class Mydemo implements Servlet {
+        // 构造器
+        public Mydemo() {
+            System.out.println("Mydemo 空参构造器");
+        }
+    
+        // 方法
+        @Override
+        public void init(ServletConfig servletConfig) throws ServletException {
+            System.out.println("Mydemo init方法");
+        }
+    
+        @Override
+        public ServletConfig getServletConfig() {
+            return null;
+        }
+    
+        @Override
+        public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+            System.out.println("接受到了客户端请求, "+ System.currentTimeMillis());
+            HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
+    
+            String method = httpRequest.getMethod();
+            if (method.equalsIgnoreCase("get")) {
+                System.out.println("客户端个请求方法为get");
+            } else if (method.equalsIgnoreCase("post")) {
+                System.out.println("客户端个请求方法为post");
+            }
+        }
+    
+        @Override
+        public String getServletInfo() {
+            return null;
+        }
+    
+        @Override
+        public void destroy() {
+            System.out.println("servlet销毁了");
+        }
+    }
+    ```
+    
+2. 在web/WEB-INF/web.xml中定义servlet与处理请求处理类的映射，url路由与servlet的映射  
+做完这两个映射关系，一个确定的url就能找到对应的类来处理请求了  
 
-### 使用idea创建Servlet
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+             version="4.0">
+        <!-- 定义一个servlet，servlet名与处理请求class的映射 -->
+        <servlet>
+            <servlet-name>demo</servlet-name>
+            <servlet-class>com.java.servlet.Mydemo</servlet-class>
+        </servlet>
+    
+        <!-- 定义URL与servlet的映射 -->
+        <servlet-mapping>
+            <servlet-name>demo</servlet-name>
+            <!-- http://127.0.0.1:8080/项目名/demo -->
+            <url-pattern>/demo</url-pattern>
+        </servlet-mapping>
+    </web-app>
+    ```
+
+    此时运行tomcat就可访问了
+
+### 继承HttpServlet抽象类实现Servlet程序
+1. 使用idea创建Servlet
+    ![](../images/tomcat/servlet2_2.png)  
+    
+    ![](../images/tomcat/servlet2_3.png)  
+
+    此时在web.xml文件中自动添加了servlet配置，需要再配置下servlet-mapping
+
+2. 重写doPost、doGet方法
+    ```text
+    一般情况下重写这两个方法即可，
+    doPost方法是处理post请求的，
+    doGet方法是处理get语法的，如果是其他请求方法，请重写相应的方法，如：
+    doHead
+    doPut
+    doDelete
+    ```
+
+此时启动tomcat即可访问
+
+**注意：**  
+```text
+通过继承HttpServlet抽象类实现Servlet程序，
+重写init(ServletConfig config)时，一定要写super.init(config);
+否则其他方法再调用getServletContext()方法时就会报空指针异常
+
+```
+```java
+    public void init(ServletConfig config) throws ServletException {
+        // 需要调用父类的super.config，它保存了ServletConfig的引用
+        super.init(config);
+    }
+```
+
+
+### Servlet的生命周期
+1. 调用Servlet的构造方法，只在tomcat启动后，调用一次
+2. 调用init方法，初始化Servlet，只在tomcat启动后，调用一次
+3. 调用Servlet对象的service方法处理请求操作，每个请求调用一次
+4. 调用 destory方法 执行Servlet销毁的操作，在tomcat关闭时调用
+
+
+## 手动部署web工程
+1. 把artifacts输出目录下对应的工程复制到tomcat根目录/webapps/目录下
+    ![](../images/tomcat/javaEE_project01.png)
+2. 启动tomcat即可
+
+## ServletConfig类
+```text
+一个Servlet对应一个config对象
+
+功能：
+1.获取Servlet在web.xml文件中配置的Servlet名称（也就是servlet-name的值<servlet-name>ConfigServlet</servlet-name>）
+2.获取Servlet初始化信息。（web.xml文件中<Servlet>标签中 <init-param>的初始化信息 ）
+3.获取ServletContext域对象
+```
+[示例](../tomcat/src/com/java/servlet/ConfigServlet.java)  
