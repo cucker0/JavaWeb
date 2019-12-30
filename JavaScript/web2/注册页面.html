@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <script type="text/javascript">
+
+
+        // 点击用户名称输入框时，提前把文本去掉
+        function processUser() {
+            var userInputObj = document.getElementById("user");
+            userInputObj.value = "";
+        }
+
+        /**
+         * 用户名验证，必须由字母、数字、下划线组成，且长度为8-15
+         */
+        function checkuser() {
+            var userInputValue = document.querySelector('input[name="user"]').value; // js通过属性名查找
+            // 用户名匹配这则表达式
+            var reg = /^\w{8,15}$/;
+            var result = reg.test(userInputValue);
+            var userspanObj = document.getElementById("userspan");
+            if (reg) {
+                userspanObj.innerHTML = "";
+                return true;
+            } else {
+                userspanObj.innerHTML = "用户名必须由字母、数字、下划线组成，并且长度为8-15长度";
+                return false;
+            }
+        }
+
+        /**
+         * 验证密码
+         */
+        function checkpwd() {
+            var pwdInputObjValue = document.getElementById("pwd").value;
+            var reg = /^\w{6,12}$/;
+            var result = reg.test(pwdInputObjValue);
+            var pwdspanObj = document.getElementById("pwdspan");
+
+            if (result) {
+                pwdspanObj.innerHTML = "";
+                return true;
+            } else {
+                pwdspanObj.innerHTML = "用户密码  必须由字母、数字、下划线组成，并且长度为6-12长度";
+                return false;
+            }
+        }
+
+        /**
+         * 验证确认密码
+         */
+        function checkrepwd() {
+            var repwdInputObjValue = document.getElementById("repwd").value;
+            var reg = /^\w{6,12}$/;
+            var result = reg.test(repwdInputObjValue);
+            var repwdspanObj = document.getElementById("repwdspan");
+            if (result) {
+                var pwdInputObjValue = document.getElementById("pwd").value;
+                if (pwdInputObjValue === repwdInputObjValue) {
+                    repwdspanObj.innerHTML = "";
+                    return true;
+                } else {
+                    repwdspanObj.innerHTML = "确认密码和用户密码不一致";
+                    return false;
+                }
+            } else {
+                repwdspanObj.innerHTML = "确认密码  必须由字母、数字、下划线组成，并且长度为6-12长度";
+                return false;
+            }
+        }
+
+        /**
+         * 性别必须选择一个
+         */
+        function checksex() {
+            var checked = false;
+            var sexs = document.getElementById("sex");
+            for (var i = 0; i < sexs.length; ++i) {
+                if (sexs[i].checked) {
+                    checked = true;
+                    break;
+                }
+            }
+            var sexspanObj = document.getElementById("sexspan");
+            if (checked) {
+                sexspanObj.innerHTML = "";
+                return true;
+            }
+            sexspanObj.innerHTML = "性别，必须选一个";
+            return false;
+        }
+
+        /**
+         * 兴趣爱好至少选择一个
+         */
+
+
+    </script>
+</head>
+<body>
+    <h2>注册页面：获取焦点、时区时区焦点、提交事件</h2>
+    <form action="//127.0.0.1:8080" method="post" onsubmit="check_data()">
+        <table>
+            <tr>
+                <td>用户名称：*</td>
+                <td>
+                    <input id="user" type="text" name="user" value="请输入用户名" onblur="checkuser()">
+                    <span style="color: red" id="userspan"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>用户密码：</td>
+                <td>
+                    <input id="pwd", type="password" name="pwd", onblur="checkpwd()">
+                    <span id="pwdspan"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>确认密码：</td>
+                <td>
+                    <input id="repwd" type="text" name="repwd" onblur="checkrepwd()">
+                </td>
+            </tr>
+            <tr>
+                <td>选择性别：</td>
+                <td>
+                    <label><input name="sex" type="radio" value="male" onblur="checksex()">男</label>
+                    <label><input name="sex" type="radio" value="female" onblur="checksex()" checked="checked">女</label>
+                    <span id="sexspan"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>选择爱好：</td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="hobby" value="c">C
+                    </label>
+                    <label>
+                        <input type="checkbox" name="hobby" value="c++">C++
+                    </label>
+                    <label>
+                        <input type="checkbox" name="hobby" value="java" checked="checked">Java
+                    </label>
+                    <label>
+                        <input type="checkbox" name="hobby" value="php">PHP
+                    </label>
+                    <span id="hspan"></span></td>
+                </td>
+            </tr>
+            <tr>
+                <td>选择国家：</td>
+                <td>
+                    <select id="country" name="country">
+                        <option>-- 请选择国家 --</option>
+                        <option value="cn">中国</option>
+                        <option value="us">美国</option>
+                        <option value="en">英国</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>自我评价：</td>
+                <td>
+                    <textarea id="desc" rows="10" cols="60" name="desc"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="注册">
+                </td>
+                <td>
+                    <input type="reset" value="重置">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

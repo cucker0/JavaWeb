@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义对象</title>
+</head>
+<body>
+    <div>自定义对象</div>
+    <script type="text/javascript">
+        // Object形式定义对象
+        var person = new Object();
+        person.name = "Marry";
+        person.age = 23;
+        person.info = function () {
+            return "person[name:" + this.name + ", age:" + this.age + "]";
+        };
+
+        console.log(person.info());
+
+
+        // {}形式定义对象
+        var stu = {
+            name: "Lily",
+            age: 22,
+            info: function () {
+                return "Student[name:" + this.name + ", age:" + this.age + "]"
+            }
+        };
+
+        console.log(stu);
+
+
+        // function形式定义对象
+        function Employee() {
+            this.name = "马云";
+            this.age = 29;
+            this.info = function () {
+                return "Employee[name:" + this.name + ", age:" + this.age + "]";
+            }
+        }
+
+        var emp = new Employee();
+        console.log(emp.info());
+    </script>
+</body>
+</html>

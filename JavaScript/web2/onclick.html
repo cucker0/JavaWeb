@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onclick</title>
+    <script type="text/javascript">
+        function func1() {
+            alert("静态注册点击事件");
+        }
+
+        // 动态注册事件
+        window.onload = function func2() {
+            // 1. 查找到要绑定的目标元素
+            var btn = document.getElementById("btn02");
+            // 2. 注册事件
+            btn.onclick = function () {
+                alert("我是动态注册的点击事件");
+            };
+        };
+    </script>
+</head>
+<body>
+    <div>onclick事件</div>
+    <button onclick="func1()">按钮1</button>
+    <button id="btn02">按钮1</button>
+</body>
+</html>

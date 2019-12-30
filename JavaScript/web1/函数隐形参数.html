@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数隐形参数</title>
+</head>
+<body>
+    <div>函数隐形参数</div>
+    <script type="text/javascript">
+        function func(cname) {
+            console.log(cname); // 1
+            console.log(arguments.length);
+            console.log("arguments[0]: ", arguments[0]); // 1
+            console.log("arguments[1]: ", arguments[1]); // "abc"
+            console.log("arguments[2]: ", arguments[2]); // true
+            console.log("arguments[3]: ", arguments[3]); // undefined
+        }
+
+
+        func(1, "abc", true);
+
+        // 利用函数的隐形参数arguments实现可变参数
+        // 计算无限 参数 个数的和，并把结果返回
+        function sum() {
+            var ret = 0;
+            for (var i = 0; i < arguments.length; ++i) {
+                if (typeof(arguments[i]) != "number") {
+                    continue;
+                }
+                ret += arguments[i];
+            }
+            return ret;
+        }
+
+        console.log(sum(10, 20, "dog", 30));
+    </script>
+</body>
+</html>

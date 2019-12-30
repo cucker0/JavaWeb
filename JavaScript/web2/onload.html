@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onload事件</title>
+    <script type="text/javascript">
+        function func1() {
+            console.log("页面加载完成");
+        }
+
+        // 动态注册事件
+        window.onload = function () {
+            console.log("onload动态注册事件");
+        };
+
+    </script>
+</head>
+<!-- 静态注册事件,onload绑定在body上生效，绑定在div不生效 -->
+<!--<body onload="func1()">-->
+<body>
+    <div>onload</div>
+
+</body>
+</html>
