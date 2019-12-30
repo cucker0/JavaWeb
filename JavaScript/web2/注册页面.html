@@ -9,7 +9,9 @@
         // 点击用户名称输入框时，提前把文本去掉
         function processUser() {
             var userInputObj = document.getElementById("user");
-            userInputObj.value = "";
+            if (userInputObj.value == "请输入用户名") {
+                userInputObj.value = "";
+            }
         }
 
         /**
@@ -21,7 +23,7 @@
             var reg = /^\w{8,15}$/;
             var result = reg.test(userInputValue);
             var userspanObj = document.getElementById("userspan");
-            if (reg) {
+            if (result) {
                 userspanObj.innerHTML = "";
                 return true;
             } else {
@@ -95,18 +97,82 @@
         /**
          * 兴趣爱好至少选择一个
          */
+        function checkhobby() {
+            var checked = false;
+            var hobbys = document.getElementById("hobby");
+            for (i in hobbys) {
+                if (hobbys[i].checked) {
+                    checked = true;
+                    break;
+                }
+            }
+            var hspanObj = document.getElementById("hspan");
+            if (checked) {
+                hspanObj.innerHTML = "";
+                return true;
+            } else {
+                hspanObj.innerHTML = "兴趣，至少选一个";
+                return false;
+            }
+        }
 
+        /**
+         * 验证国籍
+         */
+        function checkCountry() {
+            var countrySelect = document.getElementById("country");
+            var countrySpan = document.getElementById("countryspan");
+            if (countrySelect.selectedIndex == 0) {
+                countrySpan.innerHTML = "请选择国家";
+                return false;
+            } else {
+                countrySpan.innerHTML = "";
+                return false;
+            }
+        }
 
+        /**
+         * 自我评价
+         */
+        function checkDesc() {
+            var descInputObjValue = document.getElementById("desc").value;
+            var reg = /^([\u4E00-\u9FA5]|[a-zA-Z0-9]){5,15}$/;
+            var result = reg.test(descInputObjValue);
+            var descspanObj = document.getElementById("descspan");
+            if (result) {
+                descspanObj.innerHTML = "";
+                return true;
+            } else {
+                descspanObj.innerHTML = "自我评价 长度为5-15长度";
+                return false;
+            }
+        }
+
+        /**
+         * 添加整个表单的数据验证方法
+         * 当验证数据有非法时，返回false，阻止表单提交
+         * 当验证数据都合法时，返回true 让表单提交
+         */
+
+        function _validata() {
+            if (checkuser() && checkpwd() && checkrepwd() && checksex()
+                && checkhobby() && checkCountry() && checkDesc()) {
+                alert("所有数据验证成功");
+                return true;
+            }
+            alert(false);
+            return false;
+        }
     </script>
 </head>
 <body>
     <h2>注册页面：获取焦点、时区时区焦点、提交事件</h2>
-    <form action="//127.0.0.1:8080" method="post" onsubmit="check_data()">
+    <form action="//127.0.0.1:8080" method="post" onsubmit="return _validata();">
         <table>
             <tr>
                 <td>用户名称：*</td>
                 <td>
-                    <input id="user" type="text" name="user" value="请输入用户名" onblur="checkuser()">
+                    <input id="user" type="text" name="user" value="请输入用户名" onblur="checkuser()" onclick="processUser()">
                     <span style="color: red" id="userspan"></span>
                 </td>
             </tr>
@@ -121,6 +187,7 @@
                 <td>确认密码：</td>
                 <td>
                     <input id="repwd" type="text" name="repwd" onblur="checkrepwd()">
+                    <span id="repwdspan"></span>
                 </td>
             </tr>
             <tr>
