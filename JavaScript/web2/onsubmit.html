@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onsubmit</title>
+    <script type="text/javascript">
+        function regist() {
+            var ret = confirm("是否提交？");
+            return ret; // true: onsubmit事件会提交，false:onsubmit事件不会提交
+        }
+    </script>
+</head>
+<body>
+    <h3>onsubmit事件</h3>
+    <div>
+        <form action="https://www.sogou.com/web?query=js" method="get" onsubmit="return regist();">
+            用户名：<input type="text">
+            <input type="submit">
+        </form>
+    </div>
+</body>
+</html>

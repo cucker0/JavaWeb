@@ -147,78 +147,79 @@ console.log(typeof(flag1));
     ```
 
 #### object
-* array
-    ```js
-    // Array
-    var arr = []; // 空数组
-    var person = ['tom', 'cherry', 'rich'];
-    var person2 = Array('tom', 'cherry', 'rich');
-    console.log(typeof(person2)); // object
-    console.log(person[0]);
-    
-    // 遍历数组
-    console.log("-- 遍历数组 --");
-    for (var i in person) {
-        console.log(person[i]);
-    }
+##### array
+```js
+// Array
+var arr = []; // 空数组
+var person = ['tom', 'cherry', 'rich'];
+var person2 = Array('tom', 'cherry', 'rich');
+console.log(typeof(person2)); // object
+console.log(person[0]);
+
+// 遍历数组
+console.log("-- 遍历数组 --");
+for (var i in person) {
+    console.log(person[i]);
+}
+```
+* 数组对象常用方法
+    ```text
+    * 添加
+        obj.push(ele)                   追加
+        obj.unshift(ele)                最前插入
+        obj.splice(index,0,'content')   指定索引插入
+    * 移除
+        obj.pop()                       数组尾部获取
+        obj.shift()                     数组头部获取
+        obj.splice(index,count)         数组指定位置后count个字符
+      
+    *切片
+        obj.slice(start,end)          
+    * 合并
+        newArray ＝ obj1.concat(obj2)  
+    * 翻转
+        obj.reverse()
+      
+    * 字符串化：用指定的字符串连接每个元素
+        obj.join('_')
+    * 长度
+        obj.length
     ```
-    * 数组对象常用方法
-        ```text
-        * 添加
-            obj.push(ele)                   追加
-            obj.unshift(ele)                最前插入
-            obj.splice(index,0,'content')   指定索引插入
-        * 移除
-            obj.pop()                       数组尾部获取
-            obj.shift()                     数组头部获取
-            obj.splice(index,count)         数组指定位置后count个字符
-          
-        *切片
-            obj.slice(start,end)          
-        * 合并
-            newArray ＝ obj1.concat(obj2)  
-        * 翻转
-            obj.reverse()
-          
-        * 字符串化：用指定的字符串连接每个元素
-            obj.join('_')
-        * 长度
-            obj.length
-    ```
-* 字典
+##### 字典
+```js
+// dictionary
+var dic = {}; // 空字典
+var items = {k1: "v1", k2: "v2"}; // 标准写法, key为字符串，无需用引号包裹key
+var items2 = {items: '00', 'addr': "中金大道"};
+console.log(items.k1);
+var a = {k1: "v1", k2: "v2"};
+console.log(a);
+console.log(items);
+console.log(items2.items); // 00
+console.log(items2['items']); // 00
+console.log(typeof(items2));
+
+// 遍历字典
+console.log("-- 遍历字典 --");
+for (var k in items) {
+    console.log(items[k]);
+}
+console.log("-- end 遍历字典 --");
+/* end object */
+```
+
+* 序列化：对象转字符串
     ```js
-    // dictionary
-    var dic = {}; // 空字典
-    var items = {k1: "v1", k2: "v2"}; // 标准写法, key为字符串，无需用引号包裹key
-    var items2 = {items: '00', 'addr': "中金大道"};
-    console.log(items.k1);
     var a = {k1: "v1", k2: "v2"};
-    console.log(a);
-    console.log(items);
-    console.log(items2.items); // 00
-    console.log(items2['items']); // 00
-    console.log(typeof(items2));
-    
-    // 遍历字典
-    console.log("-- 遍历字典 --");
-    for (var k in items) {
-        console.log(items[k]);
-    }
-    console.log("-- end 遍历字典 --");
-    /* end object */
+    var b = JSON.stringify(a);
+    console.log(b); // '{"k1":"v1","k2":"v2"}'
     ```
-    * 序列化：对象转字符串
-        ```js
-        var a = {k1: "v1", k2: "v2"};
-        var b = JSON.stringify(a);
-        console.log(b); // '{"k1":"v1","k2":"v2"}'
-        ```
-    * 反序列化：字符串转对象
-        ```js
-        var stu = JSON.parse('{"name":"dicke","age":18}');
-        console.log(stu.age);
-        console.log("stu type: " + typeof (stu)); // object
-        ```
+* 反序列化：字符串转对象
+    ```js
+    var stu = JSON.parse('{"name":"dicke","age":18}');
+    console.log(stu.age);
+    console.log("stu type: " + typeof (stu)); // object
+    ```
 
 * 自定义对象
     * Object形式自定义对象
@@ -422,3 +423,76 @@ throw 错误消息; // 允许您创建自定义错误
     ```text
     先通过js代码获取标签的dom对象，然后通过dom对象.事件名 = function() {}的形式
     ```
+
+## DOM
+```text
+DOM: Document Object Model 文档对象模型
+就是把文档中的标签，属性，文本，转换成为对象来管理
+```
+
+![](../images/javascript/DOM_01.png)  
+
+### Node节点
+* 节点：Node，构成HTML文档最基本的单元
+* 元素节点：HTML文档中的HTML标签
+* 属性节点：标签的属性
+* 文本节点：标签中的文本内容
+
+### 节点对象的常用属性
+* nodeName：节点名
+* nodeType：节点类型
+* nodeValue：节点值
+
+`#` |nodeName |nodeType |nodeValue
+:--- |:--- |:--- |:---
+元素节点 |标签名 |1 |null  
+属性节点 |属性名 |2 |属性值  
+文本节点 |#text |3 |文本内容  
+
+### document对象常用方法
+* document.getElementById(elementId)
+    >通过标签的id属性查找标签dom对象，elementId是标签的id属性值
+
+* document.getElementsByName(elementName)
+    >通过标签的name属性查找标签dom对象，elementName标签的name属性值
+
+* document.getElementsByTagName(tagname)
+    >通过标签名查找标签dom对象。tagname是标签名
+
+### 节点的常用方法
+通过具体的元素节点调用方法
+
+* getElementsByTagName(tagname)
+    >方法，获取当前节点的指定标签名孩子节点
+
+* appendChild(oNode)
+    >方法给标签对象添加子节点。oNode是要添加的子节点。
+
+* removeChild(oNode)
+    >removeChild方法删除子节点。oNode是要删除的孩子节点
+
+* cloneNode( [bCloneChildren])
+    >cloneNode方法克隆一个对象。bCloneChildren表示是否需要克隆孩子节点
+
+* getAttribute(sAttributeName)
+    >getAttribute方法获取属性值。sAttributeName是要获取的属性名
+    
+### 节点的常用属性
+* childNodes
+    >属性，获取当前节点的所有子节点
+* firstChild
+    >属性，获取当前节点的第一个子节点
+* lastChild
+    >获取当前节点的最后一个子节点
+* parentNode
+    >获取当前节点的父节点
+* nextSibling
+    >获取当前节点的下一个节点
+* previousSibling
+    >获取当前节点的上一个节点
+* className
+    >用于获取或设置标签的class属性值
+* innerHTML 
+    >表示获取/设置起始标签和结束标签中的内容
+* innerTEXT
+    >表示获取/设置起始标签和结束标签中的文本

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onchange</title>
+    <script type="text/javascript">
+        function func1() {
+            alert("静态绑定ongchange事件");
+        }
+
+        window.onload = function () {
+            var eleObj = document.getElementById("equipment");
+            eleObj.onchange = function () {
+                alert("动态绑定onchange事件");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>onchange事件</h3>
+    <div>
+        <div>城市：</div>
+        <select onchange="func1()">
+            <option>选择城市</option>
+            <option>纽约</option>
+            <option>北京</option>
+            <option>巴黎</option>
+        </select>
+
+    </div>
+    <div>
+        <div>设备：</div>
+        <select id="equipment">
+            <option>PC电脑</option>
+            <option>笔记本</option>
+            <option>平板</option>
+        </select>
+    </div>
+</body>
+</html>

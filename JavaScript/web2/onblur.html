@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onblur</title>
+    <script type="text/javascript">
+        function func1() {
+            console.log("静态绑定onblur失去焦点事件");
+        }
+
+        window.onload = function () {
+            var pwdObj = document.getElementById("pwd");
+            pwdObj.onblur = function () {
+                console.log("动态绑定onblur失去焦点事件");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>onblur事件</h3>
+    <div>
+        <div>
+            用户名：<input type="text" onblur="func1()">
+        </div>
+        <div>
+            密码：<input id="pwd" type="password">
+        </div>
+    </div>
+</body>
+</html>
