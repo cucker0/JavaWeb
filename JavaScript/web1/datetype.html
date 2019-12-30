@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript数据类型</title>
+</head>
+<body>
+    <div>
+        javascript数据类型
+    </div>
+    <script type="text/javascript">
+        // number
+        var num = 2;
+        var age = Number(18);
+        var a1 = 1, a2 = 2, a3 = 3;
+
+        // 字符串解析为数值
+        var n1 = parseInt("1.2"); // 1
+        var n2 = parseFloat("1.2"); // 1.2
+        console.log(n1, n2);
+
+        // string
+        var name = "pikaqs";
+        var theam = String("black");
+        var age_str = String(18);
+
+
+        // boolean
+        var status = true;
+        var siClose = false;
+        var flag1 = Boolean(1); // 非0数值为true
+        var flag2 = Boolean(0); // false
+        console.log(flag1, flag2);
+        console.log(typeof(flag1));
+
+
+        /* object */
+        // Array
+        var person = ['tom', 'cherry', 'rich'];
+        var person2 = Array('tom', 'cherry', 'rich');
+        console.log(typeof(person2)); // object
+        console.log(person[0]);
+
+        // 遍历数组
+        console.log("-- 遍历数组 --");
+        for (var i in person) {
+            console.log(person[i]);
+        }
+        console.log("-- end 遍历数组 --");
+
+        // dictionary
+        var items = {k1: "v1", k2: "v2"}; // 标准写法, key为字符串，无需用引号包裹key
+        var items2 = {items: '00', 'addr': "中金大道"};
+        console.log(items.k1);
+        var a = {k1: "v1", k2: "v2"};
+        console.log(a);
+        console.log(items);
+        console.log(items2.items); // 00
+        console.log(items2['items']); // 00
+        console.log(typeof(items2));
+
+        // 遍历字典
+        console.log("-- 遍历字典 --");
+        for (var k in items) {
+            console.log(items[k]);
+        }
+        console.log("-- end 遍历字典 --");
+
+        // 序列化：对象转字符串
+        var b = JSON.stringify(a);
+        console.log(b); // '{"k1":"v1","k2":"v2"}'
+
+        // 反序列化：字符串转对象
+        var stu = JSON.parse('{"name":"dicke","age":18}');
+        console.log(stu.age);
+        console.log("stu type: " + typeof (stu)); // object
+        /* end object */
+
+        // function
+        var func1 = new Function();
+        console.log(typeof(func1));
+    </script>
+</body>
+</html>
