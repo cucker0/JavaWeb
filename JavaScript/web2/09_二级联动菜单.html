@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09_二级联动菜单</title>
+    <script type="text/javascript" src="./js/citys.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 查找节点
+            provinceSelect = document.getElementById("province");
+            provinceSelect.onchange = showCity;
+
+            getAllProvince();
+        }
+
+        /**
+         * 从js文件获取所有省的数据，并创建options标签节点
+         */
+        function getAllProvince() {
+            var optionObj;
+            china.provinces.forEach((province) => {
+                optionObj = document.createElement("option");
+                optionObj.innerHTML = province.name;
+                provinceSelect.appendChild(optionObj);
+            })
+        }
+
+        /**
+         * 改变省时，更新城市列表
+         */
+        function showCity() {
+            var citySelect = document.getElementById("city");
+            // 在添加新的城市数据之前，要把原来的城市 数据清掉
+            for (var i = 1; i < citySelect.options.length;) { // var i = 1  表示不清除 <option value="none">--请选择市--</option>
+                citySelect.removeChild(citySelect.options[i]); // 调用 citySelect.options[i] 时 i会自增1
+            }
+            // 当选择省为 <option value="none">--请选择省--</option> 退出
+            if (provinceSelect.selectedIndex === 0) {
+                return;
+            }
+            // 遍历选择省的城市
+            china.provinces[provinceSelect.selectedIndex - 1].city.forEach((city) => { // provinceSelect.selectedIndex - 1 是因为第一个<option value="none">--请选择省--</option>
+                var optionObj = document.createElement("option");
+                optionObj.innerHTML = city;
+                citySelect.appendChild(optionObj);
+            })
+        }
+
+    </script>
+</head>
+<body>
+    <h3>09_二级联动菜单</h3>
+    <div>
+        <select id="province" name="province">
+            <option value="none">--请选择省--</option>
+        </select>
+        <select id="city" name="city">
+            <option value="none">--请选择市--</option>
+        </select>
+    </div>
+</body>
+</html>

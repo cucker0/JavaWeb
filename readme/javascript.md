@@ -502,7 +502,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Document
     >方法，获取当前节点的指定标签名孩子节点
 
 * appendChild(oNode)
-    >方法给标签对象添加子节点。oNode是要添加的子节点。
+    >方法给标签对象添加子节点。oNode是要添加的子节点。相当于剪切oNode节点
 
 * removeChild(oNode)
     >removeChild方法删除子节点。oNode是要删除的孩子节点

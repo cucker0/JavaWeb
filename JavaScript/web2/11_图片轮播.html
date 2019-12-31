@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+        .container {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .container img {
+            width: 300px;
+        }
+    </style>
+    <script type="text/javascript">
+        // 图片的基本路径
+        var imgUrlBase = "./images/";
+        // 图片名列表
+        var imageList = ["0.jpg", "1.jpg", "2.jpg", "6.jpg", "11.jpg", "18.jpg",];
+
+        // 拼接图片url
+        function concateImageUrl(index) {
+            return imgUrlBase + imageList[index];
+        }
+
+        /**
+         * 切换图片
+         * @param index: 图片在imageList中的索引
+         */
+        function switchImage(index) {
+            // 查找节点
+            var imgObj = document.getElementById("image");
+            // 更新图片src地址
+            imgObj.src = concateImageUrl(index);
+        }
+
+        window.onload = function () {
+            // 设置首次显示的图片
+            switchImage(0);
+
+            var index = 0;
+            // 定时器，切换图片
+            window.setInterval(function () {
+                ++index;
+                index %= imageList.length;
+                switchImage(index);
+            }, 2000);
+        }
+    </script>
+</head>
+<body>
+    <h3>图片轮播</h3>
+    <div class="container">
+        <img id="image" alt="图片找不到了">
+    </div>
+</body>
+</html>
