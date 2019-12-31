@@ -13,7 +13,7 @@
         }
 
         .container img {
-            width: 300px;
+            width: 500px;
         }
     </style>
     <script type="text/javascript">
@@ -21,11 +21,6 @@
         var imgUrlBase = "./images/";
         // 图片名列表
         var imageList = ["0.jpg", "1.jpg", "2.jpg", "6.jpg", "11.jpg", "18.jpg",];
-
-        // 拼接图片url
-        function concateImageUrl(index) {
-            return imgUrlBase + imageList[index];
-        }
 
         /**
          * 切换图片
@@ -35,7 +30,7 @@
             // 查找节点
             var imgObj = document.getElementById("image");
             // 更新图片src地址
-            imgObj.src = concateImageUrl(index);
+            imgObj.src = imgUrlBase + imageList[index];
         }
 
         window.onload = function () {
