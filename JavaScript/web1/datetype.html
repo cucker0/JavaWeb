@@ -42,10 +42,28 @@
         console.log(person[0]);
 
         // 遍历数组
-        console.log("-- 遍历数组 --");
+        // 一般的for
+        console.log("-- 一般的for 遍历数组 --");
+        for (let i = 0; i < person.length; ++i) {
+            console.log(person[i]);
+        }
+
+        // for-in
+        console.log("-- for-in 遍历数组 --");
         for (var i in person) {
             console.log(person[i]);
         }
+
+        // forEach
+        console.log("-- forEach lambda 遍历数组 --");
+
+        person.forEach(p => {
+            console.log(p);
+        })
+        console.log("-- forEach function 遍历数组 --");
+        person.forEach(function (p) {
+            console.log(p);
+        })
         console.log("-- end 遍历数组 --");
 
         // dictionary

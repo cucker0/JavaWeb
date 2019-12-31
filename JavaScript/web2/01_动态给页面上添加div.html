@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态给页面上添加div</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 给标签绑定事件
+            var h3 = document.getElementsByTagName("h3")[0];
+
+            h3.onclick = function () {
+                var divObj = document.createElement("div");
+                divObj.innerHTML = "这时动态生成的DIV标签";
+                document.body.appendChild(divObj);
+                divObj.onclick = function () {
+                    alert("生成时间：" + new Date());
+                }
+            };
+        }
+    </script>
+</head>
+<body>
+    <h3>请点击页面</h3>
+
+</body>
+</html>

@@ -67,6 +67,12 @@ JavaScript是一种具有函数优先的轻量级，解释型或即时编译型�
 ### 定义变量格式
 * var声明的标量为局部变量
 * 无var声明的标量为全局变量
+* var、let、const声明变量区别
+    * var定义的变量可以修改，作用域为方法级，如果不初始化会输出undefined，不会报错。
+    * let是块级作用域，函数内部使用let定义后，对函数外部无影响。在变量声明之前就访问变量的话，会直接提示 ReferenceError
+    * const定义的变量不可以修改，而且必须初始化，作用域为方法级
+
+
 ```js
 var name; // 局部变量
 var height = 180;
@@ -157,10 +163,30 @@ console.log(typeof(person2)); // object
 console.log(person[0]);
 
 // 遍历数组
-console.log("-- 遍历数组 --");
+// 一般的for
+console.log("-- 一般的for 遍历数组 --");
+for (let i = 0; i < person.length; ++i) {
+    console.log(person[i]);
+}
+
+// for-in
+console.log("-- for-in 遍历数组 --");
 for (var i in person) {
     console.log(person[i]);
 }
+
+// forEach
+console.log("-- forEach function 遍历数组 --");
+person.forEach(function (p) {
+    console.log(p);
+})
+
+console.log("-- forEach lambda 遍历数组 --");
+person.forEach(p => {
+    console.log(p);
+})
+
+console.log("-- end 遍历数组 --");
 ```
 * 数组对象常用方法
     ```text
@@ -432,6 +458,8 @@ DOM: Document Object Model 文档对象模型
 
 ![](../images/javascript/DOM_01.png)  
 
+https://developer.mozilla.org/zh-CN/docs/Web/API/Document
+
 ### Node节点
 * 节点：Node，构成HTML文档最基本的单元
 * 元素节点：HTML文档中的HTML标签
@@ -458,6 +486,14 @@ DOM: Document Object Model 文档对象模型
 
 * document.getElementsByTagName(tagname)
     >通过标签名查找标签dom对象。tagname是标签名
+    
+* elements = document.getElementsByTagNameNS(namespace, name)
+    >namespace 是所要查询的元素的命名空间URL
+    >name 是所要查询的元素的名称  
+    >返回带有指定名称和命名空间的元素集合。整个文件结构都会被搜索，包括根节点。
+    >getElementsByTagName方法获取到的节点不是文档节点时，实际上是调用了element.getElementsByTagNameNS方法
+* document.getElementsByClassName(classname)
+    >通过class名查找元素dom对象
 
 ### 节点的常用方法
 通过具体的元素节点调用方法
@@ -494,5 +530,5 @@ DOM: Document Object Model 文档对象模型
     >用于获取或设置标签的class属性值
 * innerHTML 
     >表示获取/设置起始标签和结束标签中的内容
-* innerTEXT
+* innerText
     >表示获取/设置起始标签和结束标签中的文本

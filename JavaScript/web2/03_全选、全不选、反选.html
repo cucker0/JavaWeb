@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全选、全不选、反选</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 查找input节点
+            itemsInputNodes = document.getElementsByName("items");
+
+            // 绑定事件
+            var checkedAllBtn = document.getElementById("checkedAllBtn");
+            var checkedNoBtn = document.getElementById("checkedNoBtn");
+            var checkedRevBtn = document.getElementById("checkedRevBtn");
+            checkedToggleInput = document.getElementById("checkedToggle");
+            checkedAllBtn.onclick = checkedAll;
+            checkedNoBtn.onclick = checkedNo;
+            checkedRevBtn.onclick = checkedReverse;
+            checkedToggleInput.onclick = checkedToggle;
+
+            // 给每个选项的input绑定事件
+            itemsInputNodes.forEach(function (e) {
+                e.onchange = inputChange;
+            })
+        }
+
+        /**
+         * 全选
+         */
+        function checkedAll() {
+            for (let i = 0; i < itemsInputNodes.length; ++i) {
+                itemsInputNodes[i].checked = true;
+            }
+            checkedToggleInput.checked = true;
+        }
+
+        /**
+         * 全不选
+         */
+        function checkedNo() {
+            for (let i in itemsInputNodes) {
+                itemsInputNodes[i].checked = false;
+            }
+            checkedToggleInput.checked = false;
+        }
+
+        /**
+         * 反选
+         */
+        function checkedReverse() {
+            itemsInputNodes.forEach(e => {
+                e.checked = !e.checked;
+            });
+            inputChange();
+        }
+
+        /**
+         * 切换 全选/全不选
+         */
+        function checkedToggle() {
+            if (checkedToggleInput.checked) {
+                checkedAll();
+            } else {
+                checkedNo();
+            }
+        }
+
+        /**
+         * 判断是否选择了所有项
+         */
+        function isCheckedAll() {
+            var count = 0;
+            itemsInputNodes.forEach(e => {
+                if (e.checked) {
+                    ++count;
+                }
+            })
+            // 是全选
+            if (itemsInputNodes.length === count) {
+                return true;
+            }
+            // 非全选
+            return false;
+        }
+
+        /**
+         * 选择或取消input选择
+         */
+        function inputChange() {
+            checkedToggleInput.checked = isCheckedAll();
+        }
+
+    </script>
+</head>
+<body>
+    <h3>全选、全不选、反选</h3>
+    <div>
+        <form>
+            <div>
+                你喜欢的运动？
+                <label><input type="checkbox" id="checkedToggle">全选/全不选</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="items" value="football">足球</label>
+                <label><input type="checkbox" name="items" value="basketball">篮球</label>
+                <label><input type="checkbox" name="items" value="badminton">羽毛球</label>
+                <label><input type="checkbox" name="items" value="tabletennis">乒乓球</label>
+            </div>
+            <br>
+            <div>
+                <input type="button" id="checkedAllBtn" value="全选">
+                <input type="button" id="checkedNoBtn" value="全不选">
+                <input type="button" id="checkedRevBtn" value="反选">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02_删除、替换、克隆标签</title>
+    <style type="text/css">
+        #one {
+            border: 1px blue solid;
+            background: green;
+            width: 300px;
+            height: 150px;
+        }
+
+        #two {
+            border: 1px blue solid;
+            background: coral;
+            width: 300px;
+            height: 150px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 获取元素
+            divOneObj = document.getElementById("one");
+            divTwoObj = document.getElementById("two");
+            // 获取其父节点
+            parentNode = divOneObj.parentNode;
+        }
+
+        /**
+         * 删除元素
+         */
+        function func1() {
+            var divTwoObj = document.getElementById("two");
+            if (divTwoObj) {
+                parentNode.removeChild(divTwoObj);
+            } else {
+                alert("div2已经被删除了，不要再点了");
+            }
+        }
+
+        /**
+         * 替换元素
+         */
+        function func2() {
+            parentNode.replaceChild(divTwoObj, divOneObj);
+        }
+
+        /**
+         * 克隆元素
+         */
+        function func3() {
+            const node = divTwoObj.cloneNode(true);
+            parentNode.appendChild(node);
+        }
+
+    </script>
+</head>
+<body>
+    <h3>02_删除、替换、克隆标签</h3>
+    <div>
+        <input type="button" value="删除元素div2" onclick="func1()">
+        <input type="button" value="替换元素,div2替换掉div1" onclick="func2()">
+        <input type="button" value="克隆元素div2添加到body中" onclick="func3()">
+    </div>
+    <div id="one">
+        [div1] one one one one
+    </div>
+
+    <div id="two">
+        [div2] two two two
+
+    </div>
+</body>
+</html>

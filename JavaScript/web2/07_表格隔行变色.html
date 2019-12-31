@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07_表格隔行变色</title>
+    <style type="text/css">
+        table {
+            border: 1px solid;
+            width: 500px;
+            margin: auto;
+        }
+
+        td {
+            border: 1px solid;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: maroon;
+        }
+
+        .one {
+            /*background-color: white;*/
+        }
+
+        .two {
+            background-color: lightgray;
+        }
+
+        .over {
+            background-color: lightskyblue;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 查找所有的tr节点
+            var trs = document.getElementsByTagName("tr");
+            for (var i = 1; i < trs.length; ++i) {
+                if (i % 2 === 0) {
+                    trs[i].className = "two";
+                } else {
+                    trs[i].className = "one";
+                }
+                var oldClass = "";
+                trs[i].onmouseover = function () {
+                    oldClass = this.className;
+                    this.className = "over";
+                }
+                trs[i].onmouseout = function () {
+                    this.className = oldClass;
+                }
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <h3>07_表格隔行变色</h3>
+    <div>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>地址</th>
+            </tr>
+            <tr class="one">
+                <td>高杰</td>
+                <td>18</td>
+                <td>闵行</td>
+            </tr>
+            <tr class="two">
+                <td>李刚</td>
+                <td>16</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>赵士龙</td>
+                <td>22</td>
+                <td>东莞</td>
+            </tr>
+            <tr>
+                <td>鲁宾</td>
+                <td>29</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>刘鹏</td>
+                <td>13</td>
+                <td>幼儿园</td>
+            </tr>
+            <tr>
+                <td>刘鹏</td>
+                <td>13</td>
+                <td>幼儿园</td>
+            </tr>
+            <tr>
+                <td>刘鹏</td>
+                <td>13</td>
+                <td>幼儿园</td>
+            </tr>
+            <tr>
+                <td>刘鹏</td>
+                <td>13</td>
+                <td>幼儿园</td>
+            </tr>
+            <tr>
+                <td>刘鹏</td>
+                <td>13</td>
+                <td>幼儿园</td>
+            </tr>
+            <tr>
+                <td>刘鹏</td>
+                <td>13</td>
+                <td>幼儿园</td>
+            </tr>
+            <tr>
+                <td>刘鹏</td>
+                <td>13</td>
+                <td>幼儿园</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

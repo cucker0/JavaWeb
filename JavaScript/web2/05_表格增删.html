@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05_表格增删</title>
+    <style type="text/css">
+        .out {
+            height: 120px;
+            border-bottom: darkorange 1px solid;
+        }
+        .content table{
+            margin: 20px 0 0 0;
+            border-right:1px solid #F00;
+            border-bottom:1px solid #F00;
+        }
+        .content td, .content th {
+            border-left: 1px solid #F00;
+            border-top: 1px solid #F00;
+        }
+    </style>
+    <script type="text/javascript">
+        /**
+         * 删除当前操作tr
+         * @param tdObj: 操作点击对应的td对象
+         */
+        function deleteRow(tdObj) {
+            var tr = tdObj.parentNode.parentNode;
+            tr.parentNode.removeChild(tr);
+        }
+
+        window.onload = function () {
+            // 查找节点
+            var addUserNode = document.getElementById("addUser");
+
+            addUserNode.onclick = addTrNode;
+        }
+
+        // 新添加一行
+        function addTrNode() {
+            /*
+            新建如下的标签节点
+            <tr>
+                <td>user</td>
+                <td>tel</td>
+                <td>addr</td>
+                <td><a href="#">删除</a></td>
+            </tr>
+             */
+            // 获取输入的值
+            var userObj = document.getElementById("user");
+            var telObj = document.getElementById("tel");
+            var addrObj = document.getElementById("addr");
+            // user, tel, addr必须填写
+            if (!(userObj.value && telObj.value && addrObj.value)) {
+                return;
+            }
+
+            // 创建节点
+            var tdUser = document.createElement("td");
+            var tdTel = document.createElement("td");
+            var tdAddr = document.createElement("td");
+            tdUser.innerHTML = userObj.value;
+            tdTel.innerHTML = telObj.value;
+            tdAddr.innerHTML = addrObj.value;
+            var tdDel = document.createElement("td");
+            var aNode = document.createElement("a");
+            aNode.href = "#";
+            aNode.innerHTML = "删除";
+            aNode.onclick = function () {
+                deleteRow(this);
+            }
+            tdDel.appendChild(aNode);
+
+            var trNode = document.createElement("tr");
+            trNode.appendChild(tdUser);
+            trNode.appendChild(tdTel);
+            trNode.appendChild(tdAddr);
+            trNode.appendChild(tdDel);
+            console.log(trNode);
+
+            // 把新建的tr对象追加到table中
+            var usertableObj = document.getElementById("usertable");
+            usertableObj.appendChild(trNode);
+
+            // 清空添加用户的输入框
+            userObj.value = "";
+            telObj.value = "";
+            addrObj.value = "";
+        }
+    </script>
+</head>
+<body>
+    <h3>05_表格增删</h3>
+    <div class="out">
+        <h4>添加用户</h4>
+        <div>
+            姓名：<input type="text" name="user" id="user">
+            电话：<input type="text" name="tel" id="tel">
+            住址：<input type="text" name="addr" id="addr">
+        </div>
+        <button id="addUser">提交</button>
+    </div>
+    <div class="content">
+        <table id="usertable" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>姓名</th>
+                <th>电话</th>
+                <th>住址</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>110</td>
+                <td>上海</td>
+                <td>
+                    <a href="#" onclick="deleteRow(this);">删除</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

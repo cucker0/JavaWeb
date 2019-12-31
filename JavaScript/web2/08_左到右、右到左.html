@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08_左到右、右到左</title>
+    <style type="text/css">
+        .clearfix:after {
+            display: table;
+            content: '';
+            clear: both;
+        }
+
+        .ltab, .rtab {
+            float: left;
+            width: 60px;
+            margin: 0 20px 20px 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 查找节点
+            var right = document.getElementById("right");
+            var rightAll = document.getElementById("rightAll");
+            var left = document.getElementById("left");
+            var leftAll = document.getElementById("leftAll");
+
+            // 绑定事件
+            right.onclick = add;
+            rightAll.onclick = addAll;
+            left.onclick = remove;
+            leftAll.onclick = removeAll;
+        };
+
+        // 获取第1个select
+        function selectOne() {
+            // 不用全局变量，是因为每次的选择option可能不一样
+            return document.getElementById("one");
+        }
+        // 获取第2个select
+        function selectTwo() {
+            return document.getElementById("two");
+        }
+
+        /**
+         * 添加一部分
+         */
+        function add() {
+            var select1 = selectOne();
+            var select2 = selectTwo();
+            // select1.selectedIndex 是下拉列表中被选中的索引
+            select2.appendChild(select1.options[select1.selectedIndex]);
+        }
+
+        /**
+         * 添加全部
+         */
+        function addAll() {
+            var select1 = selectOne();
+            var select2 = selectTwo();
+            for (var i = 0; i < select1.options.length; ++i) {
+                select2.appendChild(select1.options[i]);
+            }
+        }
+
+        /**
+         * 移除部分
+         */
+        function remove() {
+            var select1 = selectOne();
+            var select2 = selectTwo();
+            select1.appendChild(select2.options[select2.selectedIndex]);
+        }
+
+        /**
+         * 移动全部
+         */
+        function removeAll() {
+            let select1 = selectOne();
+            let select2 = selectTwo();
+            for (var i = 0; i < select2.options.length; ++i) {
+                select1.appendChild(select2.options[i]);
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h3>08_左到右、右到左</h3>
+    <div class="clearfix">
+        <div class="ltab">
+            <select name="itme1" size="10" id="one">
+                <option value="选项1">选项1</option>
+                <option value="选项2">选项2</option>
+                <option value="选项3">选项3</option>
+                <option value="选项4">选项4</option>
+                <option value="选项5">选项5</option>
+                <option value="选项6">选项6</option>
+                <option value="选项7">选项7</option>
+                <option value="选项8">选项8</option>
+            </select>
+        </div>
+        <div class="rtab">
+            <select name="itme2" size="10" id="two">
+                <option value="选项9">选项9</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="option">
+        <button id="right">右移</button>
+        <button id="rightAll">全部右移</button>
+        <button id="left">左移</button>
+        <button id="leftAll">全部左移</button>
+    </div>
+</body>
+</html>
