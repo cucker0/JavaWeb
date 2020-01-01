@@ -12,7 +12,15 @@ JavaScript是一种具有函数优先的轻量级，解释型或即时编译型�
 
 ## javascript代码与html代码结合的方式
 * 在head或body标签内添加script标签  
-    head标签内  
+    head标签内
+    ```text
+    基本上来说，head里的 <script>标签会阻塞后续资源的载入以及整个页面的生成。
+    所以，为什么有很多网站把javascript放在网页的最后面了，
+    要么就是动用了window.onload或是docmuemt ready之类的事件。
+
+    放在<head>标签中的javascript会在页面一旦打开的时候进行加载，
+    因此，如果这里面的js对DOM树进行加载的话，很容易就会因为找不到！
+    ```  
     ```html
     <!DOCTYPE html>
     <html lang="en">
@@ -62,6 +70,20 @@ JavaScript是一种具有函数优先的轻量级，解释型或即时编译型�
     ```
 
 **也可以两种方式同时使用**  
+
+## 注释
+* 单行注释
+    ```js
+    // 注释内容
+    ```
+* 块注释
+    ```js
+    /* 注释内容 */
+    
+    /**
+     * 文档注释
+     */
+    ```
 
 ## 变量
 ### 定义变量格式
@@ -448,7 +470,50 @@ throw 错误消息; // 允许您创建自定义错误
 * 动态注册事件
     ```text
     先通过js代码获取标签的dom对象，然后通过dom对象.事件名 = function() {}的形式
+    
+    当已经定义好一个方法后，如 function fucn1() { 方法体 };
+    给dom节点绑定事件
+    dom节点.onclick = fucn1;
+    
+    // 若要传参数，使用匿名方法
+    dom节点.onclick = function () {
+        fucn1(args);
+    };
     ```
+
+### 特殊事件的阻止
+* 阻止事件冒泡
+    ```text
+    事件的冒泡是指，父子元素同时监听同一个事件。
+    当触发子元素的事件的时候，同一个事件也被传递到了父元素的事件里去响应。
+    
+    阻止方法：
+    在事件函数体内，return false; 可以阻止事件的冒泡传递。  
+    ```
+* 阻止onsubmit提交事件
+    ```html
+    // 当func方法返回值为false时，onsubmit提交事件就不会提交
+    <form action="https://api.xx.com/xx" method="post" onsubmit="return func();">
+      
+    </form>
+    ```
+* 调用方法处，显示方法返回的结果
+    ```html
+    onxxx="return func();"
+    ```
+* 点击a标签不要跳转
+    ```html
+    // 这条语句表示什么也不做，是个空语句。当绑定了onclick()事件并且点击后，页面会停留在原地
+    <a href="javacript:void(0);"></a>
+    
+    // href="#" 这个是HTML的链接用法，意思是跳转到页面顶部
+    <a href="#"></a>
+    ```
+* a、img等标签引用URL，与当前请求的http协议相同(http、https)
+    ```html
+    <a href="//img.alicdn.com"></a>
+    ```
+    
 
 ## DOM
 ```text
@@ -477,7 +542,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Document
 属性节点 |属性名 |2 |属性值  
 文本节点 |#text |3 |文本内容  
 
-### document对象常用方法
+### document对象查找节点常用方法
 * document.getElementById(elementId)
     >通过标签的id属性查找标签dom对象，elementId是标签的id属性值
 
@@ -494,6 +559,11 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Document
     >getElementsByTagName方法获取到的节点不是文档节点时，实际上是调用了element.getElementsByTagNameNS方法
 * document.getElementsByClassName(classname)
     >通过class名查找元素dom对象
+* element = document.querySelector('input[name="user"]')
+    >通过属性查找节点，返回第一个节点
+* elementList = document.querySelectorAll('input[alldata]')
+    >通过属性查找符合条件的所有节点，返回list
+
 
 ### 节点的常用方法
 通过具体的元素节点调用方法
@@ -532,3 +602,35 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Document
     >表示获取/设置起始标签和结束标签中的内容
 * innerText
     >表示获取/设置起始标签和结束标签中的文本
+    
+### dom加载和js执行的先后顺序
+DOM就是文档对象模型，html的构成就是DOM。所以说网页就是一个文档，是一个有结构的文档。
+
+**浏览器的渲染顺序**
+1. 解析HTML
+2. 加载外部脚本和样式表
+3. 脚本在文档内解析并执行
+4. 构造HTML DOM模型
+5. 加载图片以及外部内容
+6. 网页加载完毕
+
+```text
+以上顺序可以看出，外部js会在DOM构造之前执行，那么显然外部js也无法访问DOM文档模型。
+所以一般把可执行的脚本放在页面初始化时间处理函数中。这样的话就能确保文档加载完毕再执行脚本。
+
+1. js下载完成后才执行document的onload方法，图片下载完成后才会执行window的onload方法，404文件不存在的除外。
+2. 一定要在某个页面元素加载后再去执行document.getElementByIdx_x_x_x_x_x_x访问它，否则没有加载到它时会是null，报错！
+3. html代码以及js加载的顺序是：按照文档里的先后顺序，
+    从上往下依次加载：
+    先加载head标签中的js代码段以及引入的js，
+    然后加载body标签中的html代码以及js代码，
+    再加载body标签下面的js代码。
+4. 图片、css可以并行下载，js是串行下载。
+    对于Javascript的运行有两大特性：1）载入后马上执行，2）执行时会阻塞页面后续的内容（包括页面的渲染、其它资源的下载）。
+    于是，如果有多个js文件被引入，那么对于浏览器来说，这些js文被串行地载入，并依次执行。
+5. js阻塞页面后续的内容，后续有图片的话，图片会先下载，但是不会先展示。
+6. JavaScript执行引擎并非一行一行地分析和执行程序，而是一段一段地分析执行的。
+    而且在分析执行同一段代码中，定义式的函数语句会被提取出来优先执行。
+    函数定义执行完后，才会按顺序执行其他代码。
+```
+[html加载顺序示例](../JavaScript/web2/html加载顺序.html)  

@@ -24,11 +24,13 @@
     <script type="text/javascript">
         window.onload = function () {
             // 查找节点
+            select1 = document.getElementById("one");
+            select2 = document.getElementById("two");
             var right = document.getElementById("right");
             var rightAll = document.getElementById("rightAll");
             var left = document.getElementById("left");
             var leftAll = document.getElementById("leftAll");
-
+            document.querySelectorAll()
             // 绑定事件
             right.onclick = add;
             rightAll.onclick = addAll;
@@ -36,28 +38,16 @@
             leftAll.onclick = removeAll;
         };
 
-        // 获取第1个select
-        function selectOne() {
-            // 不用全局变量，是因为每次的选择option可能不一样
-            return document.getElementById("one");
-        }
-        // 获取第2个select
-        function selectTwo() {
-            return document.getElementById("two");
-        }
-
         /**
          * 添加一部分
          */
         function add() {
-            var select1 = selectOne();
-            var select2 = selectTwo();
             // select1.selectedIndex 为-1时表示，没有选择任何选项
             if (select1.selectedIndex === -1) {
                 return;
             }
             // select1.selectedIndex 是下拉列表中被选中的第一个索引
-            // select1.selectedOptions 选择的所有选项
+            // select1.selectedOptions 选中的所有选项
             for (var i = 0; i < select1.selectedOptions.length;) {
                 select2.appendChild(select1.selectedOptions[i])
             }
@@ -67,8 +57,6 @@
          * 添加全部
          */
         function addAll() {
-            var select1 = selectOne();
-            var select2 = selectTwo();
             // 注意：遍历选中的select的options时，不需要迭代条件，选中的索引自动自增
             for (var i = 0; i < select1.options.length;) {
                 select2.appendChild(select1.options[i]); // 调用 select1.options[i] 时，i会自增1
@@ -79,8 +67,6 @@
          * 移除部分
          */
         function remove() {
-            var select1 = selectOne();
-            var select2 = selectTwo();
             if (select2.selectedOptions.length === 0) {
                 return;
             }
@@ -93,8 +79,6 @@
          * 移动全部
          */
         function removeAll() {
-            let select1 = selectOne();
-            let select2 = selectTwo();
             for (var i = 0; i < select2.options.length;) {
                 select1.appendChild(select2.options[i]);
             }
