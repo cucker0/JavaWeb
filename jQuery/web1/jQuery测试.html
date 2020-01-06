@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery测试</title>
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".btn").click(function () {
+                alert("jQuery准备就绪");
+            });
+            console.log($(".btn"));
+            console.log(document.getElementsByClassName("btn"));
+
+        });
+
+    </script>
+</head>
+<body>
+    <h3>jQuery测试</h3>
+    <div>
+        <input type="button" value="点我呀，来骚一波" class="btn">
+    </div>
+</body>
+</html>
