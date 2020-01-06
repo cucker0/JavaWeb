@@ -634,3 +634,18 @@ DOM就是文档对象模型，html的构成就是DOM。所以说网页就是一�
     函数定义执行完后，才会按顺序执行其他代码。
 ```
 [html加载顺序示例](../JavaScript/web2/html加载顺序.html)  
+
+
+## js示例
+* [动态给页面上添加div](../JavaScript/web2/01_动态给页面上添加div.html)
+* [删除、替换、克隆标签](../JavaScript/web2/02_删除、替换、克隆标签.html)
+* [全选、全不选、反选](../JavaScript/web2/03_全选、全不选、反选.html)
+* [新闻字体](../JavaScript/web2/04_新闻字体.html)
+* [表格增删](../JavaScript/web2/05_表格增删.html)
+* [动态制作表格](../JavaScript/web2/06_动态制作表格.html)
+* [表格隔行变色](../JavaScript/web2/07_表格隔行变色.html)
+* [选项左到右、右到左](../JavaScript/web2/08_选项左到右、右到左.html)
+* [二级联动菜单.html](../JavaScript/web2/09_二级联动菜单.html)
+* [注册页面](../JavaScript/web2/10_注册页面.html)
+* [图片轮播.html](../JavaScript/web2/11_图片轮播.html)
+

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06_动态制作表格</title>
+    <style type="text/css">
+        #tab table {
+            width: 50%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        #tab th, #tab td {
+            border: 1px solid lightskyblue;
+        }
+    </style>
+    <script type="text/javascript">
+        var oldTable = null;
+
+        /**
+         * 创建表
+         */
+        function createTable() {
+            // 获取并解析输入的行数、列数
+            var rowNode = document.getElementById("row");
+            var colNode = document.getElementById("col");
+            var row = parseInt(rowNode.value);
+            var col = parseInt(colNode.value);
+
+            // 创建表
+            var tableObj = document.createElement("table");
+            for (let r = 0; r < row; ++r) {
+                var trObj = document.createElement("tr");
+                tableObj.appendChild(trObj);
+
+                for (let c = 0; c < col; ++c) {
+                    var tdObj = document.createElement("td");
+                    tdObj.innerHTML = r + "," + c;
+                    trObj.appendChild(tdObj);
+                }
+            }
+
+            // 把表节点添加到body中
+            // 先删除原来的表
+            if (oldTable) {
+                oldTable.parentNode.removeChild(oldTable);
+            }
+            document.getElementById("tab").appendChild(tableObj)
+            oldTable = tableObj;
+
+            // 清空输入
+            rowNode.value = "";
+            colNode.value = "";
+        }
+
+        window.onload = function () {
+            var nodes = document.getElementsByName("btnCreateTable");
+            nodes[0].onclick = createTable;
+        }
+
+    </script>
+</head>
+<body>
+    <h3>06_动态制作表格</h3>
+    <div>
+        <label>
+            行数：<input type="number" id="row">
+        </label>
+        <br>
+        <label>
+            列数：<input type="number" id="col">
+        </label>
+    </div>
+    <div>
+        <input type="button" value="创建表格" name="btnCreateTable">
+    </div>
+    <div id="tab"></div>
+</body>
+</html>
