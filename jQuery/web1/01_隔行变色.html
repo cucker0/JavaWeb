@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>隔行变色</title>
+    <style>
+        .tabtitle {
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 10px 0;
+        }
+        table td {
+            border: 1px solid lightgrey;
+        }
+
+    </style>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("table:eq(1) tr:odd").css("background", "#ffaabb");
+        });
+
+    </script>
+</head>
+<body>
+<h3>隔行变色</h3>
+<div>
+    <div class="tabtitle">旧眼保健操</div>
+    <table>
+        <tr>
+            <td>第一节</td>
+            <td>揉天应穴</td>
+        </tr>
+        <tr>
+            <td>第二节</td>
+            <td>挤按睛明穴</td>
+        </tr>
+        <tr>
+            <td>第三节</td>
+            <td>按揉四白穴</td>
+        </tr>
+        <tr>
+            <td>第四节</td>
+            <td>按太阳穴、轮刮眼眶</td>
+        </tr>
+    </table>
+
+
+    <div class="tabtitle">2008眼保健操</div>
+    <table>
+        <tr>
+            <td>第一节</td>
+            <td>按揉耳垂眼穴，脚趾抓地</td>
+        </tr>
+        <tr>
+            <td>第二节</td>
+            <td>按揉太阳穴，刮上眼眶</td>
+        </tr>
+        <tr>
+            <td>第三节</td>
+            <td>按揉四白穴</td>
+        </tr>
+        <tr>
+            <td>第四节</td>
+            <td>按揉风池穴</td>
+        </tr>
+        <tr>
+            <td>第五节</td>
+            <td>按头部督脉穴</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

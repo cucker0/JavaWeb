@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq全选、全不选、反选</title>
+    <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 查找节点
+            itemsInputNodes = $("input[name='items']");
+            checkedToggleBtn = $("#checkedToggleBtn");
+            var checkedAllBtn = $("#checkedAllBtn");
+            var checkedNoBtn = $("#checkedNoBtn");
+            var checkedRevBtn = $("#checkedRevBtn");
+
+            // 绑定事件
+            checkedToggleBtn.click(checkedToggle);
+            checkedAllBtn.bind('click', checkedAll);
+            checkedNoBtn.on('click', checkedNo);
+            // $(document).on('click', checkedRevBtn, checkedReverse); // 经测试，用此方法，会影响checkedAll、checkedNo，复选框的设置变为相反的
+            checkedRevBtn.on('click', checkedReverse);
+            itemsInputNodes.on('change', inputChange);
+        });
+
+
+        /**
+         * 全选
+         */
+        function checkedAll() {
+            itemsInputNodes.prop("checked", true);
+            inputChange();
+        }
+
+
+        /**
+         * 反选
+         */
+        function checkedReverse() {
+            itemsInputNodes.each(function () {
+                this.checked = !this.checked;
+            });
+            inputChange();
+        }
+
+        /**
+         * 全不选
+         */
+        function checkedNo() {
+            itemsInputNodes.prop("checked", false);
+            inputChange();
+        }
+
+        /**
+         * 切换 全选/全不选
+         */
+        function checkedToggle() {
+            var checkedToggleBtnChecked = $("#checkedToggleBtn")[0].checked;
+            itemsInputNodes.prop("checked", checkedToggleBtnChecked);
+        }
+
+        /**
+         * 是否 全选
+         *
+         */
+        function isCheckedAll() {
+            var checkedInputObjs = $("input:checked[name='items']");
+            return checkedInputObjs.length === itemsInputNodes.length;
+        }
+
+        /**
+         * 选择或取消input选择
+         */
+        function inputChange() {
+            checkedToggleBtn.prop("checked", isCheckedAll());
+        }
+    </script>
+</head>
+<body>
+<h3>jq全选、全不选、反选</h3>
+<div>
+    <from>
+        <div>
+            你喜欢的运行
+            <label>
+                <input type="checkbox" id="checkedToggleBtn">全选/全不选
+            </label>
+        </div>
+        <div>
+            <label><input type="checkbox" name="items" value="football">足球</label>
+            <label><input type="checkbox" name="items" value="basketball">篮球</label>
+            <label><input type="checkbox" name="items" value="badminton">羽毛球</label>
+            <label><input type="checkbox" name="items" value="tabletennis">乒乓球</label>
+        </div>
+        <br>
+        <div>
+            <input type="button" id="checkedAllBtn" value="全选">
+            <input type="button" id="checkedNoBtn" value="全不选">
+            <input type="button" id="checkedRevBtn" value="反选">
+        </div>
+    </from>
+</div>
+
+</body>
+</html>

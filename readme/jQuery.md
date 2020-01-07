@@ -14,12 +14,34 @@ jQuery: JavaScript和Query，是辅助JavaScript开发的js类库
 
 ## jQuery的使用
 * 导入jQeury js库文件
-```html
-<head>
-    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-</head>
-```
-* 在页面加载完之后，查找节点，然后在节点对象上绑定事件
+    ```html
+    <head>
+        <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    </head>
+    ```
+* 在页面加载完之后，查找节点，然后在节点对象上绑定事件  
+
+* js加载时间顺序
+    ```js
+    // DOM准备就绪时，即DOM加载完成之后，这时候页面可能并没有正常显示出来
+    $(document).ready(function() {
+      
+    });
+    
+    // 简写
+    $().ready(function() {
+      
+    });
+    
+    // 简写
+    $(function() {
+      
+    });
+    ```
+* $(document).ready() vs window.onload()
+    * window.onload(): 页面准备就绪完成时
+        >要等到页面中所引用的图片等外部资源 完全下载完成后并且在浏览器中显示才执行
+    * $(document).ready():  DOM准备就绪完成时，早于window.onload()
 
 ## jQuery本质
 ```text
@@ -235,20 +257,20 @@ prev ~ siblings  查找与prev同辈的兄弟元素中为siblings的元素 （�
 ```
 ### 属性选择器
 ```text
-[attribute]
-[attribute=value]
-[attribute!=value]
-[attribute^=value]
-[attribute$=value]
-[attribute*=value]
+[attribute]  匹配包含给定属性的元素
+[attribute=value]  查找属性attribute值 = value的元素
+[attribute!=value]  查找属性attribute值 != value的元素
+[attribute^=value]  查找属性attribute值 以 value开头的元素
+[attribute$=value]  查找属性attribute值 以 value结尾的元素
+[attribute*=value]  查找属性attribute值 包含 value的元素
 [attrSel1][attrSel2][attrSelN]  同时满足多个属性条件
 ```
 ### 子元素选择器
 ```text
-:first-child
-:first-of-type
-:last-child
-:last-of-type
+:first-child  匹配所给选择器( :之前的选择器)的第一个子元素
+:first-of-type  等价于:nth-of-type(1) 选择器
+:last-child  匹配所给选择器( :之前的选择器)的最后一个子元素
+:last-of-type  等价于:nth-of-type(1) 选择器
 :nth-child
 :nth-last-child()
 :nth-last-of-type()
@@ -273,6 +295,44 @@ prev ~ siblings  查找与prev同辈的兄弟元素中为siblings的元素 （�
 ```text
 :enabled  可用的元素
 :disabled  不可用的元素
-:checked  已选中的
-:selected  已选中的下拉列表选项
+:checked  已选中的,匹配所有选中的单选，复选，和下拉列表中选中的option标签对象
+:selected  已选中的下拉列表选项,匹配所有选中的option
 ```
+
+
+## 其他
+* **对加载后，动态生成的DOM对象上同样自动绑定事件方法**
+    ```js
+    // 我的域名 分页导航绑定点击事件。
+    // DomainPage为方法，{'optype': 2}为要传的参数，需要用字典，不传参可以省略此字段
+    $(document).on("click", "#domain_box button[name=jump-page]", {'optype': 2}, DomainPage);
+    
+    function DomainPage(event){
+      if (event.data.optype == 1){
+          
+      }
+    }
+    ```
+    ```js
+    // 该方式，只针在DOM准备就绪后，绑定一次，之后动态生成的DOM对象匹配，即使匹配选择器字，不会自动绑定该事件
+    $("选择器字符串").bind('事件名', 方法名);
+    ```
+* jq对象绑定事件方式
+    * jQuery对象.事件名(方法名);
+        ```js
+        $("选择器字符串").click(方法名或匿名函数);
+        ```
+    * jQuery对象.bind(type, [selector], [data], fn)
+        >css 3.0弃用，建议使用on()
+    * jQeury对象.on(events, [selector], [data], fn)
+        >当一个事件被触发时要传递event.data给事件处理函数，用{}字典来传包装多个数
+    * $(document).on(events, selector, [data], fn);
+        ```text
+        建议使用此方法，动态生成的DOM对象同样也能绑定上设置的事件  
+  
+        events: 字符串形式，可以为多个事件，多个事件之间用","分隔，
+        selector: 选择器的字符串
+        data: 用{}字典来传包装多个数
+        fn: 方法
+        document参数不能省略
+        ```
