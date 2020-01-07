@@ -182,7 +182,7 @@ console.log(jQuery对象);显示的为jQuery.fn.init对象
 
 ### JQuery对象的本质
 ```text
-Jquery对象本质是一个数组，jquery对象由dom对象数组、一系列jquery对象提供的方法组成
+Jquery对象本质是一个数组，该数组素由dom对象数组、一系列jquery对象提供的方法组成
 ```
 
 ### jQuery对象和DOM对象使用区别
@@ -203,11 +203,15 @@ Jquery对象本质是一个数组，jquery对象由dom对象数组、一系列jq
     ```
 
 ## jQuery选择器
-jQuery选择器与css选择器是一样的，参考 http://jquery.cuishifeng.cn
+jQuery选择器与css选择器是一样的，参考 http://jquery.cuishifeng.cn  
+选择返回的jQuery对象为一个由n个DOM对象和一些方法组成的数组，  
+**调用方法时，可以直接用数组对象.方法名()**  
+**调用数据里面的DOM对象元素时，需要指定具体的元素，如 jqArr[0].checked**
+
 
 ### 基本选择器
 ```text
-#id  id选择器
+#id  id选择器，返回一个元素，或0个元素。
 element  标签选择器
 .class  类选择器
 *  匹配所有元素
@@ -299,6 +303,40 @@ prev ~ siblings  查找与prev同辈的兄弟元素中为siblings的元素 （�
 :selected  已选中的下拉列表选项,匹配所有选中的option
 ```
 
+## jQuery常用方法
+* jQuery.each(object, [callback])
+```text
+object:需要遍历的对象或数组。
+callback:每个成员/元素执行的回调函数
+```
+```js
+// 遍历数组，同时使用元素索引和内容
+$.each( [0,1,2], function(i, n){
+    alert( "Item #" + i + ": " + n );
+});
+
+// 遍历对象，同时使用成员名称和变量内容
+$.each( { name: "John", lang: "JS" }, function(i, n){
+    alert( "Name: " + i + ", Value: " + n );
+});
+```
+
+* $("选择器").each(function () {});
+```js
+$("选择器").each(function () {
+    console.log(this); // this为选择器匹配的元素数组中的遍历的一个一个元素
+});
+```
+* $("选择器").each(function (i) {});
+```js
+$("选择器").each(function (i) { // 这里的i为选择器匹配的元素数组遍历时的下标
+});  
+```
+* $("选择器").each(function (i, n) {});
+```js
+$("选择器").each(function (i, n) { // 这里的i为选择器匹配的元素数组遍历时的下标，n为元素
+}); 
+```
 
 ## 其他
 * **对加载后，动态生成的DOM对象上同样自动绑定事件方法**
