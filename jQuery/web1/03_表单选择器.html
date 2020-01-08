@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单选择器</title>
+    <style type="text/css">
+        .item {
+            margin: 16px 0;
+        }
+        select[name=start] {
+            height: 120px;
+        }
+        ul li {
+            margin: 5px 0;
+        }
+    </style>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 查找标签并绑定事件
+            var buttons = $(".btn button");
+            buttons.eq(0).click(function () {
+                $("select[name=tv]").val('gang');
+            });
+
+            buttons.eq(1).click(function () {
+                $("select[name=start]").val(['jchou', 'xuezhiqian']);
+            });
+
+            buttons.eq(2).click(function () {
+                $("input:checkbox").val(['java', 'python']);
+            });
+
+            // 单选按钮特殊点，设置为一个数组
+            buttons.eq(3).click(function () {
+                $("input[name=qualifications]").val(['college']);
+            });
+
+            buttons.eq(4).click(function () {
+                $("select[name=tv]")
+                    .add("select[name=start]")
+                    .add("input:checkbox:checked")
+                    .add("input[name=qualifications]:checked")
+                    .each(function () {
+                        console.log($(this).val());
+                    });
+            });
+        });
+
+    </script>
+</head>
+<body>
+<h3>表单选择器</h3>
+
+<div>
+    <ul class="btn">
+        <li><button>播放电视台: 选中 江西TV</button></li>
+        <li><button>选择明星: 选中 周杰伦、薛之谦</button></li>
+        <li><button>课程: 选中 JAVA、PYTHON</button></li>
+        <li><button>学历: 选中 大专</button></li>
+        <li><button>打印已经被选中的值</button></li>
+    </ul>
+</div>
+
+<div>
+    <div class="item">
+        <div>播放电视台：</div>
+        <select name="tv">
+            <option value="xiang">湖南TV</option>
+            <option value="yue">广东TV</option>
+            <option value="gang">江西TV</option>
+        </select>
+    </div>
+
+    <div class="item">
+        <div>选择明星：</div>
+        <select name="start" multiple="multiple">
+            <option value="G.E.M" selected="selected">邓紫棋</option>
+            <option value="jchou">周杰伦</option>
+            <option value="lironghao">李荣浩</option>
+            <option value="xuezhiqian">薛之谦</option>
+            <option value="jj" selected="selected">林俊杰</option>
+        </select>
+    </div>
+
+    <div class="item">
+        课程：
+        <label><input type="checkbox" name="course" value="java">JAVA</label>
+        <label><input type="checkbox" name="course" value="php">PHP</label>
+        <label><input type="checkbox" name="course" value="python">PYTHON</label>
+        <label><input type="checkbox" name="course" value="go">GO</label>
+    </div>
+
+    <div class="item">
+        <div>学历：
+            <label><input type="radio" name="qualifications" value="undergraduate">本科及本科以上</label>
+            <label><input type="radio" name="qualifications" value="college">大专</label>
+            <label><input type="radio" name="qualifications" value="high_school">高中及高中以下</label>
+        </div>
+    </div>
+</div>
+</body>
+</html>

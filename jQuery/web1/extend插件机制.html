@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>extend插件机制</title>
+    <style type="text/css">
+        form div {
+            margin: 15px 0;
+        }
+    </style>
+    <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        // 建议使用立即执行函数
+        (function () {
+            // 为jQuery扩展方法
+            $.fn.extend({
+                checkedAll: function () {
+                    this.prop('checked', true);
+                },
+                checkedNo: function () {
+                    this.prop('checked', false);
+                },
+                checkedReverse: function () {
+                    this.each(function () {
+                        this.checked = !this.checked;
+                    });
+                }
+            });
+
+            // 扩展jQuery本身的函数
+            $.extend({
+                // 求最小数
+                min: function () {
+                    // console.log(arguments);
+                    var minValue = null;
+                    if (arguments.length === 0) {
+
+                    } else if (arguments.length === 1) {
+                        minValue = $.isNumeric(arguments[0]) ? arguments[0] : null;
+                    } else {
+                        $.each(arguments, function (index, element) {
+                            if ($.isNumeric(element)) {
+                                if (minValue === null) {
+                                    minValue = element;
+                                } else {
+                                    minValue = minValue < element ? minValue : element;
+                                }
+                            }
+                        });
+                    }
+                    return minValue;
+                },
+                // 求最大数
+                max: function () {
+                    var maxValue = null;
+                    if (arguments.length === 0 ) {
+
+                    } else if (arguments.length === 1) {
+                        maxValue = $.isNumeric(arguments[0]) ? arguments[0] : null;
+                    } else {
+                        $.each(arguments, function (index, element) {
+                            if ($.isNumeric(element)) {
+                                if (maxValue === null) {
+                                    maxValue = element;
+                                } else {
+                                    maxValue = maxValue > element ? maxValue : element;
+                                }
+                            }
+                        });
+                    }
+                    return maxValue;
+                },
+                // 求和
+                sum: function () {
+                    var sumValue = null;
+                    $.each(arguments, function (index, element) {
+                        if ($.isNumeric(element)) {
+                            element = element * 1;
+                            if (sumValue === null) {
+                                sumValue = element;
+                            } else {
+                                sumValue += element;
+                            }
+                        }
+                    });
+                    return sumValue;
+                }
+            });
+        })();
+
+
+        window.onload = function () {
+            var cityitemsInputs = $("input:checkbox");
+            // 绑定事件
+            $("#checkedAllBtn")[0].onclick = function (e) {
+                $("input:checkbox").checkedAll();
+                // // 阻止<button>按钮的reload事件
+                // return false;
+
+                // 或
+                e.preventDefault();  // 阻止默认事件
+            };
+
+            $("#checkedNoBtn").on('click', function () {
+                cityitemsInputs.checkedNo();
+                return false;
+            });
+
+            $("#checkedReverseBtn").on('click', function () {
+                cityitemsInputs.checkedReverse();
+                return false;
+            });
+
+            //
+            var numInputs = $(".numEnter input[type=number]");
+            $(".min").click(function () {
+                console.log($.min(numInputs[0].value, numInputs[1].value, numInputs[2].value));
+            });
+            $(".max").click(() => {
+                console.log($.max(numInputs[0].value, numInputs[1].value, numInputs[2].value));
+            });
+            $(".sum").click(() => {
+                console.log($.sum(numInputs[0].value, numInputs[1].value, numInputs[2].value));
+            });
+        }
+
+
+    </script>
+</head>
+<body>
+<h3>extend插件机制</h3>
+<div>
+    <form>
+        <div name="cityitems">
+            喜欢的城市：
+            <label><input type="checkbox" name="citys" value="gz">广州</label>
+            <label><input type="checkbox" name="citys" value="sh">上海</label>
+            <label><input type="checkbox" name="citys" value="sz">深圳</label>
+            <label><input type="checkbox" name="citys" value="bj">北京</label>
+        </div>
+        <div>
+            <button type="button" id="checkedAllBtn">全选</button>
+            <button id="checkedNoBtn">全不选</button>
+            <button id="checkedReverseBtn">反选</button>
+        </div>
+    </form>
+</div>
+
+<div>
+    <div class="numEnter">
+        第1个数：<input type="number">
+        第2个数：<input type="number">
+        第3个数：<input type="number">
+    </div>
+    <div>
+        <button class="min">min</button>
+        <button class="max">max</button>
+        <button class="sum">sum</button>
+    </div>
+</div>
+</body>
+</html>

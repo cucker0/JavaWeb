@@ -194,6 +194,11 @@ Jquery对象本质是一个数组，该数组素由dom对象数组、一系列jq
     ```js
     var DOM对象 = document.getElementByXxx("属性值"); // Xxx为Id、name、class等
     var $jq对象 = $(DOM对象);
+  
+    // 在遍历jQuery对象时，元素为DOM对象，为更好的使用jQuery方法，把DOM对象转jQeury对象
+    $("select[name=itme1]:selected").each(function () {
+        $(this).appendTo($("select[name=itme2]"));
+    });
     ```
 
 * jQuery对象转DOM对象
@@ -338,6 +343,103 @@ $("选择器").each(function (i, n) { // 这里的i为选择器匹配的元素�
 }); 
 ```
 
+## extend插件机制
+### jQuery.fn.extend(object)
+扩展 jQuery 元素集来提供新的方法，通常用来制作插件。  
+更多可查看https://learn.jquery.com/plugins/
+```js
+// 需要先引入jQeury库文件
+
+(function () {
+    // 为jQuery扩展方法
+    $.fn.extend({
+        checkedAll: function () {
+            this.prop('checked', true);
+        },
+        checkedNo: function () {
+            this.prop('checked', false);
+        },
+        checkedReverse: function () {
+            this.each(function () {
+                this.checked = !this.checked;
+            });
+        }
+    });
+        
+    window.onload = function () {
+        var cityitemsInputs = $("input:checkbox");
+        // 绑定事件
+        $("#checkedAllBtn")[0].onclick = function (e) {
+            $("input:checkbox").checkedAll();
+            // // 阻止<button>按钮的reload事件
+            // return false;
+
+            // 或
+            e.preventDefault();  // 阻止默认事件
+        };
+    };
+})();
+```
+
+### jQuery.extend(object)
+扩展jQuery对象本身，用来在jQuery命名空间上增加新函数
+```js
+(function () {
+    // 扩展jQuery本身的函数
+    $.extend({
+        // 求最小数
+        min: function () {
+            // console.log(arguments);
+            var minValue = null;
+            if (arguments.length === 0) {
+
+            } else if (arguments.length === 1) {
+                minValue = $.isNumeric(arguments[0]) ? arguments[0] : null;
+            } else {
+                $.each(arguments, function (index, element) {
+                    if ($.isNumeric(element)) {
+                        if (minValue === null) {
+                            minValue = element;
+                        } else {
+                            minValue = minValue < element ? minValue : element;
+                        }
+                    }
+                });
+            }
+            return minValue;
+        },
+        // 求和
+        sum: function () {
+            var sumValue = null;
+            $.each(arguments, function (index, element) {
+                if ($.isNumeric(element)) {
+                    element = element * 1;
+                    if (sumValue === null) {
+                        sumValue = element;
+                    } else {
+                        sumValue += element;
+                    }
+                }
+            });
+            return sumValue;
+        }
+    });
+    
+    $(function() {
+        var numInputs = $(".numEnter input[type=number]");
+        $(".min").click(function () {
+            console.log($.min(numInputs[0].value, numInputs[1].value, numInputs[2].value));
+        });
+        $(".sum").click(() => {
+            console.log($.sum(numInputs[0].value, numInputs[1].value, numInputs[2].value));
+        });
+    });
+})();
+```
+
+[extend插件机制](../jQuery/web1/extend插件机制.html)  
+
+
 ## 其他
 * **对加载后，动态生成的DOM对象上同样自动绑定事件方法**
     ```js
@@ -374,3 +476,33 @@ $("选择器").each(function (i, n) { // 这里的i为选择器匹配的元素�
         fn: 方法
         document参数不能省略
         ```
+
+* form标签内的button标签默认有reload重载事件
+    即点击button标签，就会重新加载页面，放回false则会阻止
+* 阻止默认事件
+    * 方式1：函数最后返回false
+    * 方式2：利用事件，event.preventDefault();
+        ```js
+        function func1() {}
+
+        $(".logo").on('click', {opt: 1}, function(event) {    
+            func1();
+            event.preventDefault(); // 只会阻止默认事件，但不会阻止冒泡事件
+            // 或return false; // 同时阻止 默认事件 和冒泡事件
+        });
+        ```
+
+* 阻止冒泡事件
+    * 方式1：函数最后返回false
+    * 方式2：利用事件，event.stopPropagation();
+        ```js
+        function func1() {}
+        
+        $(".logo").on('click', {opt: 1}, function(event) {    
+            func1();
+            event.stopPropagation();
+            // 或return false;
+        });
+        ```
+    
+    

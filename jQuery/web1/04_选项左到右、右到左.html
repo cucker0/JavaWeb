@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>08_选项左到右、右到左</title>
+    <title>选项左到右、右到左</title>
     <style type="text/css">
         .clearfix:after {
             display: table;
@@ -21,73 +21,57 @@
             height: 200px;
         }
     </style>
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-        window.onload = function () {
-            // 查找节点
-            select1 = document.getElementById("one");
-            select2 = document.getElementById("two");
-            var right = document.getElementById("right");
-            var rightAll = document.getElementById("rightAll");
-            var left = document.getElementById("left");
-            var leftAll = document.getElementById("leftAll");
-            document.querySelectorAll()
-            // 绑定事件
-            right.onclick = add;
-            rightAll.onclick = addAll;
-            left.onclick = remove;
-            leftAll.onclick = removeAll;
-        };
+        $(function () {
+            //  添加一部分
+            $(".option button:eq(0)").on('click', add);
+
+            // 添加全部
+            $(".option button:eq(1)").on('click', addAll);
+
+            // 移除部分
+            $(".option button:eq(2)").on('click', remove);
+
+            // 移动全部
+            $(".option button:eq(3)").on('click', removeAll);
+        });
+
 
         /**
          * 添加一部分
          */
         function add() {
-            // select1.selectedIndex 为-1时表示，没有选择任何选项
-            if (select1.selectedIndex === -1) {
-                return;
-            }
-            // select1.selectedIndex 是下拉列表中被选中的第一个索引
-            // select1.selectedOptions 选中的所有选项
-            for (var i = 0; i < select1.selectedOptions.length;) {
-                select2.appendChild(select1.selectedOptions[i])
-            }
+            $("select[name=item1] :selected").each(function () {
+               $(this).appendTo("select[name=item2]");
+            });
         }
 
         /**
          * 添加全部
          */
         function addAll() {
-            // 注意：遍历选中的select的options时，不需要迭代条件，选中的索引自动自增
-            for (var i = 0; i < select1.options.length;) {
-                select2.appendChild(select1.options[i]); // 调用 select1.options[i] 时，i会自增1
-            }
+            $("select[name=item1] option").appendTo("select[name=item2]");
         }
 
         /**
          * 移除部分
          */
         function remove() {
-            if (select2.selectedOptions.length === 0) {
-                return;
-            }
-            for (var i = 0; i < select2.selectedOptions.length;) {
-                select1.appendChild(select2.selectedOptions[i]);
-            }
+            $("select[name=item2] :selected").appendTo("select[name=item1]");
         }
 
         /**
          * 移动全部
          */
         function removeAll() {
-            for (var i = 0; i < select2.options.length;) {
-                select1.appendChild(select2.options[i]);
-            }
+            $("select[name=item2] option").appendTo("select[name=item1]");
         }
 
     </script>
 </head>
 <body>
-    <h3>08_选项左到右、右到左</h3>
+    <h3>jQuery选项左到右、右到左</h3>
     <div class="clearfix">
         <div class="ltab">
             <select name="item1" size="10" id="one" multiple="multiple">
