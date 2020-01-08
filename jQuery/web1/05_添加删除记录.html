@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加删除记录</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid gray;
+        }
+        .employeeTab {
+            width: 400px;
+        }
+        .newEmployeeBox {
+            width: 400px;
+            border: 1px solid grey;
+            margin: 10px 0;
+            padding: 30px 60px;
+        }
+        ul, li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            width: 100%;
+            text-align: right;
+        }
+        ul input {
+            width: 320px;
+            margin: 0 0 0 26px;
+        }
+    </style>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("button[name=addEmployee]").on('click', addEmployee);
+            // 此绑定方法带来的问题：新生成的tr对象中的a标签没有绑定事件
+            // $(".employeeTab a").on('click', deleteEmployee);
+
+            //解决方法：$(document).on(); 进行事件绑定
+            $(document).on('click', ".employeeTab a", deleteEmployee);
+        });
+        
+        function addEmployee() {
+            var name = $(".newEmployeeBox input[name=name]").val();
+            var email = $(".newEmployeeBox input[name=email]").val();
+            var salary = $(".newEmployeeBox input[name=salary]").val();
+
+            $("<tr></tr>").append("<td>" + name + "</td>")
+                .append("<td>" + email + "</td>")
+                .append("<td>" + salary + "</td>")
+                .append('<td><a href="javascript: void(0);">Delete</a></td>')
+                .appendTo(".employeeTab");
+        }
+
+        function deleteEmployee() {
+            var name = $(this).parents("tr").find("td:eq(0)").text();
+            // 弹框进行确认
+            var flag = confirm("确定删除 "+ name + " 员工吗?");
+            if (flag) {
+                $(this).parents("tr").remove();
+            }
+
+        }
+    </script>
+</head>
+<body>
+<h3>jQuery添加删除记录</h3>
+<div>
+    <div>
+        <table class="employeeTab">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td>Tom</td>
+                <td>tom@qq.com</td>
+                <td>5000</td>
+                <td><a href="javascript: void(0);">Delete</a></td>
+            </tr>
+            <tr>
+                <td>Jerry</td>
+                <td>jerry@qq.com</td>
+                <td>8000</td>
+                <td><a href="javascript: void(0);">Delete</a></td>
+            </tr>
+            <tr>
+                <td>Bob</td>
+                <td>Bob@qq.com</td>
+                <td>10000</td>
+                <td><a href="javascript: void(0);">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h4>添加员工</h4>
+        <div class="newEmployeeBox">
+            <ul>
+                <li><label>name:<input type="text" name="name"></label></li>
+                <li><label>email:<input type="text" name="email"></label></li>
+                <li><label>salary:<input type="text" name="salary"></label></li>
+            </ul>
+        </div>
+        <div>
+            <button name="addEmployee">添加</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
