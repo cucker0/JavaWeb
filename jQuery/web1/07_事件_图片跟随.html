@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件_图片跟随</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+        .small {
+            margin-top: 150px;
+        }
+        .showBig {
+            position: absolute;
+            display: none;
+        }
+    </style>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".small")
+                .mouseover(function (event) {
+                    $(".showBig")
+                        .show()
+                        .css("left", event.pageX + 10)
+                        .css("top", event.pageY + 10);
+                })
+                .mousemove(function (event) {
+                    /*
+                    * pageX + 10, event.pageY +10的是让光标 与 .showBig 层有一个距离
+                    *
+                    * 当光标 与 .showBig层之间无距离时，光标向 .showBig层移动一点点时，光标的位置就到了 .showBig层 内，
+                    * 这时就相当于退出了 .small层，会触发 光标退出的事件，会导致 .showBig层 一闪一闪的。于是就有了上面的解决方法
+                    * */
+                    // $(".showBig")
+                    //     .css("left", event.pageX +10)
+                    //     .css("top", event.pageY +10);
+
+                    // 或用offset()来指定位置
+                    $(".showBig").offset({
+                        left: event.pageX +10,
+                        top: event.pageY +10
+                    });
+                })
+                .mouseout(function () {
+                    $(".showBig").hide();
+                });
+        });
+
+    </script>
+</head>
+<body>
+<h3>jQeury事件_图片跟随</h3>
+<div>
+    <div>
+        <img class="small" src="img/small.jpg">
+    </div>
+    <div>
+        <img class="showBig" src="img/big.jpg">
+    </div>
+</div>
+</body>
+</html>
