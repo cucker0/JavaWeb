@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>京东放大查看商品图</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .w {
+            margin: 0 auto;
+            width: 100%;
+        }
+        .ww {
+            margin: 0 auto;
+            width: 1210px;
+        }
+        .titleNavBar {
+            height: 30px;
+            background: #e3e4e5;
+        }
+        .header {
+            height: 211px;
+            background: #bfa;
+        }
+        .navBar {
+            height: 40px;
+            background: #000;
+        }
+        .subNav {
+            height: 45px;
+            background: #f2f2f2;
+            margin-bottom: 10px;
+        }
+        .preview-wrap {
+            width: 452px;
+            height: 740px;
+            float: left;
+            position: relative;
+            /*background: #fba;*/
+        }
+        .preview {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #e3e4e5;
+            cursor: move;
+            /*background: url("./img/smallphone.jpg") no-repeat;*/
+        }
+        .jqZoomPup {
+            width: 300px;
+            height: 300px;
+            background: #FEDE4F;
+            border: 1px solid #e3e4e5;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            display: none;
+            z-index: 3;
+            /* 去掉遮罩层光标事件， 防止闪烁抖动
+             此元素不再是鼠标事件的目标，鼠标不再监听当前层而去监听下面的层中的元素
+             使得超链接和按钮等鼠标点击事件都会失效
+             */
+            pointer-events: none;
+        }
+        .zoomdiv {
+            width: 540px;
+            height: 540px;
+            display: none;
+            border: 1px solid #e3e4e5;
+            position: absolute;
+            top: 0;
+            left: 451px;
+        }
+        .clearfix:before,
+        .clearfix:after {
+            display: table;
+            content: "";
+            clear: both;
+        }
+
+        .itemInfo-wrap {
+            width: 736px;
+            height: 500px;
+            padding: 5px 0 0 20px;
+            float: left;
+            background: #bfa;
+        }
+
+    </style>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        // DOM就绪后
+        $(function () {
+            zoomBackground();
+
+            $(".preview")
+                .mouseover(function (event) {
+                    $(".jqZoomPup").add(".zoomdiv").show();
+                })
+                .mouseout(function (event) {
+                    $(".jqZoomPup").add(".zoomdiv").hide();
+                })
+                .mousemove(function (event) {
+                    // console.log(event);
+                    /**
+                     * preview 450px  小图
+                     * jqZoomPup 300px  遮罩层
+                     * zoomdiv 540px  大图
+                     *
+                     * 遮罩层x有效移动距离 / 大图背景图x有效移动距离 = (小图宽 - 遮罩层宽) / ( 大图宽 - 背景图宽)
+                     * 遮罩层y有效移动距离 / 大图背景图y有效移动距离 = (小图宽 - 遮罩层高) / ( 大图宽 - 背景图高)
+                     *
+                     *
+                     * 遮罩层触碰小图四边：
+                     *    x < 300/2  ,x 表示光标横向到左边，或右边的其中较小的距离
+                     *    y < 300/2  ,y 表示光标横向到上边，或下边的其中较小距离
+                     */
+                    var proportionX = (450 - 300) / (540 - 800); // x轴移动比例
+                    var proportionY = (450 - 300) / (540 - 800); // y轴移动比例
+                    var leftX = event.offsetX;
+                    var rightX = 450 - event.offsetX;
+                    var topY = event.offsetY;
+                    var bottomY =  450 - event.offsetY;
+                    // 大图要调整的x、y轴偏移量
+                    var x, y;
+                    // 遮罩层左外边距、上外边距
+                    var mLeft, mTop;
+                    // 遮罩层中心点距离小图x，y的边界值
+                    var xBorder = 300 / 2;
+                    var yBorder = 300 / 2;
+                    if (leftX < xBorder) { // 遮罩层触碰小图左边
+                        x = "left";
+                        mLeft = 0;
+                    } else if (rightX < xBorder) { // 遮罩层触碰小图右边
+                        x = "right";
+                        mLeft = 450 - 300;
+                    } else {
+                        x = (event.offsetX - xBorder) / proportionX + "px";
+                        mLeft = event.offsetX - xBorder;
+                    }
+                    if (topY < yBorder) { // 遮罩层触碰小图上边
+                        y = "top";
+                        mTop = 0;
+                    } else if (bottomY < yBorder) { // 遮罩层触碰小图底边
+                        y = "bottom";
+                        mTop = 450 - 300;
+                    } else {
+                        y = (event.offsetY - yBorder) / proportionY + "px";
+                        mTop = event.offsetY - yBorder;
+                    }
+
+                    // 移动大图背景图
+                    var positions = x + " " + y;
+                    $(".zoomdiv").css("background-position", positions);
+
+                    // 移动遮罩层
+                    $(".jqZoomPup").css("left", mLeft + "px");
+                    $(".jqZoomPup").css("top", mTop + "px");
+                });
+        });
+
+        // 设置大图背景图片
+        function zoomBackground() {
+            $(".zoomdiv").css("background", "url(./img/bigphone.jpg) 0 0 no-repeat");
+        }
+
+
+
+    </script>
+</head>
+<body>
+<div class="titleNavBar w"></div>
+<div class="header ww">
+
+</div>
+
+<div class="navBar">
+</div>
+
+<div class="subNav">
+</div>
+
+<div class="container ww">
+    <div class="product-intro clearfix">
+        <div class="preview-wrap"> <!-- 基准定位点 -->
+            <div class="preview"> <!-- 小图 -->
+                <img src="img/smallphone.jpg">
+                <div class="jqZoomPup"></div> <!-- 遮罩层 -->
+            </div>
+            <div class="zoomdiv"></div> <!-- 大图 -->
+        </div>
+        <div class="itemInfo-wrap">
+            <div>vivo iQOO Neo 855竞速版 8GB+128GB电光薄荷 骁龙855Plus 33W超快闪充 4500mAh大电池游戏手机 全网通4G手机</div>
+        </div>
+    </div>
+</div>
+
+<div class="footer"></div>
+</body>
+</html>

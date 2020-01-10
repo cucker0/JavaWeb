@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画</title>
+    <style type="text/css">
+        .box2 {
+            width: 400px;
+            height: 200px;
+            padding-top: 30px;
+            background: #FF5500;
+        }
+        ul li {
+            width: 200px;
+            cursor: pointer;
+            /*border: 1px solid black;*/
+        }
+    </style>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var btnTag = $(".box1 li");
+
+            // 显示show()
+            btnTag.eq(0).click(function () {
+                $(".box2").show(1000);
+            });
+
+            // 隐藏hide()
+            btnTag.eq(1).click(function () {
+                $(".box2").hide(1000);
+            });
+
+            // 显示/隐藏切换 toggle()
+            btnTag.eq(2).click(function () {
+                $(".box2").toggle(1000);
+            });
+
+            // 展开slideDown()
+            btnTag.eq(3).click(function () {
+                $(".box2").slideDown(1000);
+            });
+
+            // 合并slideUp()
+            btnTag.eq(4).click(function () {
+                $(".box2").slideUp(1000);
+            });
+
+            // 展开切换slideToggle(
+            btnTag.eq(5).click(function () {
+                $(".box2").slideToggle(1000);
+            });
+
+            // 淡入fadeIn()
+            btnTag.eq(6).click(function () {
+                $(".box2").fadeIn(600);
+            });
+
+            // 淡出fadeOut()
+            btnTag.eq(7).click(function () {
+                $(".box2").fadeOut(800);
+            });
+
+            // 淡化到fadeTo()
+            btnTag.eq(8).click(function () {
+                $(".box2").fadeTo("slow",Math.random());
+            });
+
+            // 淡化切换fadeToggle()
+            btnTag.eq(9).click(function () {
+                $(".box2").fadeToggle("slow","linear");
+            });
+        });
+
+
+    </script>
+</head>
+<body>
+<h3>jQuery动画</h3>
+<div class="box1">
+    <ul>
+        <li>显示show()</li>
+        <li>隐藏hide()</li>
+        <li>显示/隐藏切换 toggle()</li>
+        <li>展开slideDown()</li>
+        <li>合并slideUp()</li>
+        <li>展开切换slideToggle()</li>
+        <li>淡入fadeIn()</li>
+        <li>淡出fadeOut()</li>
+        <li>淡化到fadeTo()</li>
+        <li>淡化切换fadeToggle()</li>
+    </ul>
+</div>
+<div class="box2">
+    <pre>
+        人生两件最难的事：
+
+        一个是：把自己的思想装进别人的脑袋；
+        一个是：把别人的钱装进自己的口袋。
+
+        前者成功了，叫老师，
+        后者成功了，叫老板，
+        两者都成功了，叫老婆!
+    </pre>
+</div>
+</body>
+</html>

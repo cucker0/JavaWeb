@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>京东局部放大查看商品图</title>
+    <title>京东放大查看商品图</title>
     <style type="text/css">
         body {
             margin: 0;
@@ -45,6 +45,7 @@
             width: 450px;
             height: 450px;
             border: 1px solid #e3e4e5;
+            cursor: move;
             /*background: url("./img/smallphone.jpg") no-repeat;*/
         }
         .jqZoomPup {
@@ -57,7 +58,11 @@
             top: 0;
             display: none;
             z-index: 3;
-            cursor: move;
+            /* 去掉遮罩层光标事件， 防止mousemove时闪烁抖动
+             此元素不再是鼠标事件的目标，鼠标不再监听当前层而去监听下面的层中的元素
+             使得超链接和按钮等鼠标点击事件都会失效
+             */
+            pointer-events: none;
         }
         .zoomdiv {
             width: 540px;
@@ -67,9 +72,8 @@
             position: absolute;
             top: 0;
             left: 451px;
-            /*position: relative;*/
-            /*left: 451px;*/
-            /*top:-452px;*/
+            /* 隐藏超出框的内容 */
+            overflow: hidden;
         }
         .clearfix:before,
         .clearfix:after {
@@ -121,48 +125,47 @@
                     var rightX = 450 - event.offsetX;
                     var topY = event.offsetY;
                     var bottomY =  450 - event.offsetY;
-                    // 大图要调整的x、y轴偏移量
-                    var x, y;
+
                     // 遮罩层左外边距、上外边距
                     var mLeft, mTop;
                     // 遮罩层中心点距离小图x，y的边界值
                     var xBorder = 300 / 2;
                     var yBorder = 300 / 2;
                     if (leftX < xBorder) { // 遮罩层触碰小图左边
-                        x = "left";
                         mLeft = 0;
                     } else if (rightX < xBorder) { // 遮罩层触碰小图右边
-                        x = "right";
                         mLeft = 450 - 300;
                     } else {
-                        x = (event.offsetX - xBorder) / proportionX + "px";
                         mLeft = event.offsetX - xBorder;
                     }
                     if (topY < yBorder) { // 遮罩层触碰小图上边
-                        y = "top";
                         mTop = 0;
                     } else if (bottomY < yBorder) { // 遮罩层触碰小图底边
-                        y = "bottom";
                         mTop = 450 - 300;
                     } else {
-                        y = (event.offsetY - yBorder) / proportionY + "px";
                         mTop = event.offsetY - yBorder;
                     }
 
-                    // 移动大图背景图
-                    var positions = x + " " + y;
-                    $(".zoomdiv").css("background-position", positions);
+
+                    /**
+                     * 移动大图
+                     * 大图要调整的左外边距x、上外边距y
+                     */
+                    var x, y;
+                    x = mLeft / proportionX + "px";
+                    y = mTop / proportionY + "px";
+                    $(".zoomdiv img").css("margin-left", x);
+                    $(".zoomdiv img").css("margin-top", y);
 
                     // 移动遮罩层
                     $(".jqZoomPup").css("left", mLeft + "px");
                     $(".jqZoomPup").css("top", mTop + "px");
-                    console.log(mLeft, mTop, "x: ", event.offsetX, "y: ", event.offsetY);
                 });
         });
 
-        // 设置大图背景图片
+        // 设置大图
         function zoomBackground() {
-            $(".zoomdiv").css("background", "url(./img/bigphone.jpg) 0 0 no-repeat");
+            $(".zoomdiv img").prop("src", "./img/bigphone.jpg");
         }
 
 
@@ -183,12 +186,14 @@
 
 <div class="container ww">
     <div class="product-intro clearfix">
-        <div class="preview-wrap">
+        <div class="preview-wrap"> <!-- 基准定位点 -->
             <div class="preview"> <!-- 小图 -->
                 <img src="img/smallphone.jpg">
                 <div class="jqZoomPup"></div> <!-- 遮罩层 -->
             </div>
-            <div class="zoomdiv"></div> <!-- 大图 -->
+            <div class="zoomdiv"> <!-- 大图 -->
+                <img>
+            </div>
         </div>
         <div class="itemInfo-wrap">
             <div>vivo iQOO Neo 855竞速版 8GB+128GB电光薄荷 骁龙855Plus 33W超快闪充 4500mAh大电池游戏手机 全网通4G手机</div>
