@@ -45,7 +45,7 @@ web资源即放在Internet网上供外界访问的文件或程序
 ## tomcat服务器安装部署
 * **tomcat web服务器依赖java运行环境，即jre**，所以必须先配置好，java运行环境安装
 见[安装JDK](https://github.com/cucker0/java_2019/blob/master/README/install_JDK.md)
-* 下载tomcat包，http://tomcat.apache.org/
+* 下载tomcat Core包，http://tomcat.apache.org/
 * 把下载的tomcat包解压到一个目录，目录中不带空格
 * 配置tomcat系统环境变量
     ```text
