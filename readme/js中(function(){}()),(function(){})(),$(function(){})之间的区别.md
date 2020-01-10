@@ -1,7 +1,7 @@
 js中(function(){}()),(function(){})(),$(function(){})之间的区别
 ==
 
-## 3中写法
+## 3种写法
 ```js
 (function (形参列表) {
     // 方法体
