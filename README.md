@@ -41,7 +41,8 @@ Java Web
     * [js中window对象和document对象](readme/js中window对象和document对象.md)
     * [js中(function(){}()),(function(){})(),$(function(){})之间的区别](readme/js中(function(){}()),(function(){})(),$(function(){})之间的区别.md)
     * [window.onload和jquery的document.ready](readme/window.onload和jquery的document.ready.md)
-
+    * [ES6模块化之export和import的用法](readme/ES6模块化之export和import的用法.md)
+    
 ### jQuery
 * [概述](readme/jQuery.md#概述)
 * [jQuery的使用](readme/jQuery.md#jQuery的使用)
