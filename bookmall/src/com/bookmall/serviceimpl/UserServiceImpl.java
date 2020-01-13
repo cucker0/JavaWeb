@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void regist(User user) {
+    public void register(User user) {
         userDao.saveUser(user);
     }
 

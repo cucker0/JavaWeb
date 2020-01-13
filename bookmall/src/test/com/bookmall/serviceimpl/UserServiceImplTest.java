@@ -32,10 +32,10 @@ public class UserServiceImplTest {
     * 
     */ 
     @Test
-    public void testRegist() throws Exception { 
+    public void testRegister() throws Exception {
         //TODO: Test goes here...
         User user = new User(null, "lindanda", "pw123456", "lindanda@gmail.com");
-        userService.regist(user);
+        userService.register(user);
     } 
 
     /** 
