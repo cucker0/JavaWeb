@@ -106,7 +106,10 @@ public class C3p0Utils {
             e.printStackTrace();
         } finally {
             try {
+                // 重置回自动提交
                 connection.setAutoCommit(true);
+                // 把连接释放回连接池
+                release(connection);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -125,7 +128,10 @@ public class C3p0Utils {
             e.printStackTrace();
         } finally {
             try {
+                // 重置回自动提交
                 connection.setAutoCommit(true);
+                // 把连接释放回连接池
+                release(connection);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

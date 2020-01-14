@@ -40,12 +40,14 @@ public abstract class BaseDao<T> {
 
     // 方法
     /**
-     * 通用的SQL更新操作(INSERT,UPDATE,DELETE)
+     * 通用的SQL更新操作(INSERT,UPDATE,DELETE)，适用于事务
      *
-     * @param conn: Connection连接对象
+     * @param conn: Connection连接对象。
      * @param sql: 可含?占位符的SQL语句
      * @param params: ?占位符对应的可变参数
      * @return: 执行sql语句受影响的行数
+     *
+     * 注意：需要传入Connection连接对象的方法，适用于事务，Connection在提交事务或回滚事务时释放回连接池。下同
      */
     public int update(Connection conn, String sql, Object... params) {
         int rows = 0;
@@ -57,6 +59,15 @@ public abstract class BaseDao<T> {
         return rows;
     }
 
+    /**
+     * 通用的SQL更新操作(INSERT,UPDATE,DELETE)，适用于非事务
+     *
+     * @param sql
+     * @param params
+     * @return
+     *
+     * 注意：不需要传入Connection连接对象的方法，适用于非事务，没事执行sql语句前，从连接池获取连接，执行完sql后，在释放回连接池。下同
+     */
     public int update(String sql, Object... params) {
         Connection conn = C3p0Utils.getConnection();
         int rows = update(conn, sql, params);

@@ -25,9 +25,10 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = userService.login(new User(null, username, password, ""));
+        System.out.println(user);
         if (user == null) {
             System.out.println("用户名或密码错误，登录失败！");
-            request.getRequestDispatcher("pages/user/regist.html").forward(request, response);
+            request.getRequestDispatcher("pages/user/login.html").forward(request, response);
         } else {
             System.out.println("登录成功");
             request.getRequestDispatcher("pages/user/regist_success.html").forward(request, response);
@@ -37,6 +38,6 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        System.out.println("LoginServlet doGet");
     }
 }
