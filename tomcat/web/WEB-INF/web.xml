@@ -38,8 +38,24 @@
             <param-value>com.mysql.cj.jdbc.Driver</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>ContextServlet1</servlet-name>
+        <servlet-class>com.java.servlet2.ContextServlet1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContextServlet2</servlet-name>
+        <servlet-class>com.java.servlet2.ContextServlet2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConfigServlet</servlet-name>
         <url-pattern>/config</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContextServlet1</servlet-name>
+        <url-pattern>/context1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContextServlet2</servlet-name>
+        <url-pattern>/context2</url-pattern>
     </servlet-mapping>
 </web-app>
