@@ -24,8 +24,12 @@ IDEA配置Tomcat、创建动态Web工程、新建一个Servlet项目
 3. 添加tomcat server实例
 
     ![](../images/tomcat/tomcat工程2_1.png)  
-    ![](../images/tomcat/tomcat工程04.png)  
+    ![](../images/tomcat/tomcat工程04.png) 
+    Application context：/工程名 
     ![](../images/tomcat/tomcat工程2_2.png)  
+    确定 Project Structure ->Facets  
+    Web Resource Directory为工程的web目录绝对路径
+    ![](../images/tomcat/tomcat工程07.png)  
     ![](../images/tomcat/tomcat工程05.png)  
     ![](../images/tomcat/tomcat工程06.png)  
 4. 运行tomcat
@@ -35,6 +39,7 @@ IDEA配置Tomcat、创建动态Web工程、新建一个Servlet项目
 
 ## 导入jar包
 这里以Junit包作为示例
+另外可[参考](../bookmall/README.md)
 
 1. 此时的web工程没有lib,创建lib文件夹
 
@@ -52,7 +57,7 @@ IDEA配置Tomcat、创建动态Web工程、新建一个Servlet项目
     点击Artifacts,此时WEB-INF下只有calsses,没有lib  
     ![](../images/tomcat/tomcat工程3_5.png)   
     
-    右击WebProject下的lib,选择Put into/WEB-INF/lib   
+    **右击WebProject下的lib,选择Put into/WEB-INF/lib**   
     ![](../images/tomcat/tomcat工程3_6.png)   
     ![](../images/tomcat/tomcat工程3_7.png)  
     
