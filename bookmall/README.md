@@ -18,6 +18,7 @@ Book Mall
     ```text
     Project Structure -> Artifacts
     右键 commons-dbutils-1.7，点击 Put into/WEB-INF/lib，
+    其他包类似
     点击应用，重启tomcat即可
     ```
     ![](../images/tomcat/dbutils_02.png)  
