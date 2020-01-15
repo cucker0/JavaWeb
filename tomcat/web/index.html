@@ -2,11 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>test</title>
+    <title>tomcat</title>
 </head>
 <body>
-    <div>
-        tomcat test
-    </div>
+<div>
+    <a href="http://127.0.0.1:8080/tomcat/context1">context1</a>
+    <br>
+    <a href="http://127.0.0.1:8080/tomcat/context2">context2</a>
+</div>
+<div>
+    <a href="http://127.0.0.1:8080/tomcat/requestServlet">RequestServlet</a>
+</div>
+<div>
+    <a href="http://127.0.0.1:8080/tomcat/servletContext3">ServletContext3</a>
+</div>
+
+<div>
+    <h4>测试http get请求的数据格式</h4>
+    <form action="http://127.0.0.1" method="get">
+        <label>
+            用户名：
+            <input type="text" name="username">
+        </label>
+        <label>
+            密码：
+            <input type="password" name="pwd">
+        </label>
+        <div>
+            性别：
+            <label><input type="radio" name="sex" value="female">女</label>
+            <label><input type="radio" name="sex" value="male">男</label>
+        </div>
+        <div>
+            课程
+            <label><input type="checkbox" name="course" value="java">Java</label>
+            <label><input type="checkbox" name="course" value="go">GO</label>
+            <label><input type="checkbox" name="course" value="C++">C++</label>
+        </div>
+        <input type="submit" value="提交">
+    </form>
+</div>
+
+<div>
+    <h4>测试http post请求的数据格式</h4>
+    <form action="http://127.0.0.1" method="post">
+        <label>
+            用户名：
+            <input type="text" name="username">
+        </label>
+        <label>
+            密码：
+            <input type="password" name="pwd">
+        </label>
+        <div>
+            性别：
+            <label><input type="radio" name="sex" value="female">女</label>
+            <label><input type="radio" name="sex" value="male">男</label>
+        </div>
+        <div>
+            课程
+            <label><input type="checkbox" name="course" value="java">Java</label>
+            <label><input type="checkbox" name="course" value="go">GO</label>
+            <label><input type="checkbox" name="course" value="C++">C++</label>
+        </div>
+        <input type="submit" value="提交">
+    </form>
+</div>
 </body>
 </html>

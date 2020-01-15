@@ -7,18 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ContextServlet1 extends HttpServlet {
+/**
+ * ServletContext获取全局共享属性
+ */
+public class ServletContext2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 获取ServletContext对象
         ServletContext servletContext = getServletContext();
-        // ServletContext对象可以保存数据、获取数据
-        // 这些数据叫属性，以map(k-v)的形式保存数据
-        servletContext.setAttribute("num", 100);
         Object num = servletContext.getAttribute("num");
-        System.out.println("ContextServlet1 获取保存的数据num：" + num);
+        System.out.println("ContextServlet2 获取全局的属性num值：" + num);
     }
 }
