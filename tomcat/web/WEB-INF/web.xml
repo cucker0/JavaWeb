@@ -55,12 +55,36 @@
         <servlet-class>com.java.servlet2.ServletContext2</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RequestServlet</servlet-name>
-        <servlet-class>com.java.servlet2.RequestServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServletContext3</servlet-name>
         <servlet-class>com.java.servlet2.ServletContext3</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HttpServletRequest1</servlet-name>
+        <servlet-class>com.java.servlet2.HttpServletRequest1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetParameterFromHttpServletRequest</servlet-name>
+        <servlet-class>com.java.servlet2.GetParameterFromHttpServletRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForwardRequest</servlet-name>
+        <servlet-class>com.java.servlet2.ForwardRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Redirect</servlet-name>
+        <servlet-class>com.java.servlet2.Redirect</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HttpServletResponse1</servlet-name>
+        <servlet-class>com.java.servlet2.HttpServletResponse1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RequestSetAttributeGetAttribute</servlet-name>
+        <servlet-class>com.java.servlet2.RequestSetAttributeGetAttribute</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RequestSetAttributeGetAttribute2</servlet-name>
+        <servlet-class>com.java.servlet2.RequestSetAttributeGetAttribute2</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -76,11 +100,35 @@
         <url-pattern>/context2</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RequestServlet</servlet-name>
-        <url-pattern>/requestServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ServletContext3</servlet-name>
         <url-pattern>/servletContext3</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HttpServletRequest1</servlet-name>
+        <url-pattern>/httpservletrequest1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetParameterFromHttpServletRequest</servlet-name>
+        <url-pattern>/getparameter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForwardRequest</servlet-name>
+        <url-pattern>/forward</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Redirect</servlet-name>
+        <url-pattern>/redirect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HttpServletResponse1</servlet-name>
+        <url-pattern>/httpservletresponse1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestSetAttributeGetAttribute</servlet-name>
+        <url-pattern>/requestAttribute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestSetAttributeGetAttribute2</servlet-name>
+        <url-pattern>/requestAttribute2</url-pattern>
     </servlet-mapping>
 </web-app>

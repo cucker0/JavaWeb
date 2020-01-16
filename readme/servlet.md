@@ -140,8 +140,63 @@ MIME类型的格式是
 "大类型/小类型"，并与某一种文件的扩展名相对应
 ```
 
+文件类型 |后缀 |MIME类型 
+:--- |:--- |:--- 
+超文本标记语言文本 |.html,.html |text/html
+普通文本 |.txt |text/plain
+RTF文本 |.rtf |application/rtf
+GIF图形 |.gif |image/gif
+JPEG图形	|.jpeg, .jpg |image/jpeg
+au声音文件 |.au |audio/basic
+MIDI音乐文件 |mid, .midi |audio/midi, audio/x-midi
+RealAudio音乐文件	|.ra, .ram |audio/x-pn-realaudio
+MPEG文件	|.mpg, .mpeg |video/mpeg
+AVI文件 |.avi |video/x-msvideo
+GZIP文件 |.gz |application/x-gzip
+TAR文件 |.tar |application/x-tar 
 
 ## HttpServletRequest类
+```text
+HttpServletRequest类封装了从客户端传递过来的信息。
+每次请求，Tomcat都会把客户端请求的信息封装在一个HttpServletRequest对象实例传递到service请求的方法中让我们使用
+```
+
+### HttpServletRequest常用方法
+```text
+getRequestURI()
+获取请求的资源路径
+
+getRequestURL()
+获取请求的统一资源定位符
+
+getRemoteHost()
+获取请求的客户端ip地址
+
+getHeader("field")					
+获取请求头信息
+
+getParameter()
+获取请求参数值
+
+getParameterValues()
+获取请求的多个值（常用于复选框
+
+getRequestDispatcher()
+获取请求的转发对象。转发请求
+
+getMethod()
+获取请求的方式GET 或 POST
+
+setAttribute(key, value)
+设置Request请求范域的属性值
+
+getAttribute(key);  			获取Request请求范围的属性值。
+
+getCookies()					获取Cook对象
+getSession()					获取或创建Session对象
+```
+
+### 获取请求参数的值
 
 ## HttpServletResponse类
 

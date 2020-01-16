@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>tomcat</title>
+    <style>
+        body > div {
+            border: 1px solid gray;
+            margin: 15px 0;
+            padding: 10px 5px;
+        }
+    </style>
+    <base href="http://127.0.0.1:8080/tomcat/">
 </head>
 <body>
 <div>
     <a href="http://127.0.0.1:8080/tomcat/context1">context1</a>
     <br>
     <a href="http://127.0.0.1:8080/tomcat/context2">context2</a>
-</div>
-<div>
-    <a href="http://127.0.0.1:8080/tomcat/requestServlet">RequestServlet</a>
 </div>
 <div>
     <a href="http://127.0.0.1:8080/tomcat/servletContext3">ServletContext3</a>
@@ -67,6 +72,96 @@
         </div>
         <input type="submit" value="提交">
     </form>
+</div>
+
+<div>
+    <h4>HttpServletRequest1</h4>
+    <div>
+        <a href="http://127.0.0.1:8080/tomcat/httpservletrequest1">HttpServletRequest常用方法测试</a>
+    </div>
+</div>
+
+<div>
+    <h4>从HttpServletRequest获取参数值, GET方式</h4>
+    <form action="http://127.0.0.1:8080/tomcat/getparameter" method="get">
+        <label>
+            用户名：
+            <input type="text" name="username">
+        </label>
+        <label>
+            密码：
+            <input type="password" name="pwd">
+        </label>
+        <div>
+            性别：
+            <label><input type="radio" name="sex" value="female">女</label>
+            <label><input type="radio" name="sex" value="male">男</label>
+        </div>
+        <div>
+            课程
+            <label><input type="checkbox" name="course" value="java">Java</label>
+            <label><input type="checkbox" name="course" value="go">GO</label>
+            <label><input type="checkbox" name="course" value="C++">C++</label>
+        </div>
+        <input type="submit" value="提交">
+    </form>
+</div>
+
+<div>
+    <h4>从HttpServletRequest获取参数值, POST方式</h4>
+    <form action="http://127.0.0.1:8080/tomcat/getparameter" method="get">
+        <label>
+            用户名：
+            <input type="text" name="username">
+        </label>
+        <label>
+            密码：
+            <input type="password" name="pwd">
+        </label>
+        <div>
+            性别：
+            <label><input type="radio" name="sex" value="female">女</label>
+            <label><input type="radio" name="sex" value="male">男</label>
+        </div>
+        <div>
+            课程
+            <label><input type="checkbox" name="course" value="java">Java</label>
+            <label><input type="checkbox" name="course" value="go">GO</label>
+            <label><input type="checkbox" name="course" value="C++">C++</label>
+        </div>
+        <input type="submit" value="提交">
+    </form>
+</div>
+
+<div>
+    <h4>forward转发请求</h4>
+    <div>
+        <a href="forward">转发请求</a>
+    </div>
+</div>
+
+<div>
+    <h4>response.sendRedirect() 请求重定向</h4>
+    <div>
+        <a href="redirect">请求重定向</a>
+    </div>
+</div>
+
+<div>
+    <h4>HttpServletResponse 服务端响应数据</h4>
+    <div>
+        <a href="httpservletresponse1">HttpServletResponse1</a>
+    </div>
+</div>
+
+<div>
+    <h4>HttpServletResponse对象设置属性、获取属性值</h4>
+    <div>
+        <a href="requestAttribute">requestAttribute</a>
+    </div>
+    <div>
+        <a href="requestAttribute2">requestAttribute2</a>
+    </div>
 </div>
 </body>
 </html>
