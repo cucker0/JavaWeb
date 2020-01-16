@@ -89,7 +89,7 @@ Java Web
 * 其他
     * [IntelliJ_IDEA使用TOMCAT中文乱码](readme/IntelliJ_IDEA使用TOMCAT中文乱码.md)
     * [IDEA配置Tomcat、创建动态Web工程、新建一个Servlet项目](readme/IDEA配置Tomcat_创建动态Web工程_新建一个Servlet项目.md)
-
+    * [Intellij idea的tomcat原理](readme/Intellij_idea的tomcat原理.md)
 
 ### xml
 * [XML简介](readme/xml.md#XML简介)
