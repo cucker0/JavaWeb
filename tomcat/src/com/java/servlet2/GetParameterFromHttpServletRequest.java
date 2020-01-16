@@ -46,7 +46,7 @@ public class GetParameterFromHttpServletRequest extends HttpServlet {
          */
 
         /**
-         * 结局方法2: 给request对象指定编码字符集.
+         * 解决方法2: 给request对象指定编码字符集.
          * request.setCharacterEncoding("UTF-8");
          * 在使用前先设置
          */
