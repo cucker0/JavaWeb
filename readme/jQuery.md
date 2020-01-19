@@ -441,6 +441,81 @@ $("选择器").each(function (i, n) { // 这里的i为选择器匹配的元素�
 
 
     
+
+## jQuery的ajax方法
+### get方法
+语法
+```text
+$.get(url, [data], [callback], [type]);
+
+参数
+url: 待载入页面的URL地址
+
+data: 待发送 Key/value 参数
+
+callback: 载入成功时回调函数
+
+type: 返回内容格式，xml, html, script, json, text, _default
+```
+
+示例
+```js
+$.get(
+    "test.cgi", 
+    { name: "John", time: "2pm" },
+    function (data) { // data为服务端响应给客户端的数据
+        alert("Data Loaded: " + data);
+    }
+);
+```
+
+### post方法
+语法
+```text
+$.post(url, [data], [callback], [type]);
+
+参数
+url:发送请求地址。
+
+data:待发送 Key/value 参数
+
+callback:发送成功时回调函数
+
+type:返回内容格式，xml, html, script, json, text, _default
+```
+
+示例
+```js
+send_data = JSON.stringify(send_data);
+
+$.post(window.location.pathname + window.location.search, {'data':send_data},
+    function(callback){ // callback为服务端响应给客户端的数据
+        callback = JSON.parse(callback)['data'];
+        if (callback['auth_status'] == '1'){ // 登录成功
+            location.href = callback['url'];
+        }else if(callback['auth_status'] == '0'){ // 登录失败
+            $('.login-box-msg').text('用户或密码错误,请重新输入').css('color','red');
+        }
+});
+```
+
+
+### ajax方法
+语法
+```text
+$.ajax(url,[settings])
+
+参数
+url:一个用来包含发送请求的URL字符串
+
+settings:AJAX 请求设置。所有选项都是可选的
+
+jQuery 底层 AJAX 实现
+以上两个是简单易用的高层实现
+```
+
+
+
 ## jQuery对象常用方法
 * 从祖先元素中找匹配的元素
     ```js
