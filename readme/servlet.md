@@ -240,7 +240,7 @@ request.setCharacterEncoding("UTF-8");
 在使用前先设置
 ```
 
-### 请求Request中设置属性和获取属性
+### 请求Request中设置属性和获取属性值
 ```text
 setAttribute(key, value)
 设置Request请求范围内域的属性值
@@ -265,6 +265,13 @@ getAttribute(key);  			获取Request请求范围的属性值。
 / 表示http://ip:port/工程名/
 也就是与web目录对应
 ```
+
+### ServletContext域属性值与HttpServletRequest域属性值对比
+
+`#` |设置属性值方法 |获取属性值方法 |作用范围  
+:--- |:--- |:--- |:---
+ServletContext对象 |setAttribute("属性名", 值) |getAttribute("属性名") |全局生效，所有的request 
+HttpServletRequest对象 |setAttribute(key, value) |getAttribute(key) |同一request对象有效 
 
 ## HttpServletResponse类
 ```text
