@@ -587,7 +587,13 @@ jQuery 底层 AJAX 实现
     都会处理转化成一个查询字符串，以配合默认内容类型 "application/x-www-form-urlencoded"。
     如果要发送 DOM 树信息或其它不希望转换的信息，请设置为 false。
     ```
- 
+* crossDomain是否跨域
+```text
+可选值
+true  强制跨域请求，如JSONP形式
+false  默认值，不跨域
+```
+
 高级选项
 * cache是否启用缓存
     ```text
