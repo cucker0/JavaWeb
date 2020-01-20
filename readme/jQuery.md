@@ -475,20 +475,20 @@ $.get(
 $.post(url, [data], [callback], [type]);
 
 参数
-url:发送请求地址。
+url: 发送请求地址。
 
-data:待发送 Key/value 参数
+data: 待发送 Key/value 参数
 
-callback:发送成功时回调函数
+callback: 发送成功时回调函数
 
-type:返回内容格式，xml, html, script, json, text, _default
+type: 返回内容格式，xml, html, script, json, text, _default
 ```
 
 示例
 ```js
-send_data = JSON.stringify(send_data);
+send_data = JSON.stringify({user: "mali", email: "mali@qq.com"});
 
-$.post(window.location.pathname + window.location.search, {'data':send_data},
+$.post(window.location.pathname + window.location.search, {data:send_data},
     function(callback){ // callback为服务端响应给客户端的数据
         callback = JSON.parse(callback)['data'];
         if (callback['auth_status'] == '1'){ // 登录成功
@@ -501,20 +501,150 @@ $.post(window.location.pathname + window.location.search, {'data':send_data},
 
 
 ### ajax方法
-语法
+[语法](http://jquery.cuishifeng.cn/jQuery.Ajax.html)
+
 ```text
-$.ajax(url,[settings])
+$.ajax({url: url_val, [settings]})
 
 参数
 url:一个用来包含发送请求的URL字符串
 
 settings:AJAX 请求设置。所有选项都是可选的
+一般都传入一个字典类型的对象，用k-v来表示各个参数
 
 jQuery 底层 AJAX 实现
 以上两个是简单易用的高层实现
 ```
 
+* url
+    ```text
+    一个用来包含发送请求的URL字符串
+    ```
 
+* 回调函数  
+    用于处理$.ajax()获得的数据，
+    * beforeSend
+        >在发送请求之前调用，并且传入一个XMLHttpRequest作为参数
+    * error
+        >在请求出错时调用。传入XMLHttpRequest对象，描述错误类型的字符串以及一个异常对象（如果有的话）
+    * dataFilter
+        >在请求成功之后，且在success函数之前调用。传入返回的数据以及"dataType"参数的值。并且必须返回新的数据（可能是处理过的）传递给success回调函数
+    * success
+        >当请求成功之后调用(dataFilter函数之后)。传入返回后的数据，以及包含成功代码的字符串
+    * complete
+        >当请求完成之后调用这个函数，无论成功或失败。传入XMLHttpRequest对象，以及一个包含成功或错误代码的字符串
+
+* type
+```text
+请求方法
+可选
+"GET"  默认值
+"POST"
+"PUT"
+"DELETE"
+
+```
+
+* dataType数据类型  
+    ```text
+    $.ajax()函数依赖服务器提供的信息来处理返回的数据。
+    如果服务器报告说返回的数据是XML，那么返回的结果就可以用普通的XML方法或者jQuery的选择器来遍历。
+    如果想得到其他类型，比如HTML，则数据就以文本形式来对待。
+    
+    可设置类型：
+    "xml", "html", "script", "json", "jsonp", "text"
+    ```
+
+* data发送个给服务到的数据
+    ```text
+    数据可以是一个查询字符串，如："key1=value1&amp;key2=value2"
+    也可以是字典对象，如：{key1: "value1", key2: "value2"}，对象类型的数据在发送时会被转换成查询字符串。
+    
+    这时可通过processData选项为false来回避。但如果是发送一个XML对象给服务器就不合适了
+    ```
+* async是否异步
+    ```text
+    可选值: 
+        true  默认值，默认发起的是异步的请求
+        false  关闭异步请求，即为同步请求
+    ```
+* contentType
+    ```text
+    设置请求头contentType值，即发送信息至服务器时内容编码类型
+    ```
+* username
+    ```text
+    用于响应HTTP访问认证请求的用户名
+    ```
+
+* password
+    ```text
+    用于响应HTTP访问认证请求的密码
+    ```
+* processData
+    ```text
+    (默认: true) 默认情况下，通过data选项传递进来的数据，如果是一个对象(技术上讲只要不是字符串)，
+    都会处理转化成一个查询字符串，以配合默认内容类型 "application/x-www-form-urlencoded"。
+    如果要发送 DOM 树信息或其它不希望转换的信息，请设置为 false。
+    ```
+ 
+高级选项
+* cache是否启用缓存
+    ```text
+    可选值：
+        true  默认值，默认情况下，请求总会被发出去，但浏览器有可能从他的缓存中调取数据
+        false  关闭缓存，将不缓存此页面
+    ```
+* scriptCharset设置字符集
+    ```text
+    只有当请求时dataType为"jsonp"或"script"，并且type是"GET"才会用于强制修改charset。通常只在本地和远程的内容编码不同时使用。
+    ```
+* success: function (data, status, jqXHR) {}
+```text
+请求成功后的回调函数
+
+参数
+data  由服务器返回，并根据dataType参数进行处理后的数据
+status  描述状态的字符串，如"200"
+jqXHR  XMLHttpRequest对象
+```
+
+* timeout
+    ```text
+    设置请求超时时间（毫秒）。此设置将覆盖全局设置
+    ```
+
+示例
+```js
+function signup() {
+    $.ajax({
+        // 提交数据的类型 POST GET
+        type: "POST",
+        // 提交的网址
+        url: "testLogin.aspx",
+        // 提交的数据
+        data: {Name:"sanmao",Password:"sanmaoword"},
+        // 返回数据的格式
+        datatype: "html",//"xml", "html", "script", "json", "jsonp", "text".
+        // 在请求之前调用的函数
+        beforeSend: function(){$("#msg").html("logining");},
+        // 成功返回之后调用的函数             
+        success: function(data){
+       $("#msg").html(decodeURI(data));            
+        }   ,
+        // 调用执行后调用的函数
+        complete: function(XMLHttpRequest, textStatus){
+           alert(XMLHttpRequest.responseText);
+           alert(textStatus);
+            //HideLoading();
+        },
+        // 调用出错执行的函数
+        error: function(){
+            // 请求出错处理
+        }         
+    });
+}
+```
 
 ## jQuery对象常用方法
 * 从祖先元素中找匹配的元素
