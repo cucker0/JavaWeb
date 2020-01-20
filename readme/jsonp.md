@@ -117,7 +117,7 @@ JSONP 由两部分组成：回调函数和数据
         运行之后查看结果，页面成功弹出提示窗口，显示：
         我是本地函数，可以被跨域的remote.js文件调用，远程js带来的数据是：我是远程js带来的数据
         
-        现实中远程的js文件是动态生成的，一般通过request中的callback参数来获得客户端期望要调用的回调函数名
+        现实中远程的js文件是动态生成的，一般通过request中的callback参数来获得客户端期望要调用的客户端本地的回调函数名
         ```
 
 
@@ -142,19 +142,18 @@ JSONP 由两部分组成：回调函数和数据
         所以要在开始加一个分号
         ```
 
-    * 动态创建`<script>`标签，设置其src，回调函数在src中设置
-        ```js
-        var script = document.createElement("script");
-        script.src = "https://douban.uieee.com/v2/book/search?q=javascript&count=1&callback=handleResponse";
-        document.body.insertBefore(script, document.body.firstChild);
-        ```
-
     * 在页面中，返回的JSON作为参数传入回调函数中，我们通过回调函数来来操作数据
         ```js
         function handleResponse(response){
             // 对response数据进行操作代码
         }
         ```
+    * 动态创建`<script>`标签，设置其src，回调函数在src中设置
+            ```js
+            var script = document.createElement("script");
+            script.src = "https://douban.uieee.com/v2/book/search?q=javascript&count=1&callback=handleResponse";
+            document.body.insertBefore(script, document.body.firstChild);
+            ```
 
     * 了解了JSONP的基本使用方法，我们在实现上面通过ajax调用豆瓣接口的需求，实现代码如下
         ```html
@@ -171,8 +170,8 @@ JSONP 由两部分组成：回调函数和数据
         </body>
         <script type="text/javascript">
             // 先定义了一个函数handleResponse
-            function handleResponse(response){
-                    console.log(response);
+            function handleResponse(jsonData){
+                    console.log(jsonData);
             }
         </script>
         
@@ -237,7 +236,7 @@ JSONP目前还是比较流行的跨域方式，虽然JSONP使用起来方便，
                     url: "https://douban.uieee.com/v2/book/search",
                     type: "GET",
                     dataType: "jsonp", // 返回的数据类型，设置为JSONP方式
-                    jsonp: 'callback', // 传递给请求处理程序或页面的，服务端用于获得jsonp回调函数名的参数名，相当于上面的callback=handleResponse传参
+                    jsonp: 'callback', // 传递给请求处理程序或页面的，服务端用于获得jsonp回调函数名的参数名，相当于request的callback=handleResponse传参
                     jsonpCallback: 'handleResponse', // 设置回调函数名，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
                     data: {
                         q: "javascript", 
