@@ -132,8 +132,14 @@ JSONP 由两部分组成：回调函数和数据
         通过传参callback=handleResponse后，发现返回的数据做了如下包装，这是在调用handleResponse方法
         ```text
         ;handleResponse(
-            源数据
+            json数据
         );
+        ```
+        ```text
+        handleResponse函数名前为什么要加;
+        因为：前端页面脚本压缩可减少脚本数量和脚本大小，
+        为了避免压缩时前一个脚本没有写最后一个分号而导致压缩后脚本不能使用，
+        所以要在开始加一个分号
         ```
 
     * 动态创建`<script>`标签，设置其src，回调函数在src中设置
