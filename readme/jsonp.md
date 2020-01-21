@@ -258,6 +258,31 @@ JSONP目前还是比较流行的跨域方式，虽然JSONP使用起来方便，
     自动帮你生成回调函数并把数据取出来供success属性方法来调用，是不是很爽呀？
     （还是忍不住吐槽，虽然jquery也把jsonp归入了ajax，但其实它们真的不是一回事儿），
     ```
+    同等效果的写法  
+    ```html
+    <script type="text/javascript">
+        function handleResponse(jsonData) {
+            console.log(response);
+        }
+  
+        $(function(){
+            $("#btn").click(function(){
+                $.ajax({
+                    async: true,
+                    url: "https://douban.uieee.com/v2/book/search",
+                    type: "GET",
+                    dataType: "jsonp", // 返回的数据类型，设置为JSONP方式
+                    jsonp: 'callback', // 传递给请求处理程序或页面的，服务端用于获得jsonp回调函数名的参数名，相当于request的callback=handleResponse传参
+                    jsonpCallback: 'handleResponse', // 设置回调函数名，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+                    data: {
+                        q: "javascript", 
+                        count: 1
+                    }
+                });
+            });
+        });
+    </script>
+    ```
 
     最后的结果与JavaScript通过动态添加`<script>`标签得到的结果是一样的
     ![](../images/jQuery/jsonp_04.png)  
