@@ -1,9 +1,19 @@
 Book Mall注册、登录
 ==
 
+
+## 效果图
+首页
+![](../images/bookmall/bm_01.png)  
+
+登录页
+![](../images/bookmall/bm_02.png)  
+
+注册页
+![](../images/bookmall/bm_03.png)  
+
 ## 新建bookmall项目
 新建项目，命名为bookmall，类型为Java EE，选择Web Application
-
 
     
 ## 需求
