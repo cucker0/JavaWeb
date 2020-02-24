@@ -84,24 +84,102 @@ session		    设置当前jsp页面是否获取session对象，默认为true
 extends		    设置jsp文件翻译后的类继承的类，给类似tomcat厂商预留的jsp默认翻译的servlet继承于什么类
 ```
 
+### jsp中的注释
+```text
+<%-- jsp注释 --%>
+
+<!-- html注释 -->
+
+<%
+    // java单行注释注释
+
+    /*
+    java块注释
+     */
+%>
+```
 
 
 ### jsp的三种脚本语法
 #### 1声明式脚本
 ```text
-
+<%!
+    java声明代码
+%>
 ```
+在声明脚本块中，可以做如下声明
+* 定义全局变量
+* 定义static静态代码块
+* 定义方法
+* 定义内部类  
+几乎可以写在类中的代码，都可以通过声明脚本类实现  
+
+[声明式脚本示例](../jspProj/web/syntax1.jsp)  
 
 #### 2表达式脚本
+```text
+<%= 表达式 %>
+```
+```text
+表达式脚本用于向html页面中输出内容
+表达式脚本 翻译到Servlet程序的service方法中 以 out.print() 打印输出
+out 是jsp的一个内置对象，用于生成html的源代码
+```
+* 注意：表达式不要以分号结尾，否则会报错
+* 表达式脚本可以输出任意类型
 
+[表达式脚本示例](../jspProj/web/syntax2.jsp)  
 
 #### 3代码脚本
+```text
+<%
+    java代码
+%>
+```
+```text
+代码脚本里可以书写任意的java语句
+代码脚本的内容都会被翻译到service方法中
+所以service方法中可以写的java代码，都可以书写到代码脚本中
+```
+
+[代码脚本示例](../jspProj/web/syntax3.jsp) 
 
 ## jps九大内置对象
+* request：请求对象，可获取请求信息
+* response：响应对象，可设置响应信息
+* pageContext：当前页面的上下文对象，可在该对象中保存属性信息
+* session：会话对象，可获取会话信息
+* application：ServletContext对象实例，可获取真个工程的一些信息
+* config：ServletConfig对象实例，可获取Servlet的配置信息
+* out：输出流
+    ```text
+    主要用来在jsp页面上进行输出。在jsp页面中输出数据的时候，统一使用out进行输出（性能好，并且输出统一）
+    而不使用response.getWriter进行输出
+    ```
+* page：当前Servlet对象实例，使用this对象代替它更合适
+* exception：异常对象，只有在jsp页面的page 指令中设置 isErrorPage="true" 的时才会存在
 
+以上9大内置对象，在[代码脚本]、[表达式脚本]中可以直接使用
 
 ## jsp四大域对象
+* pageContext：可以保存数据在同一个jsp页面中
+    >作用范围：当前jsp页面内
+* request：可以保存数据在同一个request对象中
+    >作用范围：同一个request对象
+* session：可以保存数据在同一个会话中
+    >作用范围：浏览器从打开到关闭中间都在同一个session中
+* application：就是ServletContext对象
+    >作用范围：Tomcat服务器从启动到关闭
 
+```text
+4个域对象都有setAttribute、getAttribute方法，都可设置、获取属性值
+```
+
+### 该使用那个与对象
+```text
+选择域对象优先顺序：对象的作用范围从小到大，
+pageContext -> request -> session -> application
+```
 
 ## jsp常用标签
 

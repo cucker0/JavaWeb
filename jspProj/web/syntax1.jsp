@@ -6,6 +6,7 @@
     <title>声明式脚本</title>
 </head>
 <body>
+<h3>jsp声明式脚本语法</h3>
 <%!
     // 定义全局变量
     private int age;
@@ -18,6 +19,7 @@
         map.put("sn11", "小波");
         map.put("sn12", "吴曦");
     }
+
     // 定义方法
     public void check() {
         System.out.println("check method");
@@ -29,5 +31,6 @@
     }
 
 %>
+
 </body>
 </html>
