@@ -3,13 +3,28 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.html</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
     <servlet>
         <servlet-name>HtmlServlet</servlet-name>
         <servlet-class>com.java.servlet.HtmlServlet</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>QueryStudent</servlet-name>
+        <servlet-class>com.java.servlet.QueryStudent</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>HtmlServlet</servlet-name>
         <url-pattern>/htmlServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryStudent</servlet-name>
+        <url-pattern>/queryStudent</url-pattern>
     </servlet-mapping>
 </web-app>

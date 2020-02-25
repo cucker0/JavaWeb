@@ -9,6 +9,14 @@ JSP: Java Server Pages，Sun公司专门为了解决动态生成HTML文档的技
     [普通的Servlet输出html内容示例](../jspProj/src/com/java/servlet/HtmlServlet.java)  
     弊端：需要一行一行输出，很麻烦
 
+```text
+jsp面世最主要的目的是什么？
+
+jsp最主要是为了解决输出html内容。
+jsp在整个JavaEE中的定位。就只是为了输出html数据。
+在jsp中，并不推荐编写大量的java代码。
+```
+
 ## jsp本质
 jsp的本质是Servlet程序
 
@@ -181,10 +189,125 @@ out 是jsp的一个内置对象，用于生成html的源代码
 pageContext -> request -> session -> application
 ```
 
+### jsp中out输出流与response.getwriter()输出流的区别
+**输出内容到客户的输出流有：**
+* out输出流
+* response.getWriter()输出流
+
+建议统一使用out输出流，
+
+**这两个输出流都有两个方法：**
+* write(输出的对象)    输出字符串时优先使用
+* print(输出的对象)    输出任何类型
+
+建议统一使用print方法
+
+
+[out_getWriter源文件](../jspProj/web/out_getWriter.jsp)  
+
+out输出流与response.getwriter()输出流缓冲区工作原理
+![](../images/jsp/out_response.getWriter.png)  
+
+
 ## jsp常用标签
+### 静态包含
+```text
+很常用
+静态包含是把包含的页面内容原封装不动的输出到包含的位置
+被静态包含的文件没有被翻译成为Servlet源文件
+
+静态包含会比动态包含性能更优
+```
+
+语法
+```jsp
+<%@ include file="" %>
+```
 
 
-## 静态包含与动态包含的区别
+### 动态包含
+```text
+很少用
 
+动态包含会把被包含的页面单独翻译成servlet文件(即使是html文件)，然后在执行到<jsp:include时再调用翻译的servlet程序，
+并把计算的结果返回，将其追加到其包含的jsp的out缓冲区中
+动态包含是在执行的时候，才会加载。
+
+动态包含适合于，去包含那些，在jsp页面中有大量的java源代码的，
+或者 在jsp页面中有一些耗时比较长的操作的java代码的页面。
+比如在jsp页面中编写Socket操作。或者是有jdbc的操作等等
+```
+
+语法
+```jsp
+<jsp:include page=""></jsp:include>
+```
+
+翻译后的包含jsp文件
+```text
+      out.write("\n");
+      out.write("<html>\n");
+      out.write("<head>\n");
+      out.write("    <title>动态包含</title>\n");
+      out.write("</head>\n");
+      out.write("<body>\n");
+      out.write("<h3>jsp动态包含</h3>\n");
+      out.write("\n");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "footer.html", out, false);
+      out.write("\n");
+      out.write("</body>\n");
+      out.write("</html>\n");
+```
+调用了org.apache.jasper.runtime.JspRuntimeLibrary.include方法
+
+### 页面转发
+```text
+常用，URL不会跳转
+
+功能同
+request.getRequestDispatcher("/xxxx.jsp").forward(request, response);
+```
+
+语法
+```jsp
+<jsp:forward page=""></jsp:forward>
+```
+
+翻译后的jsp文件
+```text
+_jspx_page_context = pageContext;
+
+if (true) {
+    _jspx_page_context.forward("forward_home.jsp");
+    return;
+}
+```
+执行了pageContext.forward("转发页面路径")
+
+### jsp include标签在包含html文件乱码解决方法
+* 方法一：就是不要include html页面，改成include jsp页面
+* 方法二：在被包含的html文件的第一行添加如jsp指令
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+```
+* 方法三(推荐)：配置web.xml，所有html文件输出时都采用UTF-8的编码
+```text
+<jsp-config>
+    <jsp-property-group>
+        <url-pattern>*.html</url-pattern>
+        <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+</jsp-config>
+```
+
+### 静态包含与动态包含的区别
+
+项|静态包含 |动态包含 
+:---|:---|:---
+是否生成java |否 |是 
+_jspService方法中的区别 |把包含内容复制到_jspService中 |调用了org.apache.jasper.runtime.JspRuntimeLibrary.include方法 
+是否可以传递参数 |不能 |可以 
+编译次数 |1次 |包含的文件数 + 1 
+适用范围 |适用于那些大部分是静态页面内容 的jsp页面 |jsp页面中包含有大量的java代码的jsp页面，或者耗时 时间比较长的jsp页面 
 
 
