@@ -137,3 +137,10 @@ public class HelloWorld extends HttpServlet {
 
 7. 浏览器访问 http://localhost:8080/demo
 
+8. web.xml配置的url与servlet映射不生效问题
+    1. 先检测编译输出目录中是否存在有web.xml文件，如 out/artifacts/工程名/WEB-INF/web.xml
+    2. 若步骤1中没有web.xml文件，则删除 out/artifacts/工程名 目录
+    3. 重启tomcat
+    
+    ![](../images/servlet/web.xml配置的url与servlet不生效.png)
+    
