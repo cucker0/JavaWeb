@@ -167,7 +167,7 @@ TAR文件 |.tar |application/x-tar
 ### 响应状态码
 状态码 |含义 
 :--- |:--- 
-200 |请求成功，浏览器会把响应体内容显示在浏览器中。响应休内容通过是html
+200 |请求成功，浏览器会把响应体内容显示在浏览器中。响应体内容通过是html
 404 |请求资源没有找到，表示客户端请求了不存在的资源
 405 |服务器禁止了使用当前 HTTP 方法的请求，或服务器内部调用了不可调用的方法，如调用了HttpServlet父类的doGet或doPosst方法
 500 |请求的资源找到了，但服务器内部出现了错误，如代码报错等
@@ -223,7 +223,7 @@ getSession()					获取或创建Session对象
 ### 获取请求参数的值
 [GetParameterFromHttpServletRequest](../tomcat/src/com/java/servlet2/GetParameterFromHttpServletRequest.java)
 
-### request响应休中文乱码解决方法
+### request响应体中文乱码解决方法
 ```text
 
 request获取的参数，为中文是出现乱码，

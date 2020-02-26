@@ -32,6 +32,11 @@ IDEA配置Tomcat、创建动态Web工程、新建一个Servlet项目
     ![](../images/tomcat/tomcat工程07.png)  
     ![](../images/tomcat/tomcat工程05.png)  
     ![](../images/tomcat/tomcat工程06.png)  
+    
+    若打开Facets页面，提示 Web' Facet resources are not included in an artifact，点击 Create Artifact 按钮即可
+    ![](../images/tomcat/create_artifacts_01.png)  
+    
+    
 4. 运行tomcat
     ![](../images/tomcat/tomcat工程2_3.png)  
 5. [乱码问题](IntelliJ_IDEA使用TOMCAT中文乱码.md)
