@@ -311,3 +311,20 @@ _jspService方法中的区别 |把包含内容复制到_jspService中 |调用了
 适用范围 |适用于那些大部分是静态页面内容 的jsp页面 |jsp页面中包含有大量的java代码的jsp页面，或者耗时 时间比较长的jsp页面 
 
 
+## html中的路径与jsp中java代码的路径使用注意事项 
+* html相对路径
+    ```text
+    html中的相对路是base标签中定义的baseUrl，
+    如果没有定义则是 当前页面在浏览器上显示的URL  
+  
+    html中相对路径不以/开头，
+    如果是以/开头则表示为绝对路径，/ 表示为基准路径
+    ```
+* html中的java代码里的路径
+    ```text
+    基准URL为 http://服务器ip:port/工程名
+    
+    所有其路径要求以/开头，后台会对URL进行拼接
+    ```
+    
+[示例(href、file里路径)](../bookmall_v3/web/pages/user/login.jsp)  

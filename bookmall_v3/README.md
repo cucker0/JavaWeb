@@ -1,10 +1,10 @@
 Book Mall v3说明
 ==
 
-## 在bookmall基础上，利用jsp技术进一步完善改进
+## 在bookmall基础上，利用jsp技术进一步完善优化
 https://github.com/cucker0/JavaWeb/tree/master/bookmall
 
-## 要求
+## 优化要求
 * 页面jsp动态化
     ```text
     1.在html页面顶部加上page指令

@@ -1,10 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <%-- 引入head相同部分 --%>
+    <%@ include file="/pages/common/head.jsp" %>
     <title>尚硅谷会员登录页面</title>
-    <base href="http://localhost:8080/bookmall/"/>
-    <script type="text/javascript" src="static/script/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         // 页面加载完成之后
         $(function () {
@@ -41,8 +41,6 @@
         });
 
     </script>
-
-    <link type="text/css" rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
 <div id="login_header">
@@ -60,17 +58,20 @@
             <div class="login_box">
                 <div class="tit">
                     <h1>尚硅谷会员</h1>
-                    <a href="pages/user/regist.html">立即注册</a>
+                    <a href="pages/user/regist.jsp">立即注册</a>
                 </div>
                 <div class="msg_cont">
                     <b></b>
-                    <span class="errorMsg">请输入用户名和密码</span>
+                    <span class="errorMsg">
+                        <%= request.getAttribute("tips") == null ? "请输入用户名和密码" : request.getAttribute("tips") %>
+                    </span>
                 </div>
                 <div class="form">
                     <form action="login" method="post">
                         <label>用户名称：</label>
                         <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off"
-                               tabindex="1" name="username" id="username"/>
+                               tabindex="1" name="username" id="username"
+                               value="<%= request.getAttribute("username") == null ? "" : request.getAttribute("username") %>" />
                         <br/>
                         <br/>
                         <label>用户密码：</label>
@@ -87,10 +88,7 @@
         </div>
     </div>
 </div>
-<div id="bottom">
-			<span>
-				尚硅谷书城.Copyright &copy; 2020
-			</span>
-</div>
+<%-- 引入页脚 --%>
+<%@ include file="/pages/common/footer.jsp" %>
 </body>
 </html>

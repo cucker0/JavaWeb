@@ -26,12 +26,17 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         User user = userService.login(new User(null, username, password, ""));
         System.out.println(user);
+        // save username to request object
+        request.setAttribute("username", username);
         if (user == null) {
             System.out.println("用户名或密码错误，登录失败！");
-            request.getRequestDispatcher("pages/user/login.html").forward(request, response);
+            // 把需要返回给客户端的提示信息，保存到 request与对象中
+            request.setAttribute("tips", "用户名或密码错误，登录失败！");
+            // 转发请求由另一个Servlet来处理
+            request.getRequestDispatcher("pages/user/login.jsp").forward(request, response);
         } else {
             System.out.println("登录成功");
-            request.getRequestDispatcher("pages/user/regist_success.html").forward(request, response);
+            request.getRequestDispatcher("pages/user/regist_success.jsp").forward(request, response);
         }
 
     }

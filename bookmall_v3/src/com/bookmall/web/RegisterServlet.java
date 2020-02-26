@@ -28,6 +28,10 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String code = request.getParameter("code");
+        // save user info to request object
+        request.setAttribute("username", username);
+        request.setAttribute("password", password);
+        request.setAttribute("email", email);
 
         // 验证码暂时不从服务器生成，直接使用一个固定的
         String validCode = "abcde";
@@ -37,22 +41,27 @@ public class RegisterServlet extends HttpServlet {
             if (existUsername) {
                 // 用户名存在
                 System.out.println("用户名已经存在，注册失败");
+                // 向request与对象中保存提示信息
+                request.setAttribute("tips", "用户名已经存在，注册失败");
+
                 // 响应注册页面内容
                 /**
                  * 在请求转发中，
                  * / 表示 http://ip:port/工程名/   与web目录对应
                  */
-                request.getRequestDispatcher("pages/user/regist.html").forward(request, response);
+                request.getRequestDispatcher("pages/user/regist.jsp").forward(request, response);
             } else {
                 // 可注册的用户，开始注册
                 userService.register(new User(0, username, password, email));
                 // 用户注册后，跳转到成功注册页面
-                request.getRequestDispatcher("pages/user/regist_success.html").forward(request, response);
+                request.getRequestDispatcher("pages/user/regist_success.jsp").forward(request, response);
             }
         } else {
             System.out.println("验证码错误，注册失败");
+            request.setAttribute("tips", "验证码错误，注册失败");
+
             // 转发到注册URL，由该页面响应
-            request.getRequestDispatcher("pages/user/regist.html").forward(request, response);
+            request.getRequestDispatcher("pages/user/regist.jsp").forward(request, response);
         }
     }
 
