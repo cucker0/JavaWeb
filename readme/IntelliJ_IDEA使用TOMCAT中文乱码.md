@@ -42,12 +42,13 @@ IntelliJ IDEA 使用 TOMCAT 中文乱码
 ## jsp乱码
 查看代码中是否添加下面代码
 ```text
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 ```
 
 ## request和response乱码
+在Servlet的doGet、doPost方法中设置字符集
 ```text
 request.setCharacterEncoding("utf-8");
-response.setCharacterEncoding("utf-8");
+
 response.setContentType("text/html;charset=utf-8");
 ```
