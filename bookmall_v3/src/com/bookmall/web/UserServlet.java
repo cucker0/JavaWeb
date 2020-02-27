@@ -9,20 +9,54 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 
-public class RegisterServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
     private UserService userService;
 
-    public RegisterServlet() {
+    // 构造器
+    public UserServlet() {
         super();
         userService = new UserServiceImpl();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("RegisterServlet doPost");
-        // 设置request的编码字符集，解决中文乱码
+    // 方法
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 设置request的解码字符集
         request.setCharacterEncoding("UTF-8");
+        // 从request中获取参数
+        String action = request.getParameter("action");
+
+        // 根据action值调用不同的业务逻辑方法
+        if (action.equalsIgnoreCase("login")) {
+            login(request, response);
+        } else if (action.equalsIgnoreCase("register")) {
+            register(request, response);
+        }
+    }
+
+    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 从request中获取参数
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = userService.login(new User(null, username, password, ""));
+        System.out.println(user);
+        // save username to request object
+        request.setAttribute("username", username);
+        if (user == null) {
+            System.out.println("用户名或密码错误，登录失败！");
+            // 把需要返回给客户端的提示信息，保存到 request与对象中
+            request.setAttribute("tips", "用户名或密码错误，登录失败！");
+            // 转发请求由另一个Servlet来处理
+            request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
+        } else {
+            System.out.println("登录成功");
+            request.getRequestDispatcher("/pages/user/regist_success.jsp").forward(request, response);
+        }
+    }
+
+    protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 获取请求参数
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -63,10 +97,5 @@ public class RegisterServlet extends HttpServlet {
             // 转发到注册URL，由该页面响应
             request.getRequestDispatcher("pages/user/register.jsp").forward(request, response);
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("RegisterServlet doGet");
     }
 }

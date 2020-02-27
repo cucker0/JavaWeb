@@ -12,6 +12,12 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.bookmall.web.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+<!--        <servlet-class>com.bookmall.web.UserServlet</servlet-class>-->
+<!--        <servlet-class>com.bookmall.web.UserServlet2</servlet-class>-->
+        <servlet-class>com.bookmall.web.UserServlet3</servlet-class>
+    </servlet>
 
     <!-- URL与Servlet映射 -->
     <servlet-mapping>
@@ -21,5 +27,9 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>
 </web-app>
