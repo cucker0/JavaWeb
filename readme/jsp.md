@@ -18,7 +18,7 @@ jsp在整个JavaEE中的定位。就只是为了输出html数据。
 ```
 
 ## jsp本质
-jsp的本质是Servlet程序
+jsp的本质是Servlet程序，要求文件后缀为.jsp，否则将找不到资源
 
 * [page.jsp源文件](../jspProj/web/page1.jsp)  
 http://localhost:8080/jsp/page1.jsp
