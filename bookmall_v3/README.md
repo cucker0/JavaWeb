@@ -62,3 +62,23 @@ https://github.com/cucker0/JavaWeb/tree/master/bookmall
     ```
 
 * 数据的封装和抽取BeanUtils的使用
+    ```text
+    当一个Bean对象有很多属性需要从http request中获取时，就需要写很多request.getParameter("key")
+    
+    借助于BeanUtils工具的BeanUtils.populate(T bean, Map map)方法，来给Bean对象注意参数值
+    刚好request.getParameterMap() 获取的是由所有参数与值组成的Map对象
+
+    注意：注意客户端发送的request参数名要与bean实例的的setXxx 方法名对应上
+    ```
+    
+## 异常问题
+* java.lang.NoClassDefFoundError: org/apache/commons/collections/FastHashMap
+```text
+执行BeanUtils.populate(bean, paramsMap)时，当paramsMap的key比bean多出一些没有属性时，会报该异常，
+当paramsMap的key都在bean属性范围内的，正常
+
+解决方法：
+下载 commons-collections 3.2， 添加该lib到Artifacts
+
+commons-collections 4.4 不能解决此问题，原因是其路径不一样，包路径为org.apache.commons.collections4
+```

@@ -18,7 +18,10 @@
         <!-- 优化1 -->
 <!--        <servlet-class>com.bookmall.web.UserServlet2</servlet-class>-->
         <!-- 优化2 -->
-        <servlet-class>com.bookmall.web.UserServlet3</servlet-class>
+<!--        <servlet-class>com.bookmall.web.UserServlet3</servlet-class>-->
+        <!-- 优化3 -->
+        <servlet-class>com.bookmall.web.UserServlet4</servlet-class>
+
     </servlet>
 
     <!-- URL与Servlet映射 -->
