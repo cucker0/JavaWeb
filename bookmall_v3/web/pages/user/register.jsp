@@ -94,7 +94,13 @@
             <div class="login_box">
                 <div class="tit">
                     <h1>注册尚硅谷会员</h1>
-                    <span class="errorMsg"><%= request.getAttribute("tips") == null ? "" : request.getAttribute("tips") %></span>
+                    <span class="errorMsg">
+                        <%-- jsp代码脚本处理回显信息 --%>
+<%--                        <%= request.getAttribute("tips") == null ? "" : request.getAttribute("tips") %>--%>
+
+                        <%-- EL表达式方式处理 回显信息 --%>
+                        ${requestScope.tips}
+                    </span>
                 </div>
                 <div class="form">
 <%--                    <form action="register" method="post">--%>

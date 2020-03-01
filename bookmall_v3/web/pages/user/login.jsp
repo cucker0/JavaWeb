@@ -63,7 +63,10 @@
                 <div class="msg_cont">
                     <b></b>
                     <span class="errorMsg">
-                        <%= request.getAttribute("tips") == null ? "请输入用户名和密码" : request.getAttribute("tips") %>
+                        <%-- jsp代码脚本处理回显信息 --%>
+<%--                        <%= request.getAttribute("tips") == null ? "请输入用户名和密码" : request.getAttribute("tips") %>--%>
+                        <%-- EL表达式语言方式，处理回显信息 --%>
+                        ${requestScope.tips == null ? "请输入用户名和密码" : requestScope.tips}
                     </span>
                 </div>
                 <div class="form">
