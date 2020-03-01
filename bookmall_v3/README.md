@@ -73,12 +73,39 @@ https://github.com/cucker0/JavaWeb/tree/master/bookmall
     
 ## 异常问题
 * java.lang.NoClassDefFoundError: org/apache/commons/collections/FastHashMap
+    ```text
+    执行BeanUtils.populate(bean, paramsMap)时，当paramsMap的key比bean多出一些没有属性时，会报该异常，
+    当paramsMap的key都在bean属性范围内的，正常
+    
+    解决方法：
+    下载 commons-collections 3.2， 添加该lib到Artifacts
+    
+    commons-collections 4.4 不能解决此问题，原因是其路径不一样，包路径为org.apache.commons.collections4
+    ```
+
+## 几次优化
 ```text
-执行BeanUtils.populate(bean, paramsMap)时，当paramsMap的key比bean多出一些没有属性时，会报该异常，
-当paramsMap的key都在bean属性范围内的，正常
-
-解决方法：
-下载 commons-collections 3.2， 添加该lib到Artifacts
-
-commons-collections 4.4 不能解决此问题，原因是其路径不一样，包路径为org.apache.commons.collections4
+        <!-- 优化1 -->
+<!--        <servlet-class>com.bookmall.web.UserServlet2</servlet-class>-->
+        <!-- 优化2 -->
+<!--        <servlet-class>com.bookmall.web.UserServlet3</servlet-class>-->
+        <!-- 优化3 -->
+        <servlet-class>com.bookmall.web.UserServlet4</servlet-class>
 ```
+
+1. 根据客户端的request的action参数值调用不同的业务逻辑方法
+
+    [UserServlet2](./src/com/bookmall/web/UserServlet2.java)  
+    ```text
+    先获取request的action参数值，通过反射方法查找该值对应的业务逻辑方法名，并调用该方法
+    前提条件：request的action参数值 要与 业务逻辑方法名 相同
+    ```
+
+2. 把通用部分：通过反射找到不同业务对应的方法，并执行该方法抽象出来，作为一个Servlet的父类(抽象类)
+    [UserServlet3](./src/com/bookmall/web/UserServlet3.java) 
+3. 使用BeanUtils工具，一次性获得request中的参数并注意到Bean实例
+
+    对BeanUtils进一步封装  
+    [Beanutils](./src/com/bookmall/utils/Beanutils.java)
+
+    [UserServlet4](./src/com/bookmall/web/UserServlet4.java)  
