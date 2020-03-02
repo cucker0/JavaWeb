@@ -21,3 +21,13 @@ ${属性名}
 ### EL表达式运算
 
 
+## JSTL标签库
+```text
+JSTL：JSP Standard Tag Library，即JSP标准标签库。
+
+是一个不断完善的开放源代码的JSP标签库。
+EL表达式主要是为了替换jsp中的表达式脚本，
+而标签库则是为了替换代码脚本。这样使得整个jsp页面变得更佳简洁。
+
+官网：http://archive.apache.org/dist/tomcat/taglibs/
+```
