@@ -1,10 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+<<<<<<< HEAD
     <title>EL表达式获取指定域对象中的数据</title>
 </head>
 <body>
 <h3>EL表达式获取指定域对象中的数据</h3>
+=======
+    <title>EL表达式获取域对象中的数据</title>
+</head>
+<body>
+<h3>EL表达式获取域对象中的数据</h3>
+>>>>>>> 7c16f4079d881ca999e5e7add75186cd2c50e4c1
 
 <%
     application.setAttribute("key", "application value");
