@@ -56,3 +56,19 @@ SQL LIBRARY
 FUNCTIONS LIBRARY
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 ```
+
+### 使用步骤
+1. 导入taglib库
+```text
+<%@ taglib prefix="tagPrefix" uri="http://java.sun.com/jsp/jstl/core" %>
+或
+<%@ taglib prefix="tagPrefix" tagDir="tagDir" %>
+
+属性含义
+======
+    prefix: 标签的前缀，区分多个自定义标签。不可以使用保留前缀和空前缀，遵循XML命名空间的命名约定。
+        相当于库的唯一标识，因为JSTL由多个不同的库组成，使用该属性指定要导入哪个库
+    uri: 定位标签库描述符的位置。唯一标识和前缀相关的标签库描述符，可以使用绝对或相对URL。
+    tagDir: 指示前缀将被用于标识在WEV-INF/tags目录下的标签文件。可解压jar文件，查看.tld文件
+
+```
