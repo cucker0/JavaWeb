@@ -29,5 +29,30 @@ JSTL：JSP Standard Tag Library，即JSP标准标签库。
 EL表达式主要是为了替换jsp中的表达式脚本，
 而标签库则是为了替换代码脚本。这样使得整个jsp页面变得更佳简洁。
 
+依赖 taglibs lib库
 官网：http://archive.apache.org/dist/tomcat/taglibs/
+
+jar包：
+taglibs-standard-impl-1.2.5.jar
+taglibs-standard-spec-1.2.5.jar
+taglibs-standard-compat-1.2.5.jar
+```
+
+```text
+https://downloads.apache.org/tomcat/taglibs/taglibs-standard-1.2.5/README_bin.txt
+
+CORE LIBRARY
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+XML LIBRARY
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+
+FMT LIBRARY 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+SQL LIBRARY
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
+FUNCTIONS LIBRARY
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 ```
