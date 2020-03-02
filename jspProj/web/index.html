@@ -4,14 +4,34 @@
     <meta charset="UTF-8">
     <title>JSP</title>
     <base href="http://127.0.0.1:8080/jsp/">
+    <style type="text/css">
+        div {
+            margin: 0 0 0 20px;
+        }
+    </style>
 </head>
 <body>
-    <h3>JSP</h3>
-    <div>
-        <a href="htmlServlet">普通的Servlet</a>
-    </div>
-    <div>
-        <a href="queryStudent">queryStudent</a>
-    </div>
+<h3>JSP</h3>
+<div>
+    <a href="htmlServlet">普通的Servlet</a>
+</div>
+<div>
+    <a href="queryStudent">queryStudent</a>
+</div>
+
+<h4>EL表达式</h4>
+<div><a href="el/el1.jsp">EL1 初始EL表达式</a></div>
+<div><a href="el/el2.jsp">EL2 EL表达式获取域属性顺序</a></div>
+<div><a href="el/el3.jsp">EL3 EL表达式获取与对象属性值</a></div>
+<div><a href="el/el4.jsp">EL4 EL表达式--关系运算</a></div>
+<div><a href="el/el5.jsp">EL5 EL表达式--逻辑运算</a></div>
+<div><a href="el/el6.jsp">EL6 EL表达式--算术运算</a></div>
+<div><a href="el/el7.jsp">EL7 EL empty 运算符</a></div>
+<div><a href="el/el8.jsp">EL8 EL三目运算符</a></div>
+<div><a href="el/el9.jsp">EL9 "."点 和 []运算符</a></div>
+<div><a href="el/el10.jsp">EL10 获取指定域对象的属性值</a></div>
+<div><a href="el/el11.jsp">EL11 通过pageContext访问Jsp中内置对象</a></div>
+<div><a href="el/el12.jsp?username=admin&hobby=book&hobby=TV">EL12 EL表达式其他隐含对象</a></div>
+
 </body>
 </html>
