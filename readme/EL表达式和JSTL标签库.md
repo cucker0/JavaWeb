@@ -11,14 +11,23 @@ EL表达式出现的目的是为了使JSP写起来更加简单，让jsp的代码
 主要用于替换 jsp 中表达式脚本
 EL表达式的最主要功能就是从域对象中获取数据，并且输出
 ```
+[初识EL表达式](../jspProj/web/el/el1.jsp)
 
 ### EL表达式获取域对象属性值
 语法
 ```text
 ${属性名}
-```
 
-### EL表达式运算
+查找优先顺序(从作用范围小的到大的)：pageContext -> request -> session -> application
+与书写顺序无关，
+找到则返回相应数据、找不到则返回空串。（注意，不是null，而是空字符串）
+```
+[EL表达式获取域属性顺序](../jspProj/web/el/el2.jsp)
+
+### 获取javaBean普通属性、数组属性、List集合属性，以map属性中的数据
+
+
+### EL表达式_运算
 
 
 ## JSTL标签库

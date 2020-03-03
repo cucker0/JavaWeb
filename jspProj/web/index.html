@@ -8,6 +8,9 @@
         div {
             margin: 0 0 0 20px;
         }
+        a {
+            text-decoration-line: none;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +23,7 @@
 </div>
 
 <h4>EL表达式</h4>
-<div><a href="el/el1.jsp">EL1 初始EL表达式</a></div>
+<div><a href="el/el1.jsp">EL1 初识EL表达式</a></div>
 <div><a href="el/el2.jsp">EL2 EL表达式获取域属性顺序</a></div>
 <div><a href="el/el3.jsp">EL3 EL表达式获取与对象属性值</a></div>
 <div><a href="el/el4.jsp">EL4 EL表达式--关系运算</a></div>
@@ -34,13 +37,26 @@
 <div><a href="el/el12.jsp?username=admin&hobby=book&hobby=TV">EL12 EL表达式其他隐含对象</a></div>
 
 <h4>JSTL</h4>
-<div><a href="jstl/url.jsp">c:url</a></div>
-<div><a href="jstl/set.jsp">c:set</a></div>
-<div><a href="jstl/if.jsp">c:if</a></div>
-<div><a href="jstl/choose.jsp">c:choose</a></div>
-<div><a href="jstl/foreach.jsp">c:forEach</a></div>
-<div><a href="jstl/out.jsp">c:out</a></div>
-<div><a href="jstl/remove.jsp">c:remove</a></div>
-<div><a href="jstl/redirect.jsp">c:redirect</a></div>
+<div><a href="jstl/c/url.jsp">c:url</a></div>
+<div><a href="jstl/c/set.jsp">c:set</a></div>
+<div><a href="jstl/c/if.jsp">c:if</a></div>
+<div><a href="jstl/c/choose.jsp">c:choose</a></div>
+<div><a href="jstl/c/foreach.jsp">c:forEach</a></div>
+<div><a href="jstl/c/out.jsp">c:out</a></div>
+<div><a href="jstl/c/remove.jsp">c:remove</a></div>
+<div><a href="jstl/c/redirect.jsp">c:redirect</a></div>
+<br>
+<div><a href="jstl/fn/contains_containsIgnoreCase.jsp">fn:contains()、fn:containsIgnoreCase()</a></div>
+<div><a href="jstl/fn/startsWith_endsWith.jsp">fn:startsWith("String", "prefix")、 fn:endsWith("string", "suffix")</a></div>
+<div><a href="jstl/fn/indexOf.jsp">fn:indexOf("String", "subString")</a></div>
+<div><a href="jstl/fn/replace.jsp">fn:replace(str, beforeSubString, afterSubString)</a></div>
+<div><a href="jstl/fn/substring.jsp">fn:substring(str, beginIndex, endIndex)</a></div>
+<div><a href="jstl/fn/substringBefore_substringAfter.jsp">fn:substringBefore() \ fn:substringAfter()</a></div>
+<div><a href="jstl/fn/split.jsp">fn:split(string, delimiters) 分割字符串，并返回分割后的str[]数组</a></div>
+<div><a href="jstl/fn/join.jsp">fn:join(array, sparator) 用指字符串将数据中的元素连接起来</a></div>
+<div><a href="jstl/fn/toLowerCase_toUpperCase.jsp">fn:toLowerCase(str)字母转小写并返回 \ fn:toUpperCase(str)字母转大写并返回</a></div>
+<div><a href="jstl/fn/trim.jsp">fn:trim(str) 去掉字符串前后的空格去掉字符串前后的空格</a></div>
+<div><a href="jstl/fn/length.jsp">fn:length(obj) 计算对象的长度</a></div>
+
 </body>
 </html>

@@ -1,6 +1,8 @@
 <%@ page import="com.java.jsp.Student" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -15,6 +17,10 @@
 
         th, td {
             border: 1px solid skyblue;
+        }
+
+        div {
+            margin: 0 0 0 20px;
         }
     </style>
 </head>
@@ -34,11 +40,12 @@ items 你需要遍历的数据源
     var是当前遍历到的对象名
     varStatus是当前遍历的状态对象，是LoopTagStatus对象实例
 --%>
-<h4>1-10的整数</h4>
-<c:forEach var="i" begin="1" end="10">
-    ${i}
-</c:forEach>
-
+<h4>遍历1-10的整数</h4>
+<div>
+    <c:forEach var="i" begin="1" end="10">
+        ${i}
+    </c:forEach>
+</div>
 
 <%--
 遍历数组
@@ -100,6 +107,23 @@ items 你需要遍历的数据源
     </table>
 </div>
 
+<%--
+遍历map
+--%>
+<h4>遍历map</h4>
+<div>
+    <%
+        Map<String, String> map = new HashMap<>();
+        map.put("k1", "k1_value");
+        map.put("k2", "k2_value");
+        map.put("k3", "k3_value");
 
+        request.setAttribute("m", map);
+    %>
+
+    <c:forEach var="item" items="${requestScope.m}">
+        <p>${item}: ${item.value}</p>
+    </c:forEach>
+</div>
 </body>
 </html>
