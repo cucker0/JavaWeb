@@ -25,10 +25,141 @@ ${属性名}
 [EL表达式获取域属性顺序](../jspProj/web/el/el2.jsp)
 
 ### 获取javaBean普通属性、数组属性、List集合属性，以map属性中的数据
-
+[EL表达式获取对象属性值](../jspProj/web/el/el3.jsp)
 
 ### EL表达式_运算
+语法：
+```text
+${运算表达式}
+```
 
+* 关系运算
+
+    关系运算符| 说明 |示例 |结果  
+    :--- |:--- |:--- |:---
+    == 或 eq |= |${5 == 5} 或 ${5 eq 5}|true 
+    != 或 ne |!= |${ 5 != 5} 或 ${5 ne 5} |false 
+    < 或 lt |< |${3 < 5} 或 ${3 lt 5} |true 
+    <= 或 le |<= |${5 <= 12} 或 ${5 le 12}|true 
+    >= 或 ge |>= |${3 >= 5} 或 ${3 ge 5} |false 
+    
+    [示例](../jspProj/web/el/el4.jsp)
+
+* 逻辑运算
+
+    逻辑运算符| 说明 |示例 |结果  
+    :--- |:--- |:--- |:---
+    && 或 and |短路与 |${12 == 12 && 1 < 4} 或 ${12 == 12 and 1 < 4} |true 
+    &#124;&#124; 或 or |短路或 |${12 != 12 &#124;&#124; 1 < 4} 或 ${12 != 12 or 1 < 4} |false 
+    ! 或 not |非，取反运算 |${!false} 或 ${not false} |true 
+    
+    [示例](../jspProj/web/el/el5.jsp)
+
+
+* 算术运算
+
+    逻辑运算符| 说明 |示例 |结果  
+    :--- |:--- |:--- |:---
+    + |+ |12 + 18 = ${12 + 18} |12 + 18 = 30
+    - |- |18 - 6 = ${18 - 6} |18 - 6 = 12 
+    * |x |10 * 2 = ${10 * 2} |10 * 2 = 20 
+    / 或 div |÷ |100 / 10 = ${100 / 10} |100 / 10 = 10 
+    % 或 mod |取模 |100 % 33 = ${100 % 33} |100 % 33 = 1 
+    
+    [示例](../jspProj/web/el/el6.jsp)
+    
+* empty运算符
+    ```text
+    empty运算是判断一个对象或者集合是否为空，为空返回true。返回boolean值
+    
+    
+    对象为null时，返回true
+    
+    如果是空的字符串，返回true
+    
+    如果是空的Object数组(Object数组.length == 0)，返回true
+    
+    空的集合，返回true
+    
+    空的map，返回true
+    ```
+    
+    [示例](../jspProj/web/el/el7.jsp)
+     
+* 三元运算  
+    语法：
+    ```text
+    ${表达式1 ? 表达式2 : 表达式3}
+    ```
+    如 ${10 == 10 ? "10等于10" : "10不等于10"}
+    
+    [示例](../jspProj/web/el/el8.jsp)
+    
+* "."点和[]中括号运算符
+    ```text
+    "." 运算符，可以获取JavaBean对象的属性值，可以可以取map对象的key
+    
+    [] 运算符，可以获取顺序集合中指定索引的元素，也可以获取特殊key的值，
+        如比如key中含有 ".", "+", "_", "*", "/" 等的运算字符
+    ```
+    [示例](../jspProj/web/el/el9.jsp)
+
+### EL表达式中11个隐含对象
+以下这些对象可以直接使用
+
+对象 |类型 |说明 
+:--- |:--- |:--- 
+pageContext |javax.servlet.jsp.PageContext |JSP页面中的pageContext对象 
+pageScope |java.util.Map<String,Object> |page域对象的属性名和属性 
+requestScope |java.util.Map<String,Object> |request域对象的属性名和属性值 
+sessionScope |java.util.Map<String,Object> |session范围属性名和属性值 
+applicationScope |java.util.Map<String,Object> |web应用范围属性名和属性值 
+param |java.util.Map<String,String> |对应一个请求参数 
+paramValues |java.util.Map<String,String[]> |对应一组请求参数 
+header |java.util.Map<String,String> |请求头 
+headerValues |java.util.Map<String,String[]> |请求头返回字符数组 
+cookie |java.util.Map<String, Cookie> |获取某个cookie对象 
+initParam |java.util.Map<String, String> |获取web.xml中<context-param>初始化参数 
+
+* EL表达式获取指定域对象中的数据
+    ```text
+    当多个域对象设置了同名属性名的值时，获取顺序
+    pageScope -> requestScope -> sessionScope -> applicationScope
+    ```
+    [示例](../jspProj/web/el/el10.jsp)
+
+* 通过pageContext访问Jsp中内置对象
+    ```text
+    如：
+        request对象，
+        session对象，
+        Servletconfig对象，
+        ServletContext对象，
+    
+    
+    常用获取下列属性值
+    ==============
+    
+    协议：${pageContext.request.scheme}
+    
+    服务器IP：${pageContext.request.serverName}
+    
+    服务器port：${pageContext.request.serverPort}
+    
+    <%-- 工程path是以 /开头--%>
+    工程path：${pageContext.request.contextPath}
+    
+    客户请求的方法：${pageContext.request.method}
+    
+    客户端ip address：${pageContext.request.remoteHost}
+    
+    session id：${pageContext.session.id}
+    ```
+    [示例](../jspProj/web/el/el11.jsp)
+    
+    [param、paramValues、header、headerValues、cookie、initParam 示例](../jspProj/web/el/el11.jsp)
+
+   
 
 ## JSTL标签库
 ```text
