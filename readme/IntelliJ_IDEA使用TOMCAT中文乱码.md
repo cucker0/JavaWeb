@@ -52,3 +52,15 @@ request.setCharacterEncoding("utf-8");
 
 response.setContentType("text/html;charset=utf-8");
 ```
+* 设置全局的request字符集
+```text
+直接在tomcat的安装包根目录/conf/server.xml中设置
+
+<Connector port="8080" 
+    protocol="HTTP/1.1"
+    connectionTimeout="20000" 
+    redirectPort="8443" URIEncoding="UTF-8" 
+    />
+
+
+```

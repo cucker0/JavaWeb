@@ -330,10 +330,78 @@ EL表达式主要是为了替换jsp中的表达式脚本，
     [choose](../jspProj/web/jstl/c/choose.jsp)
     
 * \<c:forEach>标签
-```text
-迭代一个集合中的对象，可以是数组，也可以是list，也可以是map对象
-```
+    ```text
+    迭代一个集合中的对象，可以是数组，也可以是list，也可以是map对象
+    ```
+    **属性**
+    
+    属性 |说明 |是否写 |默认值 
+    :--- |:--- |:--- |:--- 
+    var |定义接收被遍历的对象集合元素的变量，是一个value |否 |无 
+    items |要被遍历的对象(集合)，可以是el表达式 |否 |无 
+    begin |开始的索引 |否 |0 
+    end |最后一个索引 |否 |Last 
+    step |每次迭代的步长 |否 |1 
+    varStatus |定义保存循环状态的变量名 |否 |无 
+
+    varStatus状态值：
+    * begin 获取begin属性里的值 
+    * end 获取end属性里的值
+    * count 获取当前已遍历的个数
+    * index 获取当前index的值
+    * first 判断当前遍历的元素是否为第一个元素
+    * last 判断当前遍历的元素是否为最后一个元素
+    * current 获取当前遍历的元素对象，同var定义的变量
+    
+    [\<c:foreach>示例](../jspProj/web/jstl/c/foreach.jsp)
 
 * \<c:url>标签
-
+    ```text
+    主要是用来生成一个url地址，添加到一个域属性中。还可以在生成地址的同时添加请求参数。
+    如果请求的参数中带有中文，还会自动的做编码的操作
+    ```
+    **属性**
+    
+    属性 |说明 |是否写 |默认值 
+    :--- |:--- |:--- |:--- 
+    value |资源路径 |是 |无
+    context |工程路径，上下文路径 |否 |当前易用所在工程路径
+    var|保存URL的变量 |否 |直接输出
+    scope|var属性的域作用范围，page,request,session,application |否 |page
+    
+    **url子标签\<c:param>，设置参数** 
+    ```jsp
+    <c:param name="key" value="值"></c:param>
+    <%-- 一行设置一个参数，可以添加多行 --%> 
+    ```
+    
+    [\<c:url>示例](../jspProj/web/jstl/c/url.jsp)
+    
+    **特别注意：相对路径不能修改context工程路径**  
+    * 生成URL直接输出到页面，只能有context、value属性
+        ><c:url value="" context=""/>
+    * 使用相对路径生成URL，相对于当前工程path
+        ```jsp
+        <c:url var="url3" value="/a.jsp" scope="page">
+            <c:param name="id" value="10101"></c:param>
+            <c:param name="data" value="QQ"></c:param>
+        </c:url>
+        ```
+    * 使用绝对路径生成URL
+        ```jsp
+        <c:url var="li" context="/list" value="/list.jsp" scope="request">
+            <c:param name="type" value="all"></c:param>
+            <c:param name="isCurrent" value="true"></c:param>
+        </c:url>
+        ```
+    
 * \<c:redirect>标签
+    ```text
+    重写URL来将浏览器重定向至一个新的URL，它提供内容相关的URL，支持<c:param>标签
+    ```
+    **属性**
+        
+    属性 |说明 |是否写 |默认值 
+    :--- |:--- |:--- |:--- 
+    url |目标URL |是 |无
+    context |工程名path |否 |当前应用程序(当前工程path)

@@ -85,6 +85,7 @@ items 你需要遍历的数据源
             <th>当前索引</th>
             <th>是否为第一个</th>
             <th>是否为最后一个</th>
+            <th>current</th>
         </tr>
         </thead>
         <tbody>
@@ -101,6 +102,7 @@ items 你需要遍历的数据源
                 <td>${status.index}</td>
                 <td>${status.first}</td>
                 <td>${status.last}</td>
+                <td>${status.current}</td>
             </tr>
         </c:forEach>
         </tbody>
