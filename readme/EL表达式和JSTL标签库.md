@@ -213,16 +213,127 @@ EL表达式主要是为了替换jsp中的表达式脚本，
     
     CORE LIBRARY
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-    XML LIBRARY
-    <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+ 
+    FUNCTIONS LIBRARY
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
     FMT LIBRARY 
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
+    XML LIBRARY
+    <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+    
     SQL LIBRARY
     <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-    
-    FUNCTIONS LIBRARY
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     ```
+    
+#### core核心库
+* \<c:out>标签
+    ```text
+    直接输出一个表达式的结果到html页面，
+    与<%= 变量名 %> 作用相同
+    ```
+    
+    **属性**
+    
+    属性 |说明 |是否写 |默认值 
+    :--- |:--- |:--- |:--- 
+    value |输出的内容，可以是EL表达式 |是 |无 
+    default |当value为null时显示的默认值 |否 |空，相当于"" 
+    escapeXml |是否对特殊字符进行转义，相当于对html代码进行解析 |否 |true 
+    
+    [\<c:out>](../jspProj/web/jstl/c/out.jsp)
+
+* \<c:set>标签
+    ```text
+    用于 添加 或 修改 域中的属性
+    ```
+    **属性**
+    
+    属性 |说明 |是否写 |默认值 
+    :--- |:--- |:--- |:--- 
+    var |存储信息的变量 |否 |无 
+    value |要存储或修改后的值 |否 |主体的内容 
+    target |要修改的属性所属的对象，用于集合对象，即域对象的属性 |否 |无 
+    property |集合对象中的key |否 |无 
+    scope |var属性的作用域 (page, request, session, application) |无 |page 
+    
+    一般：
+    * 操作域对象属性：target、property、value结合  
+    * 操作一个域对象属性集合对象里的key-value：scope、var、value结合
+
+    [\<c:set>](../jspProj/web/jstl/c/set.jsp)
+* \<c:remove>标签
+    ```text
+    从域对象中移除一个属性
+    ```
+    **属性**
+    
+    属性 |说明 |是否写 |默认值 
+    :--- |:--- |:--- |:--- 
+    var |要移除的变量名 |是 |无 
+    scope |作用域 |否 |所有作用域 
+    
+    [\<c:remove>](../jspProj/web/jstl/c/remove.jsp)
+
+* \<c:if>标签
+    ```text
+    判断表达式的值，如果表达式的值为 true 则显示其标签内(HTML代码，会解析显示)
+    ```
+    **属性**
+    
+    属性 |说明 |是否写 |默认值 
+    :--- |:--- |:--- |:--- 
+    test |条件表达式 |是 |无
+    var |用于存储test测试表达式的结果 |否 |无  
+    scope |var属性的作用域 |否 |page  
+    
+    [\<c:if>](../jspProj/web/jstl/c/if.jsp)
+    
+* \<c:choose>、\<c:when>...、\<c:otherwise>标签
+    ```text
+    与Java switch语句的功能一样，值分支判断
+  
+    switch <--> <c:choose>
+    case <--> <c:when>
+    default <--> <c:otherwise>
+    
+    属性
+    ===
+    
+        <c:choose> 标签没有属性。
+        <c:when> 标签只有一个属性，test
+        <c:otherwise> 标签没有属性。
+    ```
+    语法
+    ```jsp
+    <c:choose>
+        <c:when test="${条件表达式1}">
+            <div>显示情况1</div>
+        </c:when>
+        <c:when test="${条件表达式2}">
+            <div>显示情况2</div>
+        </c:when>
+        ... ...
+        <c:otherwise>
+            <div>显示其他情况</div>
+        </c:otherwise>
+    </c:choose>
+    ```
+    
+    \<c:when>标签的属性
+
+    属性 |说明 |是否写 |默认值 
+    :--- |:--- |:--- |:--- 
+    test |条件表达式 |是 |无 
+    
+    [choose](../jspProj/web/jstl/c/choose.jsp)
+    
+* \<c:forEach>标签
+```text
+迭代一个集合中的对象，可以是数组，也可以是list，也可以是map对象
+```
+
+* \<c:url>标签
+
+* \<c:redirect>标签

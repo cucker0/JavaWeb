@@ -25,8 +25,9 @@
     <br>
     escapeXml="true"时   data: <c:out value="${map.data}" default="默认值" escapeXml="true"></c:out> <br>
     escapeXml="false时   data": <c:out value="${map.data}" default="默认值" escapeXml="false"></c:out> <br>
-    变量值为null时显示默认值：<c:out value="${map.op}" default="默认值"></c:out>
-
+    变量值为null时显示默认值：<c:out value="${map.op}" default="默认值"></c:out> <br>
+    null: <c:out value="${null}"></c:out>
+    <br>
 </div>
 
 </body>
