@@ -227,7 +227,13 @@ EL表达式主要是为了替换jsp中的表达式脚本，
     <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
     ```
     
-#### core核心库
+### core核心库
+```text
+需要引入核心库
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+```
+
 * \<c:out>标签
     ```text
     直接输出一个表达式的结果到html页面，
@@ -343,7 +349,12 @@ EL表达式主要是为了替换jsp中的表达式脚本，
     end |最后一个索引 |否 |Last 
     step |每次迭代的步长 |否 |1 
     varStatus |定义保存循环状态的变量名 |否 |无 
-
+    
+    ```text
+    获取对象的长度
+    ${fn:length(obj)}
+    ```
+    
     varStatus状态值：
     * begin 获取begin属性里的值 
     * end 获取end属性里的值
@@ -405,3 +416,195 @@ EL表达式主要是为了替换jsp中的表达式脚本，
     :--- |:--- |:--- |:--- 
     url |目标URL |是 |无
     context |工程名path |否 |当前应用程序(当前工程path)
+    
+### fn函数库
+```text
+基本都是对字符串的操作，函数功能
+需要引入函数库
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+```
+
+* fn:contains函数 和 fn:containsIgnoreCase函数
+    ```text
+    用于判断字符串中是否包含指定字符串，
+    containsIgnoreCase 忽略大小写
+    ```
+    语法
+    ```text
+    fn:contains(string, subString)
+    
+    string: 源字符串
+    subString: 要查找的字符串
+    return: Boolean值
+        true: string中包含subString字符串
+        false: 与true相反
+    ```
+    [contains_containsIgnoreCase 示例](../jspProj/web/jstl/fn/contains_containsIgnoreCase.jsp)
+
+* fn:startsWith函数 和 fn:endsWith函数
+    ```text
+    fn:startsWith: 判断一个字符串是否以指定字符串开头
+    fn:endsWith函数: 判断一个字符串是否以指定字符串结尾
+    ```
+    语法
+    ```text
+    fn:startsWith(string, prefix)
+    fn:endsWith(string, suffix)
+    
+    string: 源字符串
+    prefix: 要查找的前缀
+    suffix: 要查找的后缀字符串
+    return: Boolean
+        true: 是匹配
+        false: 不匹配
+    ```
+    
+    [startsWith_endsWith 示例](../jspProj/web/jstl/fn/startsWith_endsWith.jsp)
+    
+* fn:indexOf函数
+    ```text
+    在一个字符串中查找指定字符串，并返回第一个符合的字符串的第一个字符的索引
+    ```
+    语法
+    ```text
+    fn:indexOf(string, subString)
+    
+    string: 源字符串
+    subString: 要查找的字符串
+    return: int
+        若在string中找到subString则返回第一个符合的索引，
+        若没有符合的则返回-1
+    ```
+    [indexOf 示例](../jspProj/web/jstl/fn/indexOf.jsp)
+    
+    
+* fn:replace函数
+    ```text
+    将一个字符串替换为另外一个字符串，并返回替换后的字符串
+    ```
+    语法
+    ```text
+    fn:replace(str, beforeSubString, afterSubString)
+    
+    str: 源字符串
+    beforeSubString: 被替换的字符串
+    afterSubString: 要替换的新字符串,即afterSubString替换beforeSubString
+    return: String
+        替换后的字符串
+    ```
+    [replace 示例](../jspProj/web/jstl/fn/replace.jsp)
+    
+* fn:substring函数
+    ```text
+    截取字符串
+    ```
+    语法
+    ```text
+    fn:substring(str, beginIndex, endIndex)
+    
+    str: 源字符串
+    beginIndex: int
+        开始位置索引(包含该位置)
+    endIndex: int
+        结束位置索引(不包含自身)
+    return: String
+        返回截取的字符串
+    ```
+    [substring 示例](../jspProj/web/jstl/fn/substring.jsp)
+    
+    
+* fn:substringBefore函数 和 fn:substringAfter函数
+    ```text
+    fn:substringBefore  返回一个字符串指定子串之前的字符串
+    fn:substringAfter 返回一个字符串指定子串之后的字符串
+    ```
+    语法
+    ```text
+    fn:substringBefore(string,subString)
+    fn:substringAfter(string,subString)
+    
+    string: 源字符串
+    subString: 子字符串
+    return: String
+        返回一个字符串指定子串之前\之后的字符串
+    ```
+
+    [substringBefore_substringAfter 示例](../jspProj/web/jstl/fn/substringBefore_substringAfter.jsp)
+
+* fn:split函数
+    ```text
+    将一个字符串拆分成字符串数组，并放回该字符串数组
+    ```
+    语法
+    ```text
+    fn:split(string, delimiters)
+    
+    string: 源字符串
+    delimiters: 分隔符(字符串)
+    return: String[]
+    ```
+    [split 示例](../jspProj/web/jstl/fn/split.jsp)
+
+* fn:join函数
+    ```text
+    用指字符串将数据中的元素连接起来
+    ```
+    语法
+    ```text
+    fn:join(array, sparator)
+    
+    array: 字符串数组
+    sparator: 连接字符
+    return: String
+    ```
+
+    [join 示例](../jspProj/web/jstl/fn/join.jsp)
+
+* fn:toLowerCase函数 和 fn:toUpperCase函数
+    ```text
+    fn:toLowerCase  将字符串都转换成大写字符，并返回
+    fn:toUpperCase函数  将字符串都转换成小写字符，并返回
+    ```
+    语法
+    ```text
+    fn:toLowerCase(str)
+    fn:toUpperCase(str)
+    
+    str: 源字符串
+    return: String
+        转换好后的字符串
+    ```
+
+    [toLowerCase_toUpperCase 示例](../jspProj/web/jstl/fn/toLowerCase_toUpperCase.jsp)
+
+* fn:trim函数
+    ```text
+    去掉字符串的前后空格
+    ```
+    语法
+    ```text
+    fn:trim(str)
+    
+    str: 源字符串
+    return: String
+        去掉了字符串的前后空格后的字符串
+    ```
+    
+    [trim 示例](../jspProj/web/jstl/fn/trim.jsp)
+
+* fn:length函数
+    ```text
+    获取对象的长度
+    ```
+    语法
+    ```text
+    fn:length(obj)
+    
+    obj: 集合、字符串对象
+    return: int
+        对象的长度
+    ```
+    [length 示例](../jspProj/web/jstl/fn/length.jsp)
+    
+### fmt格式化库
