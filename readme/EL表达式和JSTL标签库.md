@@ -607,4 +607,4 @@ EL表达式主要是为了替换jsp中的表达式脚本，
     ```
     [length 示例](../jspProj/web/jstl/fn/length.jsp)
     
-### fmt格式化库
+### [fmt格式化库](jstl_fmt格式化.md)

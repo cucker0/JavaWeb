@@ -2,10 +2,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>fmt:formatNumber</title>
+    <title>formatNumber标签</title>
 </head>
 <body>
-<h3>fmt:formatNumber函数</h3>
+<h3>fmt:formatNumber标签</h3>
 
 <div>
     <fmt:setLocale value="fr_fr"/>
@@ -26,17 +26,37 @@
 <div>
     <fmt:setLocale value="zh_cn"/>
     数字：<fmt:formatNumber value="0.3" type="number"/><br />
+<%--    数字：0.3--%>
+
     货币：<fmt:formatNumber value="0.3" type="currency"/><br />
+<%--    货币：￥0.30--%>
+
     百分数：<fmt:formatNumber value="0.3" type="percent"/><br />
+<%--  百分数：30%--%>
 </div>
 
 <br>
 <div>
     <fmt:formatNumber value="12" type="currency" pattern="$.00"/>  <br/>
+<%--    $12.00--%>
+
     <fmt:formatNumber value="12" type="currency" pattern="$.#"/> <br/>
+<%--    $12.0--%>
+
     <fmt:formatNumber value="12" type="currency" pattern="￥.00"/> <br/>
+<%--    ￥12.00--%>
+
     <fmt:formatNumber value="12" type="currency" pattern="#0.00元"/> <br/>
-    <fmt:formatNumber value="12" type="currency"/>
+<%--    12.00元--%>
+
+    <fmt:formatNumber value="12" type="currency"/> <br>
+<%--    ￥12.00--%>
+
+    <fmt:formatNumber value="12.31" pattern=".0000"></fmt:formatNumber> <br>
+<%--  12.3100--%>
+
+    <fmt:formatNumber value="1234567" pattern="###.##E0"/>
+<%--    1.2346E6--%>
 </div>
 </body>
 </html>
