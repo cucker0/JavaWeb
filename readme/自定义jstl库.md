@@ -55,9 +55,15 @@ public class FormatPhonenumber extends TagSupport{
 
 
 ### 编写标签库描述文件
+```text
 Tag Library Descriptor  
-在项目的web/WEB-INF/目录下新建 一个标签库描述文件
+在项目的web/WEB-INF/目录下新建 一个标签库描述文件(.tld)
 可以添加多个tag  
+
+WEB-INF/目录下的文件会被tomcat启动时加载，
+tld文件里配置了，库的short-name、uri、标签与类对应关系及属性要求、函数与方法对应关系、函数名等
+修改tld文件需要重启tomcat才能生效
+```
 如 [myformat.tld](../jspProj/web/WEB-INF/myformat.tld)
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
