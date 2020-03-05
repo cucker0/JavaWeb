@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>myfn</short-name>
+    <uri>http://www.java.com.functions</uri>
+
+    <!-- Invoke 'Generate' action to add tags or functions -->
+    <function>
+        <!-- 方法名 -->
+        <name>getYear</name>
+        <function-class>com.java.jstl.MyFunctions</function-class>
+        <function-signature>
+            java.lang.String getYear()
+        </function-signature>
+    </function>
+
+    <function>
+        <!-- 方法名 -->
+        <name>isAdult</name>
+        <function-class>com.java.jstl.MyFunctions</function-class>
+        <function-signature>
+            java.lang.Boolean isAdult(int)
+        </function-signature>
+    </function>
+
+</taglib>
