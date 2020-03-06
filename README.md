@@ -163,8 +163,8 @@ Java Web
     * [使用步骤](readme/EL表达式和JSTL标签库.md#使用步骤)
     * [core核心库](readme/EL表达式和JSTL标签库.md#core核心库)
     * [fn函数库](readme/EL表达式和JSTL标签库.md#fn函数库)
-* [fmt格式化库](readme/jstl_fmt格式化.md)
-* [自定义jstl库(标签、函数)](readme/自定义jstl库.md)
+    * [fmt格式化库](readme/jstl_fmt格式化.md)
+    * [自定义jstl库(标签、函数)](readme/自定义jstl库.md)
 
 ### 项目实战
 * [bookmall v2](bookmall/README.md)
