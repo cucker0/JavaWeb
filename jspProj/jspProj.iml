@@ -24,5 +24,6 @@
     <orderEntry type="library" name="jasper" level="application" />
     <orderEntry type="library" name="el-api" level="application" />
     <orderEntry type="library" name="tomcat-api" level="application" />
+    <orderEntry type="library" name="jstl" level="application" />
   </component>
 </module>

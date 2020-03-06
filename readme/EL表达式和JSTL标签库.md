@@ -193,6 +193,8 @@ EL表达式主要是为了替换jsp中的表达式脚本，
     taglibs-standard-spec-1.2.5.jar
     taglibs-standard-compat-1.2.5.jar
     ```
+    Modules中导入taglib库：不是必须的，未添加tomcat上也能正常运行，但增加后，jsp页面编写代码时能关联上，并可智能提示、自动补齐  
+    Artifacts实例的WEB-INF/lib目录下导入tablig库，必须的  
     ![](../images/jsp/jstl_01.png)  
 
 2. 在使用的jsp页面中使用taglib指令导入需要的标签库
