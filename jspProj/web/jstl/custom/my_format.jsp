@@ -2,10 +2,10 @@
 <%@ taglib prefix="myfmt" uri="http://www.java.com/myformat" %>
 <html>
 <head>
-    <title>自定义格式化标签(手机号、身份证号、银行卡号)</title>
+    <title>自定义格式化标签库(手机号、身份证号、银行卡号)</title>
 </head>
 <body>
-<h3>自定义格式化标签(手机号、身份证号、银行卡号)</h3>
+<h3>自定义格式化标签库(手机号、身份证号、银行卡号)</h3>
 
 <div>
     手机号: <myfmt:formatPhone value="15826180208"/> <br>

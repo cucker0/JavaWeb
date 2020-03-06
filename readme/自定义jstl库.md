@@ -85,6 +85,7 @@ tld文件里配置了，库的short-name、uri、标签与类对应关系及属�
         <!-- 标签名 -->
         <name>formatPhone</name>
         <tag-class>com.java.jstl.FormatPhonenumber</tag-class> <!-- 与前面写的标签处理器类关联 -->
+        <body-content>JSP</body-content>
         <attribute>
             <name>value</name>
             <required>true</required>

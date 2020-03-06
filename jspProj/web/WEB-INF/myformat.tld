@@ -15,6 +15,7 @@
         <!-- 标签名 -->
         <name>formatPhone</name>
         <tag-class>com.java.jstl.FormatPhonenumber</tag-class>
+        <body-content>JSP</body-content>
         <attribute>
             <name>value</name>
             <required>true</required>
@@ -31,6 +32,7 @@
         <!-- 标签名 -->
         <name>formatIdNumber</name>
         <tag-class>com.java.jstl.FormatIdNumber</tag-class>
+        <body-content>JSP</body-content>
         <attribute>
             <name>value</name>
             <required>true</required>
@@ -47,6 +49,7 @@
         <!-- 标签名 -->
         <name>formatBankcardNumber</name>
         <tag-class>com.java.jstl.FormatBankcardNumber</tag-class>
+        <body-content>JSP</body-content>
         <attribute>
             <name>value</name>
             <required>true</required>
