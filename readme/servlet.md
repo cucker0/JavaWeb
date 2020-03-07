@@ -31,6 +31,9 @@ ServletContext是一个域对象
 空行
 请求体
 ```
+空行的内容就是一个换行符的字符串"\r\n"  
+字符 "\r" 其char int值为13  
+字符 "\n" 其char int值为10  
 
 * 请求行结构
     ```text
@@ -107,6 +110,10 @@ Accept-Language: zh-CN,zh;q=0.9
 
 username=admin&pwd=pwd123456&sex=female&course=java&course=go
 ```
+Content-Length值就是 请求体字符串的字节长度，其他请求的也相同  
+如上的 请求体为：  
+"username=admin&pwd=pwd123456&sex=female&course=java&course=go"  
+其字节长度为61
 
 ### http响应数据格式
 ```text

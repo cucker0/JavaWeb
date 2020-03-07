@@ -45,6 +45,16 @@ public class WebServer {
 //                                    break;
 //                                }
                             }
+
+                            // 获取字节流，查看char int值，
+                            // '\r'  char int为13
+                            // '\n'  char int为10
+//                            int len;
+//                            char[] cb = new char[3];
+//                            while ((len = bufferedReader.read(cb)) != -1) {
+//                                System.out.println((int) cb[0] + ", " + (int) cb[1] + ", " + (int) cb[2] + ", ");
+//                            }
+
                             System.out.print(data);
                             System.out.println("------------------");
 

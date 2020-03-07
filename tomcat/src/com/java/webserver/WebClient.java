@@ -9,13 +9,13 @@ import java.nio.ByteBuffer;
  */
 public class WebClient {
     public static void main(String[] args) {
-//        String host = "www.baidu.com";
-//        String shortUrl = "/";
-//        int port = 80;
+        String host = "www.baidu.com";
+        String shortUrl = "/";
+        int port = 80;
 
-        String host = "127.0.0.1";
-        String shortUrl = "/tomcat/";
-        int port = 8080;
+//        String host = "127.0.0.1";
+//        String shortUrl = "/tomcat/";
+//        int port = 8080;
 
         Socket socket = new Socket();
         InetSocketAddress inetSocketAddress = new InetSocketAddress(host, port);
@@ -38,16 +38,22 @@ public class WebClient {
             int contentLength = -1;
             System.out.println("----------------");
             while ((tem = bufferedReader.readLine()) != null) {
-                len += tem.length();
                 if (tem.startsWith("Content-Length")) {
                     contentLength = Integer.valueOf(tem.substring(16));
-//                    System.out.println(contentLength);
+                    System.out.println(contentLength);
                 }
                 if (contentLength > 0 && len >= contentLength) {
                     break;
                 }
                 System.out.println(tem);
             }
+            // 获取字节流，查看char int值，
+            // '\r'  char int为13
+            // '\n'  char int为10
+//            char[] cb = new char[3];
+//            while ((len = bufferedReader.read(cb)) != -1) {
+//                System.out.println((int) cb[0] + ", " + (int) cb[1] + ", " + (int) cb[2]+ ", ");
+//            }
             System.out.println("----------------");
             System.out.println("len: " + len);
 
