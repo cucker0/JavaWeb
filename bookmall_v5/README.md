@@ -43,7 +43,7 @@ MVC是一种思想，MVC的理念是将软件 代码拆分成组件、单独开�
 ## 图书模块实现步骤
 1. 创建图书模块的数据库
 2. 编写图书的JavaBean--Book类
-3. 创建图书模块的BookDao和实现类BookDaoImpl
+3. 创建图书模块的BookDao接口和实现类BookDaoImpl
 4. 编写BookDao测试用例
 5. 编写图书模块的BookService和实现类BookServiceImpl
 6. 编写BookServlet类，实现如下功能
@@ -57,4 +57,12 @@ MVC是一种思想，MVC的理念是将软件 代码拆分成组件、单独开�
 9. 实现首页图书按价格条件搜索并展示的功能
 
 ### 创建图书数据库表
+在bookmall项目[第一阶段的sql](../bookmall/sql/bookmall.sql)基础上，执行下列sql
+[bookmall_v5 sql脚本](sql/bookmall_v5.sql)
+
+### 编写图书的JavaBean--Book类
+
+
+### 创建图书模块的BookDao接口和实现类BookDaoImpl
+
 
