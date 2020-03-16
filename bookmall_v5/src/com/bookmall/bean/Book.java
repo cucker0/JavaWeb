@@ -1,7 +1,7 @@
 package com.bookmall.bean;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 public class Book {
     private Integer id;
@@ -13,17 +13,17 @@ public class Book {
     private int stock;
     // 图书图片路径
     private String imgPath;
-    // 作者ID列表
-    private List<Integer> authors;
-    // 出版社ID
-    private int publisherId;
+    // 作者列表
+    private Set<Author> authors;
+    // 出版社
+    private Publisher publisher;
     // 出版日期
     private LocalDate time;
 
     // 构造器
     public Book() {}
 
-    public Book(Integer id, String name, double price, int sales, int stock, String imgPath, List<Integer> authors, int publisherId, LocalDate time) {
+    public Book(Integer id, String name, double price, int sales, int stock, String imgPath, Set<Author> authors, Publisher publisher, LocalDate time) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -31,7 +31,7 @@ public class Book {
         this.stock = stock;
         this.imgPath = imgPath;
         this.authors = authors;
-        this.publisherId = publisherId;
+        this.publisher = publisher;
         this.time = time;
     }
 
@@ -84,20 +84,20 @@ public class Book {
         this.imgPath = imgPath;
     }
 
-    public List<Integer> getAuthors() {
+    public Set<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Integer> authors) {
+    public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
 
-    public int getPublisherId() {
-        return publisherId;
+    public Publisher getPublisher() {
+        return publisher;
     }
 
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     public LocalDate getTime() {
@@ -118,7 +118,7 @@ public class Book {
                 ", stock=" + stock +
                 ", imgPath='" + imgPath + '\'' +
                 ", authors=" + authors +
-                ", publisherId=" + publisherId +
+                ", publisher=" + publisher +
                 ", time=" + time +
                 '}';
     }

@@ -11,15 +11,15 @@ public interface BookDao {
      * @return: 执行insert语句时，返回的自增ID值
      *      执行失败，放回null
      */
-    Integer save();
+    Integer saveBook(Book book);
 
     /**
      * 删除指定ID的图书
      *
-     * @param id: 图书ID
+     * @param bookId: 图书ID
      * @return: 执行sql受影响的行数
      */
-    int deleteById(int id);
+    int deleteBookById(int bookId);
 
     /**
      * 更新图书信息
@@ -27,7 +27,7 @@ public interface BookDao {
      * @param book: 新的图书对象
      * @return: 执行sql受影响的行数
      */
-    int update(Book book);
+    int updateBook(Book book);
 
     /**
      * 查询所有图书
@@ -40,8 +40,25 @@ public interface BookDao {
     /**
      * 查询指定ID的图书信息
      *
-     * @param id: 图书ID
+     * @param bookId: 图书ID
      * @return: 返回图书对象
      */
-    Book queryBookById(int id);
+    Book queryBookById(int bookId);
+
+    /**
+     * 检查图书ID的有效性
+     *
+     * @param bookId
+     * @return
+     *      true: 有效，
+     *      false: 无效
+     */
+    boolean isValidBookId(int bookId);
+
+    /**
+     * 通过图书名关键字查找图书
+     * @param nameKey
+     * @return
+     */
+    List<Book> queryBookByIdNameKey(String nameKey);
 }

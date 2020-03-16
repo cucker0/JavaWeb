@@ -8,7 +8,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
     // 构造器
     public UserDaoImpl() {}
 
-
+    // 方法
     @Override
     public User queryUserByUsernameAndPassword(User user) {
         String sql = "SELECT id, username, `password`, email FROM t_user WHERE username = ? AND `password` = ?;";

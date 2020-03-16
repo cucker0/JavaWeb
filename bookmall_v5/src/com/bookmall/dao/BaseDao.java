@@ -39,6 +39,23 @@ public abstract class BaseDao<T> {
     }
 
     // 方法
+
+    /**
+     * 获取数据库连接
+     * @return
+     */
+    protected Connection getConnection() {
+        return C3p0Utils.getConnection();
+    }
+
+    /**
+     * 释放数据库连接
+     * @param conn
+     */
+    protected void release(Connection conn) {
+        C3p0Utils.release(conn);
+    }
+
     /**
      * 通用的SQL更新操作(INSERT,UPDATE,DELETE)，适用于事务
      *
@@ -69,9 +86,9 @@ public abstract class BaseDao<T> {
      * 注意：不需要传入Connection连接对象的方法，适用于非事务，没事执行sql语句前，从连接池获取连接，执行完sql后，在释放回连接池。下同
      */
     public int update(String sql, Object... params) {
-        Connection conn = C3p0Utils.getConnection();
+        Connection conn = getConnection();
         int rows = update(conn, sql, params);
-        C3p0Utils.release(conn);
+        release(conn);
         return rows;
     }
 
@@ -95,9 +112,9 @@ public abstract class BaseDao<T> {
     }
 
     public Integer insert(String sql, Object... params) {
-        Connection conn = C3p0Utils.getConnection();
+        Connection conn = getConnection();
         Integer auto_id = insert(conn, sql, params);
-        C3p0Utils.release(conn);
+        release(conn);
         return auto_id;
     }
 
@@ -120,9 +137,9 @@ public abstract class BaseDao<T> {
     }
 
     public T getBean(String sql, Object... params) {
-        Connection conn = C3p0Utils.getConnection();
+        Connection conn = getConnection();
         T bean = getBean(conn, sql, params);
-        C3p0Utils.release(conn);
+        release(conn);
         return bean;
     }
 
@@ -145,14 +162,14 @@ public abstract class BaseDao<T> {
     }
 
     public List<T> getBeanList(String sql, Object... params) {
-        Connection conn = C3p0Utils.getConnection();
+        Connection conn = getConnection();
         List<T> list =  getBeanList(conn, sql, params);
-        C3p0Utils.release(conn);
+        release(conn);
         return list;
     }
 
     /**
-     * 执行返回一个值的查询SQL语句
+     * 执行返回一个值的SQL查询语句
      *
      * 可用来执行像 select count(*) from ...这样的sql语句
      *
@@ -172,9 +189,9 @@ public abstract class BaseDao<T> {
     }
 
     public <E> E getValue(String sql, Object... params) {
-        Connection conn = C3p0Utils.getConnection();
+        Connection conn = getConnection();
         E value = getValue(conn, sql, params);
-        C3p0Utils.release(conn);
+        release(conn);
         return value;
     }
 }
