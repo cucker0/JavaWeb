@@ -60,7 +60,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
      */
     @Override
     public List<Book> queryAllBook() {
-        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM t_book LIMIT 0, 1000;";
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime FROM t_book LIMIT 0, 1000;";
      return getBeanList(sql);
      }
 
@@ -72,7 +72,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
      */
     @Override
     public Book queryBookById(int bookdId) {
-        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE id = ?;";
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime FROM  t_book WHERE id = ?;";
         return getBean(sql, bookdId);
     }
 
@@ -102,7 +102,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
             return null;
         }
         String key = "%" + nameKey + "%";
-        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE `name` LIKE ?;";
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime FROM  t_book WHERE `name` LIKE ?;";
         return getBeanList(sql, key);
     }
 }

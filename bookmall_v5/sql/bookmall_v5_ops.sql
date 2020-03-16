@@ -84,4 +84,4 @@ LIMIT 0, 1000;
 SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE id = ?;
 
 -- 通过图书名关键字查找图书
-
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE `name` LIKE ?;

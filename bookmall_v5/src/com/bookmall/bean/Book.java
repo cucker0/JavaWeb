@@ -104,8 +104,23 @@ public class Book {
         return time;
     }
 
+
     public void setTime(LocalDate time) {
         this.time = time;
+    }
+
+    /**
+     * 用于BeanUtils工具设置 发布日期time
+     * 查询数据库Date字段返回对一数据类型为java.sql.Date
+     * sql查询语句，查询time列时，需要起别名为sqlTime
+     *
+     * 如果重载setTime，BeanUtils工具赋值JavaBean时失败，
+     * 报异常：java.sql.SQLException: Cannot set time: incompatible types, cannot convert java.sql.Date to java.time.LocalDate Query: SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE `name` LIKE ?; Parameters: [%双%]
+     * @param date
+     */
+    public void setSqlTime(java.sql.Date date) {
+        LocalDate localDate = date.toLocalDate();
+        setTime(localDate);
     }
 
     @Override
