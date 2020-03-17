@@ -66,3 +66,68 @@ MVC是一种思想，MVC的理念是将软件 代码拆分成组件、单独开�
 ### 创建图书模块的BookDao接口和实现类BookDaoImpl
 
 
+### 问题
+* QeuryRunner in (set) 模糊查询问题1
+    ```java
+    String sql = "SELECT id, `name`, brief FROM t_author WHERE id IN (?);";
+    getBeanList(sql, "2, 3, 5");
+    
+    /* 
+    参数替换后的sql为：
+    SELECT id, `name`, brief FROM t_author WHERE id IN ('2, 3, 5');
+    这样的sql查询结果与下列的结果相同
+    SELECT id, `name`, brief FROM t_author WHERE id IN (2);
+    */
+    ```
+
+* QeuryRunner in (set) 模糊查询问题2
+    ```java
+    String sql = "SELECT id, `name`, brief FROM t_author WHERE id IN ?;";
+    getBeanList(sql, "(2, 3, 5)");
+    
+    /*
+    参数替换后的sql为：
+    SELECT id, `name`, brief FROM t_author WHERE id IN '(2, 3, 5)';
+    会报语法错误
+    */
+    ```
+
+* 正确示例：QeuryRunner in (set) 模糊查询
+    ```java
+        public List<Author> queryAuthorByIdSet(Set<Integer> idSet) {
+            if (idSet == null || idSet.isEmpty()) {
+                return null;
+            }
+            // 去掉null元素要
+            idSet.remove(null);
+            // 拼接in (set) 中元素?占位
+            // 如：
+            // in (?, ?, ?)，需要括号里的内容：?, ?, ?
+            String parametersStr = "";
+            int i = 0;
+            for (Integer id : idSet) {
+                ++i;
+                if (i == idSet.size()) {
+                    parametersStr += "?";
+                } else {
+                    parametersStr += "?" + ", ";
+                }
+            }
+            Object[] paramertsList = idSet.toArray();
+            String sql = String.format("SELECT id, `name`, brief FROM t_author WHERE id IN (%s);", parametersStr);
+    //        System.out.println(parametersStr);
+            return getBeanList(sql, paramertsList);
+        }
+    ```
+* JavaBean中时间属性(Date, LocalDate等)的处理
+
+    [Book示例中的time属性](src/com/bookmall/bean/Book.java)
+    ```test
+    添加一个额外的setter方法
+    
+    用于BeanUtils工具设置 发布日期time
+    查询数据库Date字段返回对一数据类型为java.sql.Date
+    sql查询语句，查询time列时，需要起别名为sqlTime 或 SqlTime
+    如果重载setTime，BeanUtils工具赋值JavaBean时失败，
+    报异常：java.sql.SQLException: Cannot set time: incompatible types, cannot convert java.sql.Date to java.time.LocalDate Query: SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE `name` LIKE ?; Parameters: [%双%]
+    ```

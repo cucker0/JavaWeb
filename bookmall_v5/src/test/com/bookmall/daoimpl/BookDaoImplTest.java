@@ -8,7 +8,9 @@ import org.junit.Before;
 import org.junit.After;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /** 
 * BookDaoImpl Tester. 
@@ -116,7 +118,21 @@ public class BookDaoImplTest {
         //TODO: Test goes here...
         List<Book> books = bookDao.queryBookByIdNameKey("双");
         System.out.println(books);
-    } 
+    }
 
-
+    /**
+     *
+     * Method: queryBookByIdSet(Set<Integer> idSet)
+     *
+     */
+    @Test
+    public void testQueryBookByIdSet() throws Exception {
+        //TODO: Test goes here...
+        Set<Integer> idSet = new HashSet<>();
+        idSet.add(2);
+        idSet.add(5);
+        idSet.add(8);
+        List<Book> books = bookDao.queryBookByIdSet(idSet);
+        books.forEach(System.out::println);
+    }
 } 

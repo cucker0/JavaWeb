@@ -3,8 +3,10 @@ package com.bookmall.daoimpl;
 import com.bookmall.bean.Book;
 import com.bookmall.dao.BaseDao;
 import com.bookmall.dao.BookDao;
+import com.bookmall.utils.CommonUtils;
 
 import java.util.List;
+import java.util.Set;
 
 public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     // 构造器
@@ -105,5 +107,26 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
         String key = "%" + nameKey + "%";
         String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime FROM  t_book WHERE `name` LIKE ?;";
         return getBeanList(sql, key);
+    }
+
+    /**
+     * 通过图书ID集合查询图书信息
+     *
+     * @param idSet : 由作者ID组成的Set对象
+     * @return
+     */
+    @Override
+    public List<Book> queryBookByIdSet(Set<Integer> idSet) {
+        if (idSet == null || idSet.isEmpty()) {
+            return null;
+        }
+        idSet.remove(null);
+        if (idSet.isEmpty()) {
+            return null;
+        }
+        String parametersStr = CommonUtils.getBeanSetParamerts(idSet);
+        String sql = String.format("SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime " +
+                "FROM  t_book WHERE id IN (%s);", parametersStr);
+        return getBeanList(sql, idSet.toArray());
     }
 }

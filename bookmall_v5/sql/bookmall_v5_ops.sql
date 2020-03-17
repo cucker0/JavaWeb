@@ -57,8 +57,8 @@ SELECT COUNT(id) FROM t_author WHERE id = ?;
 SELECT id, `name`, brief FROM t_author WHERE `name` LIKE '%?%';
 SELECT id, `name`, brief FROM t_author WHERE `name` LIKE '%科夫%';
 
-
-
+-- 通过作者ID集合查询作者信息
+SELECT id, `name`, brief FROM t_author WHERE id IN (?, ?);
 
 --
 -- 检查图书ID的有效性
@@ -85,3 +85,27 @@ SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` F
 
 -- 通过图书名关键字查找图书
 SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE `name` LIKE ?;
+
+-- 通过图书ID集合查询图书信息
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE id IN (?, ?);
+
+
+--
+-- 新增出版社
+INSERT INTO t_publisher (`name`) VALUES (?);
+
+-- 删除指定ID的出版社
+DELETE FROM t_publisher WHERE id = ?;
+
+-- 更新出版社信息
+UPDATE t_publisher SET `name` = ? WHERE id = ?;
+
+-- 查询所有的出版社
+SELECT id, `name` FROM t_publisher;
+
+-- 查询指定ID的出版社
+SELECT id, `name` FROM t_publisher WHERE id = ?;
+
+-- 按出版社名字关键字查找出版社
+SELECT id, `name` FROM t_publisher WHERE `name` LIKE ?;
+

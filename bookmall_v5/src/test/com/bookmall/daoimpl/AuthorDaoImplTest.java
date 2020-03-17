@@ -7,7 +7,9 @@ import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /** 
 * AuthorDaoImpl Tester. 
@@ -110,7 +112,25 @@ public class AuthorDaoImplTest {
         //TODO: Test goes here...
         List<Author> authors = authorDao.queryAuthorByNameKey("haha");
         authors.forEach(System.out::println);
-    } 
+    }
 
+    /**
+     *
+     * Method: queryAuthorByIdList(Set<Integer> idSet)
+     *
+     */
+    @Test
+    public void testQueryAuthorByIdSet() throws Exception {
+        //TODO: Test goes here...
+        Set<Integer> idSet = new HashSet<>();
+        idSet.add(1);
+        idSet.add(3);
+        idSet.add(4);
+        idSet.add(6);
+        idSet.add(null);
+        System.out.println(idSet);
+        List<Author> authors = authorDao.queryAuthorByIdSet(idSet);
+        authors.forEach(System.out::println);
+    }
 
 } 

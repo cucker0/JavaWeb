@@ -3,6 +3,7 @@ package com.bookmall.dao;
 import com.bookmall.bean.Book;
 
 import java.util.List;
+import java.util.Set;
 
 public interface BookDao {
     /**
@@ -57,8 +58,17 @@ public interface BookDao {
 
     /**
      * 通过图书名关键字查找图书
+     *
      * @param nameKey
      * @return
      */
     List<Book> queryBookByIdNameKey(String nameKey);
+
+    /**
+     * 通过图书ID集合查询图书信息
+     *
+     * @param idSet: 由作者ID组成的Set对象
+     * @return
+     */
+    List<Book> queryBookByIdSet(Set<Integer> idSet);
 }

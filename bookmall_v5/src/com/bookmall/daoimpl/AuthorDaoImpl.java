@@ -5,6 +5,7 @@ import com.bookmall.dao.AuthorDao;
 import com.bookmall.dao.BaseDao;
 
 import java.util.List;
+import java.util.Set;
 
 public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
     /**
@@ -96,5 +97,40 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
         // 模糊查询关键字拼接
         String key = "%" + nameKey + "%";
         return getBeanList(sql, key);
+    }
+
+    /**
+     * 通过作者ID集合查询作者信息
+     *
+     * @param idSet 由作者ID组成的Set对象
+     * @return
+     */
+    @Override
+    public List<Author> queryAuthorByIdSet(Set<Integer> idSet) {
+        if (idSet == null || idSet.isEmpty()) {
+            return null;
+        }
+        // 去掉null元素要
+        idSet.remove(null);
+        if (idSet.isEmpty()) {
+            return null;
+        }
+        // 拼接in (set) 中元素?占位
+        // 如：
+        // in (?, ?, ?)，需要括号里的内容：?, ?, ?
+        String parametersStr = "";
+        int i = 0;
+        for (Integer id : idSet) {
+            ++i;
+            if (i == idSet.size()) {
+                parametersStr += "?";
+            } else {
+                parametersStr += "?" + ", ";
+            }
+        }
+        Object[] paramertsList = idSet.toArray();
+        String sql = String.format("SELECT id, `name`, brief FROM t_author WHERE id IN (%s);", parametersStr);
+//        System.out.println(parametersStr);
+        return getBeanList(sql, paramertsList);
     }
 }

@@ -3,6 +3,7 @@ package com.bookmall.dao;
 import com.bookmall.bean.Author;
 
 import java.util.List;
+import java.util.Set;
 
 public interface AuthorDao {
     /**
@@ -59,4 +60,12 @@ public interface AuthorDao {
      * @return
      */
     List<Author> queryAuthorByNameKey(String nameKey);
+
+    /**
+     * 通过作者ID集合查询作者信息
+     * @param idSet
+     *      由作者ID组成的Set对象
+     * @return
+     */
+    List<Author> queryAuthorByIdSet(Set<Integer> idSet);
 }
