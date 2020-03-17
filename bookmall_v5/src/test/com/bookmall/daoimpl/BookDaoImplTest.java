@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /** 
@@ -35,7 +36,11 @@ public class BookDaoImplTest {
     */ 
     @Test
     public void testSaveBook() throws Exception { 
-        //TODO: Test goes here... 
+        //TODO: Test goes here...
+        Book book = new Book(null, "时间简史", 33.4, 10, 20, "https://img.jd.com/2020/sjjs.png",
+                null, null, LocalDate.now());
+        Integer auto_increment_id = bookDao.saveBook(book);
+        System.out.println(auto_increment_id);
     } 
 
     /** 
@@ -45,7 +50,9 @@ public class BookDaoImplTest {
     */ 
     @Test
     public void testDeleteBookById() throws Exception { 
-        //TODO: Test goes here... 
+        //TODO: Test goes here...
+        int i = bookDao.deleteBookById(23);
+        System.out.println(i);
     } 
 
     /** 
@@ -55,7 +62,12 @@ public class BookDaoImplTest {
     */ 
     @Test
     public void testUpdateBook() throws Exception { 
-        //TODO: Test goes here... 
+        //TODO: Test goes here...
+        Book book = bookDao.queryBookById(23);
+        book.setPrice(99.0);
+        int i = bookDao.updateBook(book);
+        System.out.println(i);
+
     } 
 
     /** 
@@ -78,7 +90,7 @@ public class BookDaoImplTest {
     @Test
     public void testQueryBookById() throws Exception { 
         //TODO: Test goes here...
-        Book book = bookDao.queryBookById(1);
+        Book book = bookDao.queryBookById(23);
         System.out.println(book);
     } 
 

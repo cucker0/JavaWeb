@@ -21,8 +21,9 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     public Integer saveBook(Book book) {
         String sql = "INSERT INTO t_book (`name`, price, sales, stock, img_path, publisher_id, `time`) VALUES " +
                 "(?, ?, ?, ?, ?, ?, ?);";
-        return insert(sql, book.getName(), book.getPrice(), book.getSales(),
-                book.getStock(), book.getImgPath(), book.getPublisher().getId(), book.getTime());
+        return insert(sql, book.getName(), book.getPrice(), book.getSales(), book.getStock(), book.getImgPath(),
+                book.getPublisher() == null ? null : book.getPublisher().getId(),
+                book.getTime());
     }
 
     /**
@@ -47,9 +48,9 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     public int updateBook(Book book) {
         String sql = "UPDATE t_book SET `name` = ?, price = ?, sales = ?, stock = ?, img_path = ?, publisher_id = ?, `time` = ? " +
                 "WHERE id = ?;";
-        return update(sql, book.getName(), book.getPrice(), book.getSales(), book.getStock(),
-                book.getImgPath(), book.getPublisher().getId(), book.getTime(),
-                book.getId());
+        return update(sql, book.getName(), book.getPrice(), book.getSales(), book.getStock(), book.getImgPath(),
+                book.getPublisher() == null ? null : book.getPublisher().getId(),
+                book.getTime(), book.getId());
     }
 
     /**
