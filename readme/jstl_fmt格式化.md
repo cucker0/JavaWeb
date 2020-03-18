@@ -148,16 +148,16 @@ jstl fmt格式化
     [parseDate 示例](../jspProj/web/jstl/fmt/parsedate.jsp)
 
 * \<fmt:setTimeZone>、\<fmt:timeZone>
-```text
-设置时区，
-fmt:setTimeZone  在本页面内有效
-
-fmt:timeZone  仅所在的父标签内有效
-
-属性：
-===
-    value: 设定时区，可选EST,CST,MST,PST等 
-    var: 存储设定的时区
-    scope: 存储的范围
-
-```
+    ```text
+    设置时区，
+    fmt:setTimeZone  在本页面内有效
+    
+    fmt:timeZone  仅所在的父标签内有效
+    
+    属性：
+    ===
+        value: 设定时区，可选EST,CST,MST,PST等 
+        var: 存储设定的时区
+        scope: 存储的范围
+    
+    ```
