@@ -117,7 +117,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
      */
     @Override
     public List<Book> queryBookByIdSet(Set<Integer> idSet) {
-        if (idSet == null || idSet.isEmpty()) {
+        if (idSet == null) {
             return null;
         }
         idSet.remove(null);

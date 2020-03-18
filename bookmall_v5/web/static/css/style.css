@@ -6,8 +6,12 @@ body {
 
 * {
 	margin: 0;
-	font-family:"Microsoft Yahei";
+	font-family: "Microsoft Yahei";
 	color: #666;
+}
+
+a {
+	text-decoration: none;
 }
 
 div{
@@ -237,9 +241,13 @@ h1 {
 
 #main table td{
 	width: 120px;
-	text-align:center;
+	text-align:left;
 	border-bottom: 1px #e3e3e3 solid;
 	padding: 10px;
+}
+
+.td-w {
+	width: 200px !important;
 }
 
 .cart_info{

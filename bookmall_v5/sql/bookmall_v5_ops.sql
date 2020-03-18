@@ -22,10 +22,10 @@ DELETE FROM r_book_author WHERE book_id = ?;
 DELETE FROM r_book_author WHERE book_id = ? AND author_id = ?;
 
 -- 查询指定ID图书与作者的所有关联记录
-SELECT id, book_id bookId, author_id authorId FROM r_book_author WHERE book_id = ? LIMIT 0, 100;
+SELECT DISTINCT book_id bookId, author_id authorId FROM r_book_author WHERE book_id = ? LIMIT 0, 100;
 
 -- 查看指定作者ID与图书的所有关联记录
-SELECT id, book_id bookId, author_id authorId FROM r_book_author WHERE author_id = ? LIMIT 0, 100;
+SELECT DISTINCT book_id bookId, author_id authorId FROM r_book_author WHERE author_id = ? LIMIT 0, 100;
 
 -- 检查指定id的图书与指定id的作者关联记录是否存在
 SELECT id, book_id bookId, author_id authorId FROM r_book_author WHERE book_id = ? AND author_id = ? LIMIT 0, 100;

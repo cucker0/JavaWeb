@@ -23,6 +23,10 @@
         <servlet-class>com.bookmall.web.UserServlet4</servlet-class>
 
     </servlet>
+    <servlet>
+        <servlet-name>BookServlet</servlet-name>
+        <servlet-class>com.bookmall.web.BookServlet</servlet-class>
+    </servlet>
 
     <!-- URL与Servlet映射 -->
     <servlet-mapping>
@@ -36,5 +40,9 @@
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/userServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookServlet</servlet-name>
+        <url-pattern>/manager/bookServlet</url-pattern>
     </servlet-mapping>
 </web-app>

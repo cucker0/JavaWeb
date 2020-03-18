@@ -107,7 +107,7 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
      */
     @Override
     public List<Author> queryAuthorByIdSet(Set<Integer> idSet) {
-        if (idSet == null || idSet.isEmpty()) {
+        if (idSet == null) {
             return null;
         }
         // 去掉null元素要

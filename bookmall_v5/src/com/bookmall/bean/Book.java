@@ -1,7 +1,7 @@
 package com.bookmall.bean;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 public class Book {
     private Integer id;
@@ -14,7 +14,7 @@ public class Book {
     // 图书图片路径
     private String imgPath;
     // 作者列表
-    private Set<Author> authors;
+    private List<Author> authors;
     // 出版社
     private Publisher publisher;
     // 出版日期
@@ -23,7 +23,7 @@ public class Book {
     // 构造器
     public Book() {}
 
-    public Book(Integer id, String name, double price, int sales, int stock, String imgPath, Set<Author> authors, Publisher publisher, LocalDate time) {
+    public Book(Integer id, String name, double price, int sales, int stock, String imgPath, List<Author> authors, Publisher publisher, LocalDate time) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -84,11 +84,14 @@ public class Book {
         this.imgPath = imgPath;
     }
 
-    public Set<Author> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Author> authors) {
+    public void setAuthors(List<Author> authors) {
+        if (authors == null || authors.isEmpty()) {
+            return;
+        }
         this.authors = authors;
     }
 

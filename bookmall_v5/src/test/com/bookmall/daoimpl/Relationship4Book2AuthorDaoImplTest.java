@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.After;
 
 import java.util.List;
+import java.util.Set;
 
 /** 
 * Relationship4Book2AuthorDaoImpl Tester. 
@@ -75,9 +76,9 @@ public class Relationship4Book2AuthorDaoImplTest {
     * 
     */ 
     @Test
-    public void testQueryAuthorsByBookId() throws Exception { 
+    public void testQueryRelationshipsByBookId() throws Exception {
         //TODO: Test goes here...
-        List<Relationship4Book2Author> relationship4Book2Authors = rDao.queryAuthorsByBookId(10);
+        List<Relationship4Book2Author> relationship4Book2Authors = rDao.queryRelationshipsByBookId(10);
         System.out.println(relationship4Book2Authors);
         // [Relationship4Book2Author{id=11, bookId=10, authorId=10}, Relationship4Book2Author{id=12, bookId=10, authorId=11}]
     } 
@@ -88,12 +89,36 @@ public class Relationship4Book2AuthorDaoImplTest {
     * 
     */ 
     @Test
-    public void testQueryBooksByAuthorId() throws Exception { 
+    public void testQueryRelationshipsByAuthorId() throws Exception {
         //TODO: Test goes here...
-        List<Relationship4Book2Author> relationship4Book2Authors = rDao.queryBooksByAuthorId(1);
+        List<Relationship4Book2Author> relationship4Book2Authors = rDao.queryRelationshipsByAuthorId(1);
         System.out.println(relationship4Book2Authors);
         // [Relationship4Book2Author{id=2, bookId=2, authorId=1}]
-    } 
+    }
+
+    /**
+     *
+     * Method: queryAuthorsIdByBookId(int bookId)
+     *
+     */
+    @Test
+    public void testQueryAuthorsIdByBookId() throws Exception {
+        //TODO: Test goes here...
+        Set<Integer> set = rDao.queryAuthorsIdByBookId(1);
+        System.out.println(set);
+    }
+
+    /**
+     *
+     * Method: queryBooksIdByAuthorId(int authorId)
+     *
+     */
+    @Test
+    public void testQueryBooksIdByAuthorId() throws Exception {
+        //TODO: Test goes here...
+        Set<Integer> set = rDao.queryBooksIdByAuthorId(19);
+        System.out.println(set);
+    }
 
     /** 
     * 
