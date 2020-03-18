@@ -21,6 +21,7 @@ jstl fmt格式化
     
     <fmt:timeZone>
     ```
+    [formatnumber](../jspProj/web/jstl/fmt/formatnumber.jsp)
 
 * 国际化标签
     ```text
