@@ -287,6 +287,7 @@ EL表达式主要是为了替换jsp中的表达式脚本，
 * \<c:if>标签
     ```text
     判断表达式的值，如果表达式的值为 true 则显示其标签内(HTML代码，会解析显示)
+    标准jstl库中没有<c:else>标签，if-else或 if-else if-else可用 <c:choose>代替
     ```
     **属性**
     
@@ -300,7 +301,7 @@ EL表达式主要是为了替换jsp中的表达式脚本，
     
 * \<c:choose>、\<c:when>...、\<c:otherwise>标签
     ```text
-    与Java switch语句的功能一样，值分支判断
+    与Java switch语句的功能一样，值分支判断，可代替if-else、if-else if-else分支
   
     switch <--> <c:choose>
     case <--> <c:when>
