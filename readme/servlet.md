@@ -338,7 +338,7 @@ response.sendRedirect("/tomcat/servlet2/home.html");
 * 请求转发
     >request.getRequestDispatcher("/servlet2/forward.html").forward(request, response);
 * 请求重定向
-    >response.sendRedirect("/tomcat/servlet2/home.html")
+    >response.sendRedirect(request.getContextPath() + "/servlet2/home.html");
 
 对比项 |请求转发 |请求重定向 
 :--- |:--- |:--- 
@@ -348,4 +348,4 @@ API	|Request对象	|Response对象
 WEB-INF	|可以访问	|不能访问
 共享request请求域数据	|可以共享	|不可以共享
 目标资源	|必须是当前Web应用中的资源	|不局限于当前Web应用
-/|表示http://ip:port/工程名/ <br>也就是与web目录对应 |表示http://ip:port/
+/|表示http://ip:port/工程名 <br>也就是与web目录对应 |表示http://ip:port/ <br>获取工程目录request.getContextPath()，即"/工程名"，用此来拼接
