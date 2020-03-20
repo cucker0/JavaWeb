@@ -1,6 +1,7 @@
 package com.bookmall.bean;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Book {
@@ -49,6 +50,13 @@ public class Book {
     }
 
     public void setName(String name) {
+        if (name == null) {
+            return;
+        }
+        name = name.strip();
+        if (name.length() == 0) {
+            return;
+        }
         this.name = name;
     }
 
@@ -57,6 +65,9 @@ public class Book {
     }
 
     public void setPrice(double price) {
+        if (price < 0) {
+            return;
+        }
         this.price = price;
     }
 
@@ -65,6 +76,9 @@ public class Book {
     }
 
     public void setSales(int sales) {
+        if (sales < 0) {
+            return;
+        }
         this.sales = sales;
     }
 
@@ -73,6 +87,9 @@ public class Book {
     }
 
     public void setStock(int stock) {
+        if (stock < 0) {
+            return;
+        }
         this.stock = stock;
     }
 
@@ -100,7 +117,26 @@ public class Book {
     }
 
     public void setPublisher(Publisher publisher) {
+        if (publisher == null) {
+            return;
+        }
         this.publisher = publisher;
+    }
+
+    /**
+     * 给Publisher设置出版社ID
+     *
+     * 主要用于从数据库查询book数据时用，
+     * 注意sql查询publisher_id列，起别名:publisherId
+     *
+     * @param publisherId
+     */
+    public void setPublisherId(int publisherId) {
+        if (publisherId < 0) {
+            return;
+        }
+        Publisher publisher = new Publisher(publisherId, null);
+        setPublisher(publisher);
     }
 
     public LocalDate getTime() {
@@ -109,20 +145,33 @@ public class Book {
 
 
     public void setTime(LocalDate time) {
+        if (time == null) {
+            return;
+        }
         this.time = time;
     }
 
     /**
      * 用于BeanUtils工具设置 发布日期time
      * 查询数据库Date字段返回对一数据类型为java.sql.Date
-     * sql查询语句，查询time列时，需要起别名为sqlTime 或 SqlTime
+     * sql查询语句，查询time列时，需要起别名为:sqlTime 或 SqlTime
      *
      * 如果重载setTime，BeanUtils工具赋值JavaBean时失败，
      * 报异常：java.sql.SQLException: Cannot set time: incompatible types, cannot convert java.sql.Date to java.time.LocalDate Query: SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE `name` LIKE ?; Parameters: [%双%]
      * @param date
      */
     public void setSqlTime(java.sql.Date date) {
+        if (date == null) {
+            return;
+        }
         LocalDate localDate = date.toLocalDate();
+        setTime(localDate);
+    }
+
+    // 解决BeanUtils处理JavaBean时问题： 客户端传过来的文本日期，而time期望为LocalDate类型数据
+    // 注意：客户端页面的<input name="sqlTime">
+    public void setSqlTime(String dateStr) {
+        LocalDate localDate = LocalDate.parse(dateStr);
         setTime(localDate);
     }
 

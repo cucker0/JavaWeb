@@ -85,4 +85,17 @@ public class PublisherDaoImpl extends BaseDao<Publisher> implements PublisherDao
         String sql = "SELECT id, `name` FROM t_publisher WHERE `name` LIKE ?;";
         return getBeanList(sql, key);
     }
+
+    /**
+     * 查询出版社ID是否有效
+     *
+     * @return true: 有效
+     * false: 无效
+     */
+    @Override
+    public boolean isValidPublisherById(int publisherId) {
+        String sql = "SELECT COUNT(id) FROM t_publisher WHERE id = ?;";
+        long count = getValue(sql, publisherId);
+        return count != 0;
+    }
 }

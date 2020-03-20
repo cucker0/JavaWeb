@@ -1,17 +1,19 @@
 package com.bookmall.dao;
 
 import com.bookmall.utils.C3p0Utils;
+import com.bookmall.utils.CommonUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 基本操作的Dao
@@ -42,6 +44,7 @@ public abstract class BaseDao<T> {
 
     /**
      * 获取数据库连接
+     *
      * @return
      */
     protected Connection getConnection() {
@@ -50,6 +53,7 @@ public abstract class BaseDao<T> {
 
     /**
      * 释放数据库连接
+     *
      * @param conn
      */
     protected void release(Connection conn) {
@@ -59,11 +63,11 @@ public abstract class BaseDao<T> {
     /**
      * 通用的SQL更新操作(INSERT,UPDATE,DELETE)，适用于事务
      *
-     * @param conn: Connection连接对象。
-     * @param sql: 可含?占位符的SQL语句
+     * @param conn:   Connection连接对象。
+     * @param sql:    可含?占位符的SQL语句
      * @param params: ?占位符对应的可变参数
      * @return: 执行sql语句受影响的行数
-     *
+     * <p>
      * 注意：需要传入Connection连接对象的方法，适用于事务，Connection在提交事务或回滚事务时释放回连接池。下同
      */
     public int update(Connection conn, String sql, Object... params) {
@@ -81,9 +85,7 @@ public abstract class BaseDao<T> {
      *
      * @param sql
      * @param params
-     * @return
-     *
-     * 注意：不需要传入Connection连接对象的方法，适用于非事务，没事执行sql语句前，从连接池获取连接，执行完sql后，在释放回连接池。下同
+     * @return 注意：不需要传入Connection连接对象的方法，适用于非事务，没事执行sql语句前，从连接池获取连接，执行完sql后，在释放回连接池。下同
      */
     public int update(String sql, Object... params) {
         Connection conn = getConnection();
@@ -95,8 +97,8 @@ public abstract class BaseDao<T> {
     /**
      * 执行插入一条记录，并获取自增ID值
      *
-     * @param conn: Connection连接对象
-     * @param sql: 可含?占位符的SQL语句
+     * @param conn:   Connection连接对象
+     * @param sql:    可含?占位符的SQL语句
      * @param params: ?占位符对应的可变参数
      * @return: 自增ID值
      */
@@ -121,8 +123,8 @@ public abstract class BaseDao<T> {
     /**
      * 执行查询SQL获取第一行，并转为一个Bean对象
      *
-     * @param conn: Connection连接对象
-     * @param sql: 可含?占位符的SQL语句
+     * @param conn:   Connection连接对象
+     * @param sql:    可含?占位符的SQL语句
      * @param params: ?占位符对应的可变参数
      * @return: T的Bean对象
      */
@@ -163,18 +165,18 @@ public abstract class BaseDao<T> {
 
     public List<T> getBeanList(String sql, Object... params) {
         Connection conn = getConnection();
-        List<T> list =  getBeanList(conn, sql, params);
+        List<T> list = getBeanList(conn, sql, params);
         release(conn);
         return list;
     }
 
     /**
      * 执行返回一个值的SQL查询语句
-     *
+     * <p>
      * 可用来执行像 select count(*) from ...这样的sql语句
      *
-     * @param conn: Connection连接对象
-     * @param sql: 可含?占位符的SQL语句
+     * @param conn:   Connection连接对象
+     * @param sql:    可含?占位符的SQL语句
      * @param params: ?占位符对应的可变参数
      * @return: 返回查询SQL执行后返回的单一的值
      */
@@ -194,4 +196,5 @@ public abstract class BaseDao<T> {
         release(conn);
         return value;
     }
+
 }

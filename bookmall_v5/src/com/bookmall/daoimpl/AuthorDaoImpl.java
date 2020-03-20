@@ -3,6 +3,7 @@ package com.bookmall.daoimpl;
 import com.bookmall.bean.Author;
 import com.bookmall.dao.AuthorDao;
 import com.bookmall.dao.BaseDao;
+import com.bookmall.utils.CommonUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -79,6 +80,24 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
         String sql = "SELECT COUNT(id) FROM t_author WHERE id = ?;";
         long count = getValue(sql, authorId);
         return count != 0;
+    }
+
+    /**
+     * 给定的多个作者ID是否全部有效
+     *
+     * @param idSet 由多个作者ID组成的Set集合
+     * @return true: 是全部有效
+     * false: 不是全部都有效
+     */
+    @Override
+    public boolean isValidAuthorsId(Set<Integer> idSet) {
+        if (idSet == null || idSet.isEmpty() || idSet.contains(null)) {
+            return false;
+        }
+        String beanSetParamerts = CommonUtils.getBeanSetParamerts(idSet);
+        String sql = String.format("SELECT COUNT(id) FROM t_author WHERE id IN (%s);", beanSetParamerts);
+        long count = getValue(sql, idSet.toArray());
+        return count == idSet.size();
     }
 
     /**

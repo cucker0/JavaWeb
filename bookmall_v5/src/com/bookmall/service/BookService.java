@@ -3,6 +3,7 @@ package com.bookmall.service;
 import com.bookmall.bean.Book;
 
 import java.util.List;
+import java.util.Set;
 
 public interface BookService {
 
@@ -43,4 +44,27 @@ public interface BookService {
      * @return
      */
     List<Book> searBooksByNameKey(String nameKey);
+
+    /**
+     * 检查一个book是否有效
+     * 用于添加图书、更新图书信息时检查用
+     *
+     * 检查出版社是否有效
+     * 检查图书关联的作者是否有效
+     *
+     * @param book
+     * @return
+     *      true: 有效
+     *      false: 无效
+     */
+    boolean isValidBook(Book book);
+
+    /**
+     * 通过图书ID集合查询图书信息
+     *
+     * @param idSet: 由作者ID组成的Set对象
+     * @return
+     */
+    List<Book> queryBookByIdSet(Set<Integer> idSet);
+
 }

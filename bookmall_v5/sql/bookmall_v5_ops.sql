@@ -53,6 +53,9 @@ SELECT id, `name`, brief FROM t_author WHERE id = ?;
 -- 检查用户ID是否有效
 SELECT COUNT(id) FROM t_author WHERE id = ?;
 
+-- 给定的多个作者ID是否全部有效
+SELECT COUNT(id) FROM t_author WHERE id IN (?, ?);
+
 -- 查找作者名中包含指定关键字的作者
 SELECT id, `name`, brief FROM t_author WHERE `name` LIKE '%?%';
 SELECT id, `name`, brief FROM t_author WHERE `name` LIKE '%科夫%';
@@ -76,18 +79,18 @@ UPDATE t_book SET `name` = ?, price = ?, sales = ?, stock = ?, img_path = ?, pub
 WHERE id = ?;
 
 -- 查询所有图书
-SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time`
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime
 FROM  t_book
 LIMIT 0, 1000;
 
 -- 查询指定ID的图书信息
-SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE id = ?;
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book WHERE id = ?;
 
 -- 通过图书名关键字查找图书
-SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE `name` LIKE ?;
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book WHERE `name` LIKE ?;
 
 -- 通过图书ID集合查询图书信息
-SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE id IN (?, ?);
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book WHERE id IN (?, ?);
 
 
 --
@@ -109,3 +112,20 @@ SELECT id, `name` FROM t_publisher WHERE id = ?;
 -- 按出版社名字关键字查找出版社
 SELECT id, `name` FROM t_publisher WHERE `name` LIKE ?;
 
+-- 查询出版社ID是否有效
+SELECT COUNT(id) FROM t_publisher WHERE id = ?;
+
+
+
+SELECT * FROM t_book;
+
+SELECT * FROM r_book_author;
+
+-- 查询图书信息与作者信息
+SELECT b.*, a.name 'author'
+FROM t_book b
+LEFT OUTER JOIN r_book_author r
+ON b.id = r.book_id
+LEFT OUTER JOIN t_author a
+ON r.author_id = a.id
+;

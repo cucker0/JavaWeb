@@ -46,4 +46,12 @@ public interface PublisherDao {
      * @return
      */
     List<Publisher> queryPublisherByNameKey(String nameKey);
+
+    /**
+     * 查询出版社ID是否有效
+     * @return
+     *      true: 有效
+     *      false: 无效
+     */
+    boolean isValidPublisherById(int publisherId);
 }

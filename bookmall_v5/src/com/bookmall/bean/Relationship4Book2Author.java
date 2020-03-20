@@ -51,4 +51,24 @@ public class Relationship4Book2Author {
                 ", authorId=" + authorId +
                 '}';
     }
+
+    // 图书与记录关联记录，只要图书ID与作者ID是相同即是一个相同的关联关系
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Relationship4Book2Author that = (Relationship4Book2Author) o;
+
+        if (bookId != null ? !bookId.equals(that.bookId) : that.bookId != null) return false;
+        return authorId != null ? authorId.equals(that.authorId) : that.authorId == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = bookId != null ? bookId.hashCode() : 0;
+        result = 31 * result + (authorId != null ? authorId.hashCode() : 0);
+        return result;
+    }
 }

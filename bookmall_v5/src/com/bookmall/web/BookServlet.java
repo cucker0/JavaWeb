@@ -9,6 +9,8 @@ import com.bookmall.service.PublisherService;
 import com.bookmall.serviceimpl.AuthorServiceImpl;
 import com.bookmall.serviceimpl.BookServiceImpl;
 import com.bookmall.serviceimpl.PublisherServiceImpl;
+import com.bookmall.utils.Beanutils;
+import com.bookmall.utils.CommonUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -44,22 +46,43 @@ public class BookServlet extends BaseServlet {
      * @throws IOException
      */
     protected void editBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 获取业务类型，从request获取type参数
-        String type = request.getParameter("type");
-
-        // 2. 根据type转发请求，type预定义的有 add \ update
-        request.getRequestDispatcher("/pages/manager/book_edit.jsp?action=" + type).forward(request, response);
-    }
-
-    protected void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1. 获取作者列表、出版社列表，并保存到request域对象中
         List<Author> authors = authorService.queryAllAuthor();
         request.setAttribute("authors", authors);
         List<Publisher> publishers = publisherService.queryAllPublisher();
         request.setAttribute("publishers", publishers);
 
-        // 2. 转发请求
-        request.getRequestDispatcher("/pages/manager/book_edit.jsp?action=add").forward(request, response);
+        // 转发请求
+        // 注意：request对象中有有一个参数type，type预定义的有 add \ update
+        request.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(request, response);
+    }
+
+    protected void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 获取客户端request中传过来的图书信息，并封装到Book对象中
+        String[] authorsId = request.getParameterValues("authors_id");
+        List<Author> authors = authorService.queryAuthorByIdSet(CommonUtils.strArry2IntegerSet(authorsId));
+        int publisherId = CommonUtils.parseInt(request.getParameter("publisher_id"), 0);
+        Publisher publisher = publisherService.queryPublisherById(publisherId);
+
+        Book book = Beanutils.copyParams2Bean(request.getParameterMap(), new Book());
+        book.setAuthors(authors);
+        book.setPublisher(publisher);
+        //System.out.println("book:" + book);
+        // 添加图书
+        bookService.addBook(book);
+
+        // 添加完后，URL跳转到图书列表页
+        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
+    }
+
+    protected void deleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int bookId = CommonUtils.parseInt(request.getParameter("id"), 0);
+        bookService.deleteBookById(bookId);
+        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
+    }
+
+    protected void updateBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
 }

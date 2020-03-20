@@ -30,7 +30,7 @@ public interface PublisherService {
     List<Publisher> queryAllPublisher();
 
     /**
-     * 跟怒出版社ID查询出版社
+     * 根据出版社ID查询出版社
      * @param id
      * @return
      */
@@ -41,4 +41,11 @@ public interface PublisherService {
      * @return
      */
     List<Publisher> searchPublisherByNameKey(String nameKey);
+
+    /**
+     * 查询出版社ID是否有效
+     * @param id
+     * @return
+     */
+    boolean isValidPublisherById(int id);
 }

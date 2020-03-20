@@ -5,7 +5,7 @@ import com.bookmall.bean.Author;
 import java.util.List;
 import java.util.Set;
 
-public interface AuthorDao {
+public interface AuthorDao extends Common<Author> {
     /**
      * 新增作者
      *
@@ -52,6 +52,17 @@ public interface AuthorDao {
      * @return
      */
     boolean isValidAuthorId(int authorId);
+
+    /**
+     * 给定的多个作者ID是否全部有效
+     *
+     * @param idSet
+     *      由多个作者ID组成的Set集合
+     * @return
+     *      true: 是全部有效
+     *      false: 不是全部都有效
+     */
+    boolean isValidAuthorsId(Set<Integer> idSet);
 
     /**
      * 查找作者名中包含指定关键字的作者

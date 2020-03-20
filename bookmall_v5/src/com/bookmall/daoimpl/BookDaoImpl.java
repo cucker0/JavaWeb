@@ -58,12 +58,13 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     /**
      * 查询所有图书
      *
+     * 返回的图书对象还没有authors、publisher信息
      * @return: 返回图书对象集合，
      * 查询失败放回null
      */
     @Override
     public List<Book> queryAllBook() {
-        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime FROM t_book LIMIT 0, 1000;";
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM t_book LIMIT 0, 1000;";
      return getBeanList(sql);
      }
 
@@ -75,7 +76,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
      */
     @Override
     public Book queryBookById(int bookdId) {
-        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime FROM  t_book WHERE id = ?;";
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book WHERE id = ?;";
         return getBean(sql, bookdId);
     }
 
@@ -105,7 +106,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
             return null;
         }
         String key = "%" + nameKey + "%";
-        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime FROM  t_book WHERE `name` LIKE ?;";
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book WHERE `name` LIKE ?;";
         return getBeanList(sql, key);
     }
 
@@ -125,7 +126,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
             return null;
         }
         String parametersStr = CommonUtils.getBeanSetParamerts(idSet);
-        String sql = String.format("SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` sqlTime " +
+        String sql = String.format("SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime " +
                 "FROM  t_book WHERE id IN (%s);", parametersStr);
         return getBeanList(sql, idSet.toArray());
     }

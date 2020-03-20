@@ -19,7 +19,7 @@
 <div id="main">
     <table>
         <tr>
-            <td>名称</td>
+            <td>书名</td>
             <td>价格</td>
             <td class="td-w">作者</td>
             <td>销量</td>
@@ -49,8 +49,8 @@
                 </td>
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
-                <td><a href="manager/bookServlet?action=updateBook">修改</a></td>
-                <td><a href="#">删除</a></td>
+                <td><a href="manager/bookServlet?action=editBook&type=update&id=${book.id}">修改</a></td>
+                <td><a href="manager/bookServlet?action=deleteBook&id=${book.id}">删除</a></td>
             </tr>
         </c:forEach>
 

@@ -48,9 +48,9 @@ public class Beanutils {
      */
     public static <T> T copyParams2Bean(Map paramsMap, T bean) {
         try {
-            paramsMap.forEach((k, v) -> {
-                System.out.println(k + ": " + v);
-            });
+            //paramsMap.forEach((k, v) -> {
+            //    System.out.println(k + ": " + v);
+            //});
             System.out.println("bean===: " + bean);
             BeanUtils.populate(bean, paramsMap);
             System.out.println("bean 填充后===: " + bean);

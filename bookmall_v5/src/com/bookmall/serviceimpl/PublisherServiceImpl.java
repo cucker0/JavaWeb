@@ -60,7 +60,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     /**
-     * 跟怒出版社ID查询出版社
+     * 根据出版社ID查询出版社
      *
      * @param id
      * @return
@@ -78,5 +78,16 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     public List<Publisher> searchPublisherByNameKey(String nameKey) {
         return publisherDao.queryPublisherByNameKey(nameKey);
+    }
+
+    /**
+     * 查询出版社ID是否有效
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean isValidPublisherById(int id) {
+        return publisherDao.isValidPublisherById(id);
     }
 }
