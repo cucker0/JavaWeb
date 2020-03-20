@@ -115,7 +115,7 @@
                                 </c:forEach>
                             </select>
                         </td>
-                        <td><input name="time" type="text"></td>
+                        <td><input name="time" type="text" value="${book.time}"></td>
                         <td><input type="submit" value="提交"/></td>
                     </tr>
                 </table>

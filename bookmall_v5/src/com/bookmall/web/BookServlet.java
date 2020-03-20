@@ -3,6 +3,7 @@ package com.bookmall.web;
 import com.bookmall.bean.Author;
 import com.bookmall.bean.Book;
 import com.bookmall.bean.Publisher;
+import com.bookmall.dao.Common;
 import com.bookmall.service.AuthorService;
 import com.bookmall.service.BookService;
 import com.bookmall.service.PublisherService;
@@ -51,6 +52,13 @@ public class BookServlet extends BaseServlet {
         request.setAttribute("authors", authors);
         List<Publisher> publishers = publisherService.queryAllPublisher();
         request.setAttribute("publishers", publishers);
+
+        // 更新图书
+        if (request.getParameter("type").equalsIgnoreCase("update")) {
+            int bookId = CommonUtils.parseInt(request.getParameter("id"), 0);
+            Book book = bookService.queryBookById(bookId);
+            request.setAttribute("book", book);
+        }
 
         // 转发请求
         // 注意：request对象中有有一个参数type，type预定义的有 add \ update
