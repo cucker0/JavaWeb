@@ -40,7 +40,10 @@ public class CommonUtils {
      * @param strArry
      * @return
      */
-    public static Set<Integer> strArry2IntegerSet(String[] strArry) {
+    public static Set<Integer> strArry2IntegerSet(String[] strArry, Set<Integer> defaultVal) {
+        if (strArry == null) {
+            return defaultVal;
+        }
         Set<Integer> set = new HashSet<>();
         for (String s : strArry) {
             try {
@@ -48,7 +51,8 @@ public class CommonUtils {
                 set.add(i);
             } catch (NumberFormatException e) {
                 System.out.println("字符串转数字失败");
-                e.printStackTrace();
+                // e.printStackTrace();
+                return defaultVal;
             }
 
         }

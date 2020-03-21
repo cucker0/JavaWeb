@@ -3,6 +3,7 @@ package com.bookmall.serviceimpl;
 import com.bookmall.bean.Author;
 import com.bookmall.bean.Book;
 import com.bookmall.bean.Publisher;
+import com.bookmall.bean.Relationship4Book2Author;
 import com.bookmall.dao.AuthorDao;
 import com.bookmall.dao.BookDao;
 import com.bookmall.dao.PublisherDao;
@@ -14,6 +15,7 @@ import com.bookmall.daoimpl.Relationship4Book2AuthorDaoImpl;
 import com.bookmall.service.BookService;
 import com.bookmall.service.Relationship4Book2AuthorService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -73,7 +75,40 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public void updateBook(Book book) {
+        if (book == null || book.getId() == null) {
+            return;
+        }
+        // 1. 更新图书基本信息
         bookDao.updateBook(book);
+        // 2. 更新图书与作者的关联记录
+        // 未更新前，图书的作者
+        List<Author> authors = queryAuthorsByBookId(book.getId());
+        List<Author> newAuthors = book.getAuthors();
+        // 需要去除与本书关联的作者：authors - newAuthors
+        if (authors != null && authors.size() > 0) {
+            Set<Author> removeSet = new HashSet<>(authors);
+            // Set<Author> removeSet = new HashSet<>();
+            // removeSet.addAll(authors);
+            if (newAuthors != null) {
+                removeSet.removeAll(newAuthors);
+            }
+            for (Author author : removeSet) {
+                relDao.deleteRelationship4Book2AuthorByBookIdAndAuthorId(book.getId(), author.getId());
+            }
+        }
+        // 需要新增与本书关联的作者：newAuthors - authors
+        if (newAuthors != null && newAuthors.size() > 0) {
+            Set<Author> addSet = new HashSet<>(newAuthors);
+            // Set<Author> addSet = new HashSet<>();
+            // addSet.addAll(newAuthors);
+            if (authors != null) {
+                addSet.removeAll(authors);
+            }
+            for (Author author : addSet) {
+                relDao.saveSingleRelationship4Book2Author(book.getId(), author.getId());
+            }
+        }
+
     }
 
     /**
@@ -105,7 +140,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> queryAllBook() {
         List<Book> books = bookDao.queryAllBook();
-        if (books == null || books.size()==0) {
+        if (books == null || books.size() == 0) {
             return null;
         }
         for (Book book : books) {
@@ -187,5 +222,27 @@ public class BookServiceImpl implements BookService {
             fillBook(book);
         }
         return books;
+    }
+
+    /**
+     * 查询指定ID的图书的作者
+     *
+     * @param bookId
+     * @return
+     */
+    @Override
+    public List<Author> queryAuthorsByBookId(int bookId) {
+        return relService.queryAuthorsByBookId(bookId);
+    }
+
+    /**
+     * 查询指定ID的图书的作者ID
+     *
+     * @param bookId
+     * @return
+     */
+    @Override
+    public Set<Integer> queryAuthorsIdByBookId(int bookId) {
+        return relDao.queryAuthorsIdByBookId(bookId);
     }
 }

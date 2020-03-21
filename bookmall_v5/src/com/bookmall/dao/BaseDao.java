@@ -127,6 +127,7 @@ public abstract class BaseDao<T> {
      * @param sql:    可含?占位符的SQL语句
      * @param params: ?占位符对应的可变参数
      * @return: T的Bean对象
+     *      如果查询结果为空，则返回null
      */
     public T getBean(Connection conn, String sql, Object... params) {
         T bean = null;
@@ -152,6 +153,7 @@ public abstract class BaseDao<T> {
      * @param sql:    可含?占位符的SQL语句
      * @param params: ?占位符对应的可变参数
      * @return: T的Bean对象组成的List
+     *      如果查询结果为空，则返回null
      */
     public List<T> getBeanList(Connection conn, String sql, Object... params) {
         List<T> list = null;

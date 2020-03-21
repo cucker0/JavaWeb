@@ -47,19 +47,28 @@ public class BookServlet extends BaseServlet {
      * @throws IOException
      */
     protected void editBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 1. 获取作者列表、出版社列表，并保存到request域对象中
-        List<Author> authors = authorService.queryAllAuthor();
-        request.setAttribute("authors", authors);
-        List<Publisher> publishers = publisherService.queryAllPublisher();
-        request.setAttribute("publishers", publishers);
+        // 获取作者列表、出版社列表，并保存到request域对象中
+        List<Author> authors = null;
+        List<Publisher> publishers = null;
+        // 新增图书
+        if ("add".equalsIgnoreCase(request.getParameter("type"))) {
+            authors = authorService.queryAllAuthor();
+            publishers = publisherService.queryAllPublisher();
 
+        }
         // 更新图书
-        if (request.getParameter("type").equalsIgnoreCase("update")) {
+        else if ("update".equalsIgnoreCase(request.getParameter("type"))) {
             int bookId = CommonUtils.parseInt(request.getParameter("id"), 0);
             Book book = bookService.queryBookById(bookId);
             request.setAttribute("book", book);
-        }
+            authors = authorService.queryAllAuthor(bookId);
+            publishers = publisherService.queryAllPublisher(bookId);
+        } else {
 
+        }
+        // 把数据保存到request域对象中
+        request.setAttribute("authors", authors);
+        request.setAttribute("publishers", publishers);
         // 转发请求
         // 注意：request对象中有有一个参数type，type预定义的有 add \ update
         request.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(request, response);
@@ -68,7 +77,7 @@ public class BookServlet extends BaseServlet {
     protected void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 获取客户端request中传过来的图书信息，并封装到Book对象中
         String[] authorsId = request.getParameterValues("authors_id");
-        List<Author> authors = authorService.queryAuthorByIdSet(CommonUtils.strArry2IntegerSet(authorsId));
+        List<Author> authors = authorService.queryAuthorByIdSet(CommonUtils.strArry2IntegerSet(authorsId, null));
         int publisherId = CommonUtils.parseInt(request.getParameter("publisher_id"), 0);
         Publisher publisher = publisherService.queryPublisherById(publisherId);
 
@@ -90,7 +99,16 @@ public class BookServlet extends BaseServlet {
     }
 
     protected void updateBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String[] authorsId = request.getParameterValues("authors_id");
+        List<Author> authors = authorService.queryAuthorByIdSet(CommonUtils.strArry2IntegerSet(authorsId, null));
+        int publisherId = CommonUtils.parseInt(request.getParameter("publisher_id"), 0);
+        Publisher publisher = publisherService.queryPublisherById(publisherId);
+        // book中含有id属性
+        Book book = Beanutils.copyParams2Bean(request.getParameterMap(), new Book());
+        book.setAuthors(authors);
+        book.setPublisher(publisher);
+        bookService.updateBook(book);
+        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
     }
 
 }

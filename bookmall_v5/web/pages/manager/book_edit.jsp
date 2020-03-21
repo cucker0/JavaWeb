@@ -82,6 +82,7 @@
         <c:when test="${param.type == 'update'}">
             <form action="manager/bookServlet" method="post">
                 <input type="hidden" name="action" value="updateBook">
+                <input type="hidden" name="id" value="${requestScope.book.id}">
                 <table>
                     <tr>
                         <td>书名</td>
@@ -101,7 +102,14 @@
                             <select name="authors_id" multiple="multiple">
                                 <option>选择作者</option>
                                 <c:forEach var="author" items="${requestScope.authors}">
-                                    <option value="${author.id}">${author.name}</option>
+                                    <c:choose>
+                                        <c:when test="${author.checked}">
+                                            <option value="${author.id}" selected="selected">${author.name}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${author.id}">${author.name}</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:forEach>
                             </select>
                         </td>
@@ -111,11 +119,18 @@
                             <select name="publisher_id">
                                 <option>请选择出版社</option>
                                 <c:forEach var="publisher" items="${requestScope.publishers}">
-                                    <option value="${publisher.id}">${publisher.name}</option>
+                                    <c:choose>
+                                        <c:when test="${publisher.checked}">
+                                            <option value="${publisher.id}" selected="selected">${publisher.name}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${publisher.id}">${publisher.name}</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:forEach>
                             </select>
                         </td>
-                        <td><input name="time" type="text" value="${book.time}"></td>
+                        <td><input name="sqlTime" type="text" value="${book.time}"></td>
                         <td><input type="submit" value="提交"/></td>
                     </tr>
                 </table>

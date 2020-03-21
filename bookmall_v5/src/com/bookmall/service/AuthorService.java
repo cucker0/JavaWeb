@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 public interface AuthorService {
-    /**新增作者
+    /**
+     * 新增作者
      *
      * @param author
      */
@@ -14,12 +15,14 @@ public interface AuthorService {
 
     /**
      * 删除指定ID的作者
+     *
      * @param id
      */
     void deleteAuthorById(int id);
 
     /**
      * 更新作者信息系
+     *
      * @param author
      */
     void updateAuthor(Author author);
@@ -30,22 +33,33 @@ public interface AuthorService {
     List<Author> queryAllAuthor();
 
     /**
+     * 查询所有作者，并把指定ID图书的作者checked设置为true
+     *
+     * @param bookId
+     * @return
+     */
+    List<Author> queryAllAuthor(int bookId);
+
+    /**
      * 查询指定ID的作者
+     *
      * @param id
      */
     Author queryAuthorById(int id);
 
     /**
      * 根据作者名字关键字搜索作者信息
+     *
      * @param nameKey
      */
     List<Author> searchAuthorByNameKey(String nameKey);
 
     /**
      * 根据作者ID集合查询作者信息
-     * @param idSet
-     *      多个作者ID组成的Set集合
+     *
+     * @param idSet 多个作者ID组成的Set集合
      * @return
      */
     List<Author> queryAuthorByIdSet(Set<Integer> idSet);
+
 }

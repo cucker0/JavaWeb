@@ -8,6 +8,8 @@ public class Author {
     private String name;
     // 作者简介
     private String brief;
+    // 用于html前面显示是否选中，true: 选中，false: 不选中(默认值)
+    private boolean checked = false;
 
     // 构造器
     public Author() {}
@@ -43,12 +45,40 @@ public class Author {
         this.brief = brief;
     }
 
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Author author = (Author) o;
+
+        if (name != null ? !name.equals(author.name) : author.name != null) return false;
+        return brief != null ? brief.equals(author.brief) : author.brief == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (brief != null ? brief.hashCode() : 0);
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", brief='" + brief + '\'' +
+                ", checked=" + checked +
                 '}';
     }
 }
