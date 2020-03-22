@@ -3,6 +3,7 @@ package com.bookmall.web;
 import com.bookmall.bean.Author;
 import com.bookmall.service.AuthorService;
 import com.bookmall.serviceimpl.AuthorServiceImpl;
+import com.bookmall.utils.Beanutils;
 import com.bookmall.utils.CommonUtils;
 
 import javax.servlet.ServletException;
@@ -40,15 +41,21 @@ public class AuthorServlet extends BaseServlet {
     }
 
     protected void addAuthor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Author author = Beanutils.copyParams2Bean(request.getParameterMap(), new Author());
+        authorService.saveAuthor(author);
+        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=list");
     }
 
     protected void deleteAuthor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        int authorId = CommonUtils.parseInt(request.getParameter("id"), 0);
+        authorService.deleteAuthorById(authorId);
+        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=list");
     }
 
     protected void updateAuthor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Author author = Beanutils.copyParams2Bean(request.getParameterMap(), new Author());
+        authorService.updateAuthor(author);
+        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=list");
     }
 
 }

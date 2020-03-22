@@ -4,7 +4,7 @@ package com.bookmall.bean;
  * 图书作者
  */
 public class Author {
-    private int id;
+    private int id; // 默认值为0
     private String name;
     // 作者简介
     private String brief;

@@ -45,7 +45,7 @@ DELETE FROM t_author WHERE id = ? ;
 UPDATE t_author SET `name` = ?, brief = ? WHERE id = ?;
 
 -- 查询所有的作者
-SELECT DISTINCT id, `name`, brief FROM t_author;
+SELECT id, `name`, brief FROM t_author ORDER BY `name`;
 
 -- 查询指定ID的作者
 SELECT id, `name`, brief FROM t_author WHERE id = ?;
@@ -62,6 +62,10 @@ SELECT id, `name`, brief FROM t_author WHERE `name` LIKE '%科夫%';
 
 -- 通过作者ID集合查询作者信息
 SELECT id, `name`, brief FROM t_author WHERE id IN (?, ?);
+
+-- 指定的作者名、简介的作者是否存在
+SELECT COUNT(id) FROM t_author WHERE `name` = ? AND brief <=> ?;
+
 
 --
 -- 检查图书ID的有效性

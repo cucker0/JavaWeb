@@ -246,6 +246,12 @@ h1 {
 	padding: 10px;
 }
 
+#main table textarea {
+	width: 100%;
+	height: 60px;
+	padding: 5px;
+}
+
 .td-w {
 	width: 200px !important;
 }

@@ -21,7 +21,12 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public void saveAuthor(Author author) {
-        authorDao.saveAuthor(author);
+        if (author == null || author.getName() == null) {
+            return;
+        }
+        if (!authorDao.isValidAuthorByAuthor(author)) {
+            authorDao.saveAuthor(author);
+        }
     }
 
     /**
@@ -31,6 +36,9 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public void deleteAuthorById(int id) {
+        if (id <= 0) {
+            return;
+        }
         authorDao.deleteAuthorById(id);
     }
 
@@ -41,10 +49,13 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public void updateAuthor(Author author) {
-        if (author == null) {
+        if (author == null || author.getId() <= 0) {
             return;
         }
-        authorDao.updateAuthor(author);
+        // author.id需要存在才更新
+        if (authorDao.isValidAuthorId(author.getId())) {
+            authorDao.updateAuthor(author);
+        }
     }
 
     /**

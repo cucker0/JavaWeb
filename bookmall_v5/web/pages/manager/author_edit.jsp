@@ -40,14 +40,14 @@
             <form action="manager/authorServlet" method="post">
                 <input type="hidden" name="action" value="addAuthor">
                 <table>
-                    <thead>
-                        <th>姓名</th>
-                        <th class="td-w2">简介</th>
-                        <th>操作</th>
-                    </thead>
+                    <tr>
+                        <td>姓名</td>
+                        <td class="td-w2">简介</td>
+                        <td>操作</td>
+                    </tr>
                     <tr>
                         <td><input name="name" type="text"/></td>
-                        <td><input name="brief" type="text"/></td>
+                        <td><textarea name="brief"></textarea></td>
                         <td><input type="submit" value="提交"/></td>
                     </tr>
                 </table>
@@ -59,14 +59,14 @@
                 <input type="hidden" name="action" value="updateAuthor">
                 <input type="hidden" name="id" value="${requestScope.author.id}">
                 <table>
-                    <thead>
-                    <th>姓名</th>
-                    <th>简介</th>
-                    <th>操作</th>
-                    </thead>
+                    <tr>
+                    <td>姓名</td>
+                    <td class="td-w2">简介</td>
+                    <td>操作</td>
+                    </tr>
                     <tr>
                         <td><input name="name" type="text" value="${requestScope.author.name}"/></td>
-                        <td><input name="brief" type="text" value="${requestScope.author.brief}"/></td>
+                        <td><textarea name="brief">${requestScope.author.brief}</textarea></td>
                         <td><input type="submit" value="提交"/></td>
                     </tr>
                 </table>
