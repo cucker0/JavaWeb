@@ -250,6 +250,10 @@ h1 {
 	width: 200px !important;
 }
 
+.td-w2 {
+	width: 680px !important;
+}
+
 .cart_info{
 	width: 700px;
 	text-align: right;
@@ -283,3 +287,8 @@ h1 {
 #header div a {
 	color: blue;
 }
+
+.menu a {
+	margin: 0 0 0 10px;
+}
+

@@ -92,7 +92,7 @@
                         <td>库存</td>
                         <td>出版社</td>
                         <td>出版日期</td>
-                        <td colspan="2">操作</td>
+                        <td>操作</td>
                     </tr>
                     <tr>
                         <td><input name="name" type="text" value="${requestScope.book.name}"/></td>

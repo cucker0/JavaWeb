@@ -65,7 +65,9 @@ public class AuthorServiceImplTest {
     */ 
     @Test
     public void testQueryAllAuthor() throws Exception { 
-        //TODO: Test goes here... 
+        //TODO: Test goes here...
+        List<Author> authors = authorService.queryAllAuthor();
+        authors.forEach(System.out::println);
     } 
 
     /** 

@@ -87,6 +87,9 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public Author queryAuthorById(int id) {
+        if (id < 1) {
+            return null;
+        }
         return authorDao.queryAuthorById(id);
     }
 

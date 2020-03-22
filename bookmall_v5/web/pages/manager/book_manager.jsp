@@ -7,6 +7,15 @@
     <%-- 引入head相同部分 --%>
     <%@ include file="/pages/common/head.jsp" %>
     <title>图书管理</title>
+    <script type="text/javascript">
+        $(function () {
+            // 给删除按钮绑定事件
+            $("a.delete").click(function () {
+                var name = $(this).parents("tr").find("td:first").html();
+                return confirm("《" + name + "》\n 确定删除吗?");
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -26,7 +35,7 @@
             <td>库存</td>
             <td colspan="2">操作</td>
         </tr>
-
+        <%-- 遍历图书 --%>
         <c:forEach var="book" items="${requestScope.books}">
             <tr>
                 <td>${book.name}</td>
@@ -34,7 +43,7 @@
                     <fmt:formatNumber value="${book.price}" type="currency" pattern="￥.00"/>
                 </td>
                 <td>
-<%--                    遍历图书--%>
+<%--                    遍历作者--%>
                     <c:forEach var="author" items="${book.authors}" varStatus="status">
                         <c:choose>
                             <c:when test="${status.last}">
@@ -50,7 +59,7 @@
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
                 <td><a href="manager/bookServlet?action=editBook&type=update&id=${book.id}">修改</a></td>
-                <td><a href="manager/bookServlet?action=deleteBook&id=${book.id}">删除</a></td>
+                <td><a class="delete" href="manager/bookServlet?action=deleteBook&id=${book.id}">删除</a></td>
             </tr>
         </c:forEach>
 
