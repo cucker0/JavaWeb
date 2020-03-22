@@ -53,7 +53,7 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
      */
     @Override
     public List<Author> queryAllAuthor() {
-        String sql = "SELECT id, `name`, brief FROM t_author ORDER BY `name`;";
+        String sql = "SELECT id, `name`, brief FROM t_author ORDER BY id;";
         return getBeanList(sql);
     }
 

@@ -45,7 +45,7 @@ DELETE FROM t_author WHERE id = ? ;
 UPDATE t_author SET `name` = ?, brief = ? WHERE id = ?;
 
 -- 查询所有的作者
-SELECT id, `name`, brief FROM t_author ORDER BY `name`;
+SELECT id, `name`, brief FROM t_author ORDER BY id;
 
 -- 查询指定ID的作者
 SELECT id, `name`, brief FROM t_author WHERE id = ?;
@@ -84,7 +84,7 @@ WHERE id = ?;
 
 -- 查询所有图书
 SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime
-FROM  t_book
+FROM  t_book ORDER BY id
 LIMIT 0, 1000;
 
 -- 查询指定ID的图书信息
@@ -108,7 +108,7 @@ DELETE FROM t_publisher WHERE id = ?;
 UPDATE t_publisher SET `name` = ? WHERE id = ?;
 
 -- 查询所有的出版社
-SELECT id, `name` FROM t_publisher;
+SELECT id, `name` FROM t_publisher ORDER BY id;
 
 -- 查询指定ID的出版社
 SELECT id, `name` FROM t_publisher WHERE id = ?;
