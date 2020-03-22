@@ -440,7 +440,70 @@ $("选择器").each(function (i, n) { // 这里的i为选择器匹配的元素�
 [extend插件机制](../jQuery/web1/extend插件机制.html)  
 
 
+## jQuery事件处理
+### on绑定事件
+```text
+on(events,[selector],[data],fn)
+
+在选择元素上绑定一个或多个事件的事件处理函数。
+
+参数：
+===
+events:一个或多个用空格分隔的事件类型和可选的命名空间，如"click"或"keydown.myPlugin" 。
+
+selector:一个选择器字符串用于过滤器的触发事件的选择器元素的后代。如果选择的< null或省略，当它到达选定的元素，事件总是触发。
+
+data:当一个事件被触发时要传递event.data给事件处理函数，传递时用字典
+
+fn:该事件被触发时执行的函数。 false 值也可以做一个函数的简写，返回false。
+```
+
+* on绑定事件
+    ```js
+    // Pass data to the event handler, which is specified here by name:
+    // 取值方法
+    function myHandler(event) {
+        // event.data = {foo: "bar"}
+        alert(event.data.foo);
+    }
+    // 传值
+    $("p").on("click", {foo: "bar"}, myHandler)
     
+    // Cancel a form submit action and prevent the event from bubbling up by returning false:
+    $("form").on("submit", false)
+    ```
+* 让html页面中动态添加的标签(元素)也自动绑定事件
+    
+    默认一个页面在加载后，完成第一次绑定事后，字后添加的标签节点是不会在应用绑定事件的，解决方法如下：
+    ```js
+    $(document).ready(function() {
+        // 点击分页导航器上输入页码直接跳转
+        $(document).on("click", "#domain_record_box button[name=jump-page]", {'optype': 2}, ClickPage);
+    });
+    ```
+
+### bind绑定事件
+```text
+jQuery 3.0中已弃用此方法，请用 on()代替。
+
+bind(type,[data],fn)
+
+参数：
+===
+type:含有一个或多个事件类型的字符串，由空格分隔多个事件。比如"click"或"submit"，还可以是自定义事件名。
+
+data:作为event.data属性值传递给事件对象的额外数据对象
+
+false: 将第三个参数设置为false会使默认的动作失效。
+```
+
+* 示例
+    ```js
+    function handler(event) {
+      alert(event.data.foo);
+    }
+    $("p").bind("click", {foo: "bar"}, handler)
+    ```
 
 ## jQuery的ajax方法
 ### get方法
