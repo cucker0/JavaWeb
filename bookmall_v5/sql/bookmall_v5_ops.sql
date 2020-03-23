@@ -92,6 +92,12 @@ SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisher
 -- 通过图书ID集合查询图书信息
 SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book WHERE id IN (?, ?);
 
+-- 分页查询图书
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book LIMIT ?, ?;
+
+-- 查询图书总数量
+SELECT COUNT(*) FROM t_book;
+
 
 --
 -- 新增出版社
@@ -121,6 +127,8 @@ SELECT * FROM t_book;
 
 SELECT * FROM r_book_author;
 
+SELECT * FROM t_publisher;
+
 -- 查询图书信息与作者信息
 SELECT b.*, a.name 'author'
 FROM t_book b
@@ -128,4 +136,5 @@ LEFT OUTER JOIN r_book_author r
 ON b.id = r.book_id
 LEFT OUTER JOIN t_author a
 ON r.author_id = a.id
+-- where b.id in (1, 43)
 ;

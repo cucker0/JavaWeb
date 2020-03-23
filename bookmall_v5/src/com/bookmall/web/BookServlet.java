@@ -2,6 +2,7 @@ package com.bookmall.web;
 
 import com.bookmall.bean.Author;
 import com.bookmall.bean.Book;
+import com.bookmall.bean.Paginator;
 import com.bookmall.bean.Publisher;
 import com.bookmall.dao.Common;
 import com.bookmall.service.AuthorService;
@@ -111,4 +112,23 @@ public class BookServlet extends BaseServlet {
         response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
     }
 
+    /**
+     * 分页显示
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int activePageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
+        // 分页查询图书
+        Paginator<Book> page = bookService.page(activePageNo, pageSize);
+        page.setUrl("manager/bookServlet?action=page");
+        request.setAttribute("page", page);
+        // 2. 把request请求转发到pages/manager/book_manager.jsp对应的jsp页面去处理(jsp本质就是Servlet)
+        // request转发中，/ 表示 http://ip:port/工程名
+        request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request, response);
+    }
 }

@@ -71,4 +71,20 @@ public interface BookDao {
      * @return
      */
     List<Book> queryBookByIdSet(Set<Integer> idSet);
+
+    /**
+     * 分页查询图书
+     *
+     * @param offSet 起始索引
+     * @param size 查询记录数
+     * @return
+     */
+    List<Book> paginationQueryBook(int offSet, int size);
+
+    /**
+     * 查询图书总数量
+     *
+     * @return
+     */
+    int queryBookTotal();
 }

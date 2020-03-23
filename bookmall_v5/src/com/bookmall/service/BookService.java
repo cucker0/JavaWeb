@@ -2,6 +2,7 @@ package com.bookmall.service;
 
 import com.bookmall.bean.Author;
 import com.bookmall.bean.Book;
+import com.bookmall.bean.Paginator;
 
 import java.util.List;
 import java.util.Set;
@@ -90,4 +91,13 @@ public interface BookService {
      */
     Set<Integer> queryAuthorsIdByBookId(int bookId);
 
+    /**
+     * 分页查询图书信息
+     * 根据当面页码、每页size查询
+     *
+     * @param activePageNo
+     * @param pageSize
+     * @return
+     */
+    Paginator<Book> page(int activePageNo, int pageSize);
 }

@@ -130,4 +130,29 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
                 "FROM  t_book WHERE id IN (%s);", parametersStr);
         return getBeanList(sql, idSet.toArray());
     }
+
+    /**
+     * 分页查询图书
+     *
+     * @param offSet 起始索引
+     * @param size   查询记录数
+     * @return
+     */
+    @Override
+    public List<Book> paginationQueryBook(int offSet, int size) {
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime " +
+                "FROM  t_book LIMIT ?, ?;";
+        return getBeanList(sql, offSet, size);
+    }
+
+    /**
+     * 查询图书总数量
+     *
+     * @return
+     */
+    @Override
+    public int queryBookTotal() {
+        String sql = "SELECT COUNT(*) FROM t_book;";
+        return getValue(sql);
+    }
 }

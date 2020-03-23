@@ -1,9 +1,6 @@
 package com.bookmall.serviceimpl;
 
-import com.bookmall.bean.Author;
-import com.bookmall.bean.Book;
-import com.bookmall.bean.Publisher;
-import com.bookmall.bean.Relationship4Book2Author;
+import com.bookmall.bean.*;
 import com.bookmall.dao.AuthorDao;
 import com.bookmall.dao.BookDao;
 import com.bookmall.dao.PublisherDao;
@@ -244,5 +241,32 @@ public class BookServiceImpl implements BookService {
     @Override
     public Set<Integer> queryAuthorsIdByBookId(int bookId) {
         return relDao.queryAuthorsIdByBookId(bookId);
+    }
+
+    /**
+     * 分页查询图书信息
+     * 根据当面页码、每页size查询
+     *
+     * @param activePageNo
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public Paginator<Book> page(int activePageNo, int pageSize) {
+        Paginator<Book> paginator = new Paginator<>(activePageNo, pageSize);
+        // 查询总记录数
+        int recordsTotal = bookDao.queryBookTotal();
+        paginator.setRecordsTotal(recordsTotal);
+        // 显示的总页数
+        int pageTotal = recordsTotal / pageSize;
+        // 如果 recordsTotal不是pageSize整数倍，显示总页数要加1页
+        if (recordsTotal % pageSize != 0) {
+            pageTotal = pageTotal + 1;
+        }
+        paginator.setPageTotal(pageTotal);
+        // 查询当前要显示的记录
+        List<Book> books = bookDao.paginationQueryBook(pageSize * (activePageNo - 1), pageSize);
+        paginator.setItems(books);
+        return paginator;
     }
 }
