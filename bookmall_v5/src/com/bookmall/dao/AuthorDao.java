@@ -54,6 +54,15 @@ public interface AuthorDao extends Common<Author> {
     boolean isValidAuthorId(int authorId);
 
     /**
+     * 查询author对象是否存在
+     *
+     * @param author
+     * @return true: 存在
+     * false: 不村子
+     */
+    public boolean isValidAuthorByAuthor(Author author);
+
+    /**
      * 给定的多个作者ID是否全部有效
      *
      * @param idSet

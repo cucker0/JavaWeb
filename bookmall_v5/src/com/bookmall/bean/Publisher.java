@@ -32,6 +32,9 @@ public class Publisher {
     }
 
     public void setName(String name) {
+        if (name == null || "".equalsIgnoreCase(name)) {
+            return;
+        }
         this.name = name;
     }
 

@@ -51,7 +51,7 @@ public class PublisherDaoImpl extends BaseDao<Publisher> implements PublisherDao
      */
     @Override
     public List<Publisher> queryAllPublisher() {
-        String sql = "SELECT id, `name` FROM t_publisher;";
+        String sql = "SELECT id, `name` FROM t_publisher ORDER BY id;";
         return getBeanList(sql);
     }
 

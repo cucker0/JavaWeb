@@ -5,7 +5,7 @@
 <head>
     <%-- 引入head相同部分 --%>
     <%@ include file="/pages/common/head.jsp" %>
-    <title>作者管理</title>
+    <title>出版社管理</title>
     <script type="text/javascript">
         $(function () {
             // 给删除按钮绑定事件
@@ -28,17 +28,15 @@
 <div id="main">
     <table>
         <tr>
-            <th>姓名</th>
-            <th class="td-w2">简介</th>
+            <th class="td-w2">出版社名称</th>
             <th colspan="2">操作</th>
         </tr>
 
-        <c:forEach var="author" items="${requestScope.authors}">
+        <c:forEach var="publisher" items="${requestScope.publishers}">
             <tr>
-                <td>${author.name}</td>
-                <td>${author.brief}</td>
-                <td><a href="manager/authorServlet?action=editAuthor&type=update&id=${author.id}">修改</a></td>
-                <td><a class="delete" href="manager/authorServlet?action=deleteAuthor&id=${author.id}">删除</a></td>
+                <td>${publisher.name}</td>
+                <td><a href="manager/publisherServlet?action=editPublisher&type=update&id=${publisher.id}">修改</a></td>
+                <td><a class="delete" href="manager/publisherServlet?action=deletePublisher&id=${publisher.id}">删除</a></td>
             </tr>
         </c:forEach>
 
@@ -46,7 +44,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="manager/authorServlet?action=editAuthor&type=add">添加作者</a></td>
+            <td><a href="manager/publisherServlet?action=editPublisher&type=add">添加出版社</a></td>
         </tr>
     </table>
 </div>

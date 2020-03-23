@@ -64,7 +64,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
      */
     @Override
     public List<Book> queryAllBook() {
-        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM t_book LIMIT 0, 1000;";
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM t_book ORDER BY id LIMIT 0, 1000;";
      return getBeanList(sql);
      }
 

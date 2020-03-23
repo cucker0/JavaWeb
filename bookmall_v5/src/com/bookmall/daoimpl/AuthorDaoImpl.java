@@ -53,7 +53,7 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
      */
     @Override
     public List<Author> queryAllAuthor() {
-        String sql = "SELECT DISTINCT id, `name`, brief FROM t_author;";
+        String sql = "SELECT id, `name`, brief FROM t_author ORDER BY id;";
         return getBeanList(sql);
     }
 
@@ -79,6 +79,28 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
     public boolean isValidAuthorId(int authorId) {
         String sql = "SELECT COUNT(id) FROM t_author WHERE id = ?;";
         long count = getValue(sql, authorId);
+        return count != 0;
+    }
+
+    /**
+     * 查询author对象是否存在
+     *
+     * @param author
+     * @return true: 存在
+     * false: 不村子
+     */
+    @Override
+    public boolean isValidAuthorByAuthor(Author author) {
+        if (author == null || author.getName() == null || author.getName().isEmpty()) {
+            return false;
+        }
+        // author.id有效情况
+        if (author.getId() > 0) {
+            return isValidAuthorId(author.getId());
+        }
+        // 检查name、brief是否有效
+        String sql = "SELECT COUNT(id) FROM t_author WHERE `name` = ? AND brief <=> ?;";
+        long count = getValue(sql, author.getName(), author.getBrief());
         return count != 0;
     }
 

@@ -15,5 +15,6 @@
 %>
 <meta charset="UTF-8">
 <base href="<%= baseUrl %>">
+<link rel="icon" href="static/img/favicon.ico" type="image/x-icon" />
 <link type="text/css" rel="stylesheet" href="static/css/style.css" >
 <script type="text/javascript" src="static/script/jquery-3.4.1.min.js"></script>

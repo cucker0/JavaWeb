@@ -28,12 +28,12 @@
 <div id="main">
     <table>
         <tr>
-            <td>书名</td>
-            <td>价格</td>
-            <td class="td-w">作者</td>
-            <td>销量</td>
-            <td>库存</td>
-            <td colspan="2">操作</td>
+            <th>书名</th>
+            <th>价格</th>
+            <th class="td-w">作者</th>
+            <th>销量</th>
+            <th>库存</th>
+            <th colspan="2">操作</th>
         </tr>
         <%-- 遍历图书 --%>
         <c:forEach var="book" items="${requestScope.books}">

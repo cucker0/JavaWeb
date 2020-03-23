@@ -8,7 +8,7 @@ USE bookmall;
 CREATE TABLE t_book (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(64) NOT NULL COMMENT '书名',
-    `price` DECIMAL(11, 2) NOT NULL COMMENT '价格',
+    `price` DOUBLE(11, 2) NOT NULL COMMENT '价格',
     `sales` INT NOT NULL DEFAULT 0 COMMENT '销量',
     `stock` INT NOT NULL DEFAULT 0 COMMENT '库存',    
     `img_path` VARCHAR(512) COMMENT '书的图片路径',
