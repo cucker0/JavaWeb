@@ -6,6 +6,7 @@
 <head>
     <%-- 引入head相同部分 --%>
     <%@ include file="/pages/common/head.jsp" %>
+    <%@ include file="/pages/common/bootstrap.jsp" %>
     <title>图书管理</title>
     <script type="text/javascript">
         $(function () {
@@ -36,14 +37,15 @@
             <th colspan="2">操作</th>
         </tr>
         <%-- 遍历图书 --%>
-        <c:forEach var="book" items="${requestScope.books}">
+        <%--        <c:forEach var="book" items="${requestScope.books}">--%>
+        <c:forEach var="book" items="${requestScope.page.items}">
             <tr>
                 <td>${book.name}</td>
                 <td>
                     <fmt:formatNumber value="${book.price}" type="currency" pattern="￥.00"/>
                 </td>
                 <td>
-<%--                    遍历作者--%>
+                        <%--                    遍历作者--%>
                     <c:forEach var="author" items="${book.authors}" varStatus="status">
                         <c:choose>
                             <c:when test="${status.last}">
@@ -73,6 +75,8 @@
             <td><a href="manager/bookServlet?action=editBook&type=add">添加图书</a></td>
         </tr>
     </table>
+    <%-- 分页条导航条 --%>
+    <%@ include file="/pages/common/page_navigation.jsp" %>
 </div>
 
 <%-- 引入页脚 --%>

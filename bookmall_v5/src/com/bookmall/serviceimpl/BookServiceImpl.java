@@ -130,6 +130,22 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
+     * 给多个信息不完整的book对象填充数据
+     *
+     * @param books
+     * @return 填充数据后的book对象
+     */
+    protected List<Book> fillBook(List<Book> books) {
+        if (books == null || books.size() == 0) {
+            return null;
+        }
+        for (Book book : books) {
+            fillBook(book);
+        }
+        return books;
+    }
+
+    /**
      * 查询所有图书
      *
      * @return
@@ -266,7 +282,9 @@ public class BookServiceImpl implements BookService {
         paginator.setPageTotal(pageTotal);
         // 查询当前要显示的记录
         List<Book> books = bookDao.paginationQueryBook(pageSize * (activePageNo - 1), pageSize);
+        fillBook(books);
         paginator.setItems(books);
+        paginator.setUrl("manager/bookServlet?action=page");
         return paginator;
     }
 }

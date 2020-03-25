@@ -123,6 +123,7 @@ public class BookServlet extends BaseServlet {
     protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int activePageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
         int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
+
         // 分页查询图书
         Paginator<Book> page = bookService.page(activePageNo, pageSize);
         page.setUrl("manager/bookServlet?action=page");

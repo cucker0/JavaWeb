@@ -1,6 +1,5 @@
 package com.bookmall.bean;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class Paginator<T> {
     *     第三个元素表示右边显示的页数
     * */
     private int[] pageFormat = PAGE_FORMAT;
-    // 分页请求地址
+    // 分页请求基本地址，如果html页面定义了base地址，url：manager/bookServlet?action=page
     private String url;
 
     // 构造器
@@ -144,6 +143,15 @@ public class Paginator<T> {
         this.url = url;
     }
 
+    // 是否有上一页
+    public boolean hasPrevious() {
+        return getActivePageNo() > 1;
+    }
+
+    // 是否有下一页
+    public boolean hasNext() {
+        return getActivePageNo() < getPageTotal();
+    }
     @Override
     public String toString() {
         return "Paginator{" +

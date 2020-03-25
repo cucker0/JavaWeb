@@ -133,3 +133,20 @@ MVC是一种思想，MVC的理念是将软件 代码拆分成组件、单独开�
     如果重载setTime，BeanUtils工具赋值JavaBean时失败，
     报异常：java.sql.SQLException: Cannot set time: incompatible types, cannot convert java.sql.Date to java.time.LocalDate Query: SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id, `time` FROM  t_book WHERE `name` LIKE ?; Parameters: [%双%]
     ```
+    
+* 在jsp的表达式中，两int数相除结果为double
+```text
+<c:forEach var="i" begin="${4 - (3 / 2)}" end = 4 - 1, step="1">
+    ${i}
+</c:forEach>
+
+// 结果为
+2
+3
+
+
+/*
+begin="${4 - (3 / 2)}"  结果为2.5
+页变量i类型要求为int，所以这时会下取整
+*/
+```

@@ -153,6 +153,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     @Override
     public int queryBookTotal() {
         String sql = "SELECT COUNT(*) FROM t_book;";
-        return getValue(sql);
+        long count = getValue(sql);
+        return (int) count;
     }
 }
