@@ -291,8 +291,12 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public Paginator<Book> pageByPrice(int activePageNo, int pageSize, double minPrice, double maxPrice) {
+        if (pageSize < 1) {
+            pageSize = 1;
+        }
         int recordsTotal = bookDao.queryBookTotalByPrice(minPrice, maxPrice);
         activePageNo = Page.checkActivePageNo(activePageNo, pageSize, recordsTotal);
+        // System.out.println("activePageNo:" + activePageNo);
         List<Book> items = bookDao.paginationQueryBookByPrice(pageSize * (activePageNo - 1), pageSize, minPrice, maxPrice);
         fillBook(items);
         String url = "manager/bookServlet?action=page";

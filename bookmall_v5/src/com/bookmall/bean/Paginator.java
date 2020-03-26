@@ -77,6 +77,9 @@ public class Paginator<T> {
      * @return
      */
     public int getPageTotal() {
+        if (recordsTotal <= 0) {
+            return 1;
+        }
         int pageTotal = recordsTotal / size;
         // 如果 recordsTotal不是pageSize整数倍，显示总页数要加1页
         if (recordsTotal % size != 0) {

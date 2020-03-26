@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${not empty requestScope.page}">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:if test="${not empty requestScope.page && fn:length(requestScope.page.items) > 0}">
     <div class="clearfix paginator">
         <div class="pull-left text-y-middle">共${requestScope.page.recordsTotal}条</div>
 
@@ -194,7 +195,7 @@
     function specifyPageQuery(pageNo) {
         var parseNum = parseInt(pageNo);
         pageNo = parseNum ? parseNum : null;
-        var page_size = $(".btn-group button").attr("value").trim();
+        var page_size = $(".btn-group button").attr("value") ? $(".btn-group button").attr("value").trim() : 0;
         var min_price = $(".search-by-price input:eq(0)").val() ? parseFloat($(".search-by-price input:eq(0)").val().trim()) : -1;
         var max_price = $(".search-by-price input:eq(1)").val() ? parseFloat($(".search-by-price input:eq(1)").val().trim()) : -1;
 
