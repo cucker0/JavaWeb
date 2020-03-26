@@ -1,6 +1,7 @@
 package com.bookmall.service;
 
 import com.bookmall.bean.Author;
+import com.bookmall.bean.Paginator;
 
 import java.util.List;
 import java.util.Set;
@@ -62,4 +63,12 @@ public interface AuthorService {
      */
     List<Author> queryAuthorByIdSet(Set<Integer> idSet);
 
+    /**
+     * 分页查询作者信息
+     *
+     * @param activePageNo 要查看的页码
+     * @param pageSize 每页显示的条数
+     * @return
+     */
+    Paginator<Author> page(int activePageNo, int pageSize);
 }

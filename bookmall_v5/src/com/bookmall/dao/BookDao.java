@@ -87,4 +87,24 @@ public interface BookDao {
      * @return
      */
     int queryBookTotal();
+
+    /**
+     * 根据图书价格范围，分页查询图书信息
+     * 价格范围：[minPrice, maxPrice]
+     *
+     * @param offSet
+     * @param size
+     * @return
+     */
+    List<Book> paginationQueryBookByPrice(int offSet, int size, double minPrice, double maxPrice);
+
+    /**
+     * 查询指定价格范围内的图书数量
+     * 价格范围：[minPrice, maxPrice]
+     *
+     * @param
+     * @param maxPrice
+     * @return
+     */
+    int queryBookTotalByPrice(double minPrice, double maxPrice);
 }

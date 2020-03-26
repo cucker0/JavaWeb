@@ -1,6 +1,7 @@
 package com.bookmall.daoimpl;
 
 import com.bookmall.bean.Author;
+import com.bookmall.bean.Book;
 import com.bookmall.dao.AuthorDao;
 import com.bookmall.dao.BaseDao;
 import com.bookmall.utils.CommonUtils;
@@ -77,7 +78,7 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
      */
     @Override
     public boolean isValidAuthorId(int authorId) {
-        String sql = "SELECT COUNT(id) FROM t_author WHERE id = ?;";
+        String sql = "SELECT COUNT(*) FROM t_author WHERE id = ?;";
         long count = getValue(sql, authorId);
         return count != 0;
     }
@@ -99,7 +100,7 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
             return isValidAuthorId(author.getId());
         }
         // 检查name、brief是否有效
-        String sql = "SELECT COUNT(id) FROM t_author WHERE `name` = ? AND brief <=> ?;";
+        String sql = "SELECT COUNT(*) FROM t_author WHERE `name` = ? AND brief <=> ?;";
         long count = getValue(sql, author.getName(), author.getBrief());
         return count != 0;
     }
@@ -117,7 +118,7 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
             return false;
         }
         String beanSetParamerts = CommonUtils.getBeanSetParamerts(idSet);
-        String sql = String.format("SELECT COUNT(id) FROM t_author WHERE id IN (%s);", beanSetParamerts);
+        String sql = String.format("SELECT COUNT(*) FROM t_author WHERE id IN (%s);", beanSetParamerts);
         long count = getValue(sql, idSet.toArray());
         return count == idSet.size();
     }
@@ -174,4 +175,30 @@ public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
 //        System.out.println(parametersStr);
         return getBeanList(sql, paramertsList);
     }
+
+    /**
+     * 分页查询作者信息
+     *
+     * @param offset
+     * @param size
+     * @return
+     */
+    @Override
+    public List<Author> paginationQueryAuthor(int offset, int size) {
+        String sql = "SELECT id, `name`, brief FROM t_author ORDER BY id LIMIT ?, ?;";
+        return getBeanList(sql, offset, size);
+    }
+
+    /**
+     * 查询作者总数量
+     *
+     * @return
+     */
+    @Override
+    public int queryAuthorTotal() {
+        String sql = "SELECT COUNT(*) FROM t_author;";
+        long count = getValue(sql);
+        return (int) count;
+    }
+
 }

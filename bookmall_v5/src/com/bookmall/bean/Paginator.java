@@ -12,10 +12,10 @@ public class Paginator<T> {
     // 默认的分页导航条的格式
     private static final int[] PAGE_FORMAT = new int[]{1, 3, 1};
 
-    // 当前页码
+    // 当前页码，0：表示最后一页
     private int activePageNo = 1;
     // 总页码
-    private int pageTotal = 1;
+    // private int pageTotal = 1;
     // 总记录数
     private int recordsTotal;
     // 每页显示的记录条数
@@ -48,15 +48,17 @@ public class Paginator<T> {
 
     // 方法
     public int getActivePageNo() {
-        // activePageNo > pageTotal 显示最后一页
-        if (activePageNo > pageTotal) {
-            return pageTotal;
+        // 异常情况，显示最后一页
+        //      1. activePageNo > pageTotal
+        //      2. activePageNo == 0
+        if (activePageNo > getPageTotal() || activePageNo == 0) {
+            return getPageTotal();
         }
         return activePageNo;
     }
 
     public void setActivePageNo(int activePageNo) {
-        if (activePageNo < 1) {
+        if (activePageNo < 0) { // 需要允许设置当前活动页为0，表示查看最后一页
             this.activePageNo = 1;
         }
         // 当还没有传pageTotal，这时候还是初始值1，限制 activePageNo <= pageTotal 放在设置pageTotal值的方法中
@@ -68,21 +70,31 @@ public class Paginator<T> {
         }
     }
 
+
+    /**
+     * 获取总页码，可由size, recordsTotal计算得出
+     *
+     * @return
+     */
     public int getPageTotal() {
+        int pageTotal = recordsTotal / size;
+        // 如果 recordsTotal不是pageSize整数倍，显示总页数要加1页
+        if (recordsTotal % size != 0) {
+            ++pageTotal;
+        }
         return pageTotal;
     }
 
-    public void setPageTotal(int pageTotal) {
-        if (pageTotal < 1) {
-            this.pageTotal = 1;
-        }
-        // 要满足 activePageNo <= pageTotal
-        else if (activePageNo > pageTotal) {
-            activePageNo = pageTotal;
-        } else {
-            this.pageTotal = pageTotal;
-        }
-    }
+    // public void setPageTotal(int pageTotal) {
+    //     if (pageTotal < 1) {
+    //         pageTotal = 1;
+    //     }
+    //     this.pageTotal = pageTotal;
+    //     // 要满足 activePageNo <= pageTotal
+    //     if (activePageNo > pageTotal) {
+    //         activePageNo = pageTotal;
+    //     }
+    // }
 
     public int getRecordsTotal() {
         return recordsTotal;
@@ -156,7 +168,7 @@ public class Paginator<T> {
     public String toString() {
         return "Paginator{" +
                 "activePageNo=" + activePageNo +
-                ", pageTotal=" + pageTotal +
+                ", pageTotal=" + getPageTotal() +
                 ", recordsTotal=" + recordsTotal +
                 ", size=" + size +
                 ", items=" + items +

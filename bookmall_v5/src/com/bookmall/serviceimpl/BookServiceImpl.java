@@ -5,10 +5,7 @@ import com.bookmall.dao.AuthorDao;
 import com.bookmall.dao.BookDao;
 import com.bookmall.dao.PublisherDao;
 import com.bookmall.dao.Relationship4Book2AuthorDao;
-import com.bookmall.daoimpl.AuthorDaoImpl;
-import com.bookmall.daoimpl.BookDaoImpl;
-import com.bookmall.daoimpl.PublisherDaoImpl;
-import com.bookmall.daoimpl.Relationship4Book2AuthorDaoImpl;
+import com.bookmall.daoimpl.*;
 import com.bookmall.service.BookService;
 import com.bookmall.service.Relationship4Book2AuthorService;
 
@@ -273,18 +270,33 @@ public class BookServiceImpl implements BookService {
         // 查询总记录数
         int recordsTotal = bookDao.queryBookTotal();
         paginator.setRecordsTotal(recordsTotal);
-        // 显示的总页数
-        int pageTotal = recordsTotal / pageSize;
-        // 如果 recordsTotal不是pageSize整数倍，显示总页数要加1页
-        if (recordsTotal % pageSize != 0) {
-            pageTotal = pageTotal + 1;
-        }
-        paginator.setPageTotal(pageTotal);
         // 查询当前要显示的记录
+        // 检查activePageNo合法性
+        activePageNo = paginator.getActivePageNo();
         List<Book> books = bookDao.paginationQueryBook(pageSize * (activePageNo - 1), pageSize);
         fillBook(books);
         paginator.setItems(books);
         paginator.setUrl("manager/bookServlet?action=page");
         return paginator;
+    }
+
+    /**
+     * 根据图书价格范围，分页查询图书信息
+     *
+     * @param activePageNo
+     * @param pageSize
+     * @param minPrice
+     * @param maxPrice
+     * @return
+     */
+    @Override
+    public Paginator<Book> pageByPrice(int activePageNo, int pageSize, double minPrice, double maxPrice) {
+        int recordsTotal = bookDao.queryBookTotalByPrice(minPrice, maxPrice);
+        activePageNo = Page.checkActivePageNo(activePageNo, pageSize, recordsTotal);
+        List<Book> items = bookDao.paginationQueryBookByPrice(pageSize * (activePageNo - 1), pageSize, minPrice, maxPrice);
+        fillBook(items);
+        String url = "manager/bookServlet?action=page";
+        Page<Book> page = new Page<>(activePageNo, pageSize, recordsTotal, items, url);
+        return page.getPaginator();
     }
 }

@@ -35,6 +35,10 @@
         <servlet-name>PublisherServlet</servlet-name>
         <servlet-class>com.bookmall.web.PublisherServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ClientBookServlet</servlet-name>
+        <servlet-class>com.bookmall.web.ClientBookServlet</servlet-class>
+    </servlet>
 
     <!-- URL与Servlet映射 -->
     <servlet-mapping>
@@ -60,5 +64,9 @@
     <servlet-mapping>
         <servlet-name>PublisherServlet</servlet-name>
         <url-pattern>/manager/publisherServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientBookServlet</servlet-name>
+        <url-pattern>/client/clientBookServlet</url-pattern>
     </servlet-mapping>
 </web-app>

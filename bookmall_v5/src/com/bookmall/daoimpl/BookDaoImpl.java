@@ -141,7 +141,7 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     @Override
     public List<Book> paginationQueryBook(int offSet, int size) {
         String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime " +
-                "FROM  t_book LIMIT ?, ?;";
+                "FROM  t_book ORDER BY id LIMIT ?, ?;";
         return getBeanList(sql, offSet, size);
     }
 
@@ -154,6 +154,41 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     public int queryBookTotal() {
         String sql = "SELECT COUNT(*) FROM t_book;";
         long count = getValue(sql);
+        return (int) count;
+    }
+
+    /**
+     * 根据图书价格范围，分页查询图书信息
+     * 价格范围：[minPrice, maxPrice]
+     *
+     * @param offSet
+     * @param size
+     * @param minPrice
+     * @param maxPrice
+     * @return
+     */
+    @Override
+    public List<Book> paginationQueryBookByPrice(int offSet, int size, double minPrice, double maxPrice) {
+        String sql = "SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime " +
+                "FROM  t_book " +
+                "WHERE price BETWEEN ? AND ? " +
+                "ORDER BY id " +
+                "LIMIT ?, ?;";
+        return getBeanList(sql, minPrice, maxPrice, offSet, size);
+    }
+
+    /**
+     * 查询指定价格范围内的图书数量
+     * 价格范围：[minPrice, maxPrice]
+     *
+     * @param minPrice
+     * @param maxPrice
+     * @return
+     */
+    @Override
+    public int queryBookTotalByPrice(double minPrice, double maxPrice) {
+        String sql = "SELECT COUNT(*) FROM t_book WHERE price BETWEEN ? AND ?;";
+        long count = getValue(sql, minPrice, maxPrice);
         return (int) count;
     }
 }

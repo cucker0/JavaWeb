@@ -61,7 +61,7 @@ div {
 }
 
 .b_list {
-    height: 300px;
+    height: 340px;
     width: 250px;
     margin: 20px;
     float: left;
@@ -94,7 +94,6 @@ div {
 }
 
 .book_info {
-
     text-align: left;
 }
 
@@ -102,6 +101,21 @@ div {
     height: 10px;
     width: 300px;
     text-align: left;
+}
+
+.book_info span.sp2 {
+    /*强制span不换行*/
+    white-space: nowrap;
+    /*将span当做块级元素对待*/
+    display: inline-block;
+    /*限制宽度*/
+    width: 215px;
+    /*超出宽度部分隐藏*/
+    overflow: hidden;
+    /*超出部分以点号代替*/
+    text-overflow: ellipsis;
+    /*数字与之前的文字对齐*/
+    line-height: 1;
 }
 
 .wel_word {
@@ -362,3 +376,6 @@ li.disabled {
     cursor: not-allowed;
 }
 
+div.book_author {
+    height: 40px;
+}

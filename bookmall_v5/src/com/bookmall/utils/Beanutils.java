@@ -51,9 +51,9 @@ public class Beanutils {
             //paramsMap.forEach((k, v) -> {
             //    System.out.println(k + ": " + v);
             //});
-            System.out.println("bean===: " + bean);
+            // System.out.println("bean===: " + bean);
             BeanUtils.populate(bean, paramsMap);
-            System.out.println("bean 填充后===: " + bean);
+            // System.out.println("bean 填充后===: " + bean);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

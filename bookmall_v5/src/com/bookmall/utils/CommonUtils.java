@@ -108,6 +108,9 @@ public class CommonUtils {
      */
     public static int parseInt(String intStr, int defaultVal) {
         int ret = 0;
+        if (intStr == null) {
+            return  defaultVal;
+        }
         try {
             ret = Integer.parseInt(intStr);
         } catch (NumberFormatException e) {
@@ -127,8 +130,8 @@ public class CommonUtils {
     public static double parseDouble(String doubleStr, double defaultVal) {
         double ret = 0;
         try {
-            Double.parseDouble(doubleStr);
-        } catch (NumberFormatException e) {
+            ret = Double.parseDouble(doubleStr);
+        } catch (NumberFormatException | NullPointerException e) {
             //e.printStackTrace();
             return defaultVal;
         }

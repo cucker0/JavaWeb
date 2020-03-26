@@ -15,6 +15,11 @@
                 var name = $(this).parents("tr").find("td:first").html();
                 return confirm("《" + name + "》\n 确定删除吗?");
             });
+
+            // 按价格分页查询
+            $(".search-by-price button").click(function () {
+                specifyPageQuery(1);
+            });
         });
     </script>
 </head>
@@ -26,7 +31,16 @@
     <%@ include file="/pages/common/manager_menu.jsp" %>
 </div>
 
+
 <div id="main">
+
+    <div class="search-by-price text-center">
+        价格：
+        <input size="3" value="${param.get("min_price")}" placeholder="￥" >
+        -
+        <input size="3" value="${param.get("max_price")}" placeholder="￥" >
+        <button>确定</button>
+    </div>
     <table>
         <tr>
             <th>书名</th>
@@ -60,8 +74,16 @@
                 </td>
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
-                <td><a href="manager/bookServlet?action=editBook&type=update&id=${book.id}">修改</a></td>
-                <td><a class="delete" href="manager/bookServlet?action=deleteBook&id=${book.id}">删除</a></td>
+                <td>
+                    <a href="manager/bookServlet?action=editBook&type=update&id=${book.id}&page_no=${requestScope.page.activePageNo}&page_size=${requestScope.page.size}">
+                        修改
+                    </a>
+                </td>
+                <td>
+                    <a class="delete" href="manager/bookServlet?action=deleteBook&id=${book.id}&page_no=${requestScope.page.activePageNo}&page_size=${requestScope.page.size}">
+                        删除
+                    </a>
+                </td>
             </tr>
         </c:forEach>
 

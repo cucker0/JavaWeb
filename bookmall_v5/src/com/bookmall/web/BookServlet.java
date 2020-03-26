@@ -60,8 +60,12 @@ public class BookServlet extends BaseServlet {
         // 更新图书
         else if ("update".equalsIgnoreCase(request.getParameter("type"))) {
             int bookId = CommonUtils.parseInt(request.getParameter("id"), 0);
+            int pageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
+            int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 10);
             Book book = bookService.queryBookById(bookId);
             request.setAttribute("book", book);
+            request.setAttribute("pageNo", pageNo);
+            request.setAttribute("pageSize", pageSize);
             authors = authorService.queryAllAuthor(bookId);
             publishers = publisherService.queryAllPublisher(bookId);
         } else {
@@ -90,13 +94,20 @@ public class BookServlet extends BaseServlet {
         bookService.addBook(book);
 
         // 添加完后，URL跳转到图书列表页
-        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
+        // response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
+        // 分页查询显示，并跳转到最后一页
+        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=page&page_no=" + 0);
     }
 
     protected void deleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int bookId = CommonUtils.parseInt(request.getParameter("id"), 0);
+        int pageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
         bookService.deleteBookById(bookId);
-        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
+        // response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
+        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=page" +
+                "&page_no=" + pageNo +
+                "&page_size" + pageSize);
     }
 
     protected void updateBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,12 +115,17 @@ public class BookServlet extends BaseServlet {
         List<Author> authors = authorService.queryAuthorByIdSet(CommonUtils.strArry2IntegerSet(authorsId, null));
         int publisherId = CommonUtils.parseInt(request.getParameter("publisher_id"), 0);
         Publisher publisher = publisherService.queryPublisherById(publisherId);
+        int pageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
         // book中含有id属性
         Book book = Beanutils.copyParams2Bean(request.getParameterMap(), new Book());
         book.setAuthors(authors);
         book.setPublisher(publisher);
         bookService.updateBook(book);
-        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
+        // response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=listBook");
+        response.sendRedirect(request.getContextPath() + "/manager/bookServlet?action=page" +
+                "&page_no=" + pageNo +
+                "&page_size=" + pageSize);
     }
 
     /**
@@ -123,10 +139,15 @@ public class BookServlet extends BaseServlet {
     protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int activePageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
         int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
-
+        double minPrice = CommonUtils.parseDouble(request.getParameter("min_price"), -1);
+        double maxPrice = CommonUtils.parseDouble(request.getParameter("max_price"), -1);
         // 分页查询图书
-        Paginator<Book> page = bookService.page(activePageNo, pageSize);
-        page.setUrl("manager/bookServlet?action=page");
+        Paginator<Book> page = null;
+        if (minPrice >= 0 && minPrice < maxPrice) {
+            page = bookService.pageByPrice(activePageNo, pageSize, minPrice, maxPrice);
+        } else {
+            page = bookService.page(activePageNo, pageSize);
+        }
         request.setAttribute("page", page);
         // 2. 把request请求转发到pages/manager/book_manager.jsp对应的jsp页面去处理(jsp本质就是Servlet)
         // request转发中，/ 表示 http://ip:port/工程名

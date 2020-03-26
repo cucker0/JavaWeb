@@ -1,6 +1,7 @@
 package com.bookmall.web;
 
 import com.bookmall.bean.Author;
+import com.bookmall.bean.Paginator;
 import com.bookmall.service.AuthorService;
 import com.bookmall.serviceimpl.AuthorServiceImpl;
 import com.bookmall.utils.Beanutils;
@@ -43,19 +44,39 @@ public class AuthorServlet extends BaseServlet {
     protected void addAuthor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Author author = Beanutils.copyParams2Bean(request.getParameterMap(), new Author());
         authorService.saveAuthor(author);
-        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=list");
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
+        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=page" +
+                "&page_no=0" +
+                "&page_size=" + pageSize);
     }
 
     protected void deleteAuthor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int authorId = CommonUtils.parseInt(request.getParameter("id"), 0);
         authorService.deleteAuthorById(authorId);
-        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=list");
+        int pageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
+        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=page" +
+                "&page_no=" + pageNo +
+                "&page_size=" + pageSize);
     }
 
     protected void updateAuthor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int pageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
         Author author = Beanutils.copyParams2Bean(request.getParameterMap(), new Author());
         authorService.updateAuthor(author);
-        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=list");
+        response.sendRedirect(request.getContextPath() + "/manager/authorServlet?action=page" +
+                "&page_no=" + pageNo +
+                "&page_size=" + pageSize);
     }
 
+    // 分页显示
+    protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int pageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
+        Paginator<Author> page = authorService.page(pageNo, pageSize);
+        request.setAttribute("page", page);
+        // 转发请求到另外的servlet去处理
+        request.getRequestDispatcher("/pages/manager/author_manager.jsp").forward(request, response);
+    }
 }

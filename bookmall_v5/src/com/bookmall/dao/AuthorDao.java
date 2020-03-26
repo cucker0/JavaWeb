@@ -88,4 +88,20 @@ public interface AuthorDao extends Common<Author> {
      * @return
      */
     List<Author> queryAuthorByIdSet(Set<Integer> idSet);
+
+    /**
+     * 分页查询作者信息
+     *
+     * @param offset
+     * @param size
+     * @return
+     */
+    List<Author> paginationQueryAuthor(int offset, int size);
+
+    /**
+     * 查询作者总数量
+     *
+     * @return
+     */
+    int queryAuthorTotal();
 }

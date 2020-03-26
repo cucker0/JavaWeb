@@ -5,6 +5,7 @@
 <head>
     <%-- 引入head相同部分 --%>
     <%@ include file="/pages/common/head.jsp" %>
+    <%@ include file="/pages/common/bootstrap.jsp" %>
     <title>作者管理</title>
     <script type="text/javascript">
         $(function () {
@@ -33,12 +34,21 @@
             <th colspan="2">操作</th>
         </tr>
 
-        <c:forEach var="author" items="${requestScope.authors}">
+        <c:forEach var="author" items="${requestScope.page.items}">
             <tr>
                 <td>${author.name}</td>
                 <td>${author.brief}</td>
-                <td><a href="manager/authorServlet?action=editAuthor&type=update&id=${author.id}">修改</a></td>
-                <td><a class="delete" href="manager/authorServlet?action=deleteAuthor&id=${author.id}">删除</a></td>
+                <td>
+                    <a href="manager/authorServlet?action=editAuthor&type=update&id=${author.id}&page_no=${requestScope.page.activePageNo}&page_size=${requestScope.page.size}">
+                        修改
+                    </a>
+                </td>
+                <td>
+                    <a class="delete"
+                       href="manager/authorServlet?action=deleteAuthor&id=${author.id}&page_no=${requestScope.page.activePageNo}&page_size=${requestScope.page.size}">
+                        删除
+                    </a>
+                </td>
             </tr>
         </c:forEach>
 
@@ -46,9 +56,10 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><a href="manager/authorServlet?action=editAuthor&type=add">添加作者</a></td>
+            <td><a href="manager/authorServlet?action=editAuthor&type=add&page_size=${requestScope.page.size}">添加作者</a></td>
         </tr>
     </table>
+    <%@ include file="/pages/common/page_navigation.jsp" %>
 </div>
 
 <%-- 引入页脚 --%>

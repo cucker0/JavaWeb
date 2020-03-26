@@ -100,4 +100,15 @@ public interface BookService {
      * @return
      */
     Paginator<Book> page(int activePageNo, int pageSize);
+
+    /**
+     * 根据图书价格范围，分页查询图书信息
+     *
+     * @param activePageNo
+     * @param pageSize
+     * @param minPrice
+     * @param maxPrice
+     * @return
+     */
+    Paginator<Book> pageByPrice(int activePageNo, int pageSize, double minPrice, double maxPrice);
 }

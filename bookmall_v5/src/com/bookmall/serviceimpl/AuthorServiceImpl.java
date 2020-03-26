@@ -1,9 +1,11 @@
 package com.bookmall.serviceimpl;
 
 import com.bookmall.bean.Author;
+import com.bookmall.bean.Paginator;
 import com.bookmall.dao.AuthorDao;
 import com.bookmall.dao.Relationship4Book2AuthorDao;
 import com.bookmall.daoimpl.AuthorDaoImpl;
+import com.bookmall.daoimpl.Page;
 import com.bookmall.daoimpl.Relationship4Book2AuthorDaoImpl;
 import com.bookmall.service.AuthorService;
 
@@ -123,6 +125,23 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> queryAuthorByIdSet(Set<Integer> idSet) {
         return authorDao.queryAuthorByIdSet(idSet);
+    }
+
+    /**
+     * 分页查询作者信息
+     *
+     * @param activePageNo 要查看的页码
+     * @param pageSize     每页显示的条数
+     * @return
+     */
+    @Override
+    public Paginator<Author> page(int activePageNo, int pageSize) {
+        int recordsTotal = authorDao.queryAuthorTotal();
+        activePageNo = Page.checkActivePageNo(activePageNo, pageSize, recordsTotal);
+        List<Author> authors = authorDao.paginationQueryAuthor(pageSize * (activePageNo - 1), pageSize);
+        String url = "manager/authorServlet?action=page";
+        Page<Author> page = new Page<>(activePageNo, pageSize, recordsTotal, authors, url);
+        return page.getPaginator();
     }
 
 }

@@ -23,6 +23,11 @@
         input {
             padding: 5px;
         }
+
+        form input[type=submit] {
+            float: right;
+            margin: 33px 82px 0 0;
+        }
     </style>
 </head>
 <body>
@@ -33,7 +38,7 @@
     <%@ include file="/pages/common/manager_menu.jsp" %>
 </div>
 
-<div id="main">
+<div id="main" class="clearfix">
     <c:choose>
         <%-- 添加图书 --%>
         <c:when test="${param.type == 'add'}">
@@ -48,7 +53,7 @@
                         <td>库存</td>
                         <td>出版社</td>
                         <td>出版日期</td>
-                        <td colspan="2">操作</td>
+                        <td>图片路径</td>
                     </tr>
                     <tr>
                         <td><input name="name" type="text"/></td>
@@ -73,9 +78,10 @@
                             </select>
                         </td>
                         <td><input name="sqlTime" type="text"></td>
-                        <td><input type="submit" value="提交"/></td>
+                        <td><input name="imgPath" type="text"></td>
                     </tr>
                 </table>
+                <input type="submit" value="提交"/>
             </form>
         </c:when>
         <%-- 更新图书 --%>
@@ -83,6 +89,8 @@
             <form action="manager/bookServlet" method="post">
                 <input type="hidden" name="action" value="updateBook">
                 <input type="hidden" name="id" value="${requestScope.book.id}">
+                <input type="hidden" name="page_no" value="${requestScope.pageNo}">
+                <input type="hidden" name="page_size" value="${requestScope.pageSize}">
                 <table>
                     <tr>
                         <td>书名</td>
@@ -92,7 +100,7 @@
                         <td>库存</td>
                         <td>出版社</td>
                         <td>出版日期</td>
-                        <td>操作</td>
+                        <td>图片路径</td>
                     </tr>
                     <tr>
                         <td><input name="name" type="text" value="${requestScope.book.name}"/></td>
@@ -131,9 +139,10 @@
                             </select>
                         </td>
                         <td><input name="sqlTime" type="text" value="${book.time}"></td>
-                        <td><input type="submit" value="提交"/></td>
+                        <td><input name="imgPath" type="text" value="${book.imgPath}"></td>
                     </tr>
                 </table>
+                <input type="submit" value="提交"/>
             </form>
         </c:when>
     </c:choose>

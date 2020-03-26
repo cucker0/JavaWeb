@@ -58,6 +58,8 @@
             <form action="manager/authorServlet" method="post">
                 <input type="hidden" name="action" value="updateAuthor">
                 <input type="hidden" name="id" value="${requestScope.author.id}">
+                <input type="hidden" name="page_no" value="${param.get("page_no")}">
+                <input type="hidden" name="page_size" value="${param.get("page_size")}">
                 <table>
                     <tr>
                     <td>姓名</td>

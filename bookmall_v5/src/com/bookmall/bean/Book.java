@@ -94,6 +94,9 @@ public class Book {
     }
 
     public String getImgPath() {
+        if (imgPath == null) {
+            return "static/img/default.jpg";
+        }
         return imgPath;
     }
 

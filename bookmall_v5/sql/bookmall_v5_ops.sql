@@ -51,10 +51,10 @@ SELECT id, `name`, brief FROM t_author ORDER BY id;
 SELECT id, `name`, brief FROM t_author WHERE id = ?;
 
 -- 检查用户ID是否有效
-SELECT COUNT(id) FROM t_author WHERE id = ?;
+SELECT COUNT(*) FROM t_author WHERE id = ?;
 
 -- 给定的多个作者ID是否全部有效
-SELECT COUNT(id) FROM t_author WHERE id IN (?, ?);
+SELECT COUNT(*) FROM t_author WHERE id IN (?, ?);
 
 -- 查找作者名中包含指定关键字的作者
 SELECT id, `name`, brief FROM t_author WHERE `name` LIKE '%?%';
@@ -64,7 +64,13 @@ SELECT id, `name`, brief FROM t_author WHERE `name` LIKE '%科夫%';
 SELECT id, `name`, brief FROM t_author WHERE id IN (?, ?);
 
 -- 指定的作者名、简介的作者是否存在
-SELECT COUNT(id) FROM t_author WHERE `name` = ? AND brief <=> ?;
+SELECT COUNT(*) FROM t_author WHERE `name` = ? AND brief <=> ?;
+
+-- 查询作者总数量
+SELECT COUNT(*) FROM t_author;
+
+-- 分页查询作者信息
+SELECT id, `name`, brief FROM t_author ORDER BY id LIMIT 3, 5 ;
 
 
 --
@@ -97,10 +103,18 @@ SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisher
 SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book WHERE id IN (?, ?);
 
 -- 分页查询图书
-SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book LIMIT ?, ?;
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime FROM  t_book ORDER BY id LIMIT ?, ?;
 
 -- 查询图书总数量
 SELECT COUNT(*) FROM t_book;
+
+-- 根据图书价格范围，分页查询图书信息
+SELECT id, `name`, price, sales, stock, img_path imgPath, publisher_id publisherId, `time` sqlTime 
+FROM  t_book ORDER BY id
+WHERE price BETWEEN ? AND ? LIMIT ?, ?;
+
+-- 查询指定价格范围内的图书数量
+SELECT COUNT(*) FROM t_book WHERE price BETWEEN ? AND ?;
 
 
 --

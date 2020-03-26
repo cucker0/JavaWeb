@@ -195,8 +195,20 @@
         var parseNum = parseInt(pageNo);
         pageNo = parseNum ? parseNum : null;
         var page_size = $(".btn-group button").attr("value").trim();
+        var min_price = $(".search-by-price input:eq(0)").val() ? parseFloat($(".search-by-price input:eq(0)").val().trim()) : -1;
+        var max_price = $(".search-by-price input:eq(1)").val() ? parseFloat($(".search-by-price input:eq(1)").val().trim()) : -1;
+
         if (pageNo) {
-            location.href = "${requestScope.page.url}&page_no=" + pageNo + "&page_size=" + page_size;
+            if (min_price && max_price && min_price < max_price) {
+                location.href = "${requestScope.page.url}" +
+                    "&page_no=" + pageNo +
+                    "&min_price=" + min_price +
+                    "&max_price=" + max_price;
+            } else {
+                location.href = "${requestScope.page.url}" +
+                    "&page_no=" + pageNo +
+                    "&page_size=" + page_size;
+            }
         }
     }
 
