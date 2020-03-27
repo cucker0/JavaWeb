@@ -115,7 +115,13 @@ div {
     /*超出部分以点号代替*/
     text-overflow: ellipsis;
     /*数字与之前的文字对齐*/
-    line-height: 1;
+    /*line-height: 1;*/
+}
+
+/* 为了与 .book_info span.sp2 对齐  */
+.book_info span.sp1 {
+    display: inline-block;
+    overflow: hidden;
 }
 
 .wel_word {
