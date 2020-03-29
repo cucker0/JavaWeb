@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie</title>
+    <style type="text/css">
+        ul li {
+            list-style: none;
+        }
+
+        iframe {
+            width: 500px;
+            height: 500px;
+            float: left;
+            border: grey 1px solid;
+            margin: 0 20px 0 0;
+        }
+
+        .option {
+            float: left;
+        }
+
+        .clearfix:before, .clearfix:after {
+            display: table;
+            content: "";
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<h3>Cookie</h3>
+
+<div class="container clearfix">
+    <iframe name="target"></iframe>
+
+    <div class="option">
+        <li><a target="target" href="cookieServlet?action=createCookie">创建cookie</a></li>
+        <li><a target="target" href="cookieServlet?action=getCookie">获取cookie</a></li>
+        <li><a target="target" href="cookieServlet?action=updateCookie">修改cookie</a></li>
+        <li>Cookie的生活周期
+            <ul>
+                <li><a target="target" href="cookieServlet?action=defaultLife">cookie的默认过期时间</a></li>
+                <li><a target="target" href="cookieServlet?action=deleteCookie">立即删除cookie</a></li>
+                <li><a target="target" href="#">设置cookie存活3600秒</a></li>
+            </ul>
+        </li>
+        <li><a target="target" href="#">设置cookie应用的路径</a></li>
+    </div>
+</div>
+</body>
+</html>
