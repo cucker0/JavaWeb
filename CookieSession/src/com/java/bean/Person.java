@@ -1,6 +1,8 @@
 package com.java.bean;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private String name;
     // 0: female    1: male
     private int sex;
