@@ -70,4 +70,29 @@ public class CookieServlet extends BaseServlet {
         response.addCookie(cook1);
         response.addCookie(cook2);
     }
+
+    protected void  deleteCookie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cookie[] cookies = request.getCookies();
+        Cookie ck = getCookieByName(cookies, "no");
+        if (ck != null) {
+            // maxAge = 0 时，表示让客户端立即删除该cookie
+            ck.setMaxAge(0);
+            response.addCookie(ck);
+            response.getWriter().write("删除name为no的cookie");
+        }
+    }
+
+    protected void  setCookieMaxAge(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cookie ck = new Cookie("username", "zhaoliu");
+        ck.setMaxAge(1800);
+        response.addCookie(ck);
+        response.getWriter().write("创建名为username的cookie，" + "1800秒后过期");
+    }
+
+    protected void  setCookiePath(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cookie cookie = new Cookie("superUser", "admin");
+        cookie.setPath(request.getContextPath() + "/manager");
+        response.addCookie(cookie);
+        response.getWriter().write("已添加一个有path限制的cookie");
+    }
 }

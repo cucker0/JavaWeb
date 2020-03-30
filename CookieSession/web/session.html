@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Session</title>
+    <style type="text/css">
+        ul li {
+            list-style: none;
+        }
+
+        iframe {
+            width: 500px;
+            height: 500px;
+            float: left;
+            border: grey 1px solid;
+            margin: 0 20px 0 0;
+        }
+
+        .option {
+            float: left;
+        }
+
+        .clearfix:before, .clearfix:after {
+            display: table;
+            content: "";
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<h3>Session</h3>
+
+<div class="container clearfix">
+    <iframe name="target"></iframe>
+
+    <div class="option">
+        <li><a target="target" href="sessionServlet?action=createOrGetSession">session的创建和获取(id,是否为新创建)</a></li>
+        <li><a target="target" href="sessionServlet?action=setSessionAttribute">session域数据的添加</a></li>
+        <li><a target="target" href="sessionServlet?action=getSessionAttribute">session域数据的获取</a></li>
+        <li>Session的生命周期
+            <ul>
+                <li><a target="target" href="sessionServlet?action=defaultLife">session的默认过期时间</a></li>
+                <li><a target="target" href="sessionServlet?action=deleteCookie">立即删除session</a></li>
+                <li><a target="target" href="sessionServlet?action=setCookieMaxAge">设置session5秒后删除</a></li>
+            </ul>
+        </li>
+    </div>
+</div>
+</body>
+</html>

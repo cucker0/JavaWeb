@@ -7,10 +7,26 @@
         <servlet-name>CookieServlet</servlet-name>
         <servlet-class>com.java.web.CookieServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.java.web.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SessionServlet</servlet-name>
+        <servlet-class>com.java.web.SessionServlet</servlet-class>
+    </servlet>
 
     <!-- servlet、url mapping -->
     <servlet-mapping>
         <servlet-name>CookieServlet</servlet-name>
         <url-pattern>/cookieServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SessionServlet</servlet-name>
+        <url-pattern>/sessionServlet</url-pattern>
     </servlet-mapping>
 </web-app>

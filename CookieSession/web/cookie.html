@@ -37,14 +37,19 @@
         <li><a target="target" href="cookieServlet?action=createCookie">创建cookie</a></li>
         <li><a target="target" href="cookieServlet?action=getCookie">获取cookie</a></li>
         <li><a target="target" href="cookieServlet?action=updateCookie">修改cookie</a></li>
-        <li>Cookie的生活周期
+        <li>Cookie的生命周期
             <ul>
                 <li><a target="target" href="cookieServlet?action=defaultLife">cookie的默认过期时间</a></li>
                 <li><a target="target" href="cookieServlet?action=deleteCookie">立即删除cookie</a></li>
-                <li><a target="target" href="#">设置cookie存活3600秒</a></li>
+                <li><a target="target" href="cookieServlet?action=setCookieMaxAge">设置cookie存活1800秒</a></li>
             </ul>
         </li>
-        <li><a target="target" href="#">设置cookie应用的路径</a></li>
+        <li>
+            <a target="target" href="cookieServlet?action=setCookiePath">设置cookie应用的路径</a>
+            <ul>
+                <li><a target="_blank" href="manager/login.html">有path限制的cookie测试</a></li>
+            </ul>
+        </li>
     </div>
 </div>
 </body>
