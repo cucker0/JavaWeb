@@ -1,5 +1,7 @@
 package com.java.web;
 
+import com.java.bean.Person;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ public class SessionServlet extends BaseServlet {
     protected void setSessionAttribute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("age", 18);
+        session.setAttribute("person", new Person("lvmeng", 1));
         response.getWriter().write("成功保存数据到session域对象");
     }
 
@@ -36,7 +39,34 @@ public class SessionServlet extends BaseServlet {
         // 给session域对象添加属性时，属性值要可序列化
         response.getWriter().write("从session域对象中获取数据:<br>");
         response.getWriter().write("age: " + session.getAttribute("age"));
-        response.getWriter().write("<br>person: ");
+        response.getWriter().write("<br>person: " + session.getAttribute("person"));
+    }
+
+    protected void defaultLife(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        // 最大不活动间隔时间(单位：秒)
+        int maxInterval = session.getMaxInactiveInterval();
+        response.getWriter().write("最大不活动间隔时间：" + maxInterval + "秒");
+    }
+
+    // 立即删除session
+    protected void invalidate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        // 这里只删除了服务器端内存中的session对象，不通知客户端删除名为SESSIONID的cookie
+        // 当执行session.invalidate()后，客户端传过来的session ID也是无效的了，再获取时服务器会重新创建一个session
+        session.invalidate();
+        response.getWriter().write("session立即删除了");
+    }
+
+    // 设置最大不活动间隔时间，即超时时间
+    protected void setMaxInactiveInterval(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        // session.setMaxInactiveInterval(时间)
+        // 单位：秒
+        // 超时信息记录在服务端，同样修改超时时间不会通知客户端
+        session.setMaxInactiveInterval(6);
+        session.getLastAccessedTime();
+        response.getWriter().write("session设置的默认超时时间：" + 6 + "秒");
     }
 
     protected void getSessionAfterCloseBrowser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
