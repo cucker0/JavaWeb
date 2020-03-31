@@ -239,8 +239,10 @@ out输出流与response.getwriter()输出流缓冲区工作原理
 ```
 
 语法
-```jsp
+```
 <jsp:include page=""></jsp:include>
+或
+<jsp:include page="" />
 ```
 
 翻译后的包含jsp文件
