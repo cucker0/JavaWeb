@@ -75,7 +75,7 @@ public class SessionServlet extends BaseServlet {
         // 设置cookie的maxAge
         ck.setMaxAge(1800);
         response.addCookie(ck);
-        response.getWriter().write("session半小时后过期，关闭浏览器后session仍可生效");
+        response.getWriter().write("设置session超时时间为半小时，关闭浏览器后session仍可生效");
     }
 
 }
