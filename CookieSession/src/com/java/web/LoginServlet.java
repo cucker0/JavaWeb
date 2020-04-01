@@ -4,11 +4,15 @@ import com.java.utils.CommonUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 利用cookie，一段时间内免登录
+ *
+ * manager
+ */
 public class LoginServlet extends BaseServlet {
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

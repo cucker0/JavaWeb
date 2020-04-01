@@ -57,7 +57,7 @@
         <c:otherwise>
             <div class="box">
                 访问用户中心，需要登录
-                <a href="login.jsp">[登录]</a>
+                <a href="manager/login.jsp">[登录]</a>
             </div>
         </c:otherwise>
     </c:choose>

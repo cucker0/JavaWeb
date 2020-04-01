@@ -9,8 +9,12 @@ import java.io.IOException;
 public class CookieServlet extends BaseServlet {
     protected void createCookie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie cookie = new Cookie("no", "xs1001");
-        // 在response headers中添加一行Set-Cookie: no=xs1001
-        // response.addCookie(cookie);主要是添加了一个response header，效果同response.addHeader("Set-Cookie", "no=xs1001");
+        /*
+        * 把cookie信息添加到response对象中
+        *
+        * 在response headers中添加一行Set-Cookie: no=xs1001
+        * response.addCookie(cookie);主要是添加了一个response header，效果同response.addHeader("Set-Cookie", "no=xs1001");
+        * */
         response.addCookie(cookie);
         response.getWriter().write("cookie 创建成功，name为no");
     }
@@ -36,7 +40,7 @@ public class CookieServlet extends BaseServlet {
     }
 
     protected void getCookie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 从request中获取cookie信息，获取到的是一个数组
+        // 从request中获取所有cookie信息，获取到的是一个数组
         Cookie[] cookies = request.getCookies();
         Cookie cookie = getCookieByName(cookies, "no");
         System.out.println("名为no的cookie: " + cookie);
