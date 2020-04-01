@@ -11,8 +11,29 @@ Cookie是一段不超过4KB的小型文本数据，由一个名称（Name）、�
 ```
 
 * **cookie数据只保存在客户端(浏览器)，服务器不保存cookie数据**
+
 * cookie值要求
-    >对于0版cookies，值不能包含中文、空格、方括号、圆括号、等号、逗号、双引号、斜杠、问号、@符号、冒号和分号。空值在所有浏览器上的行为可能不同
+```text
+值为String型，不能包含中文、空格、方括号、圆括号、等号、逗号、双引号、斜杠、问号、@符号、冒号和分号。
+空值在所有浏览器上的行为可能不同
+一般包含字母、数字、-、_
+
+如果是二进制值，需要转成BASE64编码，如把中文转成 BASE64编码的形式
+
+With Version 0 cookies, values should not contain white 
+space, 空格
+brackets, 方括号
+parentheses, 圆括号
+equals signs, 等号
+commas, 都好
+double quotes, 双引号
+slashes, 斜杠
+question marks, 问好
+at signs, @符号
+colons, 冒号
+and semicolons. 分号
+Empty values may not behave the same way on all browsers.
+```  
 
 * cookie在客户端本地是如何保存的，保存在哪
 ```text
@@ -215,17 +236,120 @@ cookie对象的path，表示该cookie应用的path范围，是前缀匹配
     ```
 
 ### 利用cookie一段时间内免登录
+```text
+原理：服务端判断request是否有指定name的cookie，
+有则已经登录，没有则告诉客户端跳转到登录页面
+登录逻辑：判断用户密码是否匹配，
+如果匹配，则创建指定name的cookie，设置cookie的maxAge（即可多久有效）
+并添加到response对象中，这样登录一次后，在一段时间内就可以免登录了
+```
+
 * 一段时间内免登录示例  
     [jsp页面](../CookieSession/web/manager/user_home.jsp)  
     [Servlet：login \ logout](../CookieSession/src/com/java/web/LoginServlet.java)  
    
 
+## session
+### 什么是session
+```text
+session即会话，服务器端用来保存用户数据的一种技术，并且Session会话技术是基于Cookie实现的。
+Session对象存储特定用户会话所需的属性及配置信息。
+Session是jsp中九大内置对象之一，session是一个域对象
+
+服务端有一个session池，用于存取多个session对象，一个session对象包含了id和其他属性，重要的属性信息数据只保存在服务端
+客户端(浏览器)用一个约定name的cookie来保存session的id值，一个session id就相当于一个令牌(门票)，客户端主要保存了session id信息。
+    约定的cookie name有服务端指定，如Tomcat为JSESSIONID
+服务端与客户端就是通过session的id来匹配关联
+```
+
+### 创建或获取session
+```text
+String getId()  获取session id
+boolean isNew()  判断该sessin是否为新建的
+```
+
+* request.getSession()
+    ```text
+    从session池中返回与当前request中的session id关联的session对象，
+    如果没有关联的session就新建一个session对象，并把该session id信息以cookie形式添加到response header返回给客户端
+    
+    HttpSession session = request.getSession();
+    ```
+    
+* 示例
+    [创建或获取session Servlet：createOrGetSession](../CookieSession/src/com/java/web/SessionServlet.java)  
+    
+    访问http://localhost:8080/cookieSession/session.html，
+    
+    点击 session的创建和获取(id,是否为新创建)
+    ![](../images/cookieSession/session_01.png)  
+    
+    再次访问 session的创建和获取(id,是否为新创建)  
+    ![](../images/cookieSession/session_02.png)  
+    ![](../images/cookieSession/session_03.png)  
+
+* 创建或获取session过程
+    ![](../images/cookieSession/session的创建或获取.png)  
+
+#### 服务端创建或获取session过程
+1. 从request解析session id信息（若有，则包含在request header中的Cookie字段中）
+2. 如果无session id信息
+    >就新建session对象，放入session池，并把session id信息填在在resposne中，即添加Set-Cookie: JESSION=sessionId
+3. 如果有session id信息
+    >则根据id信息到session池中查找此session, 如果有且没有过期，则返回此session对象，否则新建session，步骤同2
+
+### session域对象属性数据的添加与获取
+```text
+getAttribute(String name)  通过属性名获取值
+setAttribute(String name, Object value)  设置属性、属性值
+```
+
+[设置session属性 Servlet：setSessionAttribute](../CookieSession/src/com/java/web/SessionServlet.java)  
+[获取session属性 Servlet：getSessionAttribute](../CookieSession/src/com/java/web/SessionServlet.java)  
+
+### session生命周期控制
+```text
+session的默认超时时间为30分钟
+```
+* session默认超时时间全局配置
+    ```xml
+    <!-- 配置文件：tomcat程序根路径的conf/web.xml -->
+    <!-- ==================== Default Session Configuration ================= -->
+    <!-- You can set the default session timeout (in minutes) for all newly   -->
+    <!-- created sessions by modifying the value below.                       -->
+    
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    ```
+* session默认超时时间单个站点生效
+    ```xml
+    <!--
+    配置文件：web/WEB-INF/web.xml
+    在web-app块内添加下列配置
+    -->
+    
+    <session-config>
+        <!-- 单位：分 -->
+        <session-timeout>30</session-timeout>
+    </session-config>
+    ```
+
+* 控制session生命周期方法
+    ```text
+    getMaxInactiveInterval()  获取session对象的超时时间，单位为秒
+    
+    setMaxInactiveInterval(int interval)  设置sessio的超时时间（设置最大不活动间隔时间），单位为秒
+    
+    invalidate()  立刻删除session，使该session对象马上失效，除所有绑定到它的属性对象。
+        此变动是发生在服务端的，删除该session后，客户端上的保存session id的cookie还不会删除
+        等到下次客户端把session id信息传到服务端获取session，已经无此id的session了，服务端会新建一个session，并通知客户端新session的id
+    ```
+
+[立刻删除session：invalidate](../CookieSession/src/com/java/web/SessionServlet.java) 
+[设置session的超时时间：setMaxInactiveInterval](../CookieSession/src/com/java/web/SessionServlet.java) 
 
 ## 请求过程中的session操作
-1. 首先要解析请求中的sessionId信息，然后将sessionId存储到request的参数列表中。
-
-2. 然后再从 request获取session的时候，如果存在sessionId那么就根据Id从session池中获取session，如果sessionId不存在或者session失效，那么则新建session并且将session信息放入session池，供下次使用。
-
 
 response headers
 Set-Cookie: no=xs1001
@@ -272,3 +396,6 @@ session纯化与活化
 序列化文件
 ${CATALINA_BASE}/work/Catalina/localhost/项目名/SESSIONS.ser
 C:\Users\cd\.IntelliJIdea2019.1\system\tomcat\Tomcat_9_0_30_(1)_JavaWeb_3\work\Catalina\localhost\cookieSession\SESSIONS.ser
+
+
+## [cookie和session测试入口页面](../CookieSession/web/index.html)

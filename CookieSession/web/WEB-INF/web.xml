@@ -3,6 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <session-config>
+        <!-- session的默认超时时间，单位：分 -->
+        <session-timeout>60</session-timeout>
+    </session-config>
+
     <servlet>
         <servlet-name>CookieServlet</servlet-name>
         <servlet-class>com.java.web.CookieServlet</servlet-class>
