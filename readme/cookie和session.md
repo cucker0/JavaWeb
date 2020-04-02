@@ -300,7 +300,7 @@ boolean isNew()  判断该sessin是否为新建的
     ![](../images/cookieSession/session的创建或获取.png)  
 
 #### 服务端创建或获取session过程
-1. 从request解析session id信息（若有，则包含在request header中的Cookie字段中）
+1. 从request解析session id信息（若有，则包含在request header中的Cookie字段中、或直接[携带在URL中](#浏览器禁用Cookie后如何关联session)）
 2. 如果无session id信息
     >就新建session对象，放入session池，并把session id信息填在在resposne中，即添加Set-Cookie: JESSION=sessionId
 3. 如果有session id信息
