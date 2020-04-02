@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * 利用session，完成用户的登录、退出功能
+ * 利用session，实现用户的登录、退出功能
  *
  * secret_book
  */
