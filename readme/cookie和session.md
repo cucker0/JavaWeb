@@ -265,7 +265,7 @@ Session是jsp中九大内置对象之一，session是一个域对象
     约定的cookie name有服务端指定，如Tomcat为JSESSIONID
 服务端与客户端就是通过session的id来匹配关联
 
-服务端session池保存在内存中，是用HashMap实现的
+服务端session池保存在内存中，是用HashMap实现的，session对象本身也是一个HashMap
 ```
 
 ### 创建或获取session
