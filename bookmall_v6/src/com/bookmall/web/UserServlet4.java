@@ -8,6 +8,7 @@ import com.bookmall.utils.Beanutils;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class UserServlet4 extends BaseServlet {
@@ -32,17 +33,21 @@ public class UserServlet4 extends BaseServlet {
         User user = Beanutils.copyParams2Bean(request.getParameterMap(), new User());
         User user1 = userService.login(user);
 
-        System.out.println(user);
-        // save username to request object
-        request.setAttribute("username", user.getUsername());
+        // 登录失败
         if (user1 == null) {
             System.out.println("用户名或密码错误，登录失败！");
             // 把需要返回给客户端的提示信息，保存到 request与对象中
             request.setAttribute("tips", "用户名或密码错误，登录失败！");
             // 转发请求由另一个Servlet来处理
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
-        } else {
+        }
+        // 登录成功
+        else {
             System.out.println("登录成功");
+            // 获取或创建session
+            HttpSession session = request.getSession();
+            // 在session对象中添加user属性值
+            session.setAttribute("user", user1);
             request.getRequestDispatcher("/pages/user/regist_success.jsp").forward(request, response);
         }
     }
@@ -90,5 +95,13 @@ public class UserServlet4 extends BaseServlet {
             // 转发到注册URL，由该页面响应
             request.getRequestDispatcher("pages/user/register.jsp").forward(request, response);
         }
+    }
+
+    // 退出登录
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 删除session对象中的user属性
+        request.getSession().removeAttribute("user");
+        // 让客户端URL跳转到首页
+        response.sendRedirect(request.getContextPath());
     }
 }

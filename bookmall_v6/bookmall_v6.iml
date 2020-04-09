@@ -26,5 +26,6 @@
     <orderEntry type="library" name="junit-4.12" level="application" />
     <orderEntry type="library" name="commons-collections-3.2.2" level="application" />
     <orderEntry type="library" name="commons-beanutils-1.9.4" level="application" />
+    <orderEntry type="library" name="kaptcha-2.3.2" level="application" />
   </component>
 </module>
