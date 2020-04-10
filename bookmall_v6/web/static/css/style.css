@@ -95,6 +95,7 @@ div {
 
 .book_info {
     text-align: left;
+    padding: 0 5px;
 }
 
 .book_info div {
@@ -109,7 +110,7 @@ div {
     /*将span当做块级元素对待*/
     display: inline-block;
     /*限制宽度*/
-    width: 215px;
+    width: 210px;
     /*超出宽度部分隐藏*/
     overflow: hidden;
     /*超出部分以点号代替*/
@@ -213,9 +214,9 @@ h1 {
 }
 
 .form .itxt {
-    border: 0 none;
+    /*border: 0 none;*/
     float: none;
-    font-family: "宋体";
+    font-family: "宋体", serif;
     font-size: 14px;
     height: 18px;
     line-height: 18px;
@@ -223,6 +224,20 @@ h1 {
     padding: 10px 0 10px 10px;
     width: 220px;
     border: 1px #e3e3e3 solid;
+}
+
+.form input[name=code].itxt  {
+    width: 100px;
+}
+
+.form label {
+    display: block;
+    margin: 10px 0
+}
+
+.form label span {
+    display: inline-block;
+    width: 75px;
 }
 
 #sub_btn {
@@ -367,6 +382,10 @@ h1 {
 /* 垂直方向上，以基础线对齐 */
 .y-baseline {
     vertical-align: baseline !important;
+}
+
+.y-middle {
+    vertical-align: middle;
 }
 
 .text-y-middle {

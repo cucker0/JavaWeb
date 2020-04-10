@@ -20,3 +20,25 @@ bookmall v6
 
 
 ### 显示登录的用户名
+
+
+
+### 其他
+```text
+history.back(-1):直接返回当前页的上一页，数据全部消息，是个新页面
+history.go(-1):也是返回当前页的上一页，不过表单里的数据全部还在 
+history.back(1) 前进 
+history.back(-1) 后退
+
+
+window.location.reload(); //刷新 
+window.history.go(1); //前进 
+window.history.go(-1); //返回+刷新 
+window.history.forward(); //前进 
+window.history.back(); //返回 
+```
+
+* 客户端js防止form表单重复提交
+```text
+<body onunload="location='about:blank'">
+```

@@ -6,6 +6,6 @@
 %>
 <div id="bottom">
     <span>
-        尚硅谷书城.Copyright &copy; <%= yearStr %>
+        &copy; <%= yearStr %>&nbsp;&nbsp;尚硅谷书城
     </span>
 </div>

@@ -7,65 +7,75 @@
     <title>尚硅谷会员注册页面</title>
 
     <script type="text/javascript">
+        // 刷新验证码
+        function flushImgCode() {
+            var time = (new Date()).getTime();
+            $(".imgcode")[0].src = "kaptcha.jpg?v=" + time;
+        }
+
+        // 检查输入用于名、密码的合法性
+        function checkUser() {
+            // 获取用户名
+            var usernameValue = $("#username").val();
+            // 验证用户名是否合法,规则如下：必须由字母，数字，下划线组成，并且长度为5到15位。
+            var usernameReg = /^\w{5,15}$/;
+            // 验证用户信息
+            if (!usernameReg.test(usernameValue)) {
+                // 提示用户
+                alert("用户名不合法！");
+                return false;
+            }
+
+            // 获取密码
+            var passwordValue = $("#password").val();
+            // 验证密码是否合法,规则如下：必须由字母，数字，下划线组成，并且长度为5到15位。
+            var passwordReg = /^\w{5,15}$/;
+            // 验证用户信息
+            if (!passwordReg.test(passwordValue)) {
+                // 提示用户
+                alert("密码不合法！");
+                return false;
+            }
+
+            // 获取确认密码
+            var repwdValue = $("#repwd").val();
+            // 验证确认密码和密码一致
+            if (passwordValue != repwdValue) {
+                // 提示用户
+                alert("确认密码和密码不一致！");
+                return false;
+            }
+
+            // 获取用户名
+            var emailValue = $("#email").val();
+            // 验证邮件输入是否合法。
+            var emailReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+
+            if (!emailReg.test(emailValue)) {
+                // 提示用户
+                alert("邮件输入不合法！");
+                return false;
+            }
+
+
+            // 获取验证码信息
+            var codeValue = $("#code").val();
+            // 验证验证码不为空！
+            if (codeValue == "") {
+                alert("验证码不能为空！");
+            }
+
+            return true;
+        }
+
         // 页面加载完成之后
         $(function () {
 
             // 给注册按钮添加事件
-            $("#sub_btn").click(function () {
+            $("#sub_btn").click(checkUser);
 
-                // 获取用户名
-                var usernameValue = $("#username").val();
-                // 验证用户名是否合法,规则如下：必须由字母，数字，下划线组成，并且长度为5到15位。
-                var usernameReg = /^\w{5,15}$/;
-                // 验证用户信息
-                if (!usernameReg.test(usernameValue)) {
-                    // 提示用户
-                    alert("用户名不合法！");
-                    return false;
-                }
-
-                // 获取密码
-                var passwordValue = $("#password").val();
-                // 验证密码是否合法,规则如下：必须由字母，数字，下划线组成，并且长度为5到15位。
-                var passwordReg = /^\w{5,15}$/;
-                // 验证用户信息
-                if (!passwordReg.test(passwordValue)) {
-                    // 提示用户
-                    alert("密码不合法！");
-                    return false;
-                }
-
-                // 获取确认密码
-                var repwdValue = $("#repwd").val();
-                // 验证确认密码和密码一致
-                if (passwordValue != repwdValue) {
-                    // 提示用户
-                    alert("确认密码和密码不一致！");
-                    return false;
-                }
-
-                // 获取用户名
-                var emailValue = $("#email").val();
-                // 验证邮件输入是否合法。
-                var emailReg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-
-                if (!emailReg.test(emailValue)) {
-                    // 提示用户
-                    alert("邮件输入不合法！");
-                    return false;
-                }
-
-
-                // 获取验证码信息
-                var codeValue = $("#code").val();
-                // 验证验证码不为空！
-                if (codeValue == "") {
-                    alert("验证码不能为空！");
-                }
-
-                return true;
-            });
-
+            // 刷新验证码
+            $(".imgcode").click(flushImgCode);
         });
 
     </script>
@@ -80,7 +90,9 @@
 <body>
 
 <div id="login_header">
-    <img class="logo_img" alt="" src="static/img/logo.gif">
+    <a href="">
+        <img class="logo_img" alt="" src="static/img/logo.gif">
+    </a>
 </div>
 
 <div class="login_banner">
@@ -103,40 +115,45 @@
                     </span>
                 </div>
                 <div class="form">
-<%--                    <form action="register" method="post">--%>
+                    <%--                    <form action="register" method="post">--%>
                     <form action="userServlet" method="post">
                         <input type="hidden" name="action" value="register">
-                        <label>用户名称：</label>
-                        <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off"
-                               tabindex="1" name="username" id="username"
-                               value="<%= request.getAttribute("username") == null ? "admin" : request.getAttribute("username") %>"/>
-                        <br/>
-                        <br/>
-                        <label>用户密码：</label>
-                        <input class="itxt" type="password" placeholder="请输入密码" autocomplete="off"
-                               tabindex="1" name="password" id="password"
-                               value="<%= request.getAttribute("password") == null ? "12345" : request.getAttribute("password") %>"/>
-                        <br/>
-                        <br/>
-                        <label>确认密码：</label>
-                        <input class="itxt" type="password" placeholder="确认密码" autocomplete="off"
-                               tabindex="1" name="repwd" id="repwd"
-                               value="<%= request.getAttribute("password") == null ? "12345" : request.getAttribute("password") %>"/>
-                        <br/>
-                        <br/>
-                        <label>电子邮件：</label>
-                        <input class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off"
-                               tabindex="1" name="email" id="email"
-                               value="<%= request.getAttribute("email") == null ? "12341321@qq.com" : request.getAttribute("email") %>"/>
-                        <br/>
-                        <br/>
-                        <label>验证码：</label>
-                        <input class="itxt" type="text" style="width: 100px;margin-left: 15px;"
-                               id="code" name="code" value="abcde"/>
-                        <img alt="" src="static/img/code.bmp"
-                             style="float: right;  width: 100px; height:35px; margin-right: 50px;">
-                        <br/>
-                        <br/>
+                        <label>
+                            用户名称:
+                            <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off"
+                                   tabindex="1" name="username" id="username"
+                                   value="${requestScope.user.username}"
+                            />
+                        </label>
+                        <label>
+                            用户密码:
+                            <input class="itxt" type="password" placeholder="请输入密码" autocomplete="off"
+                                   tabindex="1" name="password" id="password"
+                                   value="${requestScope.user.password}"
+                            />
+                        </label>
+                        <label>
+                            确认密码:
+                            <input class="itxt" type="password" placeholder="确认密码" autocomplete="off"
+                                   tabindex="1" name="repwd" id="repwd"
+                                   value="${requestScope.user.password}"/>
+                        </label>
+                        <label>
+                            电子邮件:
+                            <input class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off"
+                                   tabindex="1" name="email" id="email"
+                                   value="${requestScope.user.email}"
+                            />
+                        </label>
+                        <label>
+                            验证码:
+                            <input class="itxt" type="text" style="width: 100px;margin-left: 15px;"
+                                   id="code" name="code"
+                            />
+                            <img class="imgcode" alt="验证码" src="kaptcha.jpg"
+                                 style="float: right;  width: 100px; height:40px; margin-right: 62px;"
+                            >
+                        </label>
                         <input type="submit" value="注册" id="sub_btn"/>
 
                     </form>
