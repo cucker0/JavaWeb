@@ -286,6 +286,8 @@ if (true) {
 ```
 执行了pageContext.forward("转发页面路径")
 
+* 对比jstl的`<c:redirect url="">`标签实现url 302跳转
+
 ### jsp include标签在包含html文件乱码解决方法
 * 方法一：就是不要include html页面，改成include jsp页面
 * 方法二：在被包含的html文件的第一行添加如jsp指令
