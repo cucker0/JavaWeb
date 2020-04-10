@@ -1,6 +1,7 @@
 idea的Tomcat重启后session无法活化解决方法
 ==
 
+## 分析idea tomcat重启session活化失败原因
 * 定义一个可序列化类
 
     定义了一个Bean类实现了Serializable和HttpSessionActivationListener接口,并重写sessionWillPassivate()和sessionDidActivate()方法:(解决方法在最后)
@@ -85,7 +86,10 @@ idea的Tomcat重启后session无法活化解决方法
 
     在${TOMCAT_HOME}/conf 下的context.xml文件的Context节点下添加以下内容:
     ```xml
-    <Manager className="org.apache.catalina.session.PersistentManager" saveOnRestart="true">
+    <!-- 重启时保存session到文件 -->
+    <!-- <Manager className="org.apache.catalina.session.PersistentManager" saveOnRestart="true"> -->
+    <!-- 空闲x分钟的session从内存转移保存到文件 -->
+    <Manager className="org.apache.catalina.session.PersistentManager" maxIdleSwap="15">
         <Store 
             className="org.apache.catalina.session.FileStore" 
             directory="D:\tomcat\apache-tomcat-9.0.30\session" 
@@ -98,4 +102,29 @@ idea的Tomcat重启后session无法活化解决方法
     ```text
     ps:Eclipse和idea不同,直接在${TOMCAT_HOME}\work\Catalina\localhost\项目名称中生成SESSIONS.ser,
     重启tomcat就能实现活化的功能,无需以上的这些设置.
+    ```
+    
+## Tomcat中两种Session钝化管理器
+```text
+session钝化机制是由sessionManager管理 
+tomcat提供了以下这两种session处理方式:
+
+org.apache.catalina.session.StandarManager  默认处理方式
+org.apache.catalina.session.Persistentmanager
+```
+* StandarManager
+    ```text
+    当Tomcat服务器关闭或者重启时tomcat服务器会将当前内存中的session对象钝化到服务器文件系统中； 
+    另一种情况是web应用程序被重新加载时(其实原理也是重启tomcat)，内存中的session对象也会被钝化到服务器的文件系统中 
+    当系统启动时，会把序列化到硬盘上session重新加载到内存中来。这样用户还保持这登录状态，提供系统的可用性。
+    
+    只有在tomcat关闭和启动的时候才会活化和钝化session
+    强制kill掉tomcat是不会把session钝化到硬盘上的。
+    ```
+* Persistentmanager
+    ```text
+    可以将内存中长时间不用的session钝化到硬盘上，减少内存的占用。
+    
+    比如：当网站有大量用户访问的时候，服务器会创建大量的session，会占用大量的服务器内存资源，
+    当用户开着浏览器一分钟不操作页面的话建议将session钝化，将session生成文件放在tomcat工作目录下。
     ```
