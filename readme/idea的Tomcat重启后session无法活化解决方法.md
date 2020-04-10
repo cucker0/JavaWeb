@@ -88,7 +88,7 @@ idea的Tomcat重启后session无法活化解决方法
     <Manager className="org.apache.catalina.session.PersistentManager" saveOnRestart="true">
         <Store 
             className="org.apache.catalina.session.FileStore" 
-            directory="D:\Develop\Tomcat\apache-tomcat-8.0.53\conf\Session" 
+            directory="D:\tomcat\apache-tomcat-9.0.30\session" 
         />
     </Manager>
     ```
