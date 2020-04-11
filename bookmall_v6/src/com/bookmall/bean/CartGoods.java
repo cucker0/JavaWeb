@@ -24,6 +24,10 @@ public class CartGoods {
         this.price = price;
     }
 
+    public CartGoods(int id, String name, int count, double price) {
+        this(id, name, count, new BigDecimal("" + price));
+    }
+
     // 方法
     public int getId() {
         return id;

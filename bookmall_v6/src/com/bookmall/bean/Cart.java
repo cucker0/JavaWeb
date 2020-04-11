@@ -34,6 +34,9 @@ public class Cart {
      */
     public void updateGoods(int goodsId, int count) {
         CartGoods g = goodsMap.get(goodsId);
+        if ( g != null ) {
+            g.setCount(count);
+        }
     }
 
     /**
@@ -42,7 +45,6 @@ public class Cart {
     public void clear() {
         goodsMap.clear();
     }
-
 
     /**
      * 获取商品总数量
@@ -62,17 +64,17 @@ public class Cart {
      *
      * @return
      */
-    public BigDecimal getTotalPrice() {
+    public BigDecimal getTotalAmount() {
+        BigDecimal total = new BigDecimal(0);
         for (CartGoods g : goodsMap.values()) {
-
+            total = total.add(g.getTotalPrice());
         }
-        return null;
+        return total;
     }
 
     public LinkedHashMap<Integer, CartGoods> getGoods() {
         return goodsMap;
     }
-
 
     @Override
     public String toString() {
