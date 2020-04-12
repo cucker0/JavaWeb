@@ -176,7 +176,19 @@ EL表达式主要是为了替换jsp中的表达式脚本，
 * 函数
     ><%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 * 格式化
-    ><%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    ```text
+    <%-- 
+        格式化式value不支持表达式，如下的表达式：
+        报异常：According to TLD or attribute directive in tag file, attribute [value] does not accept any expressions
+    --%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
+    <%-- 
+        格式化式value支持表达式，如：
+        <fmt:formatNumber value="${book.price}" type="currency" pattern="￥.00"/>
+    --%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+    ```
 * 数据库(不使用)
     ><%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 * xml(不使用)
