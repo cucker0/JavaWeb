@@ -1,6 +1,11 @@
 package com.bookmall.bean;
 
+import com.mchange.v2.collection.MapEntry;
+
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,8 +15,7 @@ import java.util.Map;
 public class Cart {
     private LinkedHashMap<Integer, CartGoods> goodsMap = new LinkedHashMap<>();
 
-    public Cart() {
-    }
+    public Cart() {}
 
     // 方法
 
@@ -19,7 +23,12 @@ public class Cart {
      * 添加商品到购物车
      */
     public void addGoods(CartGoods goods) {
-        goodsMap.put(goods.getId(), goods);
+        CartGoods g = goodsMap.get(goods.getId());
+        if ( g != null ) { // 购物车中已经添加了此商品
+            g.countIncrease(goods.getCount());
+        } else {
+            goodsMap.put(goods.getId(), goods);
+        }
     }
 
     /**
@@ -64,9 +73,12 @@ public class Cart {
      *
      * @return
      */
-    public BigDecimal getTotalAmount() {
-        BigDecimal total = new BigDecimal(0);
+    public BigDecimal getTotalPrice() {
+        BigDecimal total = BigDecimal.ZERO;
         for (CartGoods g : goodsMap.values()) {
+            if ( !g.isChecked() ) { // 为选中的不计算
+                continue;
+            }
             total = total.add(g.getTotalPrice());
         }
         return total;
@@ -74,6 +86,51 @@ public class Cart {
 
     public LinkedHashMap<Integer, CartGoods> getGoods() {
         return goodsMap;
+    }
+
+    /**
+     * 买单后，清除购物车中已经买单的商品
+     *
+     * @return 购物车中已经买单的商品的种类数量
+     */
+    public int removeCheckedGoods() {
+        int count = 0;
+        System.out.println(goodsMap.values());
+        /*
+         * 使用for会报 java.util.ConcurrentModificationException 并发修改异常
+         * 这是因为遍历的map对象发生了改变，删除了一个元素，size减少了
+         * */
+        //for (CartGoods g : goodsMap.values()) {
+        //    if (g.isChecked()) {
+        //        ++count;
+        //        deleteGoods(g.getId());
+        //    }
+        //}
+        Iterator<CartGoods> iterator = goodsMap.values().iterator();
+        while (iterator.hasNext()) {
+            CartGoods g = iterator.next();
+            if ( g.isChecked() ) {
+                iterator.remove(); // 删除最近一次获取的元素，即当前正在遍历到的元素
+                // 如果用下面的方法删除元素，也会报java.util.ConcurrentModificationException 并发修改异常
+                // deleteGoods(g.getId()); // goodsMap.remove(goodsId);
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 选中 \ 取消 指定商品
+     *
+     * @param goodsId
+     * @param checked 选中情况
+     *                false: 取消
+     *                true: 选中
+     */
+    public void checkedGoods(int goodsId, boolean checked) {
+        CartGoods g = goodsMap.get(goodsId);
+        if ( g != null ) {
+            g.setChecked(checked);
+        }
     }
 
     @Override

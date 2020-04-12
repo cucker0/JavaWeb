@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,9 +45,9 @@
     <div id="book">
         <div class="search-by-price text-center">
             价格：
-            <input size="3" value="${param.get("min_price")}" placeholder="￥" >
+            <input size="3" value="${param.get("min_price")}" placeholder="￥">
             -
-            <input size="3" value="${param.get("max_price")}" placeholder="￥" >
+            <input size="3" value="${param.get("max_price")}" placeholder="￥">
             <button>确定</button>
         </div>
         <div style="text-align: center">
@@ -70,10 +70,8 @@
                     <div class="book_price">
                         <span class="sp1">价格:</span>
                         <span class="sp2">
-<%--                            <fmt:formatNumber value="${book.price}" type="currency" pattern="￥.00"/>--%>
-                            ${book.price}
+                            <fmt:formatNumber value="${book.price}" type="currency" pattern="￥.00"/>
                         </span>
-
                     </div>
                     <div class="book_sales">
                         <span class="sp1">销量:</span>
@@ -101,12 +99,13 @@
                     </div>
 
                     <div class="book_add">
-                        <button>加入购物车</button>
+                        <a type="button" class="btn btn-secondary btn-sm"
+                           href="cartServlet?action=addGoods&id=${book.id}">加入购物车</a>
                     </div>
                 </div>
             </div>
         </c:forEach>
-<%--        分页导航条--%>
+        <%--        分页导航条--%>
         <%@ include file="/pages/common/page_navigation.jsp" %>
     </div>
 

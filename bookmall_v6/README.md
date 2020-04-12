@@ -42,3 +42,7 @@ window.history.back(); //返回
 ```text
 <body onunload="location='about:blank'">
 ```
+
+* 遍历删除Map中符合条件的元素报java.util.ConcurrentModificationException并发修改异常
+    [Cart removeCheckedGoods方法](src/com/bookmall/bean/Cart.java)
+    

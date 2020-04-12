@@ -167,6 +167,9 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public Book queryBookById(int id) {
+        if (id <= 0) {
+            return null;
+        }
         Book book = bookDao.queryBookById(id);
         fillBook(book);
         return book;
