@@ -137,4 +137,15 @@ public class CommonUtils {
         }
         return ret;
     }
+
+    public static boolean parseBoolean(String booleanStr, boolean defaultVal) {
+        boolean ret = false;
+        try {
+            ret = Boolean.parseBoolean(booleanStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defaultVal;
+        }
+        return ret;
+    }
 }

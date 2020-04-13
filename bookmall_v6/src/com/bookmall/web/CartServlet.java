@@ -28,7 +28,7 @@ public class CartServlet extends BaseServlet {
         Book book = bookService.queryBookById(bookId);
         // 把图书添加到购物车
         Cart cart = getCart(request, response);
-        if (book != null) {
+        if ( book != null ) {
             // 图书信息转换成 CartGoods对象
             cart.addGoods(new CartGoods(book.getId(), book.getName(), book.getPrice(), 1));
             // 更新添加到购物车的最后一件商品信息到session域对象中
@@ -49,15 +49,13 @@ public class CartServlet extends BaseServlet {
     // 获取购物车，没有则创建
     protected Cart getCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
-        if (cart == null) {
+        if ( cart == null ) {
             cart = new Cart();
             HttpSession session = request.getSession();
             session.setAttribute("cart", cart);
-            if (session.isNew()) {
-                Cookie ck = new Cookie("JSESSIONID", session.getId());
-                ck.setMaxAge(60 * 60 * 24 * 5);
-                response.addCookie(ck);
-            }
+            Cookie ck = new Cookie("JSESSIONID", session.getId());
+            ck.setMaxAge(60 * 60 * 24 * 5);
+            response.addCookie(ck);
         }
         return cart;
     }
@@ -93,4 +91,12 @@ public class CartServlet extends BaseServlet {
         response.sendRedirect(request.getHeader("referer"));
     }
 
+    // 选择 / 取消 购物车中指定商品
+    protected void checkedGoods(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int goodsId = CommonUtils.parseInt(request.getParameter("id"), 0);
+        boolean checked = CommonUtils.parseBoolean(request.getParameter("checked"), false);
+        Cart cart = getCart(request, response);
+        cart.checkedGoods(goodsId, checked);
+        response.sendRedirect(request.getHeader("referer"));
+    }
 }

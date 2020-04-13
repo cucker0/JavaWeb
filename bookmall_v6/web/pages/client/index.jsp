@@ -50,11 +50,13 @@
             <input size="3" value="${param.get("max_price")}" placeholder="￥">
             <button>确定</button>
         </div>
-        <div style="text-align: center">
-            <span>您的购物车中有3件商品</span>
-            <div>
-                您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
-            </div>
+        <div style="text-align: center; height: 80px;">
+            <c:if test="${not empty sessionScope.cart}">
+                <span>您的购物车中有${sessionScope.cart.getTotalCount()}件商品</span>
+                <div>
+                    您刚刚将 [<span style="color: red">${sessionScope.last_goods_name}</span>] 加入到了购物车中
+                </div>
+            </c:if>
         </div>
 
         <c:forEach var="book" items="${requestScope.page.items}">

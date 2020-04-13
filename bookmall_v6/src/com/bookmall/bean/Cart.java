@@ -63,12 +63,25 @@ public class Cart implements Serializable {
      *
      * @return
      */
-    public int getTotalCount() {
+    public int getCheckedTotalCount() {
         int count = 0;
         for (CartGoods g : goodsMap.values()) {
             if (!g.isChecked()) {
                 continue;
             }
+            count += g.getCount();
+        }
+        return count;
+    }
+
+    /**
+     * 获取已选中的商品总数量
+     *
+     * @return
+     */
+    public int getTotalCount() {
+        int count = 0;
+        for (CartGoods g : goodsMap.values()) {
             count += g.getCount();
         }
         return count;

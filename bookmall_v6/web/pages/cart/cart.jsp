@@ -60,14 +60,22 @@
             });
             // 商品数量变化时，向服务器发情请求更新购物车商品的数量
             $(".quantity-form input[name=count]").on("input propertychange", function () {
+                var _id = $(this).parents("tr[goods-id]").attr("goods-id");
                 var _count = $(this).val();
-                var _id = $(this).attr("goods-id");
                 location.href = "cartServlet?action=updateGoodsCount&id=" + _id + "&count=" + _count;
             });
 
             // 全选 / 取消 购物车所有商品
             $("input.checkeda-all").click(function () {
                 location.href = "cartServlet?action=checkedAllOrNot";
+            });
+
+            // 选择 / 取消 单个商品
+            $("tr[goods-id] input:checkbox").click(function () {
+                var _id = $(this).parents("tr[goods-id]").attr("goods-id");
+                var _checked = this.checked;
+                // console.log("_checked: ", _checked);
+                location.href = "cartServlet?action=checkedGoods&id=" + _id + "&checked=" + _checked;
             });
         });
     </script>
@@ -102,15 +110,15 @@
                     <td>操作</td>
                 </tr>
                 <c:forEach var="item" items="${sessionScope.cart.goodsMap.values()}">
-                    <tr>
+                    <tr goods-id="${item.id}">
                         <td class="td-w3">
-                            <input goods-id="${item.id}" type="checkbox" class="y-middle" ${item.isChecked() ? 'checked="checked"' : ""}>
+                            <input type="checkbox" class="y-middle" ${item.isChecked() ? 'checked="checked"' : ""}>
                         </td>
                         <td>${item.name}</td>
                         <td>
                             <div class="quantity-form">
                                 <span class="decrement">-</span>
-                                <input goods-id="${item.id}" type="text" name="count" value="${item.count}">
+                                <input type="text" name="count" value="${item.count}">
                                 <span class="increase">+</span>
                             </div>
                         </td>
@@ -127,7 +135,7 @@
 
             <div class="cart_info">
                 <span class="cart_span">已选择<span
-                        class="b_count">${sessionScope.cart.getTotalCount()}</span>件商品</span>
+                        class="b_count">${sessionScope.cart.getCheckedTotalCount()}</span>件商品</span>
                 <span class="cart_span">
             总金额
             <span class="b_price">

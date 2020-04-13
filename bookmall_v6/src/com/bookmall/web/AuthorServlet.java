@@ -73,7 +73,7 @@ public class AuthorServlet extends BaseServlet {
     // 分页显示
     protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int pageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
-        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 3);
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 10);
         Paginator<Author> page = authorService.page(pageNo, pageSize);
         request.setAttribute("page", page);
         // 转发请求到另外的servlet去处理
