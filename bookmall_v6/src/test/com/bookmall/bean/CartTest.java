@@ -32,10 +32,10 @@ public class CartTest {
     */ 
     @Test
     public void testAddGoods() throws Exception { 
-        cart.addGoods(new CartGoods(1, "健康包", 1, 99.99));
-        cart.addGoods(new CartGoods(1, "健康包", 1, 99.99));
-        cart.addGoods(new CartGoods(2, "手机", 1, 1999));
-        cart.addGoods(new CartGoods(3, "笔记本", 1, 4800));
+        cart.addGoods(new CartGoods(1, "健康包", 99.99, 1));
+        cart.addGoods(new CartGoods(1, "健康包", 99.99, 1));
+        cart.addGoods(new CartGoods(2, "手机", 1999, 1));
+        cart.addGoods(new CartGoods(3, "笔记本", 4800, 1));
 //        testGetGoods();
     }
     
@@ -105,6 +105,7 @@ public class CartTest {
         for (CartGoods g : cart.getGoods().values()) {
             System.out.println(g);
         }
+        System.out.println("商品数量（件）: " + cart.getTotalCount());
         System.out.println("总价：￥" + cart.getTotalPrice());
     } 
     

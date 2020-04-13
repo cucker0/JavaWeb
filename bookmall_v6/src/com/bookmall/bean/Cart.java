@@ -1,23 +1,22 @@
 package com.bookmall.bean;
 
-import com.mchange.v2.collection.MapEntry;
-
-import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * 购物车
  */
-public class Cart {
+public class Cart implements Serializable {
     private LinkedHashMap<Integer, CartGoods> goodsMap = new LinkedHashMap<>();
 
     public Cart() {}
 
     // 方法
+    public LinkedHashMap<Integer, CartGoods> getGoodsMap() {
+        return goodsMap;
+    }
 
     /**
      * 添加商品到购物车
@@ -35,6 +34,9 @@ public class Cart {
      * 从购物车中移除指定的商品
      */
     public void deleteGoods(int goodsId) {
+        if (goodsId <= 0) {
+            return;
+        }
         goodsMap.remove(goodsId);
     }
 
@@ -43,9 +45,10 @@ public class Cart {
      */
     public void updateGoods(int goodsId, int count) {
         CartGoods g = goodsMap.get(goodsId);
-        if ( g != null ) {
-            g.setCount(count);
+        if ( g == null ) {
+            return;
         }
+        g.setCount(count);
     }
 
     /**
@@ -56,13 +59,16 @@ public class Cart {
     }
 
     /**
-     * 获取商品总数量
+     * 获取已选中的商品总数量
      *
      * @return
      */
     public int getTotalCount() {
         int count = 0;
         for (CartGoods g : goodsMap.values()) {
+            if (!g.isChecked()) {
+                continue;
+            }
             count += g.getCount();
         }
         return count;
@@ -139,4 +145,35 @@ public class Cart {
                 "goodsMap=" + goodsMap +
                 '}';
     }
+
+    // 购物车所有商品是否都选中
+    public boolean isAllChecked() {
+        boolean isAllChecked = true;
+        for (CartGoods g : goodsMap.values()) {
+            if (!g.isChecked()) {
+                isAllChecked = false;
+                break;
+            }
+        }
+        return isAllChecked;
+    }
+
+    // 全选/取消 购物车所有商品
+    public void checkedAllOrNot() {
+        System.out.println("isAllChecked:" + isAllChecked());
+        if (!isAllChecked()) {
+            for (CartGoods g : goodsMap.values()) {
+                if (!g.isChecked()) {
+                    g.setChecked(true);
+                }
+            }
+        } else {
+            for (CartGoods g : goodsMap.values()) {
+                if (g.isChecked()) {
+                    g.setChecked(false);
+                }
+            }
+        }
+    }
+
 }

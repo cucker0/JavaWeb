@@ -46,3 +46,13 @@ window.history.back(); //返回
 * 遍历删除Map中符合条件的元素报java.util.ConcurrentModificationException并发修改异常
     [Cart removeCheckedGoods方法](src/com/bookmall/bean/Cart.java)
     
+* js修改input值如何触发change事件
+    ```text
+    1. 在js给input赋值的时候就给目标input标签触发input事件
+    $("#inpstart").trigger("input"); 
+    
+    2. 目标input标签监听input和change事件
+    $("#inpstart").on("input propertychange",function () {
+        ...
+    });
+    ```

@@ -226,7 +226,7 @@ h1 {
     border: 1px #e3e3e3 solid;
 }
 
-.form input[name=code].itxt  {
+.form input[name=code].itxt {
     width: 100px;
 }
 
@@ -316,6 +316,10 @@ h1 {
     width: 680px !important;
 }
 
+.td-w3 {
+    width: 45px !important;
+}
+
 .input-w {
     width: 96%;
 }
@@ -329,10 +333,17 @@ h1 {
     margin-left: 20px;
 }
 
+span.b_price {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+}
+
 .cart_span span {
     color: red;
     font-size: 20px;
     margin: 10px;
+
 }
 
 .cart_span a, td a {
@@ -403,4 +414,39 @@ li.disabled {
 
 div.book_author {
     height: 40px;
+}
+
+.quantity-form {
+    /* 为了去除换行导致标签之间多出的空格 */
+    font-size: 0;
+}
+
+.quantity-form span {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    display: inline-block;
+    width: 15px;
+    height: 20px;
+    font-size: 12px;
+    vertical-align: middle;
+    padding: 1px 0;
+    text-align: center;
+}
+
+.quantity-form input {
+    width: 30px;
+    height: 20px;
+    background:none;
+    outline:none;
+    border:1px solid #ccc;
+    border-left: 0;
+    border-right: 0;
+    font-size: 12px;
+    vertical-align: middle;
+    padding: 1px 2px;
+    text-align: center;
+}
+
+.disabled-pointer-events {
+    pointer-events: none;
 }

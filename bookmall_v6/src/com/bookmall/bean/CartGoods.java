@@ -1,40 +1,41 @@
 package com.bookmall.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * 购物车商品
  */
-public class CartGoods {
+public class CartGoods implements Serializable {
     private int id;
     private String name;
+    private BigDecimal price;
     // 该商品数量
     private int count;
-    private BigDecimal price;
     // 是否选中
     private boolean isChecked = true;
 
     // 构造器
     public CartGoods() {}
 
-    public CartGoods(int id, String name, int count, BigDecimal price) {
+    public CartGoods(int id, String name, BigDecimal price, int count) {
         this.id = id;
         this.name = name;
-        this.count = count;
         this.price = price;
+        this.count = count;
     }
 
-    public CartGoods(int id, String name, int count, double price) {
-        this(id, name, count, new BigDecimal(Double.toString(price)));
+    public CartGoods(int id, String name, double price, int count) {
+        this(id, name, new BigDecimal(Double.toString(price)), count);
     }
 
-    public CartGoods(int id, String name, int count, BigDecimal price, boolean isChecked) {
-        this(id, name, count, price);
+    public CartGoods(int id, String name, BigDecimal price, int count, boolean isChecked) {
+        this(id, name, price, count);
         this.isChecked = isChecked;
     }
 
-    public CartGoods(int id, String name, int count, double price, boolean isChecked) {
-        this(id, name, count, new BigDecimal(Double.toString(price)));
+    public CartGoods(int id, String name, double price, int count, boolean isChecked) {
+        this(id, name, new BigDecimal(Double.toString(price)), count);
         this.isChecked  = isChecked;
     }
 
@@ -60,6 +61,9 @@ public class CartGoods {
     }
 
     public void setCount(int count) {
+        if (count < 0) {
+            return;
+        }
         this.count = count;
     }
 
