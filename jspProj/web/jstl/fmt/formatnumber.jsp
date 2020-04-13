@@ -43,8 +43,11 @@
     <fmt:formatNumber value="12" type="currency" pattern="$.#"/> <br/>
 <%--    $12.0--%>
 
-    <fmt:formatNumber value="12" type="currency" pattern="￥.00"/> <br/>
-<%--    ￥12.00--%>
+    <fmt:formatNumber value="12" type="currency" pattern="￥0.00"/> <br/>
+<%--    ￥12.00
+    pattern="￥0.00"  // 当value="0"时显示为 ￥0.00
+    pattern="￥.00"  // 当value="0"时显示为 ￥.00
+--%>
 
     <fmt:formatNumber value="12" type="currency" pattern="#0.00元"/> <br/>
 <%--    12.00元--%>
