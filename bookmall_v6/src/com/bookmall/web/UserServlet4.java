@@ -56,7 +56,8 @@ public class UserServlet4 extends BaseServlet {
             // 在session对象中添加user属性值
             session.setAttribute("user", user1);
             // request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request, response);
-            response.sendRedirect(request.getContextPath() + "/pages/user/login_success.jsp");
+            // response.sendRedirect(request.getContextPath() + "/pages/user/login_success.jsp");
+            response.sendRedirect(request.getHeader("referer"));
             return;
         }
         // 登录失败

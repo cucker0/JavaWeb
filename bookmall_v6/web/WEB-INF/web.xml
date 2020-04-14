@@ -49,6 +49,10 @@
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>com.bookmall.web.CartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ClientOrderServlet</servlet-name>
+        <servlet-class>com.bookmall.web.ClientOrderServlet</servlet-class>
+    </servlet>
 
     <!-- URL与Servlet映射 -->
     <!-- kaptcha生成验证码图片的访问路径 -->
@@ -79,5 +83,9 @@
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/cartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientOrderServlet</servlet-name>
+        <url-pattern>/client/orderServlet</url-pattern>
     </servlet-mapping>
 </web-app>

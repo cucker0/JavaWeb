@@ -9,7 +9,7 @@ public interface OrderService {
     /**
      * 创建订单
      *
-     * @param cart 购物车对象
+     * @param cart   购物车对象
      * @param userId 用户id
      * @return 返回订单id
      */
@@ -35,10 +35,20 @@ public interface OrderService {
      * 修改指定id订单的物流状态
      *
      * @param orderId 订单id
-     * @param status 物流状态值
-     *               0:为发货
-     *               1:一发货
-     *               2:用户已签收
+     * @param status  物流状态值
+     *                0:为发货
+     *                1:一发货
+     *                2:用户已签收
      */
     void updateOrderStatus(String orderId, int status);
+
+    /**
+     * 修改指定id订单的支付状态
+     *
+     * @param orderId   订单id
+     * @param payStatus 支付状态值
+     *                  0:未付款
+     *                  1:已支付
+     */
+    void updateOrderPayStatus(String orderId, int payStatus);
 }

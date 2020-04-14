@@ -33,10 +33,20 @@ public interface OrderDao {
      * 修改指定id订单的物流状态
      *
      * @param orderId 订单id
-     * @param status 物流状态值
-     *               0:未发货
-     *               1:已发货
-     *               2:用户已签收
+     * @param status  物流状态值
+     *                0:未发货
+     *                1:已发货
+     *                2:用户已签收
      */
     void updateOrderStatus(String orderId, int status);
+
+    /**
+     * 修改指定id订单的支付状态
+     *
+     * @param orderId   订单id
+     * @param payStatus 支付状态值
+     *                  0:未付款
+     *                  1:已支付
+     */
+    void updateOrderPayStatus(String orderId, int payStatus);
 }

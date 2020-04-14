@@ -1,5 +1,13 @@
 package com.bookmall.utils;
 
+import com.bookmall.bean.Cart;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -155,11 +163,26 @@ public class CommonUtils {
      * @return
      */
     public static String generateOrderId(int userId) {
+        // 订单id格式：当前时间 + "_" + 用户id
         return System.currentTimeMillis() + "_" + userId;
     }
 
     public static String generateOrderId() {
         int defaultUserId = 0;
         return generateOrderId(defaultUserId);
+    }
+
+    // 获取购物车，没有则创建
+    public static Cart getCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        if ( cart == null ) {
+            cart = new Cart();
+            HttpSession session = request.getSession();
+            session.setAttribute("cart", cart);
+            Cookie ck = new Cookie("JSESSIONID", session.getId());
+            ck.setMaxAge(60 * 60 * 24 * 5);
+            response.addCookie(ck);
+        }
+        return cart;
     }
 }

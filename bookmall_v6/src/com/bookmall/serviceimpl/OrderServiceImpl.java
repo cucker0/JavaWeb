@@ -33,12 +33,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String addOrder(Cart cart, int userId) {
         // 保存订单
-        // 生成订单id：当前时间 + "_" + 用户id
-        // String orderId = System.currentTimeMillis() + "_" + userId;
+        if (cart == null || cart.getGoodsMap().isEmpty() || cart.getAllCheckedGoods().isEmpty()) {
+            return null;
+        }
         String orderId = CommonUtils.generateOrderId(userId);
         Order order = new Order(orderId, userId, cart.getTotalPrice(), 0, null);
         orderDao.saveOrder(order);
-
         // 生成订单项，由购物车中的商品情况决定
         for (CartGoods g : cart.getAllCheckedGoods()) {
             OrderItem orderItem = new OrderItem(null, orderId, g.getName(), g.getPrice(), g.getCount());
@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
             book.stockDecrease(g.getCount());
             bookDao.updateBook(book);
         }
-        // 删除购物车中已经付款的商品
+        // 删除购物车中生成订单的商品
         cart.removeCheckedGoods();
         return orderId;
     }
@@ -88,5 +88,29 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void updateOrderStatus(String orderId, int status) {
         orderDao.updateOrderStatus(orderId, status);
+    }
+
+    /**
+     * 修改指定id订单的支付状态
+     *
+     * @param orderId   订单id
+     * @param payStatus 支付状态值
+     *                  0:未付款
+     *                  1:已支付
+     */
+    @Override
+    public void updateOrderPayStatus(String orderId, int payStatus) {
+        // 已经支付的订单的支付状态不允许再改为未支付状态
+        if (payStatus == 0) {
+            return;
+        }
+        if (orderId == null) {
+            return;
+        }
+        Order order = queryOrderById(orderId);
+        if (order == null) {
+            return;
+        }
+        orderDao.updateOrderPayStatus(orderId, payStatus);
     }
 }

@@ -14,12 +14,12 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
      */
     @Override
     public Integer saveOrder(Order order) {
-        if (order.getCreateTime() == null) {
-            String sql = "INSERT INTO t_order (id, user_id, total_amount, `status`) VALUES (?, ?, ?, ?);";
-            return insert(sql, order.getId(), order.getUserId(), order.getTotalAmount(), order.getStatus());
+        if ( order.getCreateTime() == null ) {
+            String sql = "INSERT INTO t_order (id, user_id, total_amount, `status`, pay_status) VALUES (?, ?, ?, ?, ?);";
+            return insert(sql, order.getId(), order.getUserId(), order.getTotalAmount(), order.getStatus(), order.getPayStatus());
         }
-        String sql = "INSERT INTO t_order (id, user_id, total_amount, `status`, create_time) VALUES (?, ?, ?, ?, ?);";
-        return insert(sql, order.getId(), order.getUserId(), order.getTotalAmount(), order.getStatus(), order.getCreateTime());
+        String sql = "INSERT INTO t_order (id, user_id, total_amount, `status`, pay_status, create_time) VALUES (?, ?, ?, ?, ?, ?);";
+        return insert(sql, order.getId(), order.getUserId(), order.getTotalAmount(), order.getStatus(), order.getPayStatus(), order.getCreateTime());
     }
 
     /**
@@ -30,7 +30,7 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
      */
     @Override
     public Order queryOrderById(String orderId) {
-        String sql = "SELECT id, user_id userId, total_amount totalAmount, `status`, create_time sqlCreateTime FROM t_order WHERE id = ?;";
+        String sql = "SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status payStatus, create_time sqlCreateTime FROM t_order WHERE id = ?;";
         return getBean(sql, orderId);
     }
 
@@ -42,7 +42,7 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
      */
     @Override
     public List<Order> queryOrdersByUserId(int userId) {
-        String sql = "SELECT id, user_id userId, total_amount totalAmount, `status`, create_time sqlCreateTime FROM t_order WHERE user_id = ?;";
+        String sql = "SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status payStatus, create_time sqlCreateTime FROM t_order WHERE user_id = ?;";
         return getBeanList(sql, userId);
     }
 
@@ -59,5 +59,19 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
     public void updateOrderStatus(String orderId, int status) {
         String sql = "UPDATE t_order SET `status` = ? WHERE id = ?;";
         update(sql, status, orderId);
+    }
+
+    /**
+     * 修改指定id订单的支付状态
+     *
+     * @param orderId   订单id
+     * @param payStatus 支付状态值
+     *                  0:未付款
+     *                  1:已支付
+     */
+    @Override
+    public void updateOrderPayStatus(String orderId, int payStatus) {
+        String sql = "UPDATE t_order SET pay_status = ? WHERE id = ?;";
+        update(sql, payStatus, orderId);
     }
 }

@@ -12,6 +12,8 @@ public class Order {
     private BigDecimal totalAmount;
     // 订单的物流状态，0:为发货  1:一发货  2:用户已签收
     private int status;
+    // 支付状态， 0:未付款， 1:已支付
+    private int payStatus = 0;
     // 订单创建时间
     private LocalDateTime createTime;
 
@@ -63,6 +65,14 @@ public class Order {
         this.status = status;
     }
 
+    public int getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(int payStatus) {
+        this.payStatus = payStatus;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -85,10 +95,11 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", userId=" + userId +
                 ", totalAmount=" + totalAmount +
                 ", status=" + status +
+                ", payStatus=" + payStatus +
                 ", createTime=" + createTime +
                 '}';
     }

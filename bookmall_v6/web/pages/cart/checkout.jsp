@@ -26,10 +26,11 @@
 </div>
 
 <div id="main">
-
-    <h1>你的订单已结算，订单号为2937474382928484747</h1>
-
-
+    <h1>你的订单已结算，订单号：${requestScope.orderId}</h1>
+    <div>
+        <a href="client/orderServlet?action=payOrder&orderId=${requestScope.orderId}">现在支付</a>
+        <a href="${header.get("refere")}">再看看</a>
+    </div>
 </div>
 
 <%-- 引入页脚 --%>

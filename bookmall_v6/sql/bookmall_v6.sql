@@ -5,7 +5,8 @@ CREATE TABLE t_order (
     id VARCHAR(50) PRIMARY KEY,
     user_id INT NOT NULL COMMENT '关联用户id',
     total_amount DECIMAL(11, 2) NOT NULL COMMENT '总金额',
-    `status` TINYINT NOT NULL DEFAULT 0 COMMENT '物流状态', -- 0:为发货  1:一发货  2:用户已签收 
+    `status` TINYINT NOT NULL DEFAULT 0 COMMENT '物流状态', -- 0:未发货  1:已发货  2:用户已签收 
+    pay_status TINYINT NOT NULL DEFAULT 0 COMMENT '支付状态', -- 0:未付款  1:已支付
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '订单创建时间'
 ) COMMENT='订单表';
 

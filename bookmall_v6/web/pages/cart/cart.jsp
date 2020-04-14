@@ -143,7 +143,7 @@
             </span>
         </span>
                 <span class="cart_span"><a href="cartServlet?action=clearCart">清空购物车</a></span>
-                <span class="cart_span"><a href="pages/cart/checkout.jsp">去结账</a></span>
+                <span class="cart_span"><a href="client/orderServlet?action=addOrder">去结账</a></span>
             </div>
         </c:when>
 <%--        购物车还没有添加商品--%>
