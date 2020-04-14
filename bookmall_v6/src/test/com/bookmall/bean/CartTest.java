@@ -102,7 +102,7 @@ public class CartTest {
     @Test
     public void testGetGoods() throws Exception {
         System.out.println("购物车商品：");
-        for (CartGoods g : cart.getGoods().values()) {
+        for (CartGoods g : cart.getGoodsMap().values()) {
             System.out.println(g);
         }
         System.out.println("商品数量（件）: " + cart.getTotalCount());

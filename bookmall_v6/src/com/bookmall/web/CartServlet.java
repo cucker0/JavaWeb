@@ -89,6 +89,7 @@ public class CartServlet extends BaseServlet {
         Cart cart = getCart(request, response);
         cart.checkedAllOrNot();
         response.sendRedirect(request.getHeader("referer"));
+
     }
 
     // 选择 / 取消 购物车中指定商品

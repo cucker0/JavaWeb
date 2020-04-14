@@ -178,6 +178,70 @@ public class Book {
         setTime(localDate);
     }
 
+    /**
+     * 卖出商品后，增加销量
+     *
+     * 通过DAO先从数据库查询数据获得book对象，再调整销量
+     *
+     * @param count 卖出的图书数量
+     * @return 销量是否调整了
+     *      true: 调整了
+     *      false: 未调整
+     */
+    public boolean salesIncrease(int count) {
+        if (getId() == null) { // 因为通过DAO先从数据库查询数据获得book对象，再调整销量
+            return false;
+        }
+        if (count <= 0) {
+            return false;
+        }
+        int salesNew = getSales() + count;
+        setSales(salesNew);
+        return true;
+    }
+
+    /**
+     * 卖出商品后，减少库存
+     *
+     * 通过DAO先从数据库查询数据获得book对象，再调整库存量
+     *
+     * @param count 卖出的图书数量
+     * @return 库存是否调整了
+     *      true: 调整了
+     *      false: 未调整
+     */
+    public boolean stockDecrease(int count) {
+        if (getId() == null) { // 因为通过DAO先从数据库查询数据获得book对象，再调整销量
+            return false;
+        }
+        if (count <= 0 || count > getStock()) {
+            return false;
+        }
+        int stockNew = getStock() - count;
+        setStock(stockNew);
+        return true;
+    }
+
+    /**
+     * 图书进货了，增加库存量
+     *
+     * @param count 进货的图书数量
+     * @return 库存是否调整了
+     *      true: 调整了
+     *      false: 未调整
+     */
+    public boolean stockIncrease(int count) {
+        if (getId() == null) { // 因为通过DAO先从数据库查询数据获得book对象，再调整销量
+            return false;
+        }
+        if (count <= 0) {
+            return false;
+        }
+        int stockNew = getStock() + count;
+        setStock(stockNew);
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Book{" +

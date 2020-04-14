@@ -2,8 +2,7 @@ package com.bookmall.bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 /**
  * 购物车
@@ -95,7 +94,7 @@ public class Cart implements Serializable {
     public BigDecimal getTotalPrice() {
         BigDecimal total = BigDecimal.ZERO;
         for (CartGoods g : goodsMap.values()) {
-            if ( !g.isChecked() ) { // 为选中的不计算
+            if ( !g.isChecked() ) { // 未选中的不计算
                 continue;
             }
             total = total.add(g.getTotalPrice());
@@ -103,8 +102,20 @@ public class Cart implements Serializable {
         return total;
     }
 
-    public LinkedHashMap<Integer, CartGoods> getGoods() {
-        return goodsMap;
+    /**
+     * 获取购物车中已选中的商品
+     *
+     * @return 购物车中已选中的商品组成的List对象
+     */
+    public List<CartGoods> getAllCheckedGoods() {
+        List<CartGoods> goods = new ArrayList<>();
+        for (CartGoods g : goodsMap.values()) {
+            if (!g.isChecked()) {
+                continue;
+            }
+            goods.add(g);
+        }
+        return goods;
     }
 
     /**
@@ -173,7 +184,7 @@ public class Cart implements Serializable {
 
     // 全选/取消 购物车所有商品
     public void checkedAllOrNot() {
-        System.out.println("isAllChecked:" + isAllChecked());
+        // System.out.println("isAllChecked:" + isAllChecked());
         if (!isAllChecked()) {
             for (CartGoods g : goodsMap.values()) {
                 if (!g.isChecked()) {

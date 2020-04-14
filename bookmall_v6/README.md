@@ -56,3 +56,30 @@ window.history.back(); //返回
         ...
     });
     ```
+* 解决行内块元素（inline-block）之间的空格(空白)问题
+    * 方法1：多个内联元素代码不换行，写到一行上
+        ```html
+        <div style="border:1px red solid">
+            <a style="display:inline-block;width:20%;">1111</a><a 
+            style="display:inline-block;width:80%;">2222</a>
+        </div>
+        ```
+        ```html
+        <div style="border:1px red solid">
+           <a style="display:inline-block;width:20%;">1111</a><a style="display:inline-block;width:80%;">2222</a>
+        </div>
+        ```
+        ```html
+        <!-- 使用注释，把换行与空格注释掉 -->
+        <div style="border:1px red solid">
+            <a style="display:inline-block;width:20%;">1111</a><!--
+         --><a style="display:inline-block;width:80%;">2222</a>
+        </div>
+        ```
+    * 方法2：在父元素上设置字体大小为0
+        ```css
+        符元素 {
+            font-size: 0;
+        }
+        ```
+    * 方法3：display不用inline-block改为float
