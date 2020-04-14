@@ -26,6 +26,10 @@ public class Order {
         this.createTime = createTime;
     }
 
+    public Order(String id, int userId, Double totalAmount, int status, LocalDateTime createTime) {
+        this(id, userId, new BigDecimal(totalAmount.toString()), status, createTime);
+    }
+
     // 方法
     public String getId() {
         return id;

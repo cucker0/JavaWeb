@@ -8,6 +8,7 @@ import com.bookmall.daoimpl.BookDaoImpl;
 import com.bookmall.daoimpl.OrderDaoImpl;
 import com.bookmall.daoimpl.OrderItemDaoImpl;
 import com.bookmall.service.OrderService;
+import com.bookmall.utils.CommonUtils;
 
 import java.util.List;
 
@@ -33,7 +34,8 @@ public class OrderServiceImpl implements OrderService {
     public String addOrder(Cart cart, int userId) {
         // 保存订单
         // 生成订单id：当前时间 + "_" + 用户id
-        String orderId = System.currentTimeMillis() + "_" + userId;
+        // String orderId = System.currentTimeMillis() + "_" + userId;
+        String orderId = CommonUtils.generateOrderId(userId);
         Order order = new Order(orderId, userId, cart.getTotalPrice(), 0, null);
         orderDao.saveOrder(order);
 
@@ -71,6 +73,20 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List<Order> queyrOrdersByUserId(int userId) {
-        return orderDao.queyrOrdersByUserId(userId);
+        return orderDao.queryOrdersByUserId(userId);
+    }
+
+    /**
+     * 修改指定id订单的物流状态
+     *
+     * @param orderId 订单id
+     * @param status  物流状态值
+     *                0:未发货
+     *                1:已发货
+     *                2:用户已签收
+     */
+    @Override
+    public void updateOrderStatus(String orderId, int status) {
+        orderDao.updateOrderStatus(orderId, status);
     }
 }

@@ -30,4 +30,15 @@ public interface OrderService {
      * @return
      */
     List<Order> queyrOrdersByUserId(int userId);
+
+    /**
+     * 修改指定id订单的物流状态
+     *
+     * @param orderId 订单id
+     * @param status 物流状态值
+     *               0:为发货
+     *               1:一发货
+     *               2:用户已签收
+     */
+    void updateOrderStatus(String orderId, int status);
 }

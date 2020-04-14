@@ -27,6 +27,16 @@ public interface OrderDao {
      * @param userId 用户id
      * @return 查询到的订单组合成的List对象
      */
-    List<Order> queyrOrdersByUserId(int userId);
+    List<Order> queryOrdersByUserId(int userId);
 
+    /**
+     * 修改指定id订单的物流状态
+     *
+     * @param orderId 订单id
+     * @param status 物流状态值
+     *               0:未发货
+     *               1:已发货
+     *               2:用户已签收
+     */
+    void updateOrderStatus(String orderId, int status);
 }

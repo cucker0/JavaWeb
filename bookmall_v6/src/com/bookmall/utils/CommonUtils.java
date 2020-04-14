@@ -148,4 +148,18 @@ public class CommonUtils {
         }
         return ret;
     }
+
+    /**
+     * 生成订单id
+     *
+     * @return
+     */
+    public static String generateOrderId(int userId) {
+        return System.currentTimeMillis() + "_" + userId;
+    }
+
+    public static String generateOrderId() {
+        int defaultUserId = 0;
+        return generateOrderId(defaultUserId);
+    }
 }

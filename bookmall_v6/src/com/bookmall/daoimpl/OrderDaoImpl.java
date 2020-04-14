@@ -14,6 +14,10 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
      */
     @Override
     public Integer saveOrder(Order order) {
+        if (order.getCreateTime() == null) {
+            String sql = "INSERT INTO t_order (id, user_id, total_amount, `status`) VALUES (?, ?, ?, ?);";
+            return insert(sql, order.getId(), order.getUserId(), order.getTotalAmount(), order.getStatus());
+        }
         String sql = "INSERT INTO t_order (id, user_id, total_amount, `status`, create_time) VALUES (?, ?, ?, ?, ?);";
         return insert(sql, order.getId(), order.getUserId(), order.getTotalAmount(), order.getStatus(), order.getCreateTime());
     }
@@ -37,8 +41,23 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
      * @return 查询到的订单组合成的List对象
      */
     @Override
-    public List<Order> queyrOrdersByUserId(int userId) {
+    public List<Order> queryOrdersByUserId(int userId) {
         String sql = "SELECT id, user_id userId, total_amount totalAmount, `status`, create_time sqlCreateTime FROM t_order WHERE user_id = ?;";
         return getBeanList(sql, userId);
+    }
+
+    /**
+     * 修改指定id订单的物流状态
+     *
+     * @param orderId 订单id
+     * @param status  物流状态值
+     *                0:未发货
+     *                1:已发货
+     *                2:用户已签收
+     */
+    @Override
+    public void updateOrderStatus(String orderId, int status) {
+        String sql = "UPDATE t_order SET `status` = ? WHERE id = ?;";
+        update(sql, status, orderId);
     }
 }
