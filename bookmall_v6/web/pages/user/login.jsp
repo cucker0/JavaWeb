@@ -105,6 +105,8 @@
                     <%--                    <form action="login" method="post">--%>
                     <form action="userServlet" method="post">
                         <input type="hidden" name="action" value="login">
+                        <%-- 记录用户从哪个页面跳转到登录页面，方便登录后在跳转回去 --%>
+                        <input type="hidden" name="referer_url" value="${header.get("referer")}">
                         <label>
                             <span>用户名称:</span>
                             <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off"

@@ -30,7 +30,8 @@ public class ClientOrderServlet extends BaseServlet {
         Cart cart = CommonUtils.getCart(request, response);
         String orderId = orderService.addOrder(cart, user.getId());
         if (orderId == null) {
-            response.sendRedirect(request.getHeader("referer"));
+            // response.sendRedirect(request.getHeader("referer"));
+            response.sendRedirect(request.getContextPath() + "/pages/order/order.jsp");
             return;
         }
         request.setAttribute("orderId", orderId);

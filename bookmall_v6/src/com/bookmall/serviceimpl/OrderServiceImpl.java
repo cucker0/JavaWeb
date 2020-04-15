@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
         String orderId = CommonUtils.generateOrderId(userId);
         Order order = new Order(orderId, userId, cart.getTotalPrice(), 0, null);
         orderDao.saveOrder(order);
-        // 生成订单项，由购物车中的商品情况决定
+        // 生成订单项并保存，由购物车中的商品情况决定
         for (CartGoods g : cart.getAllCheckedGoods()) {
             OrderItem orderItem = new OrderItem(null, orderId, g.getName(), g.getPrice(), g.getCount());
             orderItemDao.saveOrderItem(orderItem);

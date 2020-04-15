@@ -36,6 +36,8 @@ SELECT id, order_id orderId, `name`, price, `count` FROM t_order_item WHERE orde
 --
 SELECT * FROM t_order;
 
+SELECT * FROM t_order_item;
+
 SELECT * FROM t_book;
 
 DROP TABLE t_order;

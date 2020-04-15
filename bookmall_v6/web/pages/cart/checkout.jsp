@@ -4,6 +4,7 @@
 <head>
     <%-- 引入head相同部分 --%>
     <%@ include file="/pages/common/head.jsp" %>
+    <%@ include file="/pages/common/bootstrap.jsp" %>
     <title>结算页面</title>
     <style type="text/css">
         h1 {
@@ -27,9 +28,10 @@
 
 <div id="main">
     <h1>你的订单已结算，订单号：${requestScope.orderId}</h1>
-    <div>
-        <a href="client/orderServlet?action=payOrder&orderId=${requestScope.orderId}">现在支付</a>
-        <a href="${header.get("refere")}">再看看</a>
+    <div class="pay_option">
+        <a href="${header.get("refere")}" type="button" class="btn btn-secondary">再逛逛</a>
+        <a href="client/orderServlet?action=payOrder&orderId=${requestScope.orderId}" type="button"
+           class="btn btn-primary">现在支付</a>
     </div>
 </div>
 

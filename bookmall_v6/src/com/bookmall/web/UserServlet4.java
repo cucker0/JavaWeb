@@ -57,7 +57,8 @@ public class UserServlet4 extends BaseServlet {
             session.setAttribute("user", user1);
             // request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request, response);
             // response.sendRedirect(request.getContextPath() + "/pages/user/login_success.jsp");
-            response.sendRedirect(request.getHeader("referer"));
+            // 跳转到用户原来的页面
+            response.sendRedirect(request.getParameter("referer_url"));
             return;
         }
         // 登录失败

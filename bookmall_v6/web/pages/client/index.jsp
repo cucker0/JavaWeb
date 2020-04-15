@@ -14,10 +14,24 @@
         }
     </style>
     <script>
+        /**
+         * x秒后隐藏 添加商品的提示内容
+         */
+        function hiddenGoodsTips() {
+            setTimeout(function () {
+                $(".goods_tips").hide();
+            }, 5000);
+        }
+
         $(function () {
             // 按价格分页查询
             $(".search-by-price button").click(function () {
                 specifyPageQuery(1);
+            });
+
+            // 添加商品到购物车时候x秒后取消购物提示
+            $(".book_add a").click(function () {
+                hiddenGoodsTips();
             });
         });
     </script>
@@ -53,7 +67,7 @@
         <div style="text-align: center; height: 80px;">
             <c:if test="${not empty sessionScope.cart}">
                 <span>您的购物车中有${sessionScope.cart.getTotalCount()}件商品</span>
-                <div>
+                <div class="goods_tips">
                     您刚刚将 [<span style="color: red">${sessionScope.last_goods_name}</span>] 加入到了购物车中
                 </div>
             </c:if>
