@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.OffsetDateTime" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
@@ -30,9 +32,7 @@
             });
 
             // 添加商品到购物车时候x秒后取消购物提示
-            $(".book_add a").click(function () {
-                hiddenGoodsTips();
-            });
+            hiddenGoodsTips();
         });
     </script>
 </head>
@@ -66,10 +66,21 @@
         </div>
         <div style="text-align: center; height: 80px;">
             <c:if test="${not empty sessionScope.cart}">
-                <span>您的购物车中有${sessionScope.cart.getTotalCount()}件商品</span>
-                <div class="goods_tips">
-                    您刚刚将 [<span style="color: red">${sessionScope.last_goods_name}</span>] 加入到了购物车中
-                </div>
+                <span>
+                    <a href="pages/cart/cart.jsp">您的购物车中有${sessionScope.cart.getTotalCount()}件商品</a>
+                </span>
+                <%
+                    LocalDateTime localDateTime = LocalDateTime.now();
+                    long now = LocalDateTime.now().toEpochSecond(OffsetDateTime.now().getOffset());
+                    session.setAttribute("now", now);
+                %>
+                <%-- now: ${sessionScope.now}, lastAddgoodsTime: ${sessionScope.lastAddgoodsTime} --%>
+                <%-- 显示最近x秒内添加的商品名称 --%>
+                <c:if test="${ sessionScope.now < sessionScope.lastAddgoodsTime + 6}">
+                    <div class="goods_tips">
+                        您刚刚将 [<span style="color: red">${sessionScope.lastGoodsName}</span>] 加入到了购物车中
+                    </div>
+                </c:if>
             </c:if>
         </div>
 
@@ -86,7 +97,7 @@
                     <div class="book_price">
                         <span class="sp1">价格:</span>
                         <span class="sp2">
-                            <fmt:formatNumber value="${book.price}" type="currency" pattern="￥.00"/>
+                            <fmt:formatNumber value="${book.price}" type="currency" pattern="￥0.00"/>
                         </span>
                     </div>
                     <div class="book_sales">

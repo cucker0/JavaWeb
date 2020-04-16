@@ -2,6 +2,8 @@ package com.bookmall.service;
 
 import com.bookmall.bean.Cart;
 import com.bookmall.bean.Order;
+import com.bookmall.bean.OrderItem;
+import com.bookmall.bean.Paginator;
 
 import java.util.List;
 
@@ -32,6 +34,16 @@ public interface OrderService {
     List<Order> queyrOrdersByUserId(int userId);
 
     /**
+     * 分页查询查询指定id用户的所有订单
+     *
+     * @param activePageNo
+     * @param pageSize
+     * @param userId
+     * @return
+     */
+    public Paginator<Order> pageByUserId(int activePageNo, int pageSize, int userId);
+
+    /**
      * 修改指定id订单的物流状态
      *
      * @param orderId 订单id
@@ -51,4 +63,12 @@ public interface OrderService {
      *                  1:已支付
      */
     void updateOrderPayStatus(String orderId, int payStatus);
+
+    /**
+     * 查询指定id订单中所包含的商品
+     *
+     * @param orderId 订单id
+     * @return 一个由多个OrderItem组成的List对象
+     */
+    List<OrderItem> queryOrderItemsById(String orderId);
 }

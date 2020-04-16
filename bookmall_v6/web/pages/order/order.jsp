@@ -1,9 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
     <%-- 引入head相同部分 --%>
     <%@ include file="/pages/common/head.jsp" %>
+    <%@ include file="/pages/common/bootstrap.jsp" %>
     <title>我的订单</title>
     <style type="text/css">
         h1 {
@@ -22,37 +25,45 @@
 </div>
 
 <div id="main">
-
-    <table>
-        <tr>
-            <td>日期</td>
-            <td>金额</td>
-            <td>状态</td>
-            <td>详情</td>
-        </tr>
-        <tr>
-            <td>2015.04.23</td>
-            <td>90.00</td>
-            <td>未发货</td>
-            <td><a href="#">查看详情</a></td>
-        </tr>
-
-        <tr>
-            <td>2015.04.20</td>
-            <td>20.00</td>
-            <td>已发货</td>
-            <td><a href="#">查看详情</a></td>
-        </tr>
-
-        <tr>
-            <td>2014.01.23</td>
-            <td>190.00</td>
-            <td>已完成</td>
-            <td><a href="#">查看详情</a></td>
-        </tr>
-    </table>
-
-
+    <c:choose>
+        <c:when test="${not empty requestScope.orderItems}">
+            <div class="text-center">
+                订单号：
+                <span>${requestScope.order.id}</span>
+                <span>${requestScope.order.payStatus}</span>
+                <a href="${header.get("referer")}" type="button"
+                   class="btn">
+                    返回
+                </a>
+                <c:if test="${requestScope.order.payStatus == 0}">
+                    <a href="client/orderServlet?action=payOrder&orderId=${requestScope.order.id}" type="button"
+                       class="btn btn-primary">
+                        现在买单
+                    </a>
+                </c:if>
+            </div>
+            <table>
+                <tr>
+                    <td>商品名称</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>小计价格</td>
+                </tr>
+                <c:forEach var="orderItem" items="${requestScope.orderItems}">
+                    <tr>
+                        <td>${orderItem.name}</td>
+                        <td><fmt:formatNumber value="${orderItem.price}" type="currency" pattern="￥0.00"/></td>
+                        <td>${orderItem.count}</td>
+                        <td><fmt:formatNumber value="${orderItem.getTotalPrice()}" type="currency"
+                                              pattern="￥0.00"/></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:when>
+        <c:otherwise>
+            <div>无此订单！！！</div>
+        </c:otherwise>
+    </c:choose>
 </div>
 
 <%-- 引入页脚 --%>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%-- 使用此导航条需要，引入head文件： <%@ include file="/pages/common/bootstrap.jsp" %> --%>
 <c:if test="${not empty requestScope.page && fn:length(requestScope.page.items) > 0}">
     <div class="clearfix paginator">
         <div class="pull-left text-y-middle">共${requestScope.page.recordsTotal}条</div>
@@ -111,11 +112,11 @@
                         </c:when>
                         <%-- 情况D：只有右省略标 --%>
                         <%-- 这时最后一种情况，也可以用 otherwise --%>
-<%--                        <c:when test="${--%>
-<%--                        requestScope.page.pageTotal - requestScope.page.activePageNo >--%>
-<%--                        (requestScope.page.pageFormat[2] + requestScope.page.pageFormat[1] / 2)--%>
-<%--                        }">--%>
-<%--                        </c:when>--%>
+                        <%--                        <c:when test="${--%>
+                        <%--                        requestScope.page.pageTotal - requestScope.page.activePageNo >--%>
+                        <%--                        (requestScope.page.pageFormat[2] + requestScope.page.pageFormat[1] / 2)--%>
+                        <%--                        }">--%>
+                        <%--                        </c:when>--%>
                         <c:otherwise>
                             <c:forEach var="i" begin="1" end="${requestScope.page.activePageNo - 1}" step="1">
                                 <li class="page-item">

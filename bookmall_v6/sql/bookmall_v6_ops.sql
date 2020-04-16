@@ -19,6 +19,12 @@ UPDATE t_order SET `status` = ? WHERE id = ?;
 -- 修改指定id订单的支付状态
 UPDATE t_order SET pay_status = ? WHERE id = ?;
 
+-- 分页查询查询指定id用户的所有订单
+SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status payStatus, create_time sqlCreateTime FROM t_order WHERE user_id = ? LIMIT ?, ?;
+
+-- 查询指定id用户的所有订单的总数量
+SELECT COUNT(*) FROM t_order WHERE user_id = ?;
+
 
 --
 -- 保存订单项

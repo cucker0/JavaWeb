@@ -1,8 +1,6 @@
 package com.bookmall.web;
 
-import com.bookmall.bean.Cart;
-import com.bookmall.bean.Order;
-import com.bookmall.bean.User;
+import com.bookmall.bean.*;
 import com.bookmall.service.OrderService;
 import com.bookmall.serviceimpl.OrderServiceImpl;
 import com.bookmall.utils.CommonUtils;
@@ -11,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class ClientOrderServlet extends BaseServlet {
     private OrderService orderService;
@@ -31,11 +30,25 @@ public class ClientOrderServlet extends BaseServlet {
         String orderId = orderService.addOrder(cart, user.getId());
         if (orderId == null) {
             // response.sendRedirect(request.getHeader("referer"));
-            response.sendRedirect(request.getContextPath() + "/pages/order/order.jsp");
+            response.sendRedirect(request.getContextPath() + "/pages/order/orders.jsp");
             return;
         }
         request.setAttribute("orderId", orderId);
         request.getRequestDispatcher("/pages/cart/checkout.jsp").forward(request, response);
+    }
+
+    protected void updateOrderPayStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    // 列出指定用户的所有订单
+    protected void pageOrderByUserId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int activePageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
+        int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 10);
+        User user = (User) request.getSession().getAttribute("user");
+        Paginator<Order> orderPaginator = orderService.pageByUserId(activePageNo, pageSize, user.getId());
+        request.setAttribute("page", orderPaginator);
+        request.getRequestDispatcher("/pages/order/orders.jsp").forward(request, response);
     }
 
     // 支付订单
@@ -46,6 +59,16 @@ public class ClientOrderServlet extends BaseServlet {
         if (order != null) {
             orderService.updateOrderPayStatus(order.getId(), 1);
         }
-        response.sendRedirect(request.getContextPath() + "/pages/order/order.jsp");
+        response.sendRedirect(request.getContextPath() + "/client/orderServlet?action=pageOrderByUserId");
+    }
+
+    // 查询指定的订单详情
+    protected void getOrderById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String orderId = request.getParameter("orderId").strip();
+        List<OrderItem> orderItems = orderService.queryOrderItemsById(orderId);
+        request.setAttribute("orderItems", orderItems);
+        Order order = orderService.queryOrderById(orderId);
+        request.setAttribute("order", order);
+        request.getRequestDispatcher("/pages/order/order.jsp").forward(request, response);
     }
 }

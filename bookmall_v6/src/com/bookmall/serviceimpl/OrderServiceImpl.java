@@ -7,6 +7,7 @@ import com.bookmall.dao.OrderItemDao;
 import com.bookmall.daoimpl.BookDaoImpl;
 import com.bookmall.daoimpl.OrderDaoImpl;
 import com.bookmall.daoimpl.OrderItemDaoImpl;
+import com.bookmall.daoimpl.Page;
 import com.bookmall.service.OrderService;
 import com.bookmall.utils.CommonUtils;
 
@@ -77,6 +78,28 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * 分页查询查询指定id用户的所有订单
+     *
+     * @param activePageNo
+     * @param pageSize
+     * @param userId
+     * @return
+     */
+    @Override
+    public Paginator<Order> pageByUserId(int activePageNo, int pageSize, int userId) {
+        if (pageSize < 1) {
+            pageSize = 1;
+        }
+        int recordsTotal = orderDao.queryOrderTotalByUserId(userId);
+        // 检查activePageNo的合法性
+        activePageNo = Page.checkActivePageNo(activePageNo, pageSize, recordsTotal);
+        List<Order> orders = orderDao.paginationQueryOrdersByUserId((activePageNo - 1) * pageSize, pageSize, userId);
+        String url = "client/orderServlet?action=pageOrderByUserId";
+        Page<Order> page = new Page<>(activePageNo, pageSize, recordsTotal, orders, url);
+        return page.getPaginator();
+    }
+
+    /**
      * 修改指定id订单的物流状态
      *
      * @param orderId 订单id
@@ -112,5 +135,19 @@ public class OrderServiceImpl implements OrderService {
             return;
         }
         orderDao.updateOrderPayStatus(orderId, payStatus);
+    }
+
+    /**
+     * 查询指定id订单中所包含的商品
+     *
+     * @param orderId 订单id
+     * @return 一个由多个OrderItem组成的List对象
+     */
+    @Override
+    public List<OrderItem> queryOrderItemsById(String orderId) {
+        if (orderId.isEmpty()) {
+            return null;
+        }
+        return orderItemDao.queryOrderItemsByOrderId(orderId);
     }
 }

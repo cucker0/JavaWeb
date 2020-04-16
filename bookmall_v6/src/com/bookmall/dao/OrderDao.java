@@ -1,6 +1,7 @@
 package com.bookmall.dao;
 
 import com.bookmall.bean.Order;
+import com.bookmall.bean.OrderItem;
 
 import java.util.List;
 
@@ -30,6 +31,16 @@ public interface OrderDao {
     List<Order> queryOrdersByUserId(int userId);
 
     /**
+     * 查询指定id用户的所有订单
+     *
+     * @param offSet 从哪个第x个开始
+     * @param size 查询多少条
+     * @param userId 用户id
+     * @return
+     */
+    List<Order> paginationQueryOrdersByUserId(int offSet, int size, int userId);
+
+    /**
      * 修改指定id订单的物流状态
      *
      * @param orderId 订单id
@@ -49,4 +60,12 @@ public interface OrderDao {
      *                  1:已支付
      */
     void updateOrderPayStatus(String orderId, int payStatus);
+
+    /**
+     * 查询指定id用户的所有订单的总数量
+     *
+     * @param userId
+     * @return
+     */
+    int queryOrderTotalByUserId(int userId);
 }

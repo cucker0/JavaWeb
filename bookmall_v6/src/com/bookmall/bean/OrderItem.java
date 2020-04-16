@@ -91,6 +91,7 @@ public class OrderItem {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", count=" + count +
+                ", TotalPrice" + getTotalPrice() +
                 '}';
     }
 }

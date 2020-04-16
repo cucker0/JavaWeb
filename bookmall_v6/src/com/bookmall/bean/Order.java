@@ -10,9 +10,9 @@ public class Order {
     private int userId;
     // 此订单的总金额
     private BigDecimal totalAmount;
-    // 订单的物流状态，0:为发货  1:一发货  2:用户已签收
+    // 订单的物流状态，0:未发货  1:已发货  2:用户已签收
     private int status;
-    // 支付状态， 0:未付款， 1:已支付
+    // 支付状态， 0:未付款， 1:已支付, 2:订单取消
     private int payStatus = 0;
     // 订单创建时间
     private LocalDateTime createTime;

@@ -8,11 +8,12 @@ import com.bookmall.serviceimpl.BookServiceImpl;
 import com.bookmall.utils.CommonUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 public class CartServlet extends BaseServlet {
     private BookService bookService;
@@ -32,7 +33,11 @@ public class CartServlet extends BaseServlet {
             // 图书信息转换成 CartGoods对象
             cart.addGoods(new CartGoods(book.getId(), book.getName(), book.getPrice(), 1));
             // 更新添加到购物车的最后一件商品信息到session域对象中
-            request.getSession().setAttribute("last_goods_name", book.getName());
+            request.getSession().setAttribute("lastGoodsName", book.getName());
+            // long now = LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
+            // OffsetDateTime.now().getOffset(): 获取系统默认的ZoneOffset
+            long now = LocalDateTime.now().toEpochSecond(OffsetDateTime.now().getOffset());
+            request.getSession().setAttribute("lastAddgoodsTime", now);
         }
         // System.out.println("request head中的refere: " + request.getHeader("referer"));
         // 重定向到客户刚刚访问的页面

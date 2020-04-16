@@ -47,6 +47,20 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
     }
 
     /**
+     * 查询指定id用户的所有订单
+     *
+     * @param offSet 从哪个第x个开始
+     * @param size   查询多少条
+     * @param userId 用户id
+     * @return
+     */
+    @Override
+    public List<Order> paginationQueryOrdersByUserId(int offSet, int size, int userId) {
+        String sql = "SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status payStatus, create_time sqlCreateTime FROM t_order WHERE user_id = ? LIMIT ?, ?;";
+        return getBeanList(sql, userId, offSet, size);
+    }
+
+    /**
      * 修改指定id订单的物流状态
      *
      * @param orderId 订单id
@@ -73,5 +87,18 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
     public void updateOrderPayStatus(String orderId, int payStatus) {
         String sql = "UPDATE t_order SET pay_status = ? WHERE id = ?;";
         update(sql, payStatus, orderId);
+    }
+
+    /**
+     * 查询指定id用户的所有订单的总数量
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public int queryOrderTotalByUserId(int userId) {
+        String sql = "SELECT COUNT(*) FROM t_order WHERE user_id = ?;";
+        long count = getValue(sql, userId);
+        return (int) count;
     }
 }

@@ -302,7 +302,7 @@ public class BookServiceImpl implements BookService {
         // System.out.println("activePageNo:" + activePageNo);
         List<Book> items = bookDao.paginationQueryBookByPrice(pageSize * (activePageNo - 1), pageSize, minPrice, maxPrice);
         fillBook(items);
-        String url = "manager/bookServlet?action=page";
+        String url = "client/orderServlet?action=pageOrderByUserId";
         Page<Book> page = new Page<>(activePageNo, pageSize, recordsTotal, items, url);
         return page.getPaginator();
     }

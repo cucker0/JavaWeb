@@ -31,6 +31,7 @@ public class Paginator<T> {
     * */
     private int[] pageFormat = PAGE_FORMAT;
     // 分页请求基本地址，如果html页面定义了base地址，url：manager/bookServlet?action=page
+    // 否则使用完整的URL地址
     private String url;
 
     // 构造器
