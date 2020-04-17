@@ -13,15 +13,19 @@
             text-align: center;
             margin-top: 200px;
         }
+
         .order-head {
             width: 480px;
-            height: 40px;
-            padding: 30px;
+            /*height: 40px;*/
+            padding: 30px 0 0 0;
+            margin: 0 auto -30px auto;
         }
+
         .order-head div:first-child {
             float: left;
             line-height: 40px;
         }
+
         .order-head div:last-child {
             float: right;
         }
@@ -39,24 +43,22 @@
 <div id="main">
     <c:choose>
         <c:when test="${not empty requestScope.orderItems}">
-            <div class="text-center">
-                <div class="order-head clearfix">
-                    <div>
-                        订单号：
-                        <span>${requestScope.order.id}</span>
-                        <span>${requestScope.order.payStatus}</span>
-                    </div>
-                    <div>
-                        <a href="${header.get("referer")}" type="button" class="btn btn-secondary">
-                            返回
+            <div class="order-head clearfix">
+                <div>
+                    订单号：
+                    <span>${requestScope.order.id}</span>
+                    <span>${requestScope.order.payStatus}</span>
+                </div>
+                <div>
+                    <a href="${header.get("referer")}" type="button" class="btn btn-secondary">
+                        返回
+                    </a>
+                    <c:if test="${requestScope.order.payStatus == 0}">
+                        <a href="client/orderServlet?action=payOrder&orderId=${requestScope.order.id}" type="button"
+                           class="btn btn-primary">
+                            现在买单
                         </a>
-                        <c:if test="${requestScope.order.payStatus == 0}">
-                            <a href="client/orderServlet?action=payOrder&orderId=${requestScope.order.id}" type="button"
-                               class="btn btn-primary">
-                                现在买单
-                            </a>
-                        </c:if>
-                    </div>
+                    </c:if>
                 </div>
             </div>
             <table>
@@ -71,7 +73,8 @@
                         <td>${orderItem.name}</td>
                         <td><fmt:formatNumber value="${orderItem.price}" type="currency" pattern="￥0.00"/></td>
                         <td>${orderItem.count}</td>
-                        <td><fmt:formatNumber value="${orderItem.getTotalPrice()}" type="currency" pattern="￥0.00"/></td>
+                        <td><fmt:formatNumber value="${orderItem.getTotalPrice()}" type="currency"
+                                              pattern="￥0.00"/></td>
                     </tr>
                 </c:forEach>
             </table>

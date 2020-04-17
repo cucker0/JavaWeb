@@ -59,7 +59,8 @@ public class ClientOrderServlet extends BaseServlet {
         if (order != null) {
             orderService.updateOrderPayStatus(order.getId(), 1);
         }
-        response.sendRedirect(request.getContextPath() + "/client/orderServlet?action=pageOrderByUserId");
+        // response.sendRedirect(request.getContextPath() + "/client/orderServlet?action=pageOrderByUserId");
+        response.sendRedirect(request.getHeader("referer"));
     }
 
     // 查询指定的订单详情
