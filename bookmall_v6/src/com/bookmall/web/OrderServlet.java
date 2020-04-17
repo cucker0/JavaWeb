@@ -39,6 +39,7 @@ public class OrderServlet extends BaseServlet{
         int userId = CommonUtils.parseInt(request.getParameter("userId"), 0);
         Paginator<Order> orderPaginator = orderService.pageByUserId(activePageNo, pageSize, userId);
         request.setAttribute("page", orderPaginator);
+        request.setAttribute("searchKey4userId", userId);
         request.getRequestDispatcher("/pages/manager/order_manager.jsp").forward(request, response);
     }
 

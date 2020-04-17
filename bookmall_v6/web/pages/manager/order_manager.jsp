@@ -44,7 +44,7 @@
             订单号：<input type="text" name="orderId">
         </label>
         <label>
-            用户ID：<input type="text" name="userId">
+            用户ID：<input type="text" name="userId" value="${requestScope.searchKey4userId}">
         </label>
         <button class="btn btn-primary">搜索</button>
     </div>
