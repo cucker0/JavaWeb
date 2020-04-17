@@ -68,4 +68,27 @@ public interface OrderDao {
      * @return
      */
     int queryOrderTotalByUserId(int userId);
+
+    /**
+     * 查询所有订单
+     *
+     * @return 一个由所有订单组成的List对象
+     */
+    List<Order> queryAllOrders();
+
+    /**
+     * 查询所有订单的总数量
+     *
+     * @return 所有订单的总数量
+     */
+    int queryOrderTotal();
+
+    /**
+     * 分页查询所有订单
+     *
+     * @param offSet 从哪个第x个开始
+     * @param size 查询多少条
+     * @return 一个由查询到的订单组成的List对象
+     */
+    List<Order> paginationQueryOrders(int offSet, int size);
 }

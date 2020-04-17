@@ -71,4 +71,11 @@ public interface OrderService {
      * @return 一个由多个OrderItem组成的List对象
      */
     List<OrderItem> queryOrderItemsById(String orderId);
+
+    /**
+     * 分页查询所有订单
+     *
+     * @return
+     */
+    public Paginator<Order> page(int activePageNo, int pageSize);
 }

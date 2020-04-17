@@ -39,7 +39,7 @@
                 <td>${order.totalAmount}</td>
                 <c:choose>
                     <c:when test="${order.status == 0}">
-                        <td>未发货</td>
+                        <td>等待发货</td>
                     </c:when>
                     <c:when test="${order.status == 1}">
                         <td>已发货</td>

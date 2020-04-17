@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * client端 OrderServlet
+ */
 public class ClientOrderServlet extends BaseServlet {
     private OrderService orderService;
 
@@ -45,6 +48,7 @@ public class ClientOrderServlet extends BaseServlet {
     protected void pageOrderByUserId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int activePageNo = CommonUtils.parseInt(request.getParameter("page_no"), 1);
         int pageSize = CommonUtils.parseInt(request.getParameter("page_size"), 10);
+        // 获取当前访问的用户
         User user = (User) request.getSession().getAttribute("user");
         Paginator<Order> orderPaginator = orderService.pageByUserId(activePageNo, pageSize, user.getId());
         request.setAttribute("page", orderPaginator);

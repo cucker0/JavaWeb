@@ -101,4 +101,40 @@ public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
         long count = getValue(sql, userId);
         return (int) count;
     }
+
+    /**
+     * 查询所有订单
+     *
+     * @return 一个由所有订单组成的List对象
+     */
+    @Override
+    public List<Order> queryAllOrders() {
+        String sql = "SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status payStatus, create_time sqlCreateTime FROM t_order;";
+        return getBeanList(sql);
+    }
+
+    /**
+     * 查询所有订单的总数量
+     *
+     * @return 所有订单的总数量
+     */
+    @Override
+    public int queryOrderTotal() {
+        String sql = "SELECT COUNT(*) FROM t_order;";
+        long count = getValue(sql);
+        return (int) count;
+    }
+
+    /**
+     * 分页查询所有订单
+     *
+     * @param offSet 从哪个第x个开始
+     * @param size   查询多少条
+     * @return 一个由查询到的订单组成的List对象
+     */
+    @Override
+    public List<Order> paginationQueryOrders(int offSet, int size) {
+        String sql = "SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status payStatus, create_time sqlCreateTime FROM t_order LIMIT ?, ?;";
+        return getBeanList(sql, offSet, size);
+    }
 }

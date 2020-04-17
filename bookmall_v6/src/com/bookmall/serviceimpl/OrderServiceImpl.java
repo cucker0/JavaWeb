@@ -150,4 +150,25 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderItemDao.queryOrderItemsByOrderId(orderId);
     }
+
+    /**
+     * 分页查询所有订单
+     *
+     * @param activePageNo
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public Paginator<Order> page(int activePageNo, int pageSize) {
+        if (pageSize < 1) {
+            pageSize = 1;
+        }
+        int recordsTotal = orderDao.queryOrderTotal();
+        // 检查activePageNo的合法性
+        activePageNo = Page.checkActivePageNo(activePageNo, pageSize, recordsTotal);
+        List<Order> orders = orderDao.paginationQueryOrders((activePageNo - 1) * pageSize, pageSize);
+        String url = "manager/orderServlet?action=page";
+        Page<Order> page = new Page<>(activePageNo, pageSize, recordsTotal, orders, url);
+        return page.getPaginator();
+    }
 }

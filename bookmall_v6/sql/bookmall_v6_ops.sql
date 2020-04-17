@@ -25,6 +25,15 @@ SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status paySta
 -- 查询指定id用户的所有订单的总数量
 SELECT COUNT(*) FROM t_order WHERE user_id = ?;
 
+-- 查询所有订单
+SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status payStatus, create_time sqlCreateTime FROM t_order;
+
+-- 查询所有订单的总数量
+SELECT COUNT(*) FROM t_order;
+
+-- 分页查询所有订单
+SELECT id, user_id userId, total_amount totalAmount, `status`, pay_status payStatus, create_time sqlCreateTime FROM t_order LIMIT ?, ?;
+
 
 --
 -- 保存订单项
