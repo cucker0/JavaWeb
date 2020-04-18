@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CommonUtils {
     public CommonUtils() {
@@ -184,5 +182,45 @@ public class CommonUtils {
             response.addCookie(ck);
         }
         return cart;
+    }
+
+    /**
+     * 反转LinkedHashMap对象的元素排序
+     *
+     * @param map LinkedHashMap对象
+     * @param reverseSelf 返回新map对象还是新map对象
+     *                    true: 反转原LinkedHashMap对象并返回
+     *                    false: 返回新map对象
+     * @param <K> map的key泛型
+     * @param <V> map的value泛型
+     * @return 与指定LinkedHashMap元素顺序相反的LinkedHashMap对象
+     */
+    public static <K, V> LinkedHashMap<K, V> reverse(LinkedHashMap<K,V> map, boolean reverseSelf) {
+        LinkedHashMap<K, V> reverseMap = new LinkedHashMap<>();
+        ListIterator<Map.Entry<K, V>> iterator = new ArrayList<>(map.entrySet())
+                .listIterator(map.entrySet().size());
+        while (iterator.hasPrevious()) {
+            Map.Entry<K, V> entry = iterator.previous();
+            reverseMap.put(entry.getKey(), entry.getValue());
+        }
+        if (reverseSelf) {
+            map.clear();
+            map.putAll(reverseMap);
+            return map;
+        }
+        return reverseMap;
+    }
+
+    /**
+     * 返回一个与指定LinkedHashMap元素顺序相反的LinkedHashMap对象
+     * 返回的LinkedHashMap对象是一个新对象，不是原LinkedHashMap对象
+     *
+     * @param map LinkedHashMap对象
+     * @param <K> map的key泛型
+     * @param <V> map的value泛型
+     * @return 与指定LinkedHashMap元素顺序相反的LinkedHashMap对象
+     */
+    public static <K, V> LinkedHashMap<K, V> reverse(LinkedHashMap<K,V> map) {
+        return reverse(map, false);
     }
 }

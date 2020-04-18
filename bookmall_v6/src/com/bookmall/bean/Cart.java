@@ -1,5 +1,7 @@
 package com.bookmall.bean;
 
+import com.bookmall.utils.CommonUtils;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
@@ -14,7 +16,9 @@ public class Cart implements Serializable {
 
     // 方法
     public LinkedHashMap<Integer, CartGoods> getGoodsMap() {
-        return goodsMap;
+        // return goodsMap;
+        // 反转排序
+        return CommonUtils.reverse(goodsMap);
     }
 
     /**
