@@ -5,7 +5,7 @@ Filter过滤器
 * Filter是一个interface接口
 * Filter是java web三大组件之一
     >Servlet小程序、Filter过滤器、Listener监听器
-* Filter是服务器专门用来过滤请求、拦截响应的，类似于哨卡的作用（进入之前、出来之后做些审问登记）
+* Filter是服务器专门用来过滤(拦截)请求、响应，类似于哨卡的作用（进入之前、出来之后做些审问登记）
 
 ### Filter的常见作用
 * 检查用户访问权限，权限管理

@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <form action="admin/login.jsp" method="post">
+    <form action="login" method="post">
         <div>
             <label>
                 用户名：<input type="text" name="username">
