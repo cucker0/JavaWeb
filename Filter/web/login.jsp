@@ -6,7 +6,8 @@
 </head>
 <body>
 <div>
-    <form action="login" method="post">
+    <form action="userServlet" method="post">
+        <input type="hidden" name="action" value="login">
         <div>
             <label>
                 用户名：<input type="text" name="username">

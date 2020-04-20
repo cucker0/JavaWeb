@@ -1,11 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>登录成功</title>
+    <title>用户中心</title>
 </head>
 <body>
-<div>
-    登录成功
-</div>
+<h3>用户中心</h3>
 </body>
 </html>

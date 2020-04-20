@@ -3,19 +3,101 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <!-- filter过滤器 -->
+    <filter>
+        <filter-name>Filter1</filter-name>
+        <filter-class>com.java.filter.Filter1</filter-class>
+    </filter>
+    <filter>
+        <!-- 定义filter名称 -->
+        <filter-name>Filter2</filter-name>
+        <!-- Filter的具体实现类 -->
+        <filter-class>com.java.filter.Filter2</filter-class>
+        <!-- 配置初始化参数 -->
+        <init-param>
+            <!-- 参数名称 -->
+            <param-name>sn</param-name>
+            <!-- 参数值 -->
+            <param-value>s1001</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>FilterChain1</filter-name>
+        <filter-class>com.java.filter.FilterChain1</filter-class>
+    </filter>
+    <filter>
+        <filter-name>FilterChain2</filter-name>
+        <filter-class>com.java.filter.FilterChain2</filter-class>
+    </filter>
+    <filter>
+        <filter-name>FilterUrlPattern1</filter-name>
+        <filter-class>com.java.filter.FilterUrlPattern1</filter-class>
+    </filter>
+    <filter>
+        <filter-name>FilterUrlPattern2</filter-name>
+        <filter-class>com.java.filter.FilterUrlPattern2</filter-class>
+    </filter>
+    <filter>
+        <filter-name>FilterUrlPattern3</filter-name>
+        <filter-class>com.java.filter.FilterUrlPattern3</filter-class>
+    </filter>
+    <filter>
+        <filter-name>FilterUrlPattern4</filter-name>
+        <filter-class>com.java.filter.FilterUrlPattern4</filter-class>
+    </filter>
+
+
+    <!-- filter、url mapping -->
+    <filter-mapping>
+        <filter-name>Filter1</filter-name>
+        <!-- 拦截的目录 -->
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Filter2</filter-name>
+        <url-pattern>/transaction/recharge.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FilterChain1</filter-name>
+        <url-pattern>/filterChain.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FilterChain2</filter-name>
+        <url-pattern>/filterChain.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FilterUrlPattern1</filter-name>
+        <url-pattern>/static/css/common.css</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FilterUrlPattern2</filter-name>
+        <url-pattern>/pages/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FilterUrlPattern2</filter-name>
+        <url-pattern>/info/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FilterUrlPattern3</filter-name>
+        <!-- 匹配任意URL -->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FilterUrlPattern4</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+
+
     <!-- servlet -->
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>com.java.web.UserServlet</servlet-class>
     </servlet>
-    
-    <!-- servlet,url map -->
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>UserServlet</servlet-name>-->
-<!--        <url-pattern>/login</url-pattern>-->
-<!--    </servlet-mapping>-->
+
+    <!-- servlet,url mapping -->
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>
 </web-app>
