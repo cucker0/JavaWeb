@@ -3,6 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!-- filter与类 mapping -->
+    <filter>
+        <filter-name>ManagerFilter</filter-name>
+        <filter-class>com.bookmall.filter.ManagerFilter</filter-class>
+    </filter>
+    <!-- filter、url mapping -->
+    <filter-mapping>
+        <filter-name>ManagerFilter</filter-name>
+        <!-- 需要登录才能访问 /pages/manager/*  -->
+        <url-pattern>/pages/manager/*</url-pattern>
+    </filter-mapping>
+
     <!-- Servlet与处理类映射 -->
     <servlet>
         <servlet-name>UserServlet</servlet-name>
