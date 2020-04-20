@@ -1,0 +1,458 @@
+@CHARSET "UTF-8";
+
+body {
+    overflow: hidden;
+}
+
+* {
+    margin: 0;
+    font-family: "Microsoft Yahei";
+    color: #666;
+}
+
+a {
+    text-decoration: none;
+}
+
+.clearfix:before, .clearfix:after {
+    display: table;
+    content: "";
+    clear: both;
+}
+
+/*
+    针对IE 6
+    不支持before、after伪类，则开启hasLayout功能来解决
+*/
+.clearfix {
+    *zoom: 1; /* 缩放比例 */
+}
+
+div {
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+#header {
+    height: 82px;
+    width: 1200px;
+}
+
+#main {
+    height: 700px;
+    width: 1200px;
+    border: 1px black solid;
+    overflow: auto;
+}
+
+#bottom {
+    height: 30px;
+    width: 1200px;
+    text-align: center;
+}
+
+#book {
+    width: 100%;
+    height: 90%;
+    margin: auto;
+
+}
+
+.b_list {
+    height: 340px;
+    width: 250px;
+    margin: 20px;
+    float: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 1px #e3e3e3 solid;
+}
+
+#page_nav {
+    width: 100%;
+    height: 10px;
+    margin: auto;
+
+    text-align: center;
+}
+
+#pn_input {
+    width: 30px;
+    text-align: center;
+}
+
+.img_div {
+    height: 150px;
+    text-align: center;
+}
+
+.book_img {
+    height: 150px;
+    width: 150px;
+}
+
+.book_info {
+    text-align: left;
+    padding: 0 5px;
+}
+
+.book_info div {
+    height: 10px;
+    width: 300px;
+    text-align: left;
+}
+
+.book_info span.sp2 {
+    /*强制span不换行*/
+    white-space: nowrap;
+    /*将span当做块级元素对待*/
+    display: inline-block;
+    /*限制宽度*/
+    width: 210px;
+    /*超出宽度部分隐藏*/
+    overflow: hidden;
+    /*超出部分以点号代替*/
+    text-overflow: ellipsis;
+    /*数字与之前的文字对齐*/
+    /*line-height: 1;*/
+}
+
+/* 为了与 .book_info span.sp2 对齐  */
+.book_info span.sp1 {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.wel_word {
+    font-size: 60px;
+    float: left;
+}
+
+.logo_img {
+    float: left;
+}
+
+#header div a {
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#header div {
+    float: right;
+    margin-top: 55px;
+}
+
+.book_cond {
+    margin-left: 500px;
+}
+
+.book_cond input {
+    width: 50px;
+    text-align: center;
+}
+
+
+/*登录页面CSS样式  */
+
+#login_header {
+    height: 82px;
+    width: 1200px;
+}
+
+.login_banner {
+    height: 475px;
+    background-color: #39987c;
+}
+
+.login_form {
+    height: 310px;
+    width: 406px;
+    float: right;
+    margin-right: 50px;
+    margin-top: 50px;
+    background-color: #fff;
+}
+
+#content {
+    height: 475px;
+    width: 1200px;
+}
+
+.login_box {
+    margin: 20px;
+    height: 260px;
+    width: 366px;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+.msg_cont {
+    background: none repeat scroll 0 0 #fff6d2;
+    border: 1px solid #ffe57d;
+    color: #666;
+    height: 18px;
+    line-height: 18px;
+    padding: 3px 10px 3px 40px;
+    position: relative;
+    border: none;
+}
+
+.msg_cont b {
+    background: url("../img/pwd-icons-new.png") no-repeat scroll -104px -22px rgba(0, 0, 0, 0);
+    display: block;
+    height: 17px;
+    left: 10px;
+    margin-top: -8px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    width: 16px;
+}
+
+.form .itxt {
+    /*border: 0 none;*/
+    float: none;
+    font-family: "宋体", serif;
+    font-size: 14px;
+    height: 18px;
+    line-height: 18px;
+    overflow: hidden;
+    padding: 10px 0 10px 10px;
+    width: 220px;
+    border: 1px #e3e3e3 solid;
+}
+
+.form input[name=code].itxt {
+    width: 100px;
+}
+
+.form label {
+    display: block;
+    margin: 10px 0
+}
+
+.form label span {
+    display: inline-block;
+    width: 75px;
+}
+
+#sub_btn {
+    background-color: #39987c;
+    border: none;
+    color: #fff;
+    width: 360px;
+    height: 40px;
+}
+
+#l_content {
+    float: left;
+    margin-top: 150px;
+    margin-left: 300px;
+}
+
+#l_content span {
+    font-size: 60px;
+    color: white;
+}
+
+.tit h1 {
+    float: left;
+    margin-top: 5px;
+}
+
+.tit a {
+    float: right;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: red;
+    text-decoration: none;
+}
+
+.tit .errorMsg {
+    float: right;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: red;
+}
+
+.tit {
+    height: 30px;
+}
+
+/*购物车*/
+#main table {
+    margin: auto;
+    margin-top: 80px;
+    border-collapse: collapse;
+}
+
+#main table td {
+    width: 120px;
+    text-align: left;
+    border-bottom: 1px #e3e3e3 solid;
+    padding: 10px;
+}
+
+#main table th {
+    text-align: left;
+    padding: 10px;
+}
+
+#main table textarea {
+    width: 100%;
+    height: 60px;
+    padding: 5px;
+}
+
+.td-w {
+    width: 200px !important;
+}
+
+.td-w2 {
+    width: 680px !important;
+}
+
+.td-w3 {
+    width: 45px !important;
+}
+
+.input-w {
+    width: 96%;
+}
+
+.cart_info {
+    width: 700px;
+    text-align: right;
+}
+
+.cart_span {
+    margin-left: 20px;
+}
+
+span.b_price {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+}
+
+.cart_span span {
+    color: red;
+    font-size: 20px;
+    margin: 10px;
+
+}
+
+.cart_span a, td a {
+    font-size: 20px;
+    color: blue;
+}
+
+#header div span {
+    margin: 10px;
+}
+
+#header div .um_span {
+    color: red;
+    font-size: 25px;
+    margin: 10px;
+}
+
+#header div a {
+    color: blue;
+}
+
+.menu a {
+    margin: 0 0 0 10px;
+}
+
+.paginator {
+    margin: 40px 0 0 122px;
+}
+
+.input_page_number {
+    margin: 0 5px;
+}
+
+.pull-left {
+    float: left;
+}
+
+.jump-page {
+    padding: 0 10px 0 0;
+}
+
+.jump-page input {
+    padding: 5px;
+    margin: 0 0 0 30px;
+}
+
+/* 垂直方向上，以基础线对齐 */
+.y-baseline {
+    vertical-align: baseline !important;
+}
+
+.y-middle {
+    vertical-align: middle;
+}
+
+.text-y-middle {
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+}
+
+li.disabled {
+    cursor: not-allowed;
+}
+
+div.book_author {
+    height: 40px;
+}
+
+.quantity-form {
+    /* 为了去除换行导致标签之间多出的空格 */
+    font-size: 0;
+}
+
+.quantity-form span {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    display: inline-block;
+    width: 15px;
+    height: 20px;
+    font-size: 12px;
+    vertical-align: middle;
+    padding: 1px 0;
+    text-align: center;
+}
+
+.quantity-form input {
+    width: 30px;
+    height: 20px;
+    background:none;
+    outline:none;
+    border:1px solid #ccc;
+    border-left: 0;
+    border-right: 0;
+    font-size: 12px;
+    vertical-align: middle;
+    padding: 1px 2px;
+    text-align: center;
+}
+
+.disabled-pointer-events {
+    pointer-events: none;
+}
+
+.pay_option {
+    width: 100%;
+    text-align: center;
+    padding: 30px 0 0 0;
+}

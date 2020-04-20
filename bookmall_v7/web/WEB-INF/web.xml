@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!-- Servlet与处理类映射 -->
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+<!--        <servlet-class>com.bookmall.web.UserServlet</servlet-class>-->
+        <!-- 优化1 -->
+<!--        <servlet-class>com.bookmall.web.UserServlet2</servlet-class>-->
+        <!-- 优化2 -->
+<!--        <servlet-class>com.bookmall.web.UserServlet3</servlet-class>-->
+        <!-- 优化3 -->
+        <servlet-class>com.bookmall.web.UserServlet4</servlet-class>
+
+    </servlet>
+    <servlet>
+        <servlet-name>BookServlet</servlet-name>
+        <servlet-class>com.bookmall.web.BookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AuthorServlet</servlet-name>
+        <servlet-class>com.bookmall.web.AuthorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PublisherServlet</servlet-name>
+        <servlet-class>com.bookmall.web.PublisherServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientBookServlet</servlet-name>
+        <servlet-class>com.bookmall.web.ClientBookServlet</servlet-class>
+    </servlet>
+    <!-- kaptcha生成验证码图片的Servlet -->
+    <servlet>
+        <servlet-name>Kaptcha</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+<!--        <init-param>-->
+<!--            &lt;!&ndash; kaptcha默认是英文验证码，不需要配置，如果改成中文验证码的时候，一定要加上中文字体配置。否则会有乱码  &ndash;&gt;-->
+<!--            <param-name>kaptcha.textproducer.font.names</param-name>-->
+<!--            <param-value>楷体</param-value>-->
+<!--        </init-param>-->
+        <init-param>
+            <param-name>kaptcha.border</param-name>
+            <param-value>no</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.bookmall.web.CartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientOrderServlet</servlet-name>
+        <servlet-class>com.bookmall.web.ClientOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.bookmall.web.OrderServlet</servlet-class>
+    </servlet>
+
+    <!-- URL与Servlet映射 -->
+    <!-- kaptcha生成验证码图片的访问路径 -->
+    <servlet-mapping>
+        <servlet-name>Kaptcha</servlet-name>
+        <url-pattern>/kaptcha.jpg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookServlet</servlet-name>
+        <url-pattern>/manager/bookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthorServlet</servlet-name>
+        <url-pattern>/manager/authorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublisherServlet</servlet-name>
+        <url-pattern>/manager/publisherServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientBookServlet</servlet-name>
+        <url-pattern>/client/clientBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientOrderServlet</servlet-name>
+        <url-pattern>/client/orderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/manager/orderServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
