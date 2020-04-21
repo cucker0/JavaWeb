@@ -230,3 +230,14 @@ Filter与Filter之间的传递、Filter与请求资源之间的传递都靠Filte
     Filter对于不存在的资源也会匹配，是否应用Filter是由url-pattern决定的，只要url与设置的url匹配模式匹配就会应用Filter
     ```
     
+## 使用Filter和ThreadLocal组合来控制事务
+### TheadLocal
+TheadLocal类似Map对象
+* 以当前线程对象为key，保存一个指定泛型类型的数据
+* 线程是安全的
+* 定义ThreadLocal类型的属性字段，一般使用static修饰
+
+[使用map实现ThreadLocal功能](../Filter/src/com/java/filter/ThreadLocal1.java)  
+
+[ThreadLocal示例](../Filter/src/com/java/filter/ThreadLocal2.java)  
+

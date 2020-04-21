@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * 利用map来实现线程保存变量
+ */
 public class ThreadLocal1 {
     private static Map<String, Integer> map = new HashMap<>();
 
@@ -12,6 +15,14 @@ public class ThreadLocal1 {
         Thread th2 = new Thread(new MyTask(map));
         th1.start();
         th2.start();
+        /*
+打印结果：
+Thread-1生成的随机数：341
+Thread-0生成的随机数：781
+map[Thread-1]: 341
+map[Thread-0]: 781
+
+         */
     }
 }
 
