@@ -52,7 +52,7 @@ public abstract class BaseDao4Transaction<T> {
      * 释放threadLocal存放的connection数据库连接
      */
     protected void release() {
-        C3p0Utils.release();
+        C3p0Utils.release(getConnection());
     }
 
     /**

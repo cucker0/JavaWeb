@@ -117,17 +117,6 @@ public class C3p0Utils {
         release(null, null, connection);
     }
 
-
-    /**
-     * 释放connectionThreadLocal存放的Connection对象
-     */
-    public static void release() {
-        Connection connection = threadLocal.get();
-        release(connection);
-        // 从threadLocal中删除存放Connection的信息
-        threadLocal.remove();
-    }
-
     /**
      * 开启事务
      *
@@ -145,7 +134,7 @@ public class C3p0Utils {
     }
 
     /**
-     * 指定connnection的事务提交
+     * 指定connnection的事务提交，并关闭连接
      *
      * @param connection: Connection对象
      */
@@ -168,16 +157,20 @@ public class C3p0Utils {
     }
 
     /**
-     * 提交connectionThreadLocal存放的Connection的事务
+     * 提交connectionThreadLocal存放的Connection的事务，并关闭连接
      */
     public static void commitTransaction() {
         Connection connection = threadLocal.get();
+        if (connection == null) {
+            return;
+        }
         commitTransaction(connection);
+        // 删除connectionThreadLocal中存放Connection的信息
         threadLocal.remove();
     }
 
     /**
-     * 指定connnection的回滚事务
+     * 指定connnection的回滚事务，并关闭连接
      *
      * @param connection: Connection对象
      */
@@ -200,11 +193,12 @@ public class C3p0Utils {
     }
 
     /**
-     * 回滚connectionThreadLocal存放的Connection的事务
+     * 回滚connectionThreadLocal存放的Connection的事务，并关闭连接
      */
     public static void rollbackTransaction() {
         Connection connection = threadLocal.get();
         rollbackTransaction(connection);
+        // 删除connectionThreadLocal中存放Connection的信息
         threadLocal.remove();
     }
 }

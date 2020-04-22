@@ -14,7 +14,8 @@ import java.util.List;
 /**
  * client端 OrderServlet
  */
-public class ClientOrderServlet extends BaseServlet {
+// public class ClientOrderServlet extends BaseServlet {
+public class ClientOrderServlet extends BaseServlet4Transaction {
     private OrderService orderService;
 
     public ClientOrderServlet() {

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 访问/admin/*下的所有资源要求登录
+ */
 public class ManagerFilter implements Filter {
     public void destroy() {
     }

@@ -2,11 +2,12 @@ package com.bookmall.daoimpl;
 
 import com.bookmall.bean.Order;
 import com.bookmall.dao.BaseDao;
+import com.bookmall.dao.BaseDao4Transaction;
 import com.bookmall.dao.OrderDao;
 
 import java.util.List;
 
-public class OrderDaoImpl extends BaseDao<Order> implements OrderDao {
+public class OrderDaoImpl extends BaseDao4Transaction<Order> implements OrderDao {
     /**
      * 保存订单
      *
