@@ -210,6 +210,8 @@ Java Web
 ### 项目实战
 * [bookmall v2](bookmall/README.md)
 * [bookmall v3](bookmall_v3/README.md)
+* [bookmall v6](bookmall_v6/README.md)
+* [bookmall v7](bookmall_v7/README.md)
 
 ### 其他
 * [JSONP](./readme/jsonp.md)
