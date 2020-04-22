@@ -1,12 +1,12 @@
 package com.bookmall.daoimpl;
 
 import com.bookmall.bean.Publisher;
-import com.bookmall.dao.BaseDao;
+import com.bookmall.dao.BaseDao4Transaction;
 import com.bookmall.dao.PublisherDao;
 
 import java.util.List;
 
-public class PublisherDaoImpl extends BaseDao<Publisher> implements PublisherDao {
+public class PublisherDaoImpl extends BaseDao4Transaction<Publisher> implements PublisherDao {
     // 方法
     /**
      * 新增出版社

@@ -84,33 +84,34 @@
             </c:if>
         </div>
 
-        <c:forEach var="book" items="${requestScope.page.items}">
-            <div class="b_list">
-                <div class="img_div">
-                    <img class="book_img" alt="" src="${book.imgPath}"/>
-                </div>
-                <div class="book_info">
-                    <div class="book_name">
-                        <span class="sp1">书名:</span>
-                        <span class="sp2">${book.name}</span>
+        <div class="clearfix">
+            <c:forEach var="book" items="${requestScope.page.items}">
+                <div class="b_list">
+                    <div class="img_div">
+                        <img class="book_img" alt="" src="${book.imgPath}"/>
                     </div>
-                    <div class="book_price">
-                        <span class="sp1">价格:</span>
-                        <span class="sp2">
+                    <div class="book_info">
+                        <div class="book_name">
+                            <span class="sp1">书名:</span>
+                            <span class="sp2">${book.name}</span>
+                        </div>
+                        <div class="book_price">
+                            <span class="sp1">价格:</span>
+                            <span class="sp2">
                             <fmt:formatNumber value="${book.price}" type="currency" pattern="￥0.00"/>
                         </span>
-                    </div>
-                    <div class="book_sales">
-                        <span class="sp1">销量:</span>
-                        <span class="sp2">${book.sales}</span>
-                    </div>
-                    <div class="book_amount">
-                        <span class="sp1">库存:</span>
-                        <span class="sp2">${book.stock}</span>
-                    </div>
-                    <div class="book_author">
-                        <span class="sp1">作者:</span>
-                        <span class="sp2">
+                        </div>
+                        <div class="book_sales">
+                            <span class="sp1">销量:</span>
+                            <span class="sp2">${book.sales}</span>
+                        </div>
+                        <div class="book_amount">
+                            <span class="sp1">库存:</span>
+                            <span class="sp2">${book.stock}</span>
+                        </div>
+                        <div class="book_author">
+                            <span class="sp1">作者:</span>
+                            <span class="sp2">
                             <c:forEach var="author" items="${book.authors}" varStatus="status">
                                 <c:choose>
                                     <c:when test="${status.last}">
@@ -121,17 +122,17 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
-                        </span>
+                            </span>
+                        </div>
 
-                    </div>
-
-                    <div class="book_add">
-                        <a type="button" class="btn btn-secondary btn-sm"
-                           href="cartServlet?action=addGoods&id=${book.id}">加入购物车</a>
+                        <div class="book_add">
+                            <a type="button" class="btn btn-secondary btn-sm"
+                               href="cartServlet?action=addGoods&id=${book.id}">加入购物车</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
         <%--        分页导航条--%>
         <%@ include file="/pages/common/page_navigation.jsp" %>
     </div>

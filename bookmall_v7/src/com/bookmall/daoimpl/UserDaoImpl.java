@@ -1,10 +1,10 @@
 package com.bookmall.daoimpl;
 
 import com.bookmall.bean.User;
-import com.bookmall.dao.BaseDao;
+import com.bookmall.dao.BaseDao4Transaction;
 import com.bookmall.dao.UserDao;
 
-public class UserDaoImpl extends BaseDao<User> implements UserDao {
+public class UserDaoImpl extends BaseDao4Transaction<User> implements UserDao {
     // 构造器
     public UserDaoImpl() {}
 

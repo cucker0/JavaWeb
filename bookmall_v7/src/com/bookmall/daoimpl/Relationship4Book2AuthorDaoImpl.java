@@ -1,18 +1,13 @@
 package com.bookmall.daoimpl;
 
-import com.bookmall.bean.Author;
 import com.bookmall.bean.Relationship4Book2Author;
-import com.bookmall.dao.AuthorDao;
-import com.bookmall.dao.BaseDao;
-import com.bookmall.dao.BookDao;
-import com.bookmall.dao.Relationship4Book2AuthorDao;
+import com.bookmall.dao.*;
 
-import java.sql.Connection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Relationship4Book2AuthorDaoImpl extends BaseDao<Relationship4Book2Author> implements Relationship4Book2AuthorDao {
+public class Relationship4Book2AuthorDaoImpl extends BaseDao4Transaction<Relationship4Book2Author> implements Relationship4Book2AuthorDao {
     // 方法
     /**
      * 保存book与作者关联记录

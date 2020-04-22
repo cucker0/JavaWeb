@@ -52,6 +52,7 @@
     <table>
         <tr>
             <th>订单号</th>
+            <th>用户ID</th>
             <th>日期</th>
             <th>金额</th>
             <th>物流状态</th>
@@ -61,6 +62,7 @@
         <c:forEach var="order" items="${requestScope.page.items}">
             <tr>
                 <td>${order.id}</td>
+                <td>${order.userId}</td>
                 <td>${order.createTime}</td>
                 <td>
                     <fmt:formatNumber value="${order.totalAmount}" type="currency" pattern="￥0.00"/>

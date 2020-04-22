@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%-- 使用此导航条需要，引入head文件： <%@ include file="/pages/common/bootstrap.jsp" %> --%>
 <c:if test="${not empty requestScope.page && fn:length(requestScope.page.items) > 0}">
-    <div class="clearfix paginator">
+    <div class="paginator clearfix">
         <div class="pull-left text-y-middle">共${requestScope.page.recordsTotal}条</div>
 
         <div class="pull-left page-nav">

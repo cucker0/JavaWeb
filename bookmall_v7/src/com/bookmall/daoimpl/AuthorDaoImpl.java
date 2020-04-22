@@ -1,15 +1,14 @@
 package com.bookmall.daoimpl;
 
 import com.bookmall.bean.Author;
-import com.bookmall.bean.Book;
 import com.bookmall.dao.AuthorDao;
-import com.bookmall.dao.BaseDao;
+import com.bookmall.dao.BaseDao4Transaction;
 import com.bookmall.utils.CommonUtils;
 
 import java.util.List;
 import java.util.Set;
 
-public class AuthorDaoImpl extends BaseDao<Author> implements AuthorDao {
+public class AuthorDaoImpl extends BaseDao4Transaction<Author> implements AuthorDao {
     /**
      * 新增作者
      *

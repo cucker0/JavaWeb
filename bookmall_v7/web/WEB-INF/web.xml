@@ -25,6 +25,11 @@
         <url-pattern>/pages/manager/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>ManagerFilter</filter-name>
+        <!-- 订单操作需要登录 -->
+        <servlet-name>ClientOrderServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>TransactionFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>

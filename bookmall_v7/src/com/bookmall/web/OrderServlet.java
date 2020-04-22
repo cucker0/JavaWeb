@@ -2,8 +2,6 @@ package com.bookmall.web;
 
 import com.bookmall.bean.Order;
 import com.bookmall.bean.Paginator;
-import com.bookmall.bean.User;
-import com.bookmall.dao.Common;
 import com.bookmall.service.OrderService;
 import com.bookmall.serviceimpl.OrderServiceImpl;
 import com.bookmall.utils.CommonUtils;
@@ -16,7 +14,7 @@ import java.io.IOException;
 /**
  * manager端 OrderServlet
  */
-public class OrderServlet extends BaseServlet{
+public class OrderServlet extends BaseServlet4Transaction{
     private OrderService orderService;
 
     public OrderServlet() {

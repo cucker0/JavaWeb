@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ClientBookServlet extends BaseServlet {
+public class ClientBookServlet extends BaseServlet4Transaction {
     private BookService bookService = new BookServiceImpl();
 
     protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

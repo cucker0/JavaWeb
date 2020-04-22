@@ -8,13 +8,12 @@ import com.bookmall.utils.Beanutils;
 import com.bookmall.utils.CommonUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class AuthorServlet extends BaseServlet {
+public class AuthorServlet extends BaseServlet4Transaction {
     private AuthorService authorService;
 
     public AuthorServlet() {

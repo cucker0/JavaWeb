@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class UserServlet4 extends BaseServlet {
+public class UserServlet4 extends BaseServlet4Transaction {
     private UserService userService;
 
     // 构造器

@@ -1,7 +1,6 @@
 package com.bookmall.daoimpl;
 
 import com.bookmall.bean.Book;
-import com.bookmall.dao.BaseDao;
 import com.bookmall.dao.BaseDao4Transaction;
 import com.bookmall.dao.BookDao;
 import com.bookmall.utils.CommonUtils;

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UserServlet3 extends BaseServlet {
+public class UserServlet3 extends BaseServlet4Transaction {
     private UserService userService;
 
     // 构造器

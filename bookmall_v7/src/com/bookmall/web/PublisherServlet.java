@@ -1,22 +1,18 @@
 package com.bookmall.web;
 
-import com.bookmall.bean.Author;
 import com.bookmall.bean.Publisher;
-import com.bookmall.service.AuthorService;
 import com.bookmall.service.PublisherService;
-import com.bookmall.serviceimpl.AuthorServiceImpl;
 import com.bookmall.serviceimpl.PublisherServiceImpl;
 import com.bookmall.utils.Beanutils;
 import com.bookmall.utils.CommonUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class PublisherServlet extends BaseServlet {
+public class PublisherServlet extends BaseServlet4Transaction {
     private PublisherService publisherService;
 
     public PublisherServlet() {

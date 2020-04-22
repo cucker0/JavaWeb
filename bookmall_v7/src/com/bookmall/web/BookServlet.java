@@ -4,7 +4,6 @@ import com.bookmall.bean.Author;
 import com.bookmall.bean.Book;
 import com.bookmall.bean.Paginator;
 import com.bookmall.bean.Publisher;
-import com.bookmall.dao.Common;
 import com.bookmall.service.AuthorService;
 import com.bookmall.service.BookService;
 import com.bookmall.service.PublisherService;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class BookServlet extends BaseServlet {
+public class BookServlet extends BaseServlet4Transaction {
     private BookService bookService;
     private AuthorService authorService = new AuthorServiceImpl();
     private PublisherService publisherService = new PublisherServiceImpl();
