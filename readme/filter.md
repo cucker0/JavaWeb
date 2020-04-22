@@ -5,15 +5,15 @@ Filter过滤器
 * Filter是一个interface接口
 * Filter是java web三大组件之一
     >Servlet小程序、Filter过滤器、Listener监听器
-* Filter是服务器专门用来过滤(拦截)请求、响应，类似于哨卡的作用（进入之前、出来之后做些审问登记）
+* Filter是服务器专门用来拦截(过滤)请求、响应，类似于哨卡的作用（进入之前、出来之后做些审问登记等把控）
 
 ### Filter的常见作用
 * 检查用户访问权限，权限管理
 * 设置response编码，解决乱码问题
 
+* [Filter实现部分资源要求登录后才能访问](../bookmall_v7/README.md#部分资源要求登录后才能访问)
 
-**案例**
-
+**案例**  
 * 需求
     ```text
     现在在WebContent目录下有一个目录admin，
@@ -231,13 +231,35 @@ Filter与Filter之间的传递、Filter与请求资源之间的传递都靠Filte
     ```
     
 ## 使用Filter和ThreadLocal组合来控制事务
+```text
+原理：当一个线程被CPU分配处理请求，
+当接收到客户端的request时，从DB连接池中获取一个连接，关闭自动提交事务功能，并把该连接存放到ThreadLocal<Connection>中
+
+做DB操作时，Connection都直接从ThreadLocal获取，即保证了多次使用的Connection为同一
+
+当同为一个逻辑单元的DB操作(需要一起成功或失败的DB操作)都已经完成时，
+    如果没有报错，表示都成功，则提交事务，释放Connection连接，删除ThreadLocal中保存的Connection信息
+    如果出现异常，则回滚事务，释放Connection连接，删除ThreadLocal中保存的Connection信息
+```
+
 ### TheadLocal
-TheadLocal类似Map对象
+TheadLocal类似Map对象，最多有一个元素
+
+* 最多有一个元素，即可以有0个或1个元素
 * 以当前线程对象为key，保存一个指定泛型类型的数据
-* 线程是安全的
+* 线程是安全的，能保证当前线程取到的数据是它本身保存的数据。
 * 定义ThreadLocal类型的属性字段，一般使用static修饰
 
 [使用map实现ThreadLocal功能](../Filter/src/com/java/filter/ThreadLocal1.java)  
 
 [ThreadLocal示例](../Filter/src/com/java/filter/ThreadLocal2.java)  
 
+### 为什么可以TheadLocal保存数据库Connection对象来做事务管理
+```text
+* tomcat在处理同一个request时，从接收客户request，到响应客户端，始终都是由同一个线程来处理的
+* TheadLocal是线程安全的，即使在多线程时里，也能取到线程自己存放的数据
+* 这样就能保证在处理同一个request的不同环节中，都能获取到同一个Connection对象，
+    需要关闭Connection的自动提交功能，在程序中来控制何时提交，何时回滚
+```
+
+* [Filter、ThreadLoad组合来管理事务示例](../bookmall_v7/README.md#filterthreadload组合来管理事务)
