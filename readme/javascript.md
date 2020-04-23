@@ -256,17 +256,18 @@ console.log("-- end 遍历字典 --");
 /* end object */
 ```
 
-* 序列化：对象转字符串
+* 字符串化：对象转字符串
     ```js
     var a = {k1: "v1", k2: "v2"};
     var b = JSON.stringify(a);
     console.log(b); // '{"k1":"v1","k2":"v2"}'
     ```
-* 反序列化：字符串转对象
+* 解析字符中：字符解析对象
     ```js
     var stu = JSON.parse('{"name":"dicke","age":18}');
     console.log(stu.age);
-    console.log("stu type: " + typeof (stu)); // object
+    console.log("stu type: " + typeof(stu));  // object
+    console.log(stu);  // {name: "dicke", age: 18}
     ```
 
 * 自定义对象

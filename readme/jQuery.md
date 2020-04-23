@@ -519,6 +519,7 @@ data: 待发送 Key/value 参数
 callback: 载入成功时回调函数
 
 type: 返回内容格式，xml, html, script, json, text, _default
+    当设置为json时，自动对返回的数据进行解析，相当于JSON.parse(data)，下同 
 ```
 
 示例
@@ -598,15 +599,15 @@ jQuery 底层 AJAX 实现
         >当请求完成之后调用这个函数，无论成功或失败。传入XMLHttpRequest对象，以及一个包含成功或错误代码的字符串
 
 * type
-```text
-请求方法
-可选
-"GET"  默认值
-"POST"
-"PUT"
-"DELETE"
-
-```
+    ```text
+    请求方法
+    可选
+    "GET"  默认值
+    "POST"
+    "PUT"
+    "DELETE"
+    
+    ```
 
 * dataType数据类型  
     ```text
@@ -616,6 +617,7 @@ jQuery 底层 AJAX 实现
     
     可设置类型：
     "xml", "html", "script", "json", "jsonp", "text"
+    当设置为json时，自动对返回的数据，进行解析，相当于JSON.parse(data)
     ```
 
 * data发送个给服务到的数据
@@ -651,18 +653,18 @@ jQuery 底层 AJAX 实现
     如果要发送 DOM 树信息或其它不希望转换的信息，请设置为 false。
     ```
 * crossDomain是否跨域
-```text
-可选值
-true  强制跨域请求，如JSONP形式
-false  默认值，不跨域
-```
+    ```text
+    可选值
+    true  强制跨域请求，如JSONP形式
+    false  默认值，不跨域
+    ```
 
 * headers设置http请求头
-```text
-一个额外的"{键:值}"对映射到请求一起发送，默认值为 {}
-此设置被设置之前beforeSend函数被调用;
-因此，消息头中的值设置可以在覆盖beforeSend函数范围内的任何设置
-```
+    ```text
+    一个额外的"{键:值}"对映射到请求一起发送，默认值为 {}
+    此设置被设置之前beforeSend函数被调用;
+    因此，消息头中的值设置可以在覆盖beforeSend函数范围内的任何设置
+    ```
 
 高级选项
 * cache是否启用缓存
@@ -676,14 +678,14 @@ false  默认值，不跨域
     只有当请求时dataType为"jsonp"或"script"，并且type是"GET"才会用于强制修改charset。通常只在本地和远程的内容编码不同时使用。
     ```
 * success: function (data, status, jqXHR) {}
-```text
-请求成功后的回调函数
-
-参数
-data  由服务器返回，并根据dataType参数进行处理后的数据
-status  描述状态的字符串，如"200"
-jqXHR  XMLHttpRequest对象
-```
+    ```text
+    请求成功后的回调函数
+    
+    参数
+    data  由服务器返回，并根据dataType参数进行处理后的数据
+    status  描述状态的字符串，如"200"
+    jqXHR  XMLHttpRequest对象
+    ```
 
 * timeout
     ```text
