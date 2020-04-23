@@ -253,7 +253,7 @@ JSONP目前还是比较流行的跨域方式，虽然JSONP使用起来方便，
     </html>
     ```
     ```text
-    是不是有点奇怪？为什么我这次没有写flightHandler这个函数呢？而且竟然也运行成功了！
+    是不是有点奇怪？为什么我这次没有写handleResponse这个函数呢？而且竟然也运行成功了！
     哈哈，这就是jQuery的功劳了，jquery在处理jsonp类型的ajax时，
     自动帮你生成回调函数并把数据取出来供success属性方法来调用，是不是很爽呀？
     （还是忍不住吐槽，虽然jquery也把jsonp归入了ajax，但其实它们真的不是一回事儿），
