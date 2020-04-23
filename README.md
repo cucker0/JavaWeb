@@ -65,6 +65,7 @@ Java Web
     * [表单选择器](readme/jQuery.md#表单选择器)
     * [表单对象属性选择器](readme/jQuery.md#表单对象属性选择器)
 * [jQuery常用方法](readme/jQuery.md#jQuery常用方法)
+* [jQuery的ajax方法](readme/jQuery.md#jQuery的ajax方法)
 * [jQuery事件处理](readme/jQuery.md#jQuery事件处理)
     * [on绑定事件，动态添加标签自动绑定事件](readme/jQuery.md#on绑定事件)
     * [bind绑定事件](readme/jQuery.md#bind绑定事件)
