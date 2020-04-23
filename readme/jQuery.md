@@ -619,6 +619,7 @@ jQuery 底层 AJAX 实现
     "xml", "html", "script", "json", "jsonp", "text"
     当设置为json时，自动对返回的数据，进行解析，相当于JSON.parse(data)
     ```
+    [jsonp](jsonp.md)  
 
 * data发送个给服务到的数据
     ```text
@@ -630,8 +631,8 @@ jQuery 底层 AJAX 实现
 * async是否异步
     ```text
     可选值: 
-        true  默认值，默认发起的是异步的请求
-        false  关闭异步请求，即为同步请求
+        true  默认值，默认发起的是异步的请求，非阻塞
+        false  关闭异步请求，即为同步请求，阻塞
     ```
 * contentType
     ```text

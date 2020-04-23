@@ -64,7 +64,7 @@ http://www.a.com/abc/a.js <br>http://www.a.com/efg/b.js|同源 |域名、协议�
     <link>的href  获取css  
     <script>的src  获取javascript 
     
-    这三个都不符合同源策略，它们可以跨域获取数据
+    这三个都不受同源策略影响，它们可以跨域获取数据
     ```
 
 ## JSONP
@@ -74,9 +74,10 @@ JSONP实现跨域请求的原理简单的说，就是动态创建<script>标签�
 
 JSONP 由两部分组成：回调函数和数据
 回调函数：
-    是当接受到响应数据后接下来在页面中要调用的函数。回调函数的名字一般是在请求中指定的。
+    是当接受到响应数据后接下来在页面中要调用的函数。回调函数的函数名一般是客户端在发起的请求中指定的参数，
+    如https://douban.uieee.com/v2/book/search?q=javascript&count=1&callback=handleResponse，这里指定需要调用的函数名为handleResponse
 数据：
-    就是传入回调函数中的JSON数据
+    就是传入回调函数中的参数，即JSON数据
 ```
 
 
@@ -129,11 +130,9 @@ JSONP 由两部分组成：回调函数和数据
         https://douban.uieee.com/v2/book/search?q=javascript&count=1&callback=handleResponse
         ![](../images/jQuery/jsonp_05.png) 
     
-        通过传参callback=handleResponse后，发现返回的数据做了如下包装，这是在调用handleResponse方法
+        通过传参callback=handleResponse后，发现返回的数据做了如下封装，这是在 执行handleResponse方法，所传参数为客户端需要的json数据
         ```text
-        ;handleResponse(
-            json数据
-        );
+        ;handleResponse(json数据);
         ```
         ```text
         handleResponse函数名前为什么要加;
