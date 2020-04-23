@@ -145,7 +145,7 @@ JSONP 由两部分组成：回调函数和数据
     * 在页面中，返回的JSON作为参数传入回调函数中，我们通过回调函数来来操作数据
         ```js
         function handleResponse(response){
-            // 对response数据进行操作代码
+            // 对response数据进行操作代码，response数据即服务端封装好的 json数据
         }
         ```
     * 动态创建`<script>`标签，设置其src，回调函数在src中设置
