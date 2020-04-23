@@ -38,9 +38,9 @@ Filter过滤器
 
 ## 使用Filter步骤
 
-1. 创建Filter类
+1. 创建一个类，实现Filter接口
     ```text
-    示例javax.servlet.Filter接口
+    Filter接口：javax.servlet.Filter接口
     ```
     [Filter类示例](../Filter/src/com/java/filter/Filter1.java)  
     
