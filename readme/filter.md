@@ -127,6 +127,8 @@ Filter过滤器
 ```text
 FilterChain是整个Filter过滤器的调用者，
 Filter与Filter之间的传递、Filter与请求资源之间的传递都靠FilterChain.doFilter方法
+
+让程序继续访问下一个Filter过滤器，或者是执行访问实际的资源
 ```
 ### Filter的三个段
 * 阶段1
