@@ -67,14 +67,24 @@
     <servlet>
         <servlet-name>Kaptcha</servlet-name>
         <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
-        <!--        <init-param>-->
-        <!--            &lt;!&ndash; kaptcha默认是英文验证码，不需要配置，如果改成中文验证码的时候，一定要加上中文字体配置。否则会有乱码  &ndash;&gt;-->
-        <!--            <param-name>kaptcha.textproducer.font.names</param-name>-->
-        <!--            <param-value>楷体</param-value>-->
-        <!--        </init-param>-->
+        <!-- 指定字符集
+            kaptcha默认是英文验证码，不需要配置，如果改成中文验证码的时候，一定要加上中文字体配置。否则会有乱码
+        -->
+        <!--
+        <init-param>
+        
+            <param-name>kaptcha.textproducer.font.names</param-name>
+            <param-value>楷体</param-value>
+        </init-param>
+        -->
         <init-param>
             <param-name>kaptcha.border</param-name>
             <param-value>no</param-value>
+        </init-param>
+        <init-param>
+            <!-- 验证码字符串长度 -->
+            <param-name>kaptcha.textproducer.char.length</param-name>
+            <param-value>4</param-value>
         </init-param>
     </servlet>
     <servlet>
