@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件</title>
+    <style type="text/css">
+        form div {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<h3>上传文件</h3>
+<div>
+    <form action="upload" method="post" enctype="multipart/form-data">
+        <div>
+            <label>
+                用户名：<input name="username" type="text">
+            </label>
+        </div>
+        <div>
+            <label>
+                密码：<input name="passwrod" type="password">
+            </label>
+        </div>
+        <div>
+            头像图片：<input name="file" type="file">
+        </div>
+        <input type="submit" value="提交">
+    </form>
+</div>
+</body>
+</html>

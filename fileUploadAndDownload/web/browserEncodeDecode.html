@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览器URI编码、解码</title>
+    <script>
+        window.onload = function () {
+            // 编码
+            document.getElementsByClassName("enuri").item(0).onclick = function () {
+                var uri = "https://www.baidu.com/?username=摩大仙&password=mypasswd123";
+                // URI编码
+                var enUri = encodeURI(uri);
+                console.log(enUri);
+                document.getElementById("enuri-box").innerText = enUri;
+            }
+
+            // 解码
+            document.getElementsByClassName("deuri").item(0).onclick = function () {
+                var enUri = "https://www.baidu.com/?username=%E6%AF%95%E6%88%90%E5%8A%9F&password=mima123";
+                // URI解码
+                var uri = decodeURI(enUri);
+                console.log(uri);
+                document.getElementById("deuri-box").innerText = uri;
+            }
+
+        }
+    </script>
+</head>
+<body>
+<h3>浏览器编码、解码(请按F12打开控制台进行观察)</h3>
+<div>
+    <div>
+        <p>https://www.baidu.com/?username=摩大仙&password=mypasswd123</p>
+        <button class="enuri">URI编码</button>
+    </div>
+    <div id="enuri-box">
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div>
+        <p>https://www.baidu.com/?username=%E6%AF%95%E6%88%90%E5%8A%9F&password=mima123</p>
+        <button class="deuri">URI解码</button>
+    </div>
+    <div id="deuri-box">
+
+    </div>
+
+</div>
+</body>
+</html>
