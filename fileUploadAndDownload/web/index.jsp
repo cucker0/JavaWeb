@@ -12,7 +12,10 @@
         <a href="upload.html">文件上传</a>
     </li>
     <li>
-        <a href="showImgServlet">查看已上传的图片</a>
+        <a href="showImgServlet">查看\下载 已上传的图片</a>
+    </li>
+    <li>
+        <a href="uploadJquery.html">jQeury非Form标签上传文件</a>
     </li>
 </div>
 </body>

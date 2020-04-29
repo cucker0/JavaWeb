@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQeury非Form标签上传文件</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.js"></script>
+    <style type="text/css">
+        .container div {
+            margin: 10px 0;
+        }
+    </style>
+    <script>
+
+        /**
+         * 上传文件方法
+         */
+        function uploadFile() {
+            var form = new FormData();
+            var usernmae = $("input[name=username]").val();
+            var password = $("input[name=password]").val();
+            var selector = $("input[name=file]");
+            var file = selector[0].files[0];
+            form.append('file', file);
+            form.append('usernmae', usernmae);
+            form.append('password', password);
+            if (selector[0].files[0]) {
+                $.ajax({
+                    url: 'http://localhost:8080/file/upload',
+                    type: 'POST',
+                    data: form,
+                    //告诉jQuery不要去处理发送的数据，即不要做uri编码转换，默认是会处理为application/x-www-form-urlencoded类型
+                    processData: false,
+                    //告诉jQuery不要去设置Content-Type请求头
+                    contentType: false,
+                    //beforeSend: function(){
+                    //    console.log('正上传中，请稍候');
+                    //},
+                    success: function (callback) {
+                        console.log("success... ");
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        }
+
+        // DOM准备就绪
+        $(function () {
+            // 绑定事件
+            $("button.submit").click(function () {
+                uploadFile();
+            });
+        });
+    </script>
+</head>
+<body>
+<h3>jQeury非Form标签上传文件</h3>
+<div>
+    <div class="container">
+        <div>
+            <label>
+                用户名：<input name="username" type="text">
+            </label>
+        </div>
+        <div>
+            <label>
+                密码：<input name="password" type="password">
+            </label>
+        </div>
+        <div>
+            头像图片：<input name="file" type="file">
+        </div>
+        <button class="submit">提交</button>
+    </div>
+</div>
+</body>
+</html>

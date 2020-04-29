@@ -119,3 +119,65 @@ U8Fz\8��W_�'��{7������#ٟ�e2*�{+y������
 �s�����'l(E2��XHo0J`��u������^����G�If2��ĶhIH�B�����T���N�|�YS�6BO�z\�����A��##/�e9�R�!1Ls�qE1���cL�'��>��ӊ>�#�R�gmް�Ф� ��%�_�C�Փ55���]>�����W���B��ݹ     IEND�B`�
 ------WebKitFormBoundaryjoEWO9I66SQ9rs0d--
 ```
+
+
+## jQeury非Form标签上传文件
+* [jQeury上传文件方法](../fileUploadAndDownload/web/uploadJquery.html)
+    ```js
+    function uploadFile() {
+        var form = new FormData();
+        var usernmae = $("input[name=username]").val();
+        var password = $("input[name=password]").val();
+        var selector = $("input[name=file]");
+        var file = selector[0].files[0];
+        form.append('file', file);
+        form.append('usernmae', usernmae);
+        form.append('password', password);
+        if (selector[0].files[0]) {
+            $.ajax({
+                url: 'http://localhost:8080/file/upload',
+                type: 'POST',
+                data: form,
+                //告诉jQuery不要去处理发送的数据，即不要做uri编码转换，默认是会处理为application/x-www-form-urlencoded类型
+                processData: false,
+                //告诉jQuery不要去设置Content-Type请求头
+                contentType: false,
+                //beforeSend: function(){
+                //    console.log('正上传中，请稍候');
+                //},
+                success: function (callback) {
+                    console.log("success... ");
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+    }
+    ```
+* 浏览器
+    ![](../images/fileUploadAndDownload/提交表单11.png)
+      
+* 服务端获取的request body数据
+    ```text
+    ------WebKitFormBoundaryvbbmzsfohkwj5Paz
+    Content-Disposition: form-data; name="file"; filename="02.png"
+    Content-Type: image/png
+    
+    �PNG
+    
+    ���ULgqj�$�`����$�95�@��Q��aC��ZF�ٖ���sʁ2
+    �	O��J�L�]C5�@#�9WG�<l�jB�8�k�8$B�t��,OH�
+    vܢDl$��ی
+    ... ...
+    %�4j�o`�.�J��jbI�����x���i�/�q&�B@����+�6�#�!v>dҩ�X'k�r7kU ���~,U �����ƚt������p�r7��Bi���'r7n^j&� p7�㥎�<���X�ht�� �T߫<�;    IEND�B`�
+    ------WebKitFormBoundaryvbbmzsfohkwj5Paz
+    Content-Disposition: form-data; name="usernmae"
+    
+    admin
+    ------WebKitFormBoundaryvbbmzsfohkwj5Paz
+    Content-Disposition: form-data; name="password"
+    
+    pp123456
+    ------WebKitFormBoundaryvbbmzsfohkwj5Paz--
+    ```
