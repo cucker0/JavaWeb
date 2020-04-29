@@ -30,8 +30,11 @@
                     data: form,
                     //告诉jQuery不要去处理发送的数据，即不要做uri编码转换，默认是会处理为application/x-www-form-urlencoded类型
                     processData: false,
-                    //告诉jQuery不要去设置Content-Type请求头
+                    //告诉jQuery不要去设置Content-Type请求头，由浏览器根据数类型来添加
                     contentType: false,
+                    xhrFields: {
+                        withCredentials: true //允许跨域带Cookie
+                    },
                     //beforeSend: function(){
                     //    console.log('正上传中，请稍候');
                     //},
