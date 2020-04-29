@@ -138,6 +138,27 @@ xx.html   是这个目录下要访问的文件名
 该URL访问的资源为 webapps/ROOT/index.html
 ```
 
+## 把tomcat安装为windows系统服务
+* 打开cmd,cd 到tomcat的bin目录下
+    ![](../images/tomcat/tomcat_win_service_01.png)  
+* service相关的命令
+
+    Usage: service.bat install/remove [service_name [--rename]] [--user username]
+    ![](../images/tomcat/tomcat_win_service_02.png)  
+* 把tomcat安装为服务
+
+    service.bat install
+    ![](../images/tomcat/tomcat_win_service_03.png)  
+* 打开服务控制面板，可以启动tomcat服务，启动类型设置为"自动"
+    ![](../images/tomcat/tomcat_win_service_04.png)  
+    
+* 卸载服务
+    
+    service.bat remove
+    ![](../images/tomcat/tomcat_win_service_05.png) 
+
+**[idea打包war包](./idea打包war包.md)**
+
 
 ## Servlet
 ```text

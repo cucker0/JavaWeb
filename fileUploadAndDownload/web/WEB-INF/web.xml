@@ -8,10 +8,26 @@
         <servlet-name>UploadServlet</servlet-name>
         <servlet-class>com.java.web.UploadServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowImgServlet</servlet-name>
+        <servlet-class>com.java.web.ShowImgServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>com.java.web.DownloadServlet</servlet-class>
+    </servlet>
 
     <!-- url与servlet mapping -->
     <servlet-mapping>
         <servlet-name>UploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowImgServlet</servlet-name>
+        <url-pattern>/showImgServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/downloadServlet</url-pattern>
     </servlet-mapping>
 </web-app>

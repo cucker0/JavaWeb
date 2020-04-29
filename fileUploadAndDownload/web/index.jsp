@@ -11,6 +11,9 @@
     <li>
         <a href="upload.html">文件上传</a>
     </li>
+    <li>
+        <a href="showImgServlet">查看已上传的图片</a>
+    </li>
 </div>
 </body>
 </html>
