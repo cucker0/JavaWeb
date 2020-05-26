@@ -32,7 +32,7 @@ public class DownloadServlet extends HttpServlet {
         System.out.println("mimeType: " + mimeType);
         // 设置response的响应头字段 Content-Type: 文件类型
         response.setContentType(mimeType);
-        // 告诉浏览器使用附件形式解析(图片就不会直接展示了)，文件名
+        // 告诉浏览器使用附件形式解析(图片就不会直接展示了)，文件名，并把文件名进行URL编码，避免乱码
         String attachment = attachment = "attachment; filename=" + URLEncoder.encode(fileName, "utf-8");
         response.setHeader("Content-Disposition", attachment);
         // 从输入流读取数据，复制到输出流
