@@ -878,6 +878,7 @@ fadeTo([[speed],opacity,[easing],[fn]])    调整透明度
 * [同时设置表单的多个值](../jQuery/web1/09_同时设置表单的多个值.html)
 * [动画](../jQuery/web1/10_动画.html)
 
+## [json、ajax](json和ajax.md)
  
 ## 其他
 * **对加载后，动态生成的DOM对象上同样自动绑定事件方法**

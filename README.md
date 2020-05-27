@@ -74,6 +74,7 @@ Java Web
     * [jQuery.extend(object)](readme/jQuery.md#jQuery.extendobject)
 * [jQuery对象常用方法](readme/jQuery.md#jQuery对象常用方法)
 * [jQeury示例](readme/jQuery.md#jQeury示例)
+* [json、ajax](readme/json和ajax.md)
 * [其他](readme/jQuery.md#其他)
 
 ### tomcat

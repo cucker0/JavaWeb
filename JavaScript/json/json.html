@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json</title>
+    <script type="text/javascript">
+        var obj = {
+            "key1": 22,  // Number类型
+            "key2": "str2",  // 字符串类型
+            key3: [11, 33],  // 数组类型
+            key4: {name: "sally", age: 18}, // json对象类型
+            key5: [{name: "coco", age: 20}, {name: "dudu", age: 21}]  // json数组类型
+        };
+
+
+        // 访问json属性的值
+        console.log("obj: ", obj);
+        console.log("obj.key1: ", obj.key1);
+        console.log("obj.key3[0]: ", obj.key3[0]);
+        console.log("obj.key4.name: ", obj.key4.name);
+        console.log("obj.key5[1].name:", obj.key5[1].name);
+
+        // json对象与json字符串互转
+        console.log("\n\n");
+        console.log("--- json对象与json字符串互转 ---");
+        // json对象转换成字符串
+        var objStr = JSON.stringify(obj);
+        console.log("json对象转换成字符串: ", objStr);
+        // json字符串转换成json对象
+        var jsonStr = '[{"name":"coco","age":20},{"name":"dudu","age":21}]';
+        var jsonObj = JSON.parse(jsonStr);
+        console.log("json字符串转换成json对象: ", jsonObj);
+        console.log("jsonObj[1]: ", jsonObj[1]);
+    </script>
+</head>
+<body>
+<h3>json定义、使用，json对象与json字符串互转</h3>
+
+<div>
+    请打开控制台，刷新后再观察
+</div>
+</body>
+</html>
