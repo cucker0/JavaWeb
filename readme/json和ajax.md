@@ -12,7 +12,8 @@ json(JavaScript Object Notation)，对象表示法，是一种轻量级的数据
 这些特性使JSON成为理想的数据交换语言。
 ```
 
-### json对象的定义与使用
+### javascript中使用json
+#### json对象的定义与使用
 * json定义
 
     在javascript中 包裹key名的引号可以省略，但值的引号不能省略
@@ -52,7 +53,7 @@ json(JavaScript Object Notation)，对象表示法，是一种轻量级的数据
     obj.key5[1].name: dudu
     ```
 
-### json对象与json字符串互转
+#### json对象与json字符串互转
 这时JSON中常用的两个方法
 * JSON.stringify(json对象)
     >把一个json对象转换成json字符串
@@ -61,7 +62,9 @@ json(JavaScript Object Notation)，对象表示法，是一种轻量级的数据
 
 [json示例](../JavaScript/json/json.html)
 
-### 在java中json的使用
+
+### java中json的使用
+#### gson
 ```text
 在java中使用json，需要依赖第三方jar包gson.jar
 gson是有google提供的，用于对java对象与json数据之间进行映射，
@@ -69,19 +72,48 @@ gson是有google提供的，用于对java对象与json数据之间进行映射�
 ```
 gson下载链接：https://repo1.maven.org/maven2/com/google/code/gson/gson
 
+##### gson常用方法
+* String gson.toJson(Object obj)
+    >Java对象转json字符串
+* <T> T fromJson(String json, Class<T> classOfT)
+    >json字符串转单个java Bean对象
+* List<T> list = gson.fromJson(json字符串, (new TypeToken<List<T>>() {}).getType());
+    >json字符串转List集合
+* Map<K, V> map2 = gson.fromJson(mapJsonStr2, (new TypeToken<Map<K, V>>() {}).getType());
+    >json字符串转Map集合
+
+##### [gson使用示例](../JavaScript/src/com/java/www/GsonTest.java)
+
+#### FastJson
+```text
+FastJson是阿里巴巴开发的java类库，用于java对象与json字符串互转。
+fastjson是目前java语言中最快的json库，比自称最快的jackson速度还要快。
+
+github网址： https://github.com/alibaba/fastjson
+jar包下载地址 https://repo1.maven.org/maven2/com/alibaba/fastjson/
+```
 
 
+##### FastJson常用方法
+* String jsonString = JSON.toJSONString(obj)
+    >序列化，java对象转json字符串
+* VO vo = JSON.parseObject(jsonString, VO.class)
+    >反序列化，json字符串转java Bean对象
+* List<T> list = JSON.parseArray("json串", T.class)
+    >将包含过多个java bean对象的List格式的json字符串转换成List集合
+* 泛型反序列化
+    ```text
+    import com.alibaba.fastjson.TypeReference;
+    
+    List<VO> list = JSON.parseObject("...字符串", new TypeReference<List<VO>>() {});
+
+    Map<K, V> map = JSON.parseObject("json字符串", new TypeReference<>() {});  // <>钻石简略写法
+    ```
+
+##### [FastJson使用示例](../JavaScript/src/com/java/www/FastJsonTest.java)
 
 
-
-
-
-
-
-
-
-
-
+## ajax
 
 
 
