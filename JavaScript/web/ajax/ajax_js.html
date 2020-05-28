@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax js原生版</title>
+    <style type="text/css">
+        #msgbox {
+            border: 1px grey solid;
+            width: 80%;
+            height: 200px;
+            margin: 30px 0;
+            padding: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        /**
+         * 发起ajax请求
+         */
+        function ajaxRequest() {
+            // 1. 创建XMLHttpRequest对象
+            var xhr = new XMLHttpRequest();
+            // 2. 调用open方法设置请求参数
+            xhr.open("GET", "http://localhost:8080/js/ajaxServlet?action=jsAjax&date=" + new Date(), true);
+            // 3. 在send方法之前绑定onreadystatechange事件，处理请求完成后的操作
+            xhr.onreadystatechange = function () {
+                // 请求已经完成且响应就绪，且响应状态为200
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    var jsonObj = JSON.parse(xhr.responseText);
+                    document.getElementById("msgbox").innerHTML =
+                        "查结结果：id=" + jsonObj.id +
+                        ", name=" + jsonObj.name + ", age=" + jsonObj.age;
+                }
+            };
+            // 4. 调用send方法发送请求
+            xhr.send();
+        }
+
+        window.onload = function () {
+            // 绑定监听事件
+            var element = document.getElementsByClassName("sendReq").item(0);
+            element.addEventListener(
+                "click",  // 字符串，指定事件名
+                function () {
+                    // 调用发起ajax方法
+                    ajaxRequest();
+                },  // 指定事件触发时要执行的函数。
+                false  // 可选，指定事件是否在捕获或冒泡阶段执行。默认为false（事件句柄在冒泡阶段执行），
+            );
+        }
+    </script>
+</head>
+<body>
+<h3>ajax js原生版</h3>
+<div>
+    <button class="sendReq">ajax请求</button>
+</div>
+<div id="msgbox">
+
+</div>
+</body>
+</html>

@@ -12,7 +12,7 @@ json(JavaScript Object Notation)，对象表示法，是一种轻量级的数据
 这些特性使JSON成为理想的数据交换语言。
 ```
 
-### javascript中使用json
+### javascript中json的使用
 #### json对象的定义与使用
 * json定义
 
@@ -114,17 +114,50 @@ jar包下载地址 https://repo1.maven.org/maven2/com/alibaba/fastjson/
 
 
 ## ajax
+```text
+ajax: Asynchronous Javascript And XML，异步JavaScript和XML，是一种创建交互式网页应用的网页开发技术。
+ajax是一种由浏览器发起异常请求，局部更新页面的技术
+```
+
+### javascript原生的ajax请求
+1. 创建XMLHttpRequest对象
+2. 调用open方法设置请求参数
+3. 在send方法之前绑定onreadystatechange事件，处理请求完成后的操作
+4. 调用send方法发送请求
+
+#### ajax的XMLHttpRequest对象
+```text
+ajax的核心是XMLHttpRequest对象
+XMLHttpRequest 对象用于同幕后服务器交换数据。这意味着可以更新网页的部分，而不需要重新加载整个页面。
+
+* 跨域访问限制
+出于安全原因，现代浏览器不允许跨域访问。
+```
+
+* XMLHttpRequest对象的方法
+
+方法 |描述 
+:--- |:--- 
+new XMLHttpRequest() |创建新的XMLHttpRequest对象 
+open(method, url, async, user, psw) |规定请求 <br> * method：请求类型 GET 或 POST <br>* url：url地址<br>* async：是异步请求，true（异步请求）或 false（同步请求）<br> * user：用户名称，可选<br> * psw：密码，可选的<br> 
+setRequestHeader("header名", "value") |向该请求对象中添加htttp头的键值对，<br>如：xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+send() |将请求发送到服务器，用于 GET 请求 
+send(string) |将请求发送到服务器，用于 POST 请求，<br>如：xhr.send("fname=Bill&lname=Gates");
+abort() |在已发送请求，请求还未响应时，取消当前请求 
+getAllResponseHeaders() |在请求响应后，获取头部信息 
+getResponseHeader("key名") |在请求响应后，获取特定的头部信息 
 
 
+* XMLHttpRequest 对象属性
 
-
-
-
-
-
-
-
-
+属性 |描述 
+:--- |:---
+onreadystatechange |定义当 readyState 属性发生变化时被调用的函数，<br> var xhr = new XMLHttpRequest();<br> xhr.onreadystatechange = function() {};
+readyState |XMLHttpRequest的状态值。<br><br> * 0：请求未初始化 <br>* 1：服务器连接已建立 <br>* 2：请求已收到 <br>* 3：正在处理请求 <br>* 4：请求已完成且响应已就绪
+responseText |以字符串方式获取响应数据 
+responseXML |以XML方式获取响应数据 
+status |获取请求的响应状态码， 如：<br><br> * 200: "OK" <br>* 403: "Forbidden" <br>* 404: "Not Found" <br>...
+statusText |获取请求的响应状态文本（比如 "OK" 或 "Not Found" ）
 
 
 

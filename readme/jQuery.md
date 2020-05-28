@@ -563,6 +563,29 @@ $.post(window.location.pathname + window.location.search, {data:send_data},
 });
 ```
 
+### getJSON方法
+```text
+通过HTTP GET 请求载入 JSON 数据，响应的数据自动解析为json对象
+
+$.getJSON(url,[data],[fn])
+
+参数
+    url: 发送请求地址。
+    data: 待发送的数据，{}字典对象。
+    callback: 载入成功时回调函数，如function(repJson) {}，则repJson为响应的数据(json形式，是浏览器自动解析)，
+```
+
+```js
+$.getJSON(
+    "test.js", 
+    {name:"John", time:"2pm"}, 
+    function(repJson){
+        alert("JSON Data: " + repJson.users[3].name);
+    }
+);
+```
+
+
 
 ### ajax方法
 [语法](http://jquery.cuishifeng.cn/jQuery.Ajax.html)
@@ -570,7 +593,7 @@ $.post(window.location.pathname + window.location.search, {data:send_data},
 ```text
 $.ajax({url: url_val, [settings]})
 
-参数
+参数，一个对象(字典对象)，详细设置定位为字典对象里的key-value对
 url:一个用来包含发送请求的URL字符串
 
 settings:AJAX 请求设置。所有选项都是可选的
@@ -653,14 +676,14 @@ jQuery 底层 AJAX 实现
     都会处理转化成一个查询字符串，以配合默认内容类型 "application/x-www-form-urlencoded"。
     如果要发送 DOM 树信息或其它不希望转换的信息，请设置为 false。
     ```
-* crossDomain是否跨域
+* crossDomain 是否跨域
     ```text
     可选值
     true  强制跨域请求，如JSONP形式
     false  默认值，不跨域
     ```
 
-* headers设置http请求头
+* headers 设置http请求头
     ```text
     一个额外的"{键:值}"对映射到请求一起发送，默认值为 {}
     此设置被设置之前beforeSend函数被调用;
@@ -668,13 +691,13 @@ jQuery 底层 AJAX 实现
     ```
 
 高级选项
-* cache是否启用缓存
+* cache 是否启用缓存
     ```text
     可选值：
         true  默认值，默认情况下，请求总会被发出去，但浏览器有可能从他的缓存中调取数据
         false  关闭缓存，将不缓存此页面
     ```
-* scriptCharset设置字符集
+* scriptCharset 设置字符集
     ```text
     只有当请求时dataType为"jsonp"或"script"，并且type是"GET"才会用于强制修改charset。通常只在本地和远程的内容编码不同时使用。
     ```
