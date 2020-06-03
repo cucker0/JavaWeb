@@ -585,6 +585,52 @@ $.getJSON(
 );
 ```
 
+### serialize方法
+序列化表格内容为字符串
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+</head>
+
+<body>
+<p id="results"><b>Results: </b> </p>
+<form>
+    年级：
+    <select name="class">
+        <option value="1">1年级</option>
+        <option value="2">2年级</option>
+    </select>
+    <br>
+    城市：
+    <select name="citys" multiple="multiple">
+        <option selected="selected" value="sh">上海</option>
+        <option value="sz">深圳</option>
+        <option selected="selected" value="qd">青岛</option>
+    </select>
+    <br>
+    兴趣：
+    <input type="checkbox" name="hobby" value="11"/>篮球
+    <input type="checkbox" name="hobby" value="12"/> 游泳
+    <input type="checkbox" name="hobby" value="13" checked="checked"/> 跑步
+    <br>
+    sex:
+    <input type="radio" name="radio" value="0" checked="checked"/> female
+    <input type="radio" name="radio" value="1"/> male
+</form>
+</body>
+</html>
+```
+
+```js
+alert($("form").serialize());
+```
+显示结果：
+```text
+class=1&citys=sh&citys=qd&hobby=13&radio=0
+```
 
 
 ### ajax方法
