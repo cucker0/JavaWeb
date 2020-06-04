@@ -27,5 +27,6 @@
     <orderEntry type="library" name="junit-4.12" level="application" />
     <orderEntry type="library" name="kaptcha-2.3.2" level="application" />
     <orderEntry type="library" name="tomcat-api" level="application" />
+    <orderEntry type="library" name="gson-2.8.6" level="application" />
   </component>
 </module>

@@ -5,6 +5,7 @@ import com.bookmall.service.UserService;
 import com.bookmall.serviceimpl.UserServiceImpl;
 import com.bookmall.utils.Beanutils;
 import com.google.code.kaptcha.Constants;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserServlet4 extends BaseServlet4Transaction {
     private UserService userService;
@@ -127,5 +130,15 @@ public class UserServlet4 extends BaseServlet4Transaction {
         request.getSession().removeAttribute("user");
         // 让客户端URL跳转到首页
         response.sendRedirect(request.getContextPath());
+    }
+
+    protected void existUsername(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        boolean b = userService.existUsername(username);
+        Gson gson = new Gson();
+        Map<String, Object> map = new HashMap<>();
+        map.put("exist", b);
+        String mapJsonString = gson.toJson(map);
+        response.getWriter().write(mapJsonString);
     }
 }

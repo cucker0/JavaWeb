@@ -76,6 +76,23 @@
 
             // 刷新验证码
             $(".imgcode").click(flushImgCode);
+
+            // 输入用户名后，验证用户名是否可用
+            $("#username").blur(function () {  // 1. 给用户输入框绑定失去焦点事件
+                // 2. 获取输入框中的用户名
+                var username = this.value;
+                // 3. 发起一个ajax请求到服务器，去验证用户是否存在
+                $.post("userServlet",
+                    "action=existUsername&username=" + username,
+                    // 4. 接收服务器传回来的数据，显示在页面，用户是否可用
+                    function (data) {
+                        console.log(data);
+                        if (data.exist) {
+                            $(".errorMsg").html(username + "，用户名已经存在");
+                        }
+                    },
+                    "json");
+            });
         });
 
     </script>

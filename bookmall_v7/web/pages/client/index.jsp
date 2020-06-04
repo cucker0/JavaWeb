@@ -33,6 +33,25 @@
 
             // 添加商品到购物车时候x秒后取消购物提示
             hiddenGoodsTips();
+
+            // 点击商品，加入购物车，ajax异常请求
+            $(".addCart").click(function () {
+                var bookid = $(this).attr("bookid");
+                $.getJSON(
+                    "cartServlet?action=addGoods&ajax=1&id=" + bookid,
+                    function (data) {
+                        if (data.result === 1) {
+                            $(".newAddGoodName").html(data.lastGoodsName);
+                            $(".goods_tips").show();
+                            hiddenGoodsTips();
+
+                            $(".cartTotalCount").html(data.cartTotalCount);
+                        }
+                    }
+                );
+                // 阻止默认事件
+                // return false;
+            });
         });
     </script>
 </head>
@@ -67,7 +86,7 @@
         <div style="text-align: center; height: 80px;">
             <c:if test="${not empty sessionScope.cart}">
                 <span>
-                    <a href="pages/cart/cart.jsp">您的购物车中有${sessionScope.cart.getTotalCount()}件商品</a>
+                    <a href="pages/cart/cart.jsp">您的购物车中有<span class="cartTotalCount">${sessionScope.cart.getTotalCount()}</span>件商品</a>
                 </span>
                 <%
                     LocalDateTime localDateTime = LocalDateTime.now();
@@ -78,7 +97,7 @@
                 <%-- 显示最近x秒内添加的商品名称 --%>
                 <c:if test="${ sessionScope.now < sessionScope.lastAddgoodsTime + 6}">
                     <div class="goods_tips">
-                        您刚刚将 [<span style="color: red">${sessionScope.lastGoodsName}</span>] 加入到了购物车中
+                        您刚刚将 [<span class="newAddGoodName" style="color: red">${sessionScope.lastGoodsName}</span>] 加入到了购物车中
                     </div>
                 </c:if>
             </c:if>
@@ -126,8 +145,9 @@
                         </div>
 
                         <div class="book_add">
-                            <a type="button" class="btn btn-secondary btn-sm"
-                               href="cartServlet?action=addGoods&id=${book.id}">加入购物车</a>
+<%--                            <a type="button" class="btn btn-secondary btn-sm"--%>
+<%--                               href="cartServlet?action=addGoods&id=${book.id}">加入购物车</a>--%>
+                            <button class="btn btn-secondary btn-sm addCart" bookid="${book.id}">加入购物车</button>
                         </div>
                     </div>
                 </div>
