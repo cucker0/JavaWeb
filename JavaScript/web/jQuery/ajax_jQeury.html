@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="http://localhost:8080/js/">
+    <title>jQuery serialize方法</title>
+    <style type="text/css">
+        #msg {
+            height: 60px;
+            border: #bbffaa 1px solid;
+        }
+    </style>
+    <script src="js/jquery3.5.1.js"></script>
+    <script>
+        $(function () {
+            $("#ajaxBtn").on('click', function () {
+                $.ajax({
+                    url: "ajaxServlet",
+                    type: "GET",
+                    data: "action=jsAjax",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        $("#msg").html("ID：" + data.id + ", 用户名：" + data.name, +", 年龄：" + data.age);
+                    }
+                });
+            });
+
+            $("#getBtn").on('click', function () {
+                $.get(
+                    "ajaxServlet",
+                    {action: "jqGet"},
+                    function (data) {
+                        $("#msg").html("ID：" + data.id + ", 用户名：" + data.name, +", 年龄：" + data.age);
+                    },
+                    "json"
+                    );
+            });
+
+            $("#postBtn").on('click', function () {
+                $.post(
+                    "ajaxServlet",
+                    "action=jqPost",
+                    function (data) {
+                        $("#msg").html("ID：" + data.id + ", 用户名：" + data.name, +", 年龄：" + data.age);
+                    },
+                    "json"
+                    );
+            });
+
+            $("#getJSONBtn").on('click', function () {
+                $.getJSON(
+                    "ajaxServlet",
+                    "action=jqGetJson",
+                    function (data) {
+                        $("#msg").html("ID：" + data.id + ", 用户名：" + data.name, +", 年龄：" + data.age);
+                    }
+                    )
+            });
+
+            $("#serialize").on('click', function () {
+                var formdata = $("form").serialize();
+                console.log("序列化后的内容：", formdata);
+                $("#results").html(formdata);
+                $.getJSON(
+                    "ajaxServlet",
+                    "action=jqSerialize&" + formdata,
+                    function (data) {
+                        console.log(data);
+                        $("#msg").html("姓名：" + data.name + "，年级：" + data.class + "，年龄：" + data.age + "岁");
+                    }
+                    )
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div>
+    <ul>
+        <li>
+            <button id="ajaxBtn">$.ajax请求</button>
+        </li>
+        <li>
+            <button id="getBtn">$.get请求</button>
+        </li>
+        <li>
+            <button id="postBtn">$.post请求</button>
+        </li>
+        <li>
+            <button id="getJSONBtn">$.getJSON请求</button>
+        </li>
+    </ul>
+</div>
+<div id="msg">
+
+</div>
+
+<br>
+
+<li>
+    <button id="serialize">form表单内容序列化为字符串</button>
+</li>
+<b>Results: </b>
+<p id="results"></p>
+<form>
+    年级：
+    <select name="class">
+        <option value="1">1年级</option>
+        <option value="2">2年级</option>
+    </select>
+    <br>
+    城市：
+    <select name="citys" multiple="multiple">
+        <option selected="selected" value="sh">上海</option>
+        <option value="sz">深圳</option>
+        <option selected="selected" value="qd">青岛</option>
+    </select>
+    <br>
+    兴趣：
+    <input type="checkbox" name="hobby" value="11"/>篮球
+    <input type="checkbox" name="hobby" value="12"/> 游泳
+    <input type="checkbox" name="hobby" value="13" checked="checked"/> 跑步
+    <br>
+    sex:
+    <input type="radio" name="sex" value="0" checked="checked"/> female
+    <input type="radio" name="sex" value="1"/> male
+</form>
+</body>
+</html>

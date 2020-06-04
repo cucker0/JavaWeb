@@ -22,5 +22,8 @@
 <div>
     <a href="ajax/ajax_js.html">ajax_js原生请求</a>
 </div>
+<div>
+    <a href="jQuery/ajax_jQeury.html">ajax jQuery</a>
+</div>
 </body>
 </html>

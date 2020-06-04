@@ -519,7 +519,7 @@ data: 待发送 Key/value 参数
 callback: 载入成功时回调函数
 
 type: 返回内容格式，xml, html, script, json, text, _default
-    当设置为json时，自动对返回的数据进行解析，相当于JSON.parse(data)，下同 
+    当设置为json时，自动对返回的数据进行解析，相当于JSON.parse(data)，默认为xml，下同, 
 ```
 
 示例
@@ -571,7 +571,7 @@ $.getJSON(url,[data],[fn])
 
 参数
     url: 发送请求地址。
-    data: 待发送的数据，{}字典对象。
+    data: 待发送的数据，{}字典对象，k-v键值对。
     callback: 载入成功时回调函数，如function(repJson) {}，则repJson为响应的数据(json形式，是浏览器自动解析)，
 ```
 
@@ -646,12 +646,12 @@ settings:AJAX 请求设置。所有选项都是可选的
 一般都传入一个字典类型的对象，用k-v来表示各个参数
 
 jQuery 底层 AJAX 实现
-以上两个是简单易用的高层实现
+$.get、$.post、$.getJSON等方法，底层都是直接或间接调用了$.ajax方法来实现异常请求。
 ```
 
 * url
     ```text
-    一个用来包含发送请求的URL字符串
+    一个用来包含发送请求的URL字符串，必填
     ```
 
 * 回调函数  
@@ -669,8 +669,8 @@ jQuery 底层 AJAX 实现
 
 * type
     ```text
-    请求方法
-    可选
+    请求方法，必填
+    可选项
     "GET"  默认值
     "POST"
     "PUT"
@@ -690,7 +690,7 @@ jQuery 底层 AJAX 实现
     ```
     [jsonp](jsonp.md)  
 
-* data发送个给服务到的数据
+* data发送给服务到的数据
     ```text
     数据可以是一个查询字符串，如："key1=value1&amp;key2=value2"
     也可以是字典对象，如：{key1: "value1", key2: "value2"}，对象类型的数据在发送时会被转换成查询字符串。
@@ -793,6 +793,8 @@ function signup() {
     });
 }
 ```
+
+[$.get、$.post、$.getJSON、$.ajax方法使用示例](../JavaScript/web/jQuery/ajax_jQeury.html)
 
 ## jQuery对象常用方法
 * 从祖先元素中找匹配的元素
