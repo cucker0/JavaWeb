@@ -19,8 +19,9 @@
         /**
          * x秒后隐藏 添加商品的提示内容
          */
+        var goodsTips = null;
         function hiddenGoodsTips() {
-            setTimeout(function () {
+            goodsTips = setTimeout(function () {
                 $(".goods_tips").hide();
             }, 5000);
         }
@@ -31,7 +32,7 @@
                 specifyPageQuery(1);
             });
 
-            // 添加商品到购物车时候x秒后取消购物提示
+            // 添加商品到购物车时候x秒后取消购物提示，首次加载时执行一次
             hiddenGoodsTips();
 
             // 点击商品，加入购物车，ajax异常请求
@@ -41,16 +42,17 @@
                     "cartServlet?action=addGoods&ajax=1&id=" + bookid,
                     function (data) {
                         if (data.result === 1) {
+                            $(".cartTotalCount").html(data.cartTotalCount);
                             $(".newAddGoodName").html(data.lastGoodsName);
                             $(".goods_tips").show();
+                            clearTimeout(goodsTips);  // 清除timeout事件
+                            goodsTips = null;
                             hiddenGoodsTips();
-
-                            $(".cartTotalCount").html(data.cartTotalCount);
                         }
                     }
                 );
                 // 阻止默认事件
-                // return false;
+                return false;
             });
         });
     </script>
@@ -84,23 +86,30 @@
             <button>确定</button>
         </div>
         <div style="text-align: center; height: 80px;">
-            <c:if test="${not empty sessionScope.cart}">
+<%--            <c:if test="${not empty sessionScope.cart}">--%>
                 <span>
                     <a href="pages/cart/cart.jsp">您的购物车中有<span class="cartTotalCount">${sessionScope.cart.getTotalCount()}</span>件商品</a>
                 </span>
                 <%
-                    LocalDateTime localDateTime = LocalDateTime.now();
-                    long now = LocalDateTime.now().toEpochSecond(OffsetDateTime.now().getOffset());
-                    session.setAttribute("now", now);
+                    // LocalDateTime localDateTime = LocalDateTime.now();
+                    long nowLong = LocalDateTime.now().toEpochSecond(OffsetDateTime.now().getOffset());
+                    session.setAttribute("now", nowLong);
                 %>
                 <%-- now: ${sessionScope.now}, lastAddgoodsTime: ${sessionScope.lastAddgoodsTime} --%>
                 <%-- 显示最近x秒内添加的商品名称 --%>
-                <c:if test="${ sessionScope.now < sessionScope.lastAddgoodsTime + 6}">
-                    <div class="goods_tips">
-                        您刚刚将 [<span class="newAddGoodName" style="color: red">${sessionScope.lastGoodsName}</span>] 加入到了购物车中
-                    </div>
-                </c:if>
-            </c:if>
+                <c:choose>
+                    <c:when test="${ sessionScope.now < sessionScope.lastAddgoodsTime + 6}">
+                        <div class="goods_tips">
+                            您刚刚将 [<span class="newAddGoodName" style="color: red">${sessionScope.lastGoodsName}</span>] 加入到了购物车中
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="goods_tips" style="display: none;">
+                            您刚刚将 [<span class="newAddGoodName" style="color: red"></span>] 加入到了购物车中
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+<%--            </c:if>--%>
         </div>
 
         <div class="clearfix">

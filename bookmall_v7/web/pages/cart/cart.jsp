@@ -60,9 +60,20 @@
             });
             // 商品数量变化时，向服务器发情请求更新购物车商品的数量
             $(".quantity-form input[name=count]").on("input propertychange", function () {
+                var node = this;
                 var _id = $(this).parents("tr[goods-id]").attr("goods-id");
                 var _count = $(this).val();
-                location.href = "cartServlet?action=updateGoodsCount&id=" + _id + "&count=" + _count;
+                // location.href = "cartServlet?action=updateGoodsCount&id=" + _id + "&count=" + _count;
+                $.getJSON(
+                    "cartServlet",  // url
+                    "action=updateGoodsCount&ajax=1&id=" + _id + "&count=" + _count,  // 要发送的数据
+                    function (data) {  // 请求成功后的回调函数
+                        // console.log(data);
+                        $(node).parents("tr").find("td.goodTotalPrice").html(data.goodTotalPrice);
+                        $(".b_price").html(data.cartTotalPrice);
+                        $(".b_count").html(data.cartCount);
+                    }
+                );
             });
 
             // 全选 / 取消 购物车所有商品
@@ -127,7 +138,7 @@
                         <td>
                             <fmt:formatNumber value="${item.price}" type="currency" pattern="￥.00"/>
                         </td>
-                        <td>
+                        <td class="goodTotalPrice">
                             <fmt:formatNumber value="${item.getTotalPrice()}" type="currency" pattern="￥.00"/>
                         </td>
                         <td><a href="cartServlet?action=deleteGoods&id=${item.id}">删除</a></td>

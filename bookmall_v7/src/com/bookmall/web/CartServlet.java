@@ -3,6 +3,7 @@ package com.bookmall.web;
 import com.bookmall.bean.Book;
 import com.bookmall.bean.Cart;
 import com.bookmall.bean.CartGoods;
+import com.bookmall.dao.Common;
 import com.bookmall.service.BookService;
 import com.bookmall.serviceimpl.BookServiceImpl;
 import com.bookmall.utils.CommonUtils;
@@ -87,6 +88,17 @@ public class CartServlet extends BaseServlet4Transaction {
         int count = CommonUtils.parseInt(request.getParameter("count"), 0);
         Cart cart = CommonUtils.getCart(request, response);
         cart.updateGoods(goodsId, count);
+        int ajax = CommonUtils.parseInt(request.getParameter("ajax"), 0);
+        if (ajax == 1) {
+            CartGoods good = cart.getCartGoodSById(goodsId);
+            Map<String, Object> data = new HashMap<>();
+            data.put("goodTotalPrice", "￥" + good.getTotalPrice());
+            data.put("cartTotalPrice", "￥" + cart.getTotalPrice());
+            data.put("cartCount", cart.getTotalCount());
+            String dataJsonStr = gson.toJson(data);
+            response.getWriter().write(dataJsonStr);
+            return;
+        }
         response.sendRedirect(request.getHeader("referer"));
     }
 

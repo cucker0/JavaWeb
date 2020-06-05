@@ -204,4 +204,14 @@ public class Cart implements Serializable {
         }
     }
 
+    /**
+     * 查询购物车上指定ID的商品
+     *
+     * @param goodsId
+     * @return
+     */
+    public CartGoods getCartGoodSById(int goodsId) {
+        CartGoods cartGoods = goodsMap.get(goodsId);
+        return cartGoods;
+    }
 }
