@@ -514,7 +514,8 @@ $.get(url, [data], [callback], [type]);
 参数
 url: 待载入页面的URL地址
 
-data: 待发送 Key/value 参数
+data: 待发送 Key/value 参数，可以用一个{}字典对象来表示，也可以用key1=val1&key2=val2连接的参数形式，{}在发送时也会序列化为&连接的字符串形式
+    下同
 
 callback: 载入成功时回调函数
 
