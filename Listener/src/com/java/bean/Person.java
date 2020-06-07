@@ -1,8 +1,18 @@
 package com.java.bean;
 
+import javax.servlet.http.HttpSessionActivationListener;
+import javax.servlet.http.HttpSessionEvent;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
-public class Person implements Serializable {
+/**
+ * 对象随Session活化、钝化监听器
+ *
+ * 前提条件：
+ * 1. 需要实现 HttpSessionActivationListener、Serializable接口
+ * 2. 只有该类的对象一属性添加到了session对象中，才能随session的钝化、活化时被监听并执行相应的函数
+ */
+public class Person implements HttpSessionActivationListener, Serializable {
     private Long id;
     private String name;
 
@@ -29,6 +39,28 @@ public class Person implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * 在session钝化时，当前对象自动执行的函数
+     * 在tomcat正常关闭时执行
+     *
+     * @param se
+     */
+    @Override
+    public void sessionWillPassivate(HttpSessionEvent se) {
+        System.out.println(LocalDateTime.now() + ", " + toString() + "对象被钝化了");
+    }
+
+    /**
+     * 在session活化时，当前对象自动执行的函数
+     * 在启动tomcat时执行
+     *
+     * @param se
+     */
+    @Override
+    public void sessionDidActivate(HttpSessionEvent se) {
+        System.out.println(LocalDateTime.now() + ", " + toString() + "对象被活化了");
     }
 
     @Override

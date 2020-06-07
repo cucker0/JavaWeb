@@ -2,10 +2,11 @@ package com.java.listener.cycle;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 /**
- * Request生命周期监听器
+ * Request生命周期监听器，全局有效
  */
 public class RequestCycleListener implements ServletRequestListener {
     public RequestCycleListener() {}
@@ -39,5 +40,7 @@ public class RequestCycleListener implements ServletRequestListener {
         );
         System.out.println("    ===>RemoteAddr: " + sre.getServletRequest().getRemoteAddr() + ", RemotePort: " + sre.getServletRequest().getRemotePort());
         System.out.println("    ===>RemoteHost: " + sre.getServletRequest().getRemoteHost());
+        HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
+        // System.out.println(request.getHeader("Cookie"));
     }
 }

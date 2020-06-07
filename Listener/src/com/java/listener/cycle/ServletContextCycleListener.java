@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 import java.time.LocalDateTime;
 
 /**
- * ServletContext生命周期监听器
+ * ServletContext生命周期监听器，全局有效
  */
 public class ServletContextCycleListener implements ServletContextListener {
     /**
