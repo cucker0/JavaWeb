@@ -330,7 +330,7 @@ session的默认超时时间为30分钟，session的超时信息保存在服务�
         <session-timeout>30</session-timeout>
     </session-config>
     ```
-* session默认超时时间单个站点生效
+* session默认超时时间(单个站点生效)
     ```xml
     <!--
     配置文件：web/WEB-INF/web.xml
@@ -412,6 +412,11 @@ jsp页面翻译的Servlet程序就已经创建了session对象。
 若要浏览器关闭后，再次向服务器发起请求时，能关联上原来的session，
 则需要让记录session id的cookie(JSESSIONID)在浏览器关闭后不失效。
 这时就需要让记录session id的cookie在生成时就设置存活时间
+
+同时，服务端保存的session对象的非活动时间要设置长些，默认的为1800s，
+如想让登录的session与浏览器关联时间为10天，
+则让记录session id的cookie在生成时就设置存活时间为10天
+服务端的session对象非活动时间设置为10天
 ```
 
 * 让session在浏览器关闭后不失效
