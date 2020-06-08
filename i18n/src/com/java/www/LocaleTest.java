@@ -25,5 +25,7 @@ public class LocaleTest {
         // new Locale(String language, String country);
         Locale locale = new Locale("zh", "CN");
         System.out.println(locale);
+        Locale locale2 = new Locale("zh", "GANGGUO");
+        System.out.println(locale2); // zh_GANGGUO
     }
 }
