@@ -5,24 +5,24 @@
          version="4.0"
          metadata-complete="true">
     <!-- 监听器 -->
-    <listener>
-        <listener-class>com.java.listener.cycle.RequestCycleListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>com.java.listener.cycle.ServletContextCycleListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>com.java.listener.cycle.HttpSessionCycleListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>com.java.listener.attribute.ContextAttributeListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>com.java.listener.attribute.RequestAttributeListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>com.java.listener.attribute.SessionAttributeListener</listener-class>
-    </listener>
+<!--    <listener>-->
+<!--        <listener-class>com.java.listener.cycle.RequestCycleListener</listener-class>-->
+<!--    </listener>-->
+<!--    <listener>-->
+<!--        <listener-class>com.java.listener.cycle.ServletContextCycleListener</listener-class>-->
+<!--    </listener>-->
+<!--    <listener>-->
+<!--        <listener-class>com.java.listener.cycle.HttpSessionCycleListener</listener-class>-->
+<!--    </listener>-->
+<!--    <listener>-->
+<!--        <listener-class>com.java.listener.attribute.ContextAttributeListener</listener-class>-->
+<!--    </listener>-->
+<!--    <listener>-->
+<!--        <listener-class>com.java.listener.attribute.RequestAttributeListener</listener-class>-->
+<!--    </listener>-->
+<!--    <listener>-->
+<!--        <listener-class>com.java.listener.attribute.SessionAttributeListener</listener-class>-->
+<!--    </listener>-->
 
     <!-- servlet -->
     <servlet>

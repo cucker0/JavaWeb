@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 对象随Session活化、钝化监听器
+ * session属性值对象随Session活化、钝化监听器
  *
  * 前提条件：
  * 1. 需要实现 HttpSessionActivationListener、Serializable接口

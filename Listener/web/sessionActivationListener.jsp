@@ -10,6 +10,17 @@
     System.out.println("创建了Person对象：" + p.toString());
     // 只有该类的对象一属性添加到了session对象中，才能随session的钝化、活化时被监听并执行相应的函数
     session.setAttribute("person", p);
+
+/*
+// 访问此页面时
+创建了Person对象：Person{id=100, name='王图'}
+
+// tomcat正常关闭时
+2020-06-08T14:23:28.704898100, Person{id=100, name='王图'}对象被钝化了
+
+// tomcat开启时
+2020-06-08T14:24:48.665295700, Person{id=100, name='王图'}对象被活化了
+*/
 %>
 <h3>sessionActivationListener监听器</h3>
 <div>

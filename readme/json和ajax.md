@@ -64,7 +64,7 @@ json(JavaScript Object Notation)，对象表示法，是一种轻量级的数据
 
 
 ### java中json的使用
-#### gson
+#### Gson
 ```text
 在java中使用json，需要依赖第三方jar包gson.jar
 gson是有google提供的，用于对java对象与json数据之间进行映射，

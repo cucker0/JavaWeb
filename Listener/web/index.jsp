@@ -23,6 +23,9 @@
     <div>
         <a href="sessionActivationListener.jsp">对象随SessionActivationListener监听器</a>
     </div>
+    <div>
+        <a href="sessionBindingListener.jsp">session对象绑定监听器</a>
+    </div>
 </div>
 </body>
 </html>
