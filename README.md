@@ -225,6 +225,14 @@ Java Web
     * [javascript原生的ajax请求](readme/json和ajax.md#javascript原生的ajax请求)
         * [ajax的XMLHttpRequest对象](readme/json和ajax.md#ajax的XMLHttpRequest对象)
 
+### i18n国际化
+* [什么是i18n国际化](readme/i18n国际化.md#什么是i18n国际化)
+* [国际化的使用](readme/i18n国际化.md#国际化的使用)
+    * [国际化相关的类](readme/i18n国际化.md#国际化相关的类)
+    * [多国语言的资源配置文件命名规则](readme/i18n国际化.md#多国语言的资源配置文件命名规则)
+    * [通过请求头中的Accept-Language字段获取Locale地区信息](readme/i18n国际化.md#通过请求头中的Accept-Language字段获取Locale地区信息)
+    * [网站i18n国际化示例](readme/i18n国际化.md#网站i18n国际化示例)
+
 ### Listener监听器
 * [listener监听器概念](readme/listener.md#listener监听器概念)
 * [listenner监听器分类](readme/listener.md#listenner监听器分类)
@@ -244,7 +252,7 @@ Java Web
     * [解决下载附件名为中文名的乱码问题](readme/fileUploadAndDownload.md#解决下载附件名为中文名的乱码问题)
 * [上传文件](readme/fileUploadAndDownload.md#上传文件)
 * [下载文件](readme/fileUploadAndDownload.md#下载文件)
-* [jQeury非Form标签上传文件](readme/fileUploadAndDownload.md#jQeury非Form标签上传文件)
+* [jQeury非form标签上传文件](readme/fileUploadAndDownload.md#jQeury非Form标签上传文件)
 
 ### 项目实战
 * [bookmall v2](bookmall/README.md)
