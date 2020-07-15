@@ -50,7 +50,7 @@ IntelliJ IDEA 使用 TOMCAT 中文乱码
 ```text
 request.setCharacterEncoding("utf-8");
 
-response.setContentType("text/html;charset=utf-8");
+response.setContentType("text/html; charset=utf-8");
 ```
 * 设置全局的request字符集
 ```text
