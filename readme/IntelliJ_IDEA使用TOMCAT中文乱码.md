@@ -52,32 +52,38 @@ request.setCharacterEncoding("utf-8");
 
 response.setContentType("text/html; charset=utf-8");
 ```
-* 设置全局的request get字符集
-```text
-直接在tomcat的安装包根目录/conf/server.xml中设置
 
-<Connector port="8080" 
-    protocol="HTTP/1.1"
-    connectionTimeout="20000" 
-    redirectPort="8443" URIEncoding="UTF-8" 
-    />
-```
+* 设置全局的request get字符集
+
+    直接在tomcat的安装包根目录/conf/server.xml中设置
+    ```text
+    
+
+    <Connector port="8080" 
+        protocol="HTTP/1.1"
+        connectionTimeout="20000" 
+        redirectPort="8443" URIEncoding="UTF-8" 
+        />
+    ```
 
 * 设置全局request post字符集
-```
-WEB-INF/web.xml下添加下面的过滤器，在其他过滤器之上
 
-<!-- 过滤器 处理post乱码 -->
-  <filter>
-      <filter-name>CharacterEncodingFilter</filter-name>
-      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-      <init-param>
-          <param-name>encoding</param-name>
-          <param-value>utf-8</param-value>
-      </init-param>
-  </filter>
-  <filter-mapping>
-      <filter-name>CharacterEncodingFilter</filter-name>
-      <url-pattern>/*</url-pattern>
-  </filter-mapping>
-```
+    WEB-INF/web.xml下添加下面的过滤器，在其他过滤器之上
+    ```
+
+
+    <!-- 过滤器 处理post乱码 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    ```
