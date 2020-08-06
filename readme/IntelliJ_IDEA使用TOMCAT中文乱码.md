@@ -68,10 +68,8 @@ response.setContentType("text/html; charset=utf-8");
 
 * 设置全局request post字符集
 
-    WEB-INF/web.xml下添加下面的过滤器，在其他过滤器之上
+    WEB-INF/web.xml下添加下面的过滤器，在其他过滤器之上，使其优先
     ```
-
-
     <!-- 过滤器 处理post乱码 -->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
