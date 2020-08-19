@@ -59,7 +59,7 @@ IDEA配置Tomcat、创建动态Web工程、新建一个Servlet项目
     点击File–>Project Structure    
     ![](../images/tomcat/tomcat工程3_4.png)  
     
-    点击Artifacts,此时WEB-INF下只有calsses,没有lib  
+    点击Artifacts,此时WEB-INF下只有calsses,没有lib，**只有添加到Artifacts中的jar，才能在Tomcat中生效**  
     ![](../images/tomcat/tomcat工程3_5.png)   
     
     **右击WebProject下的lib,选择Put into/WEB-INF/lib**   
