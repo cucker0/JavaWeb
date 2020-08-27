@@ -90,7 +90,7 @@ xml的标签属性和html 的标签属性是非常类似的，属性可以提供
 
 ### 文本区域(CDATA区)
 ```text
-一般情况下。xml解析器在解析xml的时候，< > 都会当有标签来解析，
+一般情况下。xml解析器在解析xml的时候，< >会当有标签来解析，特殊字符做特殊处理，
 如果你想这些内容在解析的时候，当成文本来解析的话，就可以使用CDATA区
 ```
 
@@ -98,6 +98,7 @@ xml的标签属性和html 的标签属性是非常类似的，属性可以提供
 ```xml
 <![CDATA[ 这里可以把你输入的字符原样显示，不会解析xml ]]>
 ```
+[c3p0-config xml配置有特殊字符的示例](https://github.com/cucker0/jdbc/blob/master/day04/src/c3p0-config.xml)
 
 ## xml解析技术
 ```text
