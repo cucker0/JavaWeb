@@ -356,7 +356,7 @@ session的默认超时时间为30分钟，session的超时信息保存在服务�
         等到下次客户端把session id信息传到服务端获取session，已经无此id的session了，服务端会新建一个session，并通知客户端新session的id
     ```
 
-[立刻删除session：invalidate](../CookieSession/src/com/java/web/SessionServlet.java) 
+[立刻删除session：invalidate](../CookieSession/src/com/java/web/SessionServlet.java)   
 [设置session的超时时间：setMaxInactiveInterval](../CookieSession/src/com/java/web/SessionServlet.java) 
 
 ### session的钝化与活化
