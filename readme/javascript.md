@@ -215,14 +215,14 @@ console.log("-- end 遍历数组 --");
     * 添加
         obj.push(ele)                   追加
         obj.unshift(ele)                最前插入
-        obj.splice(index,0,'content')   指定索引插入
+        obj.splice(index, 0, 'content')   指定索引插入
     * 移除
         obj.pop()                       数组尾部获取
         obj.shift()                     数组头部获取
-        obj.splice(index,count)         数组指定位置后count个字符
+        obj.splice(index, count)         数组指定位置后count个字符
       
     *切片
-        obj.slice(start,end)          
+        obj.slice(start, end)          
     * 合并
         newArray ＝ obj1.concat(obj2)  
     * 翻转
@@ -232,6 +232,12 @@ console.log("-- end 遍历数组 --");
         obj.join('_')
     * 长度
         obj.length
+    
+    * 数组元素去重
+        var arr1=['a', 'b', 'c', 'd', 'e', 'c', 'd'];
+        Array.from(new Set(arr1));
+        //  ["a", "b", "c", "d", "e"]
+
     ```
 ##### 字典
 ```js
@@ -262,7 +268,7 @@ console.log("-- end 遍历字典 --");
     var b = JSON.stringify(a);
     console.log(b); // '{"k1":"v1","k2":"v2"}'
     ```
-* 解析字符中：字符解析对象
+* 解析字符串：字符串解析为对象
     ```js
     var stu = JSON.parse('{"name":"dicke","age":18}');
     console.log(stu.age);
@@ -273,26 +279,26 @@ console.log("-- end 遍历字典 --");
 * 自定义对象
     * Object形式自定义对象
         ```js
-        var 变量名 = new Object(); // 定义了一个空的对象实例
-        变量名.属性名 = 值; // 定义了一个属性
-        变量名.方法名 = function(){}; // 定义一个方法
+        var 变量名 = new Object();  // 定义了一个空的对象实例
+        变量名.属性名 = 值;  // 定义了一个属性
+        变量名.方法名 = function(){};  // 定义一个方法
         
         // 访问
         变量名.属性名/ 方法名()
         ```
     * {}花括号形式自定义对象
         ```js
-        var obj = {}; // 定义一个空的对象
+        var obj = {};  // 定义一个空的对象
         var obj = {
-            变量名: 值, // 定义一个属性
-            方法名: function(){}	// 定义了一个方法 
+            变量名: 值,  // 定义一个属性
+            方法名: function(){}  // 定义了一个方法 
         };
         ```
     * function形式自定义对象
         ```js
         function 类名() {
-            this.属性名 = 值;//定义一个属性
-            this.方法名 = function(){}//定义一个方法
+            this.属性名 = 值;  //定义一个属性
+            this.方法名 = function(){}  //定义一个方法
         }
         
         var 变量名 = new 类名();
@@ -315,6 +321,11 @@ var 函数名 = function(参数列表) {
     return 返回值; // 有返回值使用return
 };
 
+
+// ES6 中的剪头函数
+(参数列表) => {
+    函数体
+}
 ```
 **在Java中函数允许重载。但是在Js中函数的重载会直接覆盖掉上一次的定义，变量也类似**
 
